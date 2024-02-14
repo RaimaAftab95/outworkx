@@ -1,0 +1,115 @@
+/* use fonts */
+@font-face {
+  font-family: "mluvka"; /* Give your font a name */
+  src: url("../public/fonts/mluvka/Mluvka-Bold.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-BoldItalic.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-ExtraBold.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-ExtraBoldItalic.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-ExtraLight.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-ExtraLightItalic.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-Italic.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-Light.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-LightItalic.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-Medium.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-MediumItalic.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-Regular.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-SemiBold.otf") format("otf"),
+    url("../public/fonts/mluvka/Mluvka-SemiBoldItalic.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nohemi";
+  src: url("../public/fonts/nohemi/Nohemi-Black.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Black.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Black.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-Bold.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Bold.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-ExtraBold.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-ExtraBold.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-ExtraLight.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-ExtraLight.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-Light.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Light.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-Medium.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Medium.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-Regular.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Regular.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-SemiBold.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-SemiBold.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-Thin.otf") format("otf"),
+    url("../public/fonts/nohemi/Nohemi-Thin.ttf") format("ttf"),
+    url("../public/fonts/nohemi/Nohemi-VF.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: #00000080;
+  font-family: "mluvka", sans-serif;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000;
+  font-weight: 600;
+  font-family: "nohemi", sans-serif;
+}
+
+.font-nohemi {
+  font-family: "nohemi", sans-serif;
+}
+
+/* CustomizableBarChart.css */
+.google-visualization-tooltip {
+  display: none !important; /* Optionally hide tooltips */
+}
+
+/* Hide gridlines for horizontal and vertical axes */
+.google-visualization-table-td {
+  border-color: transparent !important;
+}
+
+.chart path {
+  fill: #000 !important;
+  width: 10px !important;
+  border-top-left-radius: 30px !important;
+}
+.chart line {
+  display: none !important;
+}
+
+svg:first-child g:nth-child(2) rect {
+  display: none;
+}
+
+svg:nth-child(6) g text {
+  display: none;
+}
+
+.swiper-wrapper {
+  padding-bottom: 80px !important;
+}
+
+.swiper-pagination {
+  /* margin-top: 50px !important; */
+  bottom: 0 !important;
+  z-index: 2000 !important;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px !important;
+  }
+}
