@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Heading from "../shared/Heading";
 import Button from "../ui/Button";
+import Error from "../ui/Error";
 import Input from "../ui/Input";
 import InputBox from "../ui/InputBox";
 import Label from "../ui/Label";
 
-const SpaceInformation = ({ setActiveTab }) => {
+const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
   const [placeType, setPlaceType] = useState("");
+  const [address, setAddress] = useState("");
   const [offers, setOffers] = useState([]);
+  const [rules, setRules] = useState([]);
+  const [errors, setErrors] = useState({});
 
   // handle select offer
   const handleSelectOffer = (offer) => {
@@ -18,11 +22,56 @@ const SpaceInformation = ({ setActiveTab }) => {
       setOffers([...offers, offer]);
     }
   };
+
+  // select rules
+  const selectRules = (e) => {
+    const rule = e.target.value;
+    if (rules?.includes(rule)) {
+      const updatedRules = rules?.filter((item) => item !== rule);
+      setRules(updatedRules);
+    } else {
+      setRules([...rules, rule]);
+    }
+  };
+
+  // submit handler
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    // check validation
+    const validationErrors = {};
+
+    if (!address) {
+      validationErrors.address = "Address is Required!";
+    }
+
+    if (offers?.length === 0) {
+      validationErrors.offers = "Please Select Offers!";
+    }
+
+    if (rules?.length === 0) {
+      validationErrors.rules = "Please Select Rules!";
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      return setErrors(validationErrors);
+    }
+
+    setSpaceDetails({
+      ...spaceDetails,
+      // placeType,
+      address,
+      amenities: offers,
+      rules,
+    });
+
+    setActiveTab(2);
+  };
   return (
     <div>
       <Heading>What type of place will guests have?</Heading>
 
-      <form action="" className="mt-9">
+      <form onSubmit={submitHandler} className="mt-9">
         <div className="flex flex-col gap-7">
           <InputBox
             className={`cursor-pointer transition-all ${
@@ -88,7 +137,7 @@ const SpaceInformation = ({ setActiveTab }) => {
               style={{ border: 0, width: "100%" }}
               allowfullscreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
 
             <div className="absolute top-11 left-0 right-0">
@@ -96,7 +145,15 @@ const SpaceInformation = ({ setActiveTab }) => {
                 <div>
                   <img src="/images/icons/map.png" alt="map" />
                 </div>
-                <Input type="text" placeholder="Enter your address" />
+                <Input
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  type="text"
+                  placeholder="Enter your address"
+                />
+              </div>
+              <div className="mt-5 text-center">
+                <Error>{errors?.address}</Error>
               </div>
             </div>
           </div>
@@ -193,6 +250,10 @@ const SpaceInformation = ({ setActiveTab }) => {
               <h3 className="text-[30px] leading-[47px]">Air Conditioning</h3>
             </div>
           </div>
+
+          <div className="mt-5">
+            <Error>{errors?.offers}</Error>
+          </div>
         </div>
 
         <div className="mt-20">
@@ -211,6 +272,9 @@ const SpaceInformation = ({ setActiveTab }) => {
                 className="w-6 h-6 rounded-[10px] border border-gray"
                 name=""
                 id="no-smoking"
+                value="no-smoking"
+                onChange={selectRules}
+                checked={rules?.includes("no-smoking")}
               />
             </div>
             <div className="flex items-center justify-between gap-5 flex-wrap">
@@ -225,6 +289,9 @@ const SpaceInformation = ({ setActiveTab }) => {
                 className="w-6 h-6 rounded-[10px] border border-gray"
                 name=""
                 id="no-pets"
+                value="no-pets"
+                onChange={selectRules}
+                checked={rules?.includes("no-pets")}
               />
             </div>
             <div className="flex items-center justify-between gap-5 flex-wrap">
@@ -238,14 +305,21 @@ const SpaceInformation = ({ setActiveTab }) => {
                 type="checkbox"
                 className="w-6 h-6 rounded-[10px] border border-gray"
                 name=""
+                checked={rules?.includes("workspace-clean")}
                 id="workspace-clean"
+                value="workspace-clean"
+                onChange={selectRules}
               />
             </div>
+          </div>
+
+          <div className="mt-5">
+            <Error>{errors?.rules}</Error>
           </div>
         </div>
 
         <div className="mt-24 flex justify-end">
-          <Button onClick={() => setActiveTab(2)} className="px-14">
+          <Button type="submit" className="px-14">
             Next
           </Button>
         </div>

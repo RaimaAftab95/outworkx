@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { cn } from "../../lib/utills";
 
@@ -10,6 +9,7 @@ const Button = ({
   onClick,
   size = "lg",
   variant = "primary",
+  loading,
   ...rest
 }) => {
   const styles = `font-medium border ${
@@ -30,8 +30,15 @@ const Button = ({
       onClick={onClick}
       type={type}
       {...rest}
+      disabled={loading}
     >
-      {children}
+      {loading ? (
+        <div className="text-center w-full flex items-center justify-center">
+          <img src="/images/loading.gif" className="w-8" alt="loading" />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };

@@ -1,18 +1,108 @@
-import React from "react";
+import { useState } from "react";
+import { useAuthStore } from "../../../store";
 import Heading from "../shared/Heading";
 import Button from "../ui/Button";
+import Error from "../ui/Error";
 import InputBox from "../ui/InputBox";
 
-const SpaceMoreInformation = ({ setActiveTab }) => {
+const SpaceMoreInformation = ({
+  setActiveTab,
+  setSpaceDetails,
+  spaceDetails,
+  isPending,
+  createSpace,
+}) => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState({});
+
+  // get user details
+  const { auth } = useAuthStore();
+  const { user } = auth || {};
+
+  // submit handler
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    // check validation
+    const validationErrors = {};
+
+    if (!name) {
+      validationErrors.name = "Title is Required!";
+    }
+
+    if (!description) {
+      validationErrors.description = "Description is Required!";
+    }
+
+    if (Object.keys(validationErrors)?.length > 0) {
+      return setErrors(validationErrors);
+    }
+
+    setSpaceDetails({
+      ...spaceDetails,
+      name,
+      description,
+      addressHint: "test address hint",
+      city: "Noakhali",
+      state: "Chattogram",
+      country: "Bangladesh",
+      postalCode: 3860,
+      gallery: [
+        {
+          type: "image",
+          url: "https://as2.ftcdn.net/v2/jpg/05/58/82/83/1000_F_558828328_Uhd1O0Qo77cZ9gjaWBaasoZ8qHBuKRNt.jpg",
+        },
+      ],
+      numberOfDesks: 5, // Replace with an actual number
+      pricePerDesk: 100, // Replace with an actual price
+      maximumNumberOfNomads: 10, // Replace with an actual number
+      spaceOwner: user?.id, // Replace with an actual ID
+      timings: [
+        {
+          day: 0,
+          start: 480, // 8:00 AM
+          end: 1020, // 5:00 PM
+        },
+        {
+          day: 1,
+          start: 480,
+          end: 1020,
+        },
+        {
+          day: 2,
+          start: 480,
+          end: 1020,
+        },
+        {
+          day: 3,
+          start: 480,
+          end: 1020,
+        },
+        {
+          day: 4,
+          start: 480,
+          end: 1020,
+        },
+        {
+          day: 5,
+          start: 480,
+          end: 1020,
+        },
+      ],
+    });
+
+    createSpace();
+  };
   return (
     <div>
       <Heading>Add some photos of your place</Heading>
       <p className="text-[22px] font-medium leading-[37px] mt-2">
-        You'll need 5 photos to get started. You can add more or make changes
-        later.
+        {`You'll`} need 5 photos to get started. You can add more or make
+        changes later.
       </p>
 
-      <form action="" className="mt-14">
+      <form onSubmit={submitHandler} className="mt-14">
         <div className="py-28 bg-[#F2F2F2] flex flex-col justify-center items-center text-center">
           <div className="flex justify-center w-full">
             <img src="/images/icons/image.png" alt="icon" />
@@ -43,13 +133,19 @@ const SpaceMoreInformation = ({ setActiveTab }) => {
             <textarea
               name=""
               id=""
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Add your title."
               className="text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none h-[130px]"
             ></textarea>
           </InputBox>
           <span className="block mt-8 text-[22px] leading-[37px] font-bold">
-            0/40
+            {name?.length}/40
           </span>
+          {name?.length > 40 && (
+            <Error>Title should not exceed 40 characters.</Error>
+          )}
+          <Error>{errors?.name}</Error>
         </div>
 
         <div className="mt-14">
@@ -62,13 +158,19 @@ const SpaceMoreInformation = ({ setActiveTab }) => {
             <textarea
               name=""
               id=""
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="Take it easy and write your description."
               className="text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none h-[230px]"
             ></textarea>
           </InputBox>
           <span className="block mt-8 text-[22px] leading-[37px] font-bold">
-            0/500
+            {description?.length}/500
           </span>
+          {description?.length > 500 && (
+            <Error>Description should not exceed 500 characters.</Error>
+          )}
+          <Error>{errors?.description}</Error>
         </div>
 
         <div className="mt-14">
@@ -134,7 +236,9 @@ const SpaceMoreInformation = ({ setActiveTab }) => {
           >
             Back
           </Button>
-          <Button className="px-14">Publish</Button>
+          <Button className="px-14" type="submit" loading={isPending}>
+            Publish
+          </Button>
         </div>
       </form>
     </div>
