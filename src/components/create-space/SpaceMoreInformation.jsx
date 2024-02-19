@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useAuthStore } from "../../../store";
+import { uploadImages } from "../../http/api";
 import Heading from "../shared/Heading";
 import Button from "../ui/Button";
 import Error from "../ui/Error";
@@ -14,11 +17,53 @@ const SpaceMoreInformation = ({
 }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [images, setImages] = useState([]);
+  const [spaceImages, setSpaceImages] = useState([]);
   const [errors, setErrors] = useState({});
 
   // get user details
   const { auth } = useAuthStore();
   const { user } = auth || {};
+
+  // handle selecte images
+  const handleFileChange = async (e) => {
+    const files = e.target.files;
+    setImages(files);
+  };
+
+  // upload space images
+  const uploadImagesHandler = async () => {
+    const formdata = new FormData();
+
+    for (const item of images) {
+      formdata.append(`media`, item, item?.name);
+    }
+
+    const { data } = await uploadImages(formdata);
+
+    return data;
+  };
+
+  // create server request
+  const { mutate, isPending: isUploading } = useMutation({
+    mutationKey: ["upload-images"],
+    mutationFn: uploadImagesHandler,
+    onSuccess: async (data) => {
+      console.log("data", data);
+      setSpaceImages(data?.data?.media);
+      toast.success("Space Images Upload Successfull.");
+    },
+    onError: async (error) => {
+      console.log("error", error);
+    },
+  });
+
+  useEffect(() => {
+    if (images?.length > 0) {
+      mutate();
+      console.log("iamges", images);
+    }
+  }, [images, mutate]);
 
   // submit handler
   const submitHandler = (e) => {
@@ -31,6 +76,10 @@ const SpaceMoreInformation = ({
       validationErrors.name = "Title is Required!";
     }
 
+    if (spaceImages?.length === 0) {
+      validationErrors.spaceImages = "Space Images is Required!";
+    }
+
     if (!description) {
       validationErrors.description = "Description is Required!";
     }
@@ -38,6 +87,12 @@ const SpaceMoreInformation = ({
     if (Object.keys(validationErrors)?.length > 0) {
       return setErrors(validationErrors);
     }
+
+    // generate gellary images
+    const galleryImages = spaceImages?.map((image) => ({
+      type: "image",
+      url: image,
+    }));
 
     setSpaceDetails({
       ...spaceDetails,
@@ -48,12 +103,7 @@ const SpaceMoreInformation = ({
       state: "Chattogram",
       country: "Bangladesh",
       postalCode: 3860,
-      gallery: [
-        {
-          type: "image",
-          url: "https://as2.ftcdn.net/v2/jpg/05/58/82/83/1000_F_558828328_Uhd1O0Qo77cZ9gjaWBaasoZ8qHBuKRNt.jpg",
-        },
-      ],
+      gallery: galleryImages,
       numberOfDesks: 5, // Replace with an actual number
       pricePerDesk: 100, // Replace with an actual price
       maximumNumberOfNomads: 10, // Replace with an actual number
@@ -119,8 +169,30 @@ const SpaceMoreInformation = ({
           >
             Upload from your device
           </label>
-          <input type="file" multiple id="images" className="hidden" />
+          <input
+            type="file"
+            multiple
+            id="images"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+
+          {isUploading && (
+            <div className="mt-5 font-semibold">
+              <span>Uploading...</span>
+            </div>
+          )}
         </div>
+        <br />
+        <Error>{errors?.spaceImages}</Error>
+
+        {spaceImages?.length > 0 && (
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {spaceImages?.map((image) => (
+              <img key={image} className="rounded-xl" src={image} alt={image} />
+            ))}
+          </div>
+        )}
 
         <div className="mt-20">
           <Heading>Let’s give title to your place</Heading>
@@ -236,7 +308,12 @@ const SpaceMoreInformation = ({
           >
             Back
           </Button>
-          <Button className="px-14" type="submit" loading={isPending}>
+          <Button
+            className="px-14"
+            disabled={isPending || isUploading}
+            type="submit"
+            loading={isPending}
+          >
             Publish
           </Button>
         </div>
