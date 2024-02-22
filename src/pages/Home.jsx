@@ -1,4 +1,3 @@
-import React from "react";
 import CallToAction from "../components/home/CallToAction";
 import Categories from "../components/home/Categories";
 import Hero from "../components/home/hero";
