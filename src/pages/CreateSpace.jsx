@@ -14,7 +14,7 @@ const tabs = {
 };
 
 const CreateSpace = () => {
-  const [activeTab, setActiveTab] = useState(2);
+  const [activeTab, setActiveTab] = useState(1);
   const Tab = tabs[activeTab];
   const [spaceDetails, setSpaceDetails] = useState({});
 
