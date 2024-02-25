@@ -177,7 +177,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               <div>
                 <img src="/images/icons/wifi-lg.png" alt="icon" />
               </div>
-              <h3 className="text-[30px] leading-[47px]">Wifi</h3>
+              <h3 className="text-2xl leading-[47px]">Wifi</h3>
             </div>
 
             <div
@@ -191,7 +191,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               <div>
                 <img src="/images/icons/tv.png" alt="icon" />
               </div>
-              <h3 className="text-[30px] leading-[47px]">TV</h3>
+              <h3 className="text-2xl leading-[47px]">TV</h3>
             </div>
 
             <div
@@ -205,7 +205,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               <div>
                 <img src="/images/icons/kitchen.png" alt="icon" />
               </div>
-              <h3 className="text-[30px] leading-[47px]">Kitchen</h3>
+              <h3 className="text-2xl leading-[47px]">Kitchen</h3>
             </div>
 
             <div
@@ -219,7 +219,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               <div>
                 <img src="/images/icons/printer.png" alt="icon" />
               </div>
-              <h3 className="text-[30px] leading-[47px]">Printer</h3>
+              <h3 className="text-2xl leading-[47px]">Printer</h3>
             </div>
 
             <div
@@ -233,7 +233,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               <div>
                 <img src="/images/icons/parking.png" alt="icon" />
               </div>
-              <h3 className="text-[30px] leading-[47px]">Parking</h3>
+              <h3 className="text-2xl leading-[47px]">Parking</h3>
             </div>
 
             <div
@@ -247,7 +247,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               <div>
                 <img src="/images/icons/air-lg.png" alt="icon" />
               </div>
-              <h3 className="text-[30px] leading-[47px]">Air Conditioning</h3>
+              <h3 className="text-2xl leading-[47px]">Air Conditioning</h3>
             </div>
           </div>
 

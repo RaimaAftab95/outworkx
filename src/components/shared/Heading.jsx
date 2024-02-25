@@ -1,8 +1,6 @@
-import React from "react";
-
 const Heading = ({ children }) => {
   return (
-    <h2 className="text-[35px] leading-[40px] sm:text-[40px] sm:leading-[45px] md:text-[44px] md:leading-[50px]">
+    <h2 className="text-[30px] leading-[35px] sm:text-[35px] sm:leading-[40px] md:text-[40px] md:leading-[45px]">
       {children}
     </h2>
   );

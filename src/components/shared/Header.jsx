@@ -137,32 +137,61 @@ const Header = () => {
             openMobileUserOpt
               ? "opacity-100 sm:opacity-0 visible sm:invisible"
               : "opacity-0 invisible"
-          } top-[150%] left-0 right-0 w-full rounded-2xl bg-white px-3 z-40 border border-gray shadow-2xl`}
+          } top-[150%] left-0 right-0 w-full rounded-[20px] bg-white px-6 z-40 mobile-header`}
         >
-          <ul className="py-3 flex items-center gap-1 justify-between px-3 text-primary border-b border-gray flex-wrap">
-            <li className="transition-all hover:text-primary-light">
-              <Link to="#">Explore</Link>
+          <ul className="py-[18px] flex items-center gap-1 justify-between px-5 text-primary border-b border-gray flex-wrap">
+            <li className="">
+              <Link
+                to="#"
+                className="flex items-center flex-col transition-all gap-2 justify-center opacity-50 hover:opacity-100"
+              >
+                <img src="/images/icons/explore.png" alt="icon" />
+                <span>Explore</span>
+              </Link>
             </li>
-            <li className="transition-all hover:text-primary-light">
-              <Link to="#">About Us</Link>
+            <li className="">
+              <Link
+                to="#"
+                className="flex items-center flex-col transition-all gap-2 justify-center opacity-50 hover:opacity-100"
+              >
+                <img src="/images/icons/about.png" alt="icon" />
+                <span>About Us</span>
+              </Link>
             </li>
-            <li className="transition-all hover:text-primary-light">
-              <Link to="#">List Space</Link>
+            <li className="">
+              <Link
+                to="#"
+                className="flex items-center flex-col transition-all gap-2 justify-center opacity-50 hover:opacity-100"
+              >
+                <img src="/images/icons/list-space.png" alt="icon" />
+                <span>List Space</span>
+              </Link>
             </li>
-            <li className="transition-all hover:text-primary-light">
-              <Link to="#">Locations</Link>
+            <li className="">
+              <Link
+                to="#"
+                className="flex items-center flex-col transition-all gap-2 justify-center opacity-50 hover:opacity-100"
+              >
+                <img src="/images/icons/location.png" alt="icon" />
+                <span>Locations</span>
+              </Link>
             </li>
           </ul>
 
-          <ul className="flex my-3 px-3 items-center justify-center gap-1">
+          <ul className="flex my-[18px] px-3 items-center justify-center gap-1">
             {user?.id ? (
               <>
                 <li>
-                  <Link to="#">Account</Link>
+                  <Link to="#" className="transition-all hover:text-primary">
+                    Account
+                  </Link>
                 </li>
                 <div className="w-[2px] h-4 bg-gray" />
                 <li>
-                  <Link className="cursor-pointer" onClick={logout}>
+                  <Link
+                    className="cursor-pointer transition-all hover:text-primary"
+                    onClick={logout}
+                  >
                     Logout
                   </Link>
                 </li>
@@ -170,11 +199,21 @@ const Header = () => {
             ) : (
               <>
                 <li>
-                  <Link to="/sign-in">Login</Link>
+                  <Link
+                    className="transition-all hover:text-primary"
+                    to="/sign-in"
+                  >
+                    Login
+                  </Link>
                 </li>
                 <div className="w-[2px] h-4 bg-gray" />
                 <li>
-                  <Link to="/sign-up">Signup</Link>
+                  <Link
+                    className="transition-all hover:text-primary"
+                    to="/sign-up"
+                  >
+                    Signup
+                  </Link>
                 </li>
               </>
             )}

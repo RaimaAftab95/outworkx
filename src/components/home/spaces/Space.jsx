@@ -5,7 +5,7 @@ const Space = ({ space }) => {
   const [activeImage, setActiveImage] = useState(0);
 
   // extract space data
-  const { name, description, pricePerDesk, gallery } = space || {};
+  const { id, name, description, pricePerDesk, gallery } = space || {};
 
   const changeImageHandler = (navigate) => {
     if (navigate === "left") {
@@ -26,7 +26,7 @@ const Space = ({ space }) => {
         <img
           src={gallery[activeImage].url}
           alt="space"
-          className={`w-full transition-all hover:scale-125 `}
+          className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 `}
         />
 
         <div className="absolute top-[10px] right-[10px] w-[50px] h-[50px] rounded-full bg-primary flex items-center justify-center cursor-pointer transition-all hover:opacity-60">
@@ -70,7 +70,7 @@ const Space = ({ space }) => {
       <div className="py-[14px] text-lg">
         <div className="flex items-center gap-2 justify-between">
           <h3 className="font-bold">
-            <Link to="#">{name}</Link>
+            <Link to={`/spaces/${id}`}>{name}</Link>
           </h3>
           <div className="flex items-center gap-2">
             <img src="/images/icons/star.png" alt="star" />

@@ -153,7 +153,7 @@ const SpaceMoreInformation = ({
       </p>
 
       <form onSubmit={submitHandler} className="mt-14">
-        <div className="py-28 bg-[#F2F2F2] flex flex-col justify-center items-center text-center">
+        <div className="py-28 bg-[#F2F2F2] flex flex-col justify-center items-center text-center relative">
           <div className="flex justify-center w-full">
             <img src="/images/icons/image.png" alt="icon" />
           </div>
@@ -173,7 +173,7 @@ const SpaceMoreInformation = ({
             type="file"
             multiple
             id="images"
-            className="hidden"
+            className="absolute top-0 left-0 right-0 bottom-0 w-full h-full opacity-0"
             onChange={handleFileChange}
           />
 

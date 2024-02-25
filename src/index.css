@@ -113,3 +113,7 @@ svg:nth-child(6) g text {
     padding: 0 20px !important;
   }
 }
+
+.mobile-header {
+  box-shadow: 0px 0px 34px 0px #00000075;
+}
