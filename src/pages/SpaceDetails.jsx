@@ -1,41 +1,221 @@
-import React from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
+import { useAuthStore } from "../../store";
 import Footer from "../components/shared/Footer";
 import Heading from "../components/shared/Heading";
+import ReserveCalender from "../components/space-details/ReserveCalender";
 import Reviews from "../components/space-details/reviews";
+import SelectPeople from "../components/space-details/SelectPeople";
 import Button from "../components/ui/Button";
+import Loading from "../components/ui/Loading";
+import { getSpace } from "../http/api";
 
 const SpaceDetails = () => {
-  return (
+  const [spaceDetails, setSpaceDetails] = useState({});
+  const [openCheckInCalender, setOpenCheckInCalender] = useState(false);
+  const [totalPeople, setTotalPeople] = useState(0);
+  const [openSelectPeople, setOpenSelectPeople] = useState(false);
+  const [checkInDate, setCheckInDate] = useState();
+  const [checkOutDate, setCheckOutDate] = useState();
+  const [totalDays, setTotalDays] = useState(0);
+  const router = useNavigate();
+  const { id } = useParams();
+  const [reserverSpaceErrors, setReserverSpaceErrors] = useState({});
+
+  // calculate total days
+  useEffect(() => {
+    if (checkInDate && checkOutDate) {
+      const startTime = new Date("2024-03-20T18:00:00.000Z");
+      const endTime = new Date("2024-03-28T18:00:00.000Z");
+
+      // Convert both dates to milliseconds
+      const startTimeMs = startTime.getTime();
+      const endTimeMs = endTime.getTime();
+
+      // Calculate the difference in milliseconds
+      const differenceMs = endTimeMs - startTimeMs;
+
+      // Convert the difference to days
+      const differenceDays = differenceMs / (1000 * 60 * 60 * 24);
+
+      setTotalDays(differenceDays + 1);
+    }
+  }, [checkInDate, checkOutDate]);
+
+  // get user data
+  const { auth } = useAuthStore();
+  const { user } = auth || {};
+
+  // when check in date and check out date is set callender modal is closed
+  useEffect(() => {
+    if (checkInDate && checkOutDate) {
+      setOpenCheckInCalender(false);
+    }
+  }, [checkInDate, checkOutDate]);
+
+  useEffect(() => {
+    scroll.scrollToTop({
+      duration: 500, // specify the duration of the scroll animation
+      smooth: "easeInOutQuart", // specify the easing function
+    });
+  }, []);
+
+  // get space details function
+  const getSpaceDetails = async () => {
+    const { data } = await getSpace(id);
+
+    return data;
+  };
+
+  // create server request
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["space-details"],
+    mutationFn: getSpaceDetails,
+    onSuccess: async (data) => {
+      setSpaceDetails(data?.data?.space);
+    },
+    onError: async () => {
+      toast.error("Something went wrong, please try again.");
+      router("/");
+    },
+  });
+
+  useEffect(() => {
+    if (id) {
+      mutate();
+    }
+  }, [id, mutate]);
+
+  const {
+    // address,
+    // addressHint,
+    amenities,
+    // city,
+    description,
+    gallery,
+    // maximumNumberOfNomads,
+    name,
+    // numberOfDesks,
+    // postalCode,
+    // pricePerDesk,
+    rules,
+    // state,
+    // timings,
+  } = spaceDetails || {};
+
+  // reserve space
+  const reserveSpace = () => {
+    // check validation
+    const validationErrors = {};
+
+    if (!checkInDate) {
+      validationErrors.checkInDate = "Please Select Check In Date!";
+    }
+
+    if (!checkOutDate) {
+      validationErrors.checkOutDate = "Please Select Check Out Date!";
+    }
+
+    if (!totalPeople) {
+      validationErrors.totalPeople = "Please Select People!";
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      return setReserverSpaceErrors(validationErrors);
+    }
+
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+
+    console.log(
+      "check in",
+      checkIn.getFullYear() +
+        "-" +
+        checkIn.getDay() +
+        "-" +
+        String(checkIn.getMonth() + 1)?.length ===
+        1
+        ? `0${checkIn.getMonth() + 1}`
+        : checkIn.getMonth() + 1
+    );
+
+    const reserveSpaceDetails = {
+      id,
+      name,
+      thumbnail: gallery[0].url,
+      pricePerDesk: spaceDetails?.pricePerDesk,
+      rating: 4.86,
+      totalReviews: 300,
+      startDate:
+        checkIn.getFullYear() +
+        "-" +
+        checkIn.getDay() +
+        "-" +
+        checkIn.getMonth() +
+        1,
+      endDate:
+        checkOut.getFullYear() +
+        "-" +
+        checkOut.getDay() +
+        "-" +
+        checkOut.getMonth() +
+        1,
+      people: totalPeople,
+      totalPrice: Number(totalDays) * Number(spaceDetails?.pricePerDesk),
+    };
+
+    localStorage.setItem("reserveSpace", JSON.stringify(reserveSpaceDetails));
+
+    if (!user) {
+      router("/sign-in?redirect=reserve-space");
+
+      toast.success("Please login for confirm reserve space.");
+    } else {
+      router("/reserve-space");
+    }
+  };
+  return isPending ? (
+    <Loading />
+  ) : (
     <main>
       {/* details */}
       <section className="text-black/70 mb-32">
         <div className="container">
           {/* space images */}
-          <div className="flex flex-col lg:flex-row justify-between gap-5">
-            <div className="w-full lg:w-[65%] relative">
-              <img
-                className="w-full h-full rounded-3xl"
-                src="/images/spaces/5.jpg"
-                alt="space"
-              />
+          {gallery?.length > 0 && (
+            <div className="flex flex-col lg:flex-row justify-between gap-5">
+              <div
+                className={`w-full ${
+                  gallery?.length > 1 && "lg:w-[65%]"
+                } relative`}
+              >
+                <img
+                  className="w-full h-full rounded-3xl"
+                  src={gallery[0]?.url}
+                  alt="space"
+                />
 
-              <div className="absolute bottom-10 right-7">
-                <Button size="sm">Show All Photos</Button>
+                <div className="absolute bottom-10 right-7">
+                  <Button size="sm">Show All Photos</Button>
+                </div>
               </div>
+              {gallery?.length > 1 && (
+                <div className="w-full lg:w-[35%] flex flex-col gap-4 h-full">
+                  {gallery?.slice(1, 3)?.map((item) => (
+                    <img
+                      key={item?.url}
+                      src={item?.url}
+                      className="w-full h-full rounded-3xl"
+                      alt="space"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="w-full lg:w-[35%] flex flex-col gap-4 h-full">
-              <img
-                src="/images/spaces/6.jpg"
-                className="w-full h-full rounded-3xl"
-                alt="space"
-              />
-              <img
-                src="/images/spaces/7.jpg"
-                className="w-full h-full rounded-3xl"
-                alt="space"
-              />
-            </div>
-          </div>
+          )}
 
           {/* space details */}
           <div>
@@ -43,10 +223,7 @@ const SpaceDetails = () => {
               {/* space content */}
               <div className="w-full lg:w-[65%]">
                 <div>
-                  <Heading>
-                    Coworking Space: Corporate Suites Rockefeller Center in New
-                    York City
-                  </Heading>
+                  <Heading>{name}</Heading>
 
                   <div className="flex items-center flex-wrap gap-2 text-xl text-primary font-bold py-7 border-b border-gray">
                     <div className="flex items-center gap-2">
@@ -74,46 +251,78 @@ const SpaceDetails = () => {
                     Coworking Space Amenities
                   </h4>
                   <div className="mt-5 flex flex-wrap items-center gap-6">
-                    <div className="flex items-center gap-3">
-                      <img src="/images/icons/wifi.png" alt="icon" />
-                      <span>High-Speed WiFi</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <img src="/images/icons/air.png" alt="icon" />
-                      <span>Air Conditioning</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <img src="/images/icons/area.png" alt="icon" />
-                      <span>Lounge / Chill-out Area</span>
-                    </div>
+                    {amenities?.map((item) => {
+                      return item?.toLowerCase()?.includes("wifi") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/wifi.png" alt="icon" />
+                          <span>High-Speed WiFi</span>
+                        </div>
+                      ) : item?.toLowerCase()?.includes("air-conditioning") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/air.png" alt="icon" />
+                          <span>Air Conditioning</span>
+                        </div>
+                      ) : item?.toLowerCase()?.includes("parking") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/parking.png" alt="icon" />
+                          <span>Parking</span>
+                        </div>
+                      ) : item?.toLowerCase()?.includes("printer") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/printer.png" alt="icon" />
+                          <span>Printer</span>
+                        </div>
+                      ) : item?.toLowerCase()?.includes("kitchen") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/kitchen.png" alt="icon" />
+                          <span>Kitchen</span>
+                        </div>
+                      ) : item?.toLowerCase()?.includes("tv") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/tv.png" alt="icon" />
+                          <span>TV</span>
+                        </div>
+                      ) : (
+                        <span>No Space Amenities Found!</span>
+                      );
+                    })}
                   </div>
                 </div>
 
                 <div className="py-7">
                   <h4 className="text-2xl leading-[47px]">Workspace Rules</h4>
                   <div className="mt-5 flex flex-wrap items-center gap-6">
-                    <div className="flex items-center gap-3">
-                      <img src="/images/icons/smoke.png" alt="icon" />
-                      <span>No Smoking</span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <img src="/images/icons/pets.png" alt="icon" />
-                      <span>No Pets Allowed</span>
-                    </div>
-                    <div className="flex items-center gap-3">
+                    {rules?.map((rule) => {
+                      return rule?.toLowerCase()?.includes("no-smoking") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/smoke.png" alt="icon" />
+                          <span>No Smoking</span>
+                        </div>
+                      ) : rule?.toLowerCase()?.includes("no-pets") ? (
+                        <div className="flex flex-wrap items-center gap-3">
+                          <img src="/images/icons/pets.png" alt="icon" />
+                          <span>No Pets Allowed</span>
+                        </div>
+                      ) : rule?.toLowerCase()?.includes("workspace-clean") ? (
+                        <div className="flex items-center gap-3">
+                          <img src="/images/icons/clean.png" alt="icon" />
+                          <span>Keep Workspace Clean</span>
+                        </div>
+                      ) : (
+                        <span>No Rules Found!</span>
+                      );
+                    })}
+
+                    {/* <div className="flex items-center gap-3">
                       <img src="/images/icons/boundaries.png" alt="icon" />
                       <span>Respect Boundaries</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <img src="/images/icons/clean.png" alt="icon" />
-                      <span>Keep Workspace Clean</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
 
               {/* space reverse section */}
-              <div className="w-full sm:w-[380px] lg:w-[35%] h-fit border border-gray rounded-2xl shadow py-4 px-6">
+              <div className="w-full sm:w-full lg:w-[35%] h-fit border border-gray rounded-2xl shadow py-4 px-6">
                 <div className="border-b border-gray pb-4">
                   <h3 className="text-[25px] leading-[50px]">
                     Coworking Space
@@ -123,49 +332,127 @@ const SpaceDetails = () => {
                   </span>
                 </div>
 
-                <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap">
-                  <span>1 - 20 People</span>
-                  <span>
-                    <span className="font-bold">$19</span> / person / day
+                <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap relative">
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => setOpenSelectPeople(!openSelectPeople)}
+                  >
+                    {totalPeople ? totalPeople + " People" : "Select People"} -{" "}
+                    {spaceDetails?.numberOfDesks} People
                   </span>
+                  <span>
+                    <span className="font-bold">
+                      ${spaceDetails?.pricePerDesk}
+                    </span>{" "}
+                    / person / day
+                  </span>
+
+                  <SelectPeople
+                    openSelectPeople={openSelectPeople}
+                    setOpenSelectPeople={setOpenSelectPeople}
+                    setTotalPeople={setTotalPeople}
+                  />
                 </div>
 
-                <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap">
+                {reserverSpaceErrors?.totalPeople && (
+                  <div className="mt-4 text-red-600">
+                    <p>{reserverSpaceErrors?.totalPeople}</p>
+                  </div>
+                )}
+
+                <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap relative">
                   <span>Check In</span>
                   <div className="flex items-center gap-3">
-                    <span className="underline">12/7/2023</span>
-                    <div>
-                      <img src="/images/icons/calendar.png" alt="icon" />
+                    <div
+                      className="flex items-center gap-3 cursor-pointer"
+                      onClick={() =>
+                        setOpenCheckInCalender(!openCheckInCalender)
+                      }
+                    >
+                      {checkInDate ? (
+                        <span className="underline">
+                          {new Date(checkInDate)?.getDate()}/
+                          {new Date(checkInDate)?.getMonth() + 1}/
+                          {new Date(checkInDate)?.getFullYear()}
+                        </span>
+                      ) : (
+                        <span>Select Date</span>
+                      )}
+                    </div>{" "}
+                    /
+                    <div
+                      className="flex items-center gap-3 cursor-pointer"
+                      onClick={() =>
+                        setOpenCheckInCalender(!openCheckInCalender)
+                      }
+                    >
+                      {checkOutDate ? (
+                        <span className="underline">
+                          {new Date(checkOutDate)?.getDate()}/
+                          {new Date(checkOutDate)?.getMonth() + 1}/
+                          {new Date(checkOutDate)?.getFullYear()}
+                        </span>
+                      ) : (
+                        <span>Select Date</span>
+                      )}
+                      <div>
+                        <img src="/images/icons/calendar.png" alt="icon" />
+                      </div>
                     </div>
                   </div>
+                  <ReserveCalender
+                    setOpen={setOpenCheckInCalender}
+                    open={openCheckInCalender}
+                    checkInDate={checkInDate}
+                    setCheckInDate={setCheckInDate}
+                    checkOutDate={checkOutDate}
+                    setCheckOutDate={setCheckOutDate}
+                  />
+                </div>
+
+                <div className="mt-4 text-red-600">
+                  {reserverSpaceErrors?.checkInDate && (
+                    <p>{reserverSpaceErrors?.checkInDate}</p>
+                  )}
+                  {reserverSpaceErrors?.checkOutDate && (
+                    <p>{reserverSpaceErrors?.checkOutDate}</p>
+                  )}
                 </div>
 
                 <div className="my-8">
-                  <Button className="w-full">Reserve Space</Button>
+                  <Button onClick={reserveSpace} className="w-full">
+                    Reserve Space
+                  </Button>
                 </div>
 
-                <div className="text-primary text-lg flex items-center gap-2 justify-between flex-wrap mb-3">
-                  <span>$19 x 5 days</span>
-                  <span>
-                    <span className="font-bold">150$</span>
-                  </span>
-                </div>
+                {totalDays !== 0 && totalPeople !== 0 && (
+                  <div className="text-primary text-lg flex items-center gap-2 justify-between flex-wrap mb-3">
+                    <span>
+                      ${spaceDetails?.pricePerDesk} x {totalDays} days
+                    </span>
+                    <span>
+                      <span className="font-bold">
+                        {Number(totalDays) * Number(spaceDetails?.pricePerDesk)}
+                        $
+                      </span>
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="py-7 border-y border-gray">
               <h4 className="text-xl leading-[47px]">About Place</h4>
               <p className="text-lg leading-[37px] text-black/70">
-                1180 Avenue of the Americas at 46th Street is a world class
-                location and prominent business address with fantastic
-                amenities, including 24/7 access and security, lobby attendants,
-                imposing on-the-avenue entrance and modern lobby with multiple
-                high speed elevators. It is easily accessible from all major
-                transportation hubs, including Penn Station.
+                {description?.length > 404
+                  ? description?.substr(0, 404)
+                  : description}
               </p>
-              <button className="text-lg font-bold leading-[47px] text-primary cursor-pointer underline">
-                Show more
-              </button>
+              {description?.length > 404 && (
+                <button className="text-lg font-bold leading-[47px] text-primary cursor-pointer underline">
+                  Show more
+                </button>
+              )}
             </div>
 
             {/* reviews */}
@@ -181,12 +468,14 @@ const SpaceDetails = () => {
                 style={{ border: 0, width: "100%", height: "720px" }}
                 allowfullscreen=""
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
+                referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>
         </div>
       </section>
+
+      {/* <ReserveCalender /> */}
 
       <Footer />
     </main>

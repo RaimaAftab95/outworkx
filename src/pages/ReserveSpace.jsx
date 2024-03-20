@@ -1,9 +1,68 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/shared/Heading";
 import Button from "../components/ui/Button";
+import { bookingSpace } from "../http/api";
 
 const ReserveSpace = () => {
+  const [spaceDetails, setSpaceDetails] = useState({});
+
+  const router = useNavigate();
+
+  useEffect(() => {
+    let reserveSpace = localStorage.getItem("reserveSpace");
+    reserveSpace = JSON.parse(reserveSpace);
+
+    if (!reserveSpace) {
+      toast.error("Please select space!");
+      router(`/`);
+    } else {
+      console.log("Reserved space", reserveSpace);
+      setSpaceDetails(reserveSpace);
+    }
+  }, [router]);
+
+  const {
+    id,
+    startDate,
+    endDate,
+    people,
+    name,
+    thumbnail,
+    rating,
+    totalReviews,
+    pricePerDesk,
+    totalPrice,
+  } = spaceDetails || {};
+
+  // confirm reserve function
+  const confirmReserveHandler = async () => {
+    const { data } = await bookingSpace({
+      spaceId: id,
+      startDate: "2024-03-18",
+      endDate: "2024-03-20",
+      price: totalPrice,
+      numberOfDesks: people,
+      status: "pending",
+    });
+    return data;
+  };
+
+  // create server request
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["confirm-reserve"],
+    mutationFn: confirmReserveHandler,
+    onSuccess: async () => {
+      router("/booking-history");
+      toast.success("Space Booking Successfully.");
+      localStorage.removeItem("reseverSpace");
+    },
+    onError: async (error) => {
+      console.log("error", error);
+    },
+  });
   return (
     <main className="py-10 text-primary/70">
       <div className="container">
@@ -25,7 +84,7 @@ const ReserveSpace = () => {
               >
                 <div className="flex flex-col gap-1">
                   <span className="font-bold">People</span>
-                  <span>3</span>
+                  <span>{people}</span>
                 </div>
                 <button className="font-bold underline">Edit</button>
               </div>
@@ -35,14 +94,19 @@ const ReserveSpace = () => {
               >
                 <div className="flex flex-col gap-1">
                   <span className="font-bold">Date</span>
-                  <span>Dec 13-18</span>
+                  <div className="flex items-center gap-5">
+                    <span>{startDate}</span>
+                    <span>{endDate}</span>
+                  </div>
                 </div>
                 <button className="font-bold underline">Edit</button>
               </div>
             </div>
 
             <div className="mt-14">
-              <Button className="w-full">Confirm reservation</Button>
+              <Button onClick={mutate} loading={isPending} className="w-full">
+                Confirm reservation
+              </Button>
             </div>
           </div>
 
@@ -51,7 +115,7 @@ const ReserveSpace = () => {
               <div className="w-full sm:w-[40%]">
                 <img
                   className="w-full rounded-[25px]"
-                  src="/images/spaces/8.jpg"
+                  src={thumbnail}
                   alt="space"
                 />
               </div>
@@ -59,17 +123,14 @@ const ReserveSpace = () => {
                 <h3 className="text-xl font-bold leading-[32px]">
                   Reservation
                 </h3>
-                <p className="text-lg leading-[32px]">
-                  Coworking Space: Corporate Suites Rockefeller Center in New
-                  York City
-                </p>
+                <p className="text-lg leading-[32px]">{name}</p>
                 <div className="flex items-center flex-wrap gap-2 text-xl text-primary font-bold">
                   <div className="flex items-center gap-2">
                     <img src="/images/icons/star-lg.png" alt="" />
-                    <span>4.86</span>
+                    <span>{rating}</span>
                   </div>
                   <div className="w-[5px] h-[5px] rounded-full bg-primary" />
-                  <span>300 Reviews</span>
+                  <span>{totalReviews} Reviews</span>
                 </div>
               </div>
             </div>
@@ -80,8 +141,10 @@ const ReserveSpace = () => {
               </h3>
               <div className="mt-6 flex flex-col gap-4 text-xl font-medium leading-[32px]">
                 <div className="flex items-center justify-between gap-5 flex-wrap">
-                  <span className="underline">$19 X 5 People</span>
-                  <span>$95.00</span>
+                  <span className="underline">
+                    ${pricePerDesk} X {people} People
+                  </span>
+                  <span>${totalPrice}.00</span>
                 </div>
                 <div className="flex items-center justify-between gap-5 flex-wrap">
                   <span className="underline">Our fee</span>
@@ -95,7 +158,7 @@ const ReserveSpace = () => {
                 Total (USD)
               </h3>
               <h3 className="text-[20px] mt-6 leading-[30px] font-bold">
-                $105.38
+                ${Number(totalPrice) + 10}.00
               </h3>
             </div>
           </div>

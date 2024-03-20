@@ -23,11 +23,13 @@ const Space = ({ space }) => {
   return (
     <div>
       <div className="overflow-hidden rounded-2xl relative w-full">
-        <img
-          src={gallery[activeImage].url}
-          alt="space"
-          className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 `}
-        />
+        <Link to={`/spaces/${id}`}>
+          <img
+            src={gallery[activeImage].url}
+            alt="space"
+            className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 `}
+          />
+        </Link>
 
         <div className="absolute top-[10px] right-[10px] w-[50px] h-[50px] rounded-full bg-primary flex items-center justify-center cursor-pointer transition-all hover:opacity-60">
           <img src="/images/icons/favorite.png" alt="favorite" />

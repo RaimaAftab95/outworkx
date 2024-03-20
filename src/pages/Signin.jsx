@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store";
 import Heading from "../components/shared/Heading";
 import Button from "../components/ui/Button";
@@ -12,6 +12,10 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const redirect = queryParams.get("redirect");
 
   const router = useNavigate();
 
@@ -38,7 +42,12 @@ const Signin = () => {
 
       // store in zustand
       setAuth(data?.data);
-      router("/");
+
+      if (redirect) {
+        router(`/${redirect}`);
+      } else {
+        router("/");
+      }
 
       toast.success("Login successful.");
     },
