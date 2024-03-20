@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
@@ -24,6 +24,32 @@ const SpaceDetails = () => {
   const router = useNavigate();
   const { id } = useParams();
   const [reserverSpaceErrors, setReserverSpaceErrors] = useState({});
+
+  const reserveCalenderRef = useRef(null);
+  const selectPeopleRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", hideClickOnOutSide);
+    document.addEventListener("click", hideClickOnOutSide2);
+  }, []);
+
+  const hideClickOnOutSide = (e) => {
+    if (
+      reserveCalenderRef.current &&
+      !reserveCalenderRef.current.contains(e.target)
+    ) {
+      setOpenCheckInCalender(false);
+    }
+  };
+
+  const hideClickOnOutSide2 = (e) => {
+    if (
+      selectPeopleRef.current &&
+      !selectPeopleRef.current.contains(e.target)
+    ) {
+      setOpenSelectPeople(false);
+    }
+  };
 
   // calculate total days
   useEffect(() => {
@@ -336,6 +362,7 @@ const SpaceDetails = () => {
                   <span
                     className="cursor-pointer"
                     onClick={() => setOpenSelectPeople(!openSelectPeople)}
+                    ref={selectPeopleRef}
                   >
                     {totalPeople ? totalPeople + " People" : "Select People"} -{" "}
                     {spaceDetails?.numberOfDesks} People
@@ -368,6 +395,7 @@ const SpaceDetails = () => {
                       onClick={() =>
                         setOpenCheckInCalender(!openCheckInCalender)
                       }
+                      ref={reserveCalenderRef}
                     >
                       {checkInDate ? (
                         <span className="underline">

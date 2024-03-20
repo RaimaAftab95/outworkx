@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../../store";
 
@@ -8,6 +8,26 @@ const Header = () => {
   const [openMobileUserOpt, setOpenMobileUserOpt] = useState(false);
   const { auth, logout } = useAuthStore();
   const { user } = auth || {};
+
+  const userMenuRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", hideClickOnOutSide);
+    document.addEventListener("click", hideClickOnOutSide2);
+  }, []);
+
+  const hideClickOnOutSide = (e) => {
+    if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+      setOpenUserOpt(false);
+    }
+  };
+
+  const hideClickOnOutSide2 = (e) => {
+    if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
+      setOpenMobileUserOpt(false);
+    }
+  };
   return (
     <header className="bg-white py-8">
       <div className="container flex items-center justify-between gap-5 flex-wrap relative">
@@ -48,6 +68,7 @@ const Header = () => {
               <div
                 className="flex items-center gap-3 py-[6px] px-3 rounded-full border border-gray transition-all hover:opacity-50 cursor-pointer"
                 onClick={() => setOpenUserOpt(!openUserOpt)}
+                ref={userMenuRef}
               >
                 <img src="/images/icons/bar.svg" alt="icon" />
                 <img src="/images/icons/profile.svg" alt="icon" />
@@ -65,6 +86,7 @@ const Header = () => {
             <div
               className="flex items-center gap-3 py-[6px] px-3 rounded-full border border-gray transition-all hover:opacity-50 cursor-pointer"
               onClick={() => setOpenMobileUserOpt(!openMobileUserOpt)}
+              ref={mobileMenuRef}
             >
               <img src="/images/icons/bar.svg" alt="icon" />
               <img src="/images/icons/profile.svg" alt="icon" />
