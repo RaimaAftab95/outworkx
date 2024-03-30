@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { cn } from "../../lib/utills";
 import Button from "../ui/Button";
 
 const SelectPeople = ({
   setTotalPeople,
   openSelectPeople,
   setOpenSelectPeople,
+  className,
 }) => {
   const [peopleCategory, setPeopleCategory] = useState({
     adult: 0,
@@ -25,9 +27,13 @@ const SelectPeople = ({
   }, [peopleCategory, setTotalPeople]);
   return (
     <div
-      className={`transition-opacity duration-300 ${
-        openSelectPeople ? "opacity-100 visible" : "opacity-0 invisible"
-      } w-full absolute top-[110%] left-0 right-0  z-40 bg-white rounded-md border shadow-md py-6 px-4 border-gray flex flex-col gap-5`}
+      className={cn(
+        `transition-opacity duration-300 ${
+          openSelectPeople ? "opacity-100 visible" : "opacity-0 invisible"
+        } w-full absolute top-[110%] left-0 right-0  z-40 bg-white rounded-md border shadow-md py-6 px-4 border-gray flex flex-col gap-5`,
+        className
+      )}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
@@ -102,7 +108,11 @@ const SelectPeople = ({
         </div>
       </div>
       <div className="flex justify-end">
-        <Button size="sm" className="px-4 py-1 rounded-lg" onClick={() => setOpenSelectPeople(false)}>
+        <Button
+          size="sm"
+          className="px-4 py-1 rounded-lg"
+          onClick={() => setOpenSelectPeople(false)}
+        >
           Close
         </Button>
       </div>

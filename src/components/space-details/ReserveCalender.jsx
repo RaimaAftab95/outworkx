@@ -10,6 +10,7 @@ import {
 } from "date-fns";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { cn } from "../../lib/utills";
 import Button from "../ui/Button";
 
 function classNames(...classes) {
@@ -23,6 +24,7 @@ const ReserveCalender = ({
   setCheckInDate,
   checkOutDate,
   setCheckOutDate,
+  className = "",
 }) => {
   const today = startOfToday();
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -63,9 +65,13 @@ const ReserveCalender = ({
 
   return (
     <div
-      className={`transition-all duration-200 ${
-        open ? "visible opacity-100" : "invisible opacity-0"
-      } w-full sm:min-w-[660px] absolute top-[100%] right-0 bg-white shadow-xl border border-gray rounded-2xl`}
+      className={cn(
+        `transition-all duration-200 ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        } w-full sm:min-w-[660px] absolute top-[100%] right-0 bg-white shadow-xl border border-gray rounded-2xl`,
+        className
+      )}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="p-5">
         <div className="flex items-center flex-wrap justify-between gap-5">

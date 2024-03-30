@@ -1,13 +1,53 @@
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/shared/Heading";
+import ReserveCalender from "../components/space-details/ReserveCalender";
+import SelectPeople from "../components/space-details/SelectPeople";
 import Button from "../components/ui/Button";
 import { bookingSpace } from "../http/api";
 
 const ReserveSpace = () => {
   const [spaceDetails, setSpaceDetails] = useState({});
+  const [openCheckInCalender, setOpenCheckInCalender] = useState(false);
+  const [totalPeople, setTotalPeople] = useState(0);
+  const [openSelectPeople, setOpenSelectPeople] = useState(false);
+  const [checkInDate, setCheckInDate] = useState();
+  const [checkOutDate, setCheckOutDate] = useState();
+
+  const reserveCalenderRef = useRef(null);
+  const selectPeopleRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", hideClickOnOutSide);
+    document.addEventListener("click", hideClickOnOutSide2);
+  }, []);
+
+  const hideClickOnOutSide = (e) => {
+    if (
+      reserveCalenderRef.current &&
+      !reserveCalenderRef.current.contains(e.target)
+    ) {
+      setOpenCheckInCalender(false);
+    }
+  };
+
+  const hideClickOnOutSide2 = (e) => {
+    if (
+      selectPeopleRef.current &&
+      !selectPeopleRef.current.contains(e.target)
+    ) {
+      setOpenSelectPeople(false);
+    }
+  };
+
+  // when check in date and check out date is set callender modal is closed
+  useEffect(() => {
+    if (checkInDate && checkOutDate) {
+      setOpenCheckInCalender(false);
+    }
+  }, [checkInDate, checkOutDate]);
 
   const router = useNavigate();
 
@@ -19,31 +59,42 @@ const ReserveSpace = () => {
       toast.error("Please select space!");
       router(`/`);
     } else {
-      console.log("Reserved space", reserveSpace);
       setSpaceDetails(reserveSpace);
+      setCheckInDate(reserveSpace?.startDate);
+      setCheckOutDate(reserveSpace?.endDate);
+      setTotalPeople(reserveSpace?.people);
     }
   }, [router]);
 
-  const {
-    id,
-    startDate,
-    endDate,
-    people,
-    name,
-    thumbnail,
-    rating,
-    totalReviews,
-    pricePerDesk,
-    totalPrice,
-  } = spaceDetails || {};
+  const { id, people, name, thumbnail, rating, totalReviews, pricePerDesk } =
+    spaceDetails || {};
 
   // confirm reserve function
   const confirmReserveHandler = async () => {
+    const startDate = new Date(checkInDate);
+    const endDate = new Date(checkOutDate);
+
     const { data } = await bookingSpace({
       spaceId: id,
-      startDate: "2024-03-18",
-      endDate: "2024-03-20",
-      price: totalPrice,
+      startDate: `${startDate.getFullYear()}-${
+        String(startDate.getUTCMonth() + 1).length === 1
+          ? "0" + (startDate.getUTCMonth() + 1)
+          : startDate.getUTCMonth() + 1
+      }-${
+        String(endDate.getDay()).length === 1
+          ? "0" + endDate.getDay()
+          : endDate.getDay()
+      }`,
+      endDate: `${endDate.getFullYear()}-${
+        String(endDate.getUTCMonth() + 1).length === 1
+          ? "0" + (endDate.getUTCMonth() + 1)
+          : endDate.getUTCMonth() + 1
+      }-${
+        String(endDate.getDay()).length === 1
+          ? "0" + endDate.getDay()
+          : endDate.getDay()
+      }`,
+      price: pricePerDesk * Number(totalPeople) + 10,
       numberOfDesks: people,
       status: "pending",
     });
@@ -83,10 +134,15 @@ const ReserveSpace = () => {
               gap-5 flex-wrap"
               >
                 <div className="flex flex-col gap-1">
-                  <span className="font-bold">People</span>
-                  <span>{people}</span>
+                  <span className="font-bold cursor-pointer">People</span>
+                  <span>{totalPeople}</span>
                 </div>
-                <button className="font-bold underline">Edit</button>
+                <button
+                  className="font-bold underline"
+                  onClick={() => setOpenSelectPeople(true)}
+                >
+                  Edit
+                </button>
               </div>
               <div
                 className="flex items-center justify-between 
@@ -95,11 +151,26 @@ const ReserveSpace = () => {
                 <div className="flex flex-col gap-1">
                   <span className="font-bold">Date</span>
                   <div className="flex items-center gap-5">
-                    <span>{startDate}</span>
-                    <span>{endDate}</span>
+                    <span>
+                      {new Date(checkInDate).getDate()} /{" "}
+                      {new Date(checkInDate).getUTCMonth() + 1} /
+                      {new Date(checkInDate).getFullYear()}
+                    </span>
+                    <span>-</span>
+                    <span>
+                      {new Date(checkOutDate).getDate()} /{" "}
+                      {new Date(checkOutDate).getUTCMonth() + 1} /
+                      {new Date(checkOutDate).getFullYear()}
+                    </span>
                   </div>
                 </div>
-                <button className="font-bold underline">Edit</button>
+                <button
+                  className="font-bold underline"
+                  onClick={() => setOpenCheckInCalender(true)}
+                  ref={reserveCalenderRef}
+                >
+                  Edit
+                </button>
               </div>
             </div>
 
@@ -142,9 +213,9 @@ const ReserveSpace = () => {
               <div className="mt-6 flex flex-col gap-4 text-xl font-medium leading-[32px]">
                 <div className="flex items-center justify-between gap-5 flex-wrap">
                   <span className="underline">
-                    ${pricePerDesk} X {people} People
+                    ${pricePerDesk} X {totalPeople} People
                   </span>
-                  <span>${totalPrice}.00</span>
+                  <span>${pricePerDesk * Number(totalPeople)}.00</span>
                 </div>
                 <div className="flex items-center justify-between gap-5 flex-wrap">
                   <span className="underline">Our fee</span>
@@ -158,12 +229,44 @@ const ReserveSpace = () => {
                 Total (USD)
               </h3>
               <h3 className="text-[20px] mt-6 leading-[30px] font-bold">
-                ${Number(totalPrice) + 10}.00
+                ${pricePerDesk * Number(totalPeople) + 10}.00
               </h3>
             </div>
           </div>
         </div>
       </div>
+
+      {openCheckInCalender && (
+        <div
+          className="fixed inset-0 w-full h-full bg-black/40 z-50"
+          onClick={() => setOpenCheckInCalender(false)}
+        >
+          <ReserveCalender
+            setOpen={setOpenCheckInCalender}
+            className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 w-[660px] h-fit"
+            open={openCheckInCalender}
+            // open={true}
+            checkInDate={checkInDate}
+            setCheckInDate={setCheckInDate}
+            checkOutDate={checkOutDate}
+            setCheckOutDate={setCheckOutDate}
+          />
+        </div>
+      )}
+
+      {openSelectPeople && (
+        <div
+          className="fixed inset-0 w-full h-full bg-black/40 z-50"
+          onClick={() => setOpenSelectPeople(false)}
+        >
+          <SelectPeople
+            openSelectPeople={openSelectPeople}
+            className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 w-[600px] h-fit"
+            setOpenSelectPeople={setOpenSelectPeople}
+            setTotalPeople={setTotalPeople}
+          />
+        </div>
+      )}
     </main>
   );
 };

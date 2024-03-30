@@ -153,21 +153,6 @@ const SpaceDetails = () => {
       return setReserverSpaceErrors(validationErrors);
     }
 
-    const checkIn = new Date(checkInDate);
-    const checkOut = new Date(checkOutDate);
-
-    console.log(
-      "check in",
-      checkIn.getFullYear() +
-        "-" +
-        checkIn.getDay() +
-        "-" +
-        String(checkIn.getMonth() + 1)?.length ===
-        1
-        ? `0${checkIn.getMonth() + 1}`
-        : checkIn.getMonth() + 1
-    );
-
     const reserveSpaceDetails = {
       id,
       name,
@@ -175,20 +160,8 @@ const SpaceDetails = () => {
       pricePerDesk: spaceDetails?.pricePerDesk,
       rating: 4.86,
       totalReviews: 300,
-      startDate:
-        checkIn.getFullYear() +
-        "-" +
-        checkIn.getDay() +
-        "-" +
-        checkIn.getMonth() +
-        1,
-      endDate:
-        checkOut.getFullYear() +
-        "-" +
-        checkOut.getDay() +
-        "-" +
-        checkOut.getMonth() +
-        1,
+      startDate: checkInDate,
+      endDate: checkOutDate,
       people: totalPeople,
       totalPrice: Number(totalDays) * Number(spaceDetails?.pricePerDesk),
     };
@@ -389,14 +362,12 @@ const SpaceDetails = () => {
 
                 <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap relative">
                   <span>Check In</span>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="flex items-center gap-3 cursor-pointer"
-                      onClick={() =>
-                        setOpenCheckInCalender(!openCheckInCalender)
-                      }
-                      ref={reserveCalenderRef}
-                    >
+                  <div
+                    className="flex items-center gap-3"
+                    onClick={() => setOpenCheckInCalender(!openCheckInCalender)}
+                    ref={reserveCalenderRef}
+                  >
+                    <div className="flex items-center gap-3 cursor-pointer">
                       {checkInDate ? (
                         <span className="underline">
                           {new Date(checkInDate)?.getDate()}/
@@ -408,12 +379,7 @@ const SpaceDetails = () => {
                       )}
                     </div>{" "}
                     /
-                    <div
-                      className="flex items-center gap-3 cursor-pointer"
-                      onClick={() =>
-                        setOpenCheckInCalender(!openCheckInCalender)
-                      }
-                    >
+                    <div className="flex items-center gap-3 cursor-pointer">
                       {checkOutDate ? (
                         <span className="underline">
                           {new Date(checkOutDate)?.getDate()}/
