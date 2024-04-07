@@ -1,47 +1,18 @@
-/* use fonts */
 @font-face {
-  font-family: "mluvka"; /* Give your font a name */
-  src: url("../public/fonts/mluvka/Mluvka-Bold.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-BoldItalic.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-ExtraBold.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-ExtraBoldItalic.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-ExtraLight.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-ExtraLightItalic.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-Italic.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-Light.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-LightItalic.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-Medium.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-MediumItalic.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-Regular.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-SemiBold.otf") format("otf"),
-    url("../public/fonts/mluvka/Mluvka-SemiBoldItalic.otf") format("otf");
-  font-weight: normal;
+  font-family: "mluvka";
+  src: url("/fonts/mluvka/regular.otf");
+  src: url("/fonts/mluvka/regular.otf") format("opentype");
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "nohemi";
-  src: url("../public/fonts/nohemi/Nohemi-Black.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Black.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Black.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-Bold.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Bold.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-ExtraBold.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-ExtraBold.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-ExtraLight.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-ExtraLight.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-Light.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Light.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-Medium.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Medium.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-Regular.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Regular.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-SemiBold.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-SemiBold.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-Thin.otf") format("otf"),
-    url("../public/fonts/nohemi/Nohemi-Thin.ttf") format("ttf"),
-    url("../public/fonts/nohemi/Nohemi-VF.ttf") format("ttf");
-  font-weight: normal;
+  src: url("/fonts/nohemi/regular.otf");
+  src: url("/fonts/nohemi/regular.otf") format("opentype"),
+       url("/fonts/nohemi/regular.woff") format("woff"),
+       url("/fonts/nohemi/regular.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -52,6 +23,7 @@
 body {
   color: #00000080;
   font-family: "mluvka", sans-serif;
+  font-style: normal;
   min-height: 100vh !important;
   overflow-x: hidden !important;
 }
