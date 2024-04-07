@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Heading from "../shared/Heading";
+import React, { useState } from 'react';
+import Heading from '../shared/Heading';
 // Import Swiper React components
-import { Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const Categories = () => {
-  const [activeCategory, setActiveCategory] = useState("Offices");
+  const [activeCategory, setActiveCategory] = useState('Offices');
   return (
     <section className="pt-14">
       <div className="container">
@@ -19,31 +19,31 @@ const Categories = () => {
           <ul className="flex items-center gap-3 flex-wrap">
             <li
               className={`transition-all border cursor-pointer py-3 px-6 rounded-full ${
-                activeCategory === "Offices"
-                  ? "bg-primary border-primary text-white"
-                  : "border-gray text-primary hover:bg-primary hover:border-primary hover:text-white"
+                activeCategory === 'Offices'
+                  ? 'bg-primary border-primary text-white'
+                  : 'border-gray text-primary hover:bg-primary hover:border-primary hover:text-white'
               }`}
-              onClick={() => setActiveCategory("Offices")}
+              onClick={() => setActiveCategory('Offices')}
             >
               Offices
             </li>
             <li
               className={`transition-all border cursor-pointer py-3 px-6 rounded-full ${
-                activeCategory === "Homes"
-                  ? "bg-primary border-primary text-white"
-                  : "border-gray text-primary hover:bg-primary hover:border-primary hover:text-white"
+                activeCategory === 'Homes'
+                  ? 'bg-primary border-primary text-white'
+                  : 'border-gray text-primary hover:bg-primary hover:border-primary hover:text-white'
               }`}
-              onClick={() => setActiveCategory("Homes")}
+              onClick={() => setActiveCategory('Homes')}
             >
               Homes
             </li>
             <li
               className={`transition-all border cursor-pointer py-3 px-6 rounded-full ${
-                activeCategory === "Cafe"
-                  ? "bg-primary border-primary text-white"
-                  : "border-gray text-primary hover:bg-primary hover:border-primary hover:text-white"
+                activeCategory === 'Cafe'
+                  ? 'bg-primary border-primary text-white'
+                  : 'border-gray text-primary hover:bg-primary hover:border-primary hover:text-white'
               }`}
-              onClick={() => setActiveCategory("Cafe")}
+              onClick={() => setActiveCategory('Cafe')}
             >
               Cafe
             </li>
@@ -58,20 +58,20 @@ const Categories = () => {
             modules={[Pagination]}
             breakpoints={{
               0: {
-                slidesPerView: 1,
+                slidesPerView: 1
               },
               640: {
-                slidesPerView: 2,
+                slidesPerView: 2
               },
               768: {
-                slidesPerView: 3,
+                slidesPerView: 3
               },
               1024: {
-                slidesPerView: 4,
-              },
+                slidesPerView: 4
+              }
             }}
             autoplay={{
-              delay: 1000,
+              delay: 1000
             }}
             loop={true}
           >

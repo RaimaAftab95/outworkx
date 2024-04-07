@@ -1,22 +1,22 @@
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useAuthStore } from "../../../store";
-import { uploadImages } from "../../http/api";
-import Heading from "../shared/Heading";
-import Button from "../ui/Button";
-import Error from "../ui/Error";
-import InputBox from "../ui/InputBox";
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useAuthStore } from '../../../store';
+import { uploadImages } from '../../http/api';
+import Heading from '../shared/Heading';
+import Button from '../ui/Button';
+import Error from '../ui/Error';
+import InputBox from '../ui/InputBox';
 
 const SpaceMoreInformation = ({
   setActiveTab,
   setSpaceDetails,
   spaceDetails,
   isPending,
-  createSpace,
+  createSpace
 }) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
   const [spaceImages, setSpaceImages] = useState([]);
   const [errors, setErrors] = useState({});
@@ -26,7 +26,7 @@ const SpaceMoreInformation = ({
   const { user } = auth || {};
 
   // handle selecte images
-  const handleFileChange = async (e) => {
+  const handleFileChange = async e => {
     const files = e.target.files;
     setImages(files);
   };
@@ -46,42 +46,42 @@ const SpaceMoreInformation = ({
 
   // create server request
   const { mutate, isPending: isUploading } = useMutation({
-    mutationKey: ["upload-images"],
+    mutationKey: ['upload-images'],
     mutationFn: uploadImagesHandler,
-    onSuccess: async (data) => {
-      console.log("data", data);
+    onSuccess: async data => {
+      console.log('data', data);
       setSpaceImages(data?.data?.media);
-      toast.success("Space Images Upload Successfull.");
+      toast.success('Space Images Upload Successfull.');
     },
-    onError: async (error) => {
-      console.log("error", error);
-    },
+    onError: async error => {
+      console.log('error', error);
+    }
   });
 
   useEffect(() => {
     if (images?.length > 0) {
       mutate();
-      console.log("iamges", images);
+      console.log('iamges', images);
     }
   }, [images, mutate]);
 
   // submit handler
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     // check validation
     const validationErrors = {};
 
     if (!name) {
-      validationErrors.name = "Title is Required!";
+      validationErrors.name = 'Title is Required!';
     }
 
     if (spaceImages?.length === 0) {
-      validationErrors.spaceImages = "Space Images is Required!";
+      validationErrors.spaceImages = 'Space Images is Required!';
     }
 
     if (!description) {
-      validationErrors.description = "Description is Required!";
+      validationErrors.description = 'Description is Required!';
     }
 
     if (Object.keys(validationErrors)?.length > 0) {
@@ -89,19 +89,19 @@ const SpaceMoreInformation = ({
     }
 
     // generate gellary images
-    const galleryImages = spaceImages?.map((image) => ({
-      type: "image",
-      url: image,
+    const galleryImages = spaceImages?.map(image => ({
+      type: 'image',
+      url: image
     }));
 
     setSpaceDetails({
       ...spaceDetails,
       name,
       description,
-      addressHint: "test address hint",
-      city: "Noakhali",
-      state: "Chattogram",
-      country: "Bangladesh",
+      addressHint: 'test address hint',
+      city: 'Noakhali',
+      state: 'Chattogram',
+      country: 'Bangladesh',
       postalCode: 3860,
       gallery: galleryImages,
       numberOfDesks: 5, // Replace with an actual number
@@ -112,34 +112,34 @@ const SpaceMoreInformation = ({
         {
           day: 0,
           start: 480, // 8:00 AM
-          end: 1020, // 5:00 PM
+          end: 1020 // 5:00 PM
         },
         {
           day: 1,
           start: 480,
-          end: 1020,
+          end: 1020
         },
         {
           day: 2,
           start: 480,
-          end: 1020,
+          end: 1020
         },
         {
           day: 3,
           start: 480,
-          end: 1020,
+          end: 1020
         },
         {
           day: 4,
           start: 480,
-          end: 1020,
+          end: 1020
         },
         {
           day: 5,
           start: 480,
-          end: 1020,
-        },
-      ],
+          end: 1020
+        }
+      ]
     });
 
     createSpace();
@@ -188,7 +188,7 @@ const SpaceMoreInformation = ({
 
         {spaceImages?.length > 0 && (
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {spaceImages?.map((image) => (
+            {spaceImages?.map(image => (
               <img key={image} className="rounded-xl" src={image} alt={image} />
             ))}
           </div>
@@ -206,7 +206,7 @@ const SpaceMoreInformation = ({
               name=""
               id=""
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
               placeholder="Add your title."
               className="text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none h-[130px]"
             ></textarea>
@@ -231,7 +231,7 @@ const SpaceMoreInformation = ({
               name=""
               id=""
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={e => setDescription(e.target.value)}
               placeholder="Take it easy and write your description."
               className="text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none h-[230px]"
             ></textarea>

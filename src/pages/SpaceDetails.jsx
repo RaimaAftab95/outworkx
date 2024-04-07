@@ -1,17 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
-import { animateScroll as scroll } from "react-scroll";
-import { useAuthStore } from "../../store";
-import Footer from "../components/shared/Footer";
-import Heading from "../components/shared/Heading";
-import ReserveCalender from "../components/space-details/ReserveCalender";
-import Reviews from "../components/space-details/reviews";
-import SelectPeople from "../components/space-details/SelectPeople";
-import Button from "../components/ui/Button";
-import Loading from "../components/ui/Loading";
-import { getSpace } from "../http/api";
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
+import { useAuthStore } from '../../store';
+import Footer from '../components/shared/Footer';
+import Heading from '../components/shared/Heading';
+import ReserveCalender from '../components/space-details/ReserveCalender';
+import Reviews from '../components/space-details/reviews';
+import SelectPeople from '../components/space-details/SelectPeople';
+import Button from '../components/ui/Button';
+import Loading from '../components/ui/Loading';
+import { getSpace } from '../http/api';
 
 const SpaceDetails = () => {
   const [spaceDetails, setSpaceDetails] = useState({});
@@ -29,11 +29,11 @@ const SpaceDetails = () => {
   const selectPeopleRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener("click", hideClickOnOutSide);
-    document.addEventListener("click", hideClickOnOutSide2);
+    document.addEventListener('click', hideClickOnOutSide);
+    document.addEventListener('click', hideClickOnOutSide2);
   }, []);
 
-  const hideClickOnOutSide = (e) => {
+  const hideClickOnOutSide = e => {
     if (
       reserveCalenderRef.current &&
       !reserveCalenderRef.current.contains(e.target)
@@ -42,7 +42,7 @@ const SpaceDetails = () => {
     }
   };
 
-  const hideClickOnOutSide2 = (e) => {
+  const hideClickOnOutSide2 = e => {
     if (
       selectPeopleRef.current &&
       !selectPeopleRef.current.contains(e.target)
@@ -54,8 +54,8 @@ const SpaceDetails = () => {
   // calculate total days
   useEffect(() => {
     if (checkInDate && checkOutDate) {
-      const startTime = new Date("2024-03-20T18:00:00.000Z");
-      const endTime = new Date("2024-03-28T18:00:00.000Z");
+      const startTime = new Date('2024-03-20T18:00:00.000Z');
+      const endTime = new Date('2024-03-28T18:00:00.000Z');
 
       // Convert both dates to milliseconds
       const startTimeMs = startTime.getTime();
@@ -85,7 +85,7 @@ const SpaceDetails = () => {
   useEffect(() => {
     scroll.scrollToTop({
       duration: 500, // specify the duration of the scroll animation
-      smooth: "easeInOutQuart", // specify the easing function
+      smooth: 'easeInOutQuart' // specify the easing function
     });
   }, []);
 
@@ -98,15 +98,15 @@ const SpaceDetails = () => {
 
   // create server request
   const { mutate, isPending } = useMutation({
-    mutationKey: ["space-details"],
+    mutationKey: ['space-details'],
     mutationFn: getSpaceDetails,
-    onSuccess: async (data) => {
+    onSuccess: async data => {
       setSpaceDetails(data?.data?.space);
     },
     onError: async () => {
-      toast.error("Something went wrong, please try again.");
-      router("/");
-    },
+      toast.error('Something went wrong, please try again.');
+      router('/');
+    }
   });
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const SpaceDetails = () => {
     // numberOfDesks,
     // postalCode,
     // pricePerDesk,
-    rules,
+    rules
     // state,
     // timings,
   } = spaceDetails || {};
@@ -138,15 +138,15 @@ const SpaceDetails = () => {
     const validationErrors = {};
 
     if (!checkInDate) {
-      validationErrors.checkInDate = "Please Select Check In Date!";
+      validationErrors.checkInDate = 'Please Select Check In Date!';
     }
 
     if (!checkOutDate) {
-      validationErrors.checkOutDate = "Please Select Check Out Date!";
+      validationErrors.checkOutDate = 'Please Select Check Out Date!';
     }
 
     if (!totalPeople) {
-      validationErrors.totalPeople = "Please Select People!";
+      validationErrors.totalPeople = 'Please Select People!';
     }
 
     if (Object.keys(validationErrors).length > 0) {
@@ -163,17 +163,17 @@ const SpaceDetails = () => {
       startDate: checkInDate,
       endDate: checkOutDate,
       people: totalPeople,
-      totalPrice: Number(totalDays) * Number(spaceDetails?.pricePerDesk),
+      totalPrice: Number(totalDays) * Number(spaceDetails?.pricePerDesk)
     };
 
-    localStorage.setItem("reserveSpace", JSON.stringify(reserveSpaceDetails));
+    localStorage.setItem('reserveSpace', JSON.stringify(reserveSpaceDetails));
 
     if (!user) {
-      router("/sign-in?redirect=reserve-space");
+      router('/sign-in?redirect=reserve-space');
 
-      toast.success("Please login for confirm reserve space.");
+      toast.success('Please login for confirm reserve space.');
     } else {
-      router("/reserve-space");
+      router('/reserve-space');
     }
   };
   return isPending ? (
@@ -188,7 +188,7 @@ const SpaceDetails = () => {
             <div className="flex flex-col lg:flex-row justify-between gap-5">
               <div
                 className={`w-full ${
-                  gallery?.length > 1 && "lg:w-[65%]"
+                  gallery?.length > 1 && 'lg:w-[65%]'
                 } relative`}
               >
                 <img
@@ -203,7 +203,7 @@ const SpaceDetails = () => {
               </div>
               {gallery?.length > 1 && (
                 <div className="w-full lg:w-[35%] flex flex-col gap-4 h-full">
-                  {gallery?.slice(1, 3)?.map((item) => (
+                  {gallery?.slice(1, 3)?.map(item => (
                     <img
                       key={item?.url}
                       src={item?.url}
@@ -250,33 +250,33 @@ const SpaceDetails = () => {
                     Coworking Space Amenities
                   </h4>
                   <div className="mt-5 flex flex-wrap items-center gap-6">
-                    {amenities?.map((item) => {
-                      return item?.toLowerCase()?.includes("wifi") ? (
+                    {amenities?.map(item => {
+                      return item?.toLowerCase()?.includes('wifi') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/wifi.png" alt="icon" />
                           <span>High-Speed WiFi</span>
                         </div>
-                      ) : item?.toLowerCase()?.includes("air-conditioning") ? (
+                      ) : item?.toLowerCase()?.includes('air-conditioning') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/air.png" alt="icon" />
                           <span>Air Conditioning</span>
                         </div>
-                      ) : item?.toLowerCase()?.includes("parking") ? (
+                      ) : item?.toLowerCase()?.includes('parking') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/parking.png" alt="icon" />
                           <span>Parking</span>
                         </div>
-                      ) : item?.toLowerCase()?.includes("printer") ? (
+                      ) : item?.toLowerCase()?.includes('printer') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/printer.png" alt="icon" />
                           <span>Printer</span>
                         </div>
-                      ) : item?.toLowerCase()?.includes("kitchen") ? (
+                      ) : item?.toLowerCase()?.includes('kitchen') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/kitchen.png" alt="icon" />
                           <span>Kitchen</span>
                         </div>
-                      ) : item?.toLowerCase()?.includes("tv") ? (
+                      ) : item?.toLowerCase()?.includes('tv') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/tv.png" alt="icon" />
                           <span>TV</span>
@@ -291,18 +291,18 @@ const SpaceDetails = () => {
                 <div className="py-7">
                   <h4 className="text-2xl leading-[47px]">Workspace Rules</h4>
                   <div className="mt-5 flex flex-wrap items-center gap-6">
-                    {rules?.map((rule) => {
-                      return rule?.toLowerCase()?.includes("no-smoking") ? (
+                    {rules?.map(rule => {
+                      return rule?.toLowerCase()?.includes('no-smoking') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/smoke.png" alt="icon" />
                           <span>No Smoking</span>
                         </div>
-                      ) : rule?.toLowerCase()?.includes("no-pets") ? (
+                      ) : rule?.toLowerCase()?.includes('no-pets') ? (
                         <div className="flex flex-wrap items-center gap-3">
                           <img src="/images/icons/pets.png" alt="icon" />
                           <span>No Pets Allowed</span>
                         </div>
-                      ) : rule?.toLowerCase()?.includes("workspace-clean") ? (
+                      ) : rule?.toLowerCase()?.includes('workspace-clean') ? (
                         <div className="flex items-center gap-3">
                           <img src="/images/icons/clean.png" alt="icon" />
                           <span>Keep Workspace Clean</span>
@@ -337,13 +337,13 @@ const SpaceDetails = () => {
                     onClick={() => setOpenSelectPeople(!openSelectPeople)}
                     ref={selectPeopleRef}
                   >
-                    {totalPeople ? totalPeople + " People" : "Select People"} -{" "}
+                    {totalPeople ? totalPeople + ' People' : 'Select People'} -{' '}
                     {spaceDetails?.numberOfDesks} People
                   </span>
                   <span>
                     <span className="font-bold">
                       ${spaceDetails?.pricePerDesk}
-                    </span>{" "}
+                    </span>{' '}
                     / person / day
                   </span>
 
@@ -377,7 +377,7 @@ const SpaceDetails = () => {
                       ) : (
                         <span>Select Date</span>
                       )}
-                    </div>{" "}
+                    </div>{' '}
                     /
                     <div className="flex items-center gap-3 cursor-pointer">
                       {checkOutDate ? (
@@ -459,7 +459,7 @@ const SpaceDetails = () => {
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"
                 // width="600"
                 // height="720"
-                style={{ border: 0, width: "100%", height: "720px" }}
+                style={{ border: 0, width: '100%', height: '720px' }}
                 allowfullscreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

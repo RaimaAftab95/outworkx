@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { spaceList } from "../../../http/api";
-import Heading from "../../shared/Heading";
-import Button from "../../ui/Button";
-import Space from "./Space";
+import { useQuery } from '@tanstack/react-query';
+import { spaceList } from '../../../http/api';
+import Heading from '../../shared/Heading';
+import Button from '../../ui/Button';
+import Space from './Space';
 
 const Spaces = () => {
   // get all spaces
@@ -10,15 +10,15 @@ const Spaces = () => {
   const getAllSpaces = async () => {
     const { data } = await spaceList({
       pageNumber: 1,
-      pageSize: 10,
+      pageSize: 10
     });
 
     return data;
   };
 
   const { data, isPending } = useQuery({
-    queryKey: ["space"],
-    queryFn: getAllSpaces,
+    queryKey: ['space'],
+    queryFn: getAllSpaces
   });
 
   const { spaces } = data?.data || {};
@@ -33,7 +33,7 @@ const Spaces = () => {
           </div>
         ) : (
           <div className="mt-[60px] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {spaces?.slice(0, 8).map((space) => (
+            {spaces?.slice(0, 8).map(space => (
               <Space key={space?.id} space={space} />
             ))}
           </div>

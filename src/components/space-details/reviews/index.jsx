@@ -1,6 +1,6 @@
-import React from "react";
-import Button from "../../ui/Button";
-import Review from "./Review";
+import React from 'react';
+import Button from '../../ui/Button';
+import Review from './Review';
 
 const Reviews = () => {
   return (

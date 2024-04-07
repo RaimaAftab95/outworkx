@@ -1,12 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-import Heading from "../components/shared/Heading";
-import ReserveCalender from "../components/space-details/ReserveCalender";
-import SelectPeople from "../components/space-details/SelectPeople";
-import Button from "../components/ui/Button";
-import { bookingSpace } from "../http/api";
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import Heading from '../components/shared/Heading';
+import ReserveCalender from '../components/space-details/ReserveCalender';
+import SelectPeople from '../components/space-details/SelectPeople';
+import Button from '../components/ui/Button';
+import { bookingSpace } from '../http/api';
 
 const ReserveSpace = () => {
   const [spaceDetails, setSpaceDetails] = useState({});
@@ -20,11 +20,11 @@ const ReserveSpace = () => {
   const selectPeopleRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener("click", hideClickOnOutSide);
-    document.addEventListener("click", hideClickOnOutSide2);
+    document.addEventListener('click', hideClickOnOutSide);
+    document.addEventListener('click', hideClickOnOutSide2);
   }, []);
 
-  const hideClickOnOutSide = (e) => {
+  const hideClickOnOutSide = e => {
     if (
       reserveCalenderRef.current &&
       !reserveCalenderRef.current.contains(e.target)
@@ -33,7 +33,7 @@ const ReserveSpace = () => {
     }
   };
 
-  const hideClickOnOutSide2 = (e) => {
+  const hideClickOnOutSide2 = e => {
     if (
       selectPeopleRef.current &&
       !selectPeopleRef.current.contains(e.target)
@@ -52,11 +52,11 @@ const ReserveSpace = () => {
   const router = useNavigate();
 
   useEffect(() => {
-    let reserveSpace = localStorage.getItem("reserveSpace");
+    let reserveSpace = localStorage.getItem('reserveSpace');
     reserveSpace = JSON.parse(reserveSpace);
 
     if (!reserveSpace) {
-      toast.error("Please select space!");
+      toast.error('Please select space!');
       router(`/`);
     } else {
       setSpaceDetails(reserveSpace);
@@ -78,41 +78,41 @@ const ReserveSpace = () => {
       spaceId: id,
       startDate: `${startDate.getFullYear()}-${
         String(startDate.getUTCMonth() + 1).length === 1
-          ? "0" + (startDate.getUTCMonth() + 1)
+          ? '0' + (startDate.getUTCMonth() + 1)
           : startDate.getUTCMonth() + 1
       }-${
         String(endDate.getDay()).length === 1
-          ? "0" + endDate.getDay()
+          ? '0' + endDate.getDay()
           : endDate.getDay()
       }`,
       endDate: `${endDate.getFullYear()}-${
         String(endDate.getUTCMonth() + 1).length === 1
-          ? "0" + (endDate.getUTCMonth() + 1)
+          ? '0' + (endDate.getUTCMonth() + 1)
           : endDate.getUTCMonth() + 1
       }-${
         String(endDate.getDay()).length === 1
-          ? "0" + endDate.getDay()
+          ? '0' + endDate.getDay()
           : endDate.getDay()
       }`,
       price: pricePerDesk * Number(totalPeople) + 10,
       numberOfDesks: people,
-      status: "pending",
+      status: 'pending'
     });
     return data;
   };
 
   // create server request
   const { mutate, isPending } = useMutation({
-    mutationKey: ["confirm-reserve"],
+    mutationKey: ['confirm-reserve'],
     mutationFn: confirmReserveHandler,
     onSuccess: async () => {
-      router("/booking-history");
-      toast.success("Space Booking Successfully.");
-      localStorage.removeItem("reseverSpace");
+      router('/booking-history');
+      toast.success('Space Booking Successfully.');
+      localStorage.removeItem('reseverSpace');
     },
-    onError: async (error) => {
-      console.log("error", error);
-    },
+    onError: async error => {
+      console.log('error', error);
+    }
   });
   return (
     <main className="py-10 text-primary/70">
@@ -152,13 +152,13 @@ const ReserveSpace = () => {
                   <span className="font-bold">Date</span>
                   <div className="flex items-center gap-5">
                     <span>
-                      {new Date(checkInDate).getDate()} /{" "}
+                      {new Date(checkInDate).getDate()} /{' '}
                       {new Date(checkInDate).getUTCMonth() + 1} /
                       {new Date(checkInDate).getFullYear()}
                     </span>
                     <span>-</span>
                     <span>
-                      {new Date(checkOutDate).getDate()} /{" "}
+                      {new Date(checkOutDate).getDate()} /{' '}
                       {new Date(checkOutDate).getUTCMonth() + 1} /
                       {new Date(checkOutDate).getFullYear()}
                     </span>

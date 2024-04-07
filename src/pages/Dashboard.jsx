@@ -1,7 +1,7 @@
-import React from "react";
-import { PieChart } from "react-minimal-pie-chart";
-import Footer from "../components/shared/Footer";
-import Heading from "../components/shared/Heading";
+import React from 'react';
+import { PieChart } from 'react-minimal-pie-chart';
+import Footer from '../components/shared/Footer';
+import Heading from '../components/shared/Heading';
 
 const Dashboard = () => {
   return (
@@ -103,9 +103,9 @@ const Dashboard = () => {
             <div className="w-[150px] h-[150] mx-auto mt-4">
               <PieChart
                 data={[
-                  { title: "confirmed", value: 220, color: "#E6E6E6" },
-                  { title: "pending", value: 48, color: "#CBCBCB" },
-                  { title: "cancelled", value: 32, color: "#919191" },
+                  { title: 'confirmed', value: 220, color: '#E6E6E6' },
+                  { title: 'pending', value: 48, color: '#CBCBCB' },
+                  { title: 'cancelled', value: 32, color: '#919191' }
                 ]}
                 lineWidth={25}
                 rounded

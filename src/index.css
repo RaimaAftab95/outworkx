@@ -1,17 +1,18 @@
 @font-face {
-  font-family: "mluvka";
-  src: url("/fonts/mluvka/regular.otf");
-  src: url("/fonts/mluvka/regular.otf") format("opentype");
+  font-family: 'mluvka';
+  src: url('/fonts/mluvka/regular.otf');
+  src: url('/fonts/mluvka/regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "nohemi";
-  src: url("/fonts/nohemi/regular.otf");
-  src: url("/fonts/nohemi/regular.otf") format("opentype"),
-       url("/fonts/nohemi/regular.woff") format("woff"),
-       url("/fonts/nohemi/regular.ttf") format("truetype");
+  font-family: 'nohemi';
+  src: url('/fonts/nohemi/regular.otf');
+  src:
+    url('/fonts/nohemi/regular.otf') format('opentype'),
+    url('/fonts/nohemi/regular.woff') format('woff'),
+    url('/fonts/nohemi/regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -22,7 +23,7 @@
 
 body {
   color: #00000080;
-  font-family: "mluvka", sans-serif;
+  font-family: 'mluvka', sans-serif;
   font-style: normal;
   min-height: 100vh !important;
   overflow-x: hidden !important;
@@ -36,11 +37,11 @@ h5,
 h6 {
   color: #000;
   font-weight: 600;
-  font-family: "nohemi", sans-serif;
+  font-family: 'nohemi', sans-serif;
 }
 
 .font-nohemi {
-  font-family: "nohemi", sans-serif;
+  font-family: 'nohemi', sans-serif;
 }
 
 /* CustomizableBarChart.css */

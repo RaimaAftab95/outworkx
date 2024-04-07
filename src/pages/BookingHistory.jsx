@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Heading from "../components/shared/Heading";
-import Loading from "../components/ui/Loading";
-import { bookingList } from "../http/api";
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Heading from '../components/shared/Heading';
+import Loading from '../components/ui/Loading';
+import { bookingList } from '../http/api';
 
 const BookingHistory = () => {
   const [bookings, setBookings] = useState([]);
@@ -12,7 +12,7 @@ const BookingHistory = () => {
   const getBookingList = async () => {
     const { data } = await bookingList({
       pageNumber: 1,
-      pageSize: 10,
+      pageSize: 10
     });
 
     return data;
@@ -20,14 +20,14 @@ const BookingHistory = () => {
 
   // create server request
   const { mutate, isPending } = useMutation({
-    mutationKey: ["booking-list"],
+    mutationKey: ['booking-list'],
     mutationFn: getBookingList,
-    onSuccess: async (data) => {
+    onSuccess: async data => {
       setBookings(data?.data?.bookings);
     },
-    onError: async (error) => {
-      console.log("error", error);
-    },
+    onError: async error => {
+      console.log('error', error);
+    }
   });
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const BookingHistory = () => {
                 </th>
               </thead>
               <tbody>
-                {bookings?.map((booking) => {
+                {bookings?.map(booking => {
                   const checkIn = new Date(booking?.startDate);
 
                   return (
@@ -116,9 +116,9 @@ const BookingHistory = () => {
                       <td className="pt-[30px]">09:00 AM- 06:00 PM</td>
                       <td className="pt-[30px]">
                         {checkIn.getFullYear() +
-                          "-" +
+                          '-' +
                           checkIn.getDay() +
-                          "-" +
+                          '-' +
                           checkIn.getMonth() +
                           1}
                       </td>

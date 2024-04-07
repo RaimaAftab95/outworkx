@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Space = ({ space }) => {
   const [activeImage, setActiveImage] = useState(0);
@@ -7,14 +7,14 @@ const Space = ({ space }) => {
   // extract space data
   const { id, name, description, pricePerDesk, gallery } = space || {};
 
-  const changeImageHandler = (navigate) => {
-    if (navigate === "left") {
+  const changeImageHandler = navigate => {
+    if (navigate === 'left') {
       activeImage !== 0
         ? setActiveImage(activeImage - 1)
         : setActiveImage(gallery?.length - 1);
     }
 
-    if (navigate === "right") {
+    if (navigate === 'right') {
       activeImage !== gallery?.length - 1
         ? setActiveImage(activeImage + 1)
         : setActiveImage(0);
@@ -41,13 +41,13 @@ const Space = ({ space }) => {
             <div className="absolute left-[10px] right-[10px] top-[50%] transform translate-y-[-50%] flex items-center justify-between gap-5">
               <div
                 className="cursor-pointer w-6 h-6 rounded-full bg-white transition-all hover:opacity-60 flex items-center justify-center"
-                onClick={() => changeImageHandler("left")}
+                onClick={() => changeImageHandler('left')}
               >
                 <img src="/images/icons/left.png" alt="left" />
               </div>
               <div
                 className="cursor-pointer w-6 h-6 rounded-full bg-white transition-all hover:opacity-60 flex items-center justify-center"
-                onClick={() => changeImageHandler("right")}
+                onClick={() => changeImageHandler('right')}
               >
                 <img src="/images/icons/right.png" alt="right" />
               </div>
@@ -59,7 +59,7 @@ const Space = ({ space }) => {
                 <div
                   key={item?.url}
                   className={`transition-all ${
-                    activeImage === idx ? "w-[8px] h-[8px]" : "w-[6px] h-[6px]"
+                    activeImage === idx ? 'w-[8px] h-[8px]' : 'w-[6px] h-[6px]'
                   } rounded-full bg-white cursor-pointer`}
                   onClick={() => setActiveImage(idx)}
                 />
@@ -81,7 +81,7 @@ const Space = ({ space }) => {
         </div>
         <p>
           {description?.length > 50
-            ? description?.substring(0, 50) + "..."
+            ? description?.substring(0, 50) + '...'
             : description}
         </p>
         <h3 className="font-bold">${pricePerDesk}</h3>

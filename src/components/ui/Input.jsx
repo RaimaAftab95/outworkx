@@ -1,13 +1,13 @@
-import React from "react";
-import { cn } from "../../lib/utills";
+import React from 'react';
+import { cn } from '../../lib/utills';
 
 const Input = ({
-  type = "",
+  type = '',
   onChange,
-  placeholder = "",
-  className = "",
+  placeholder = '',
+  className = '',
   value,
-  id = "",
+  id = '',
   ...rest
 }) => {
   return (
@@ -18,7 +18,7 @@ const Input = ({
       value={value}
       id={id}
       className={cn(
-        "text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none",
+        'text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none',
         className
       )}
       {...rest}
