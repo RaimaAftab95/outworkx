@@ -184,7 +184,9 @@ const SpaceDetails = () => {
       <section className="text-black/70 mb-32">
         <div className="container">
           {/* space images */}
-          {gallery?.length > 0 && (
+          {gallery && (
+            <>
+              {gallery?.length > 1 ? (
             <div className="flex flex-col lg:flex-row justify-between gap-5">
               <div
                 className={`w-full ${
@@ -192,7 +194,7 @@ const SpaceDetails = () => {
                 } relative`}
               >
                 <img
-                  className="min-w-screen max-h-screen rounded-3xl"
+                  className="w-full h-full rounded-3xl"
                   src={gallery[0]?.url}
                   alt="space"
                 />
@@ -214,6 +216,18 @@ const SpaceDetails = () => {
                 </div>
               )}
             </div>
+          ) : (
+            <div
+                className={`w-full max-h-screen overflow-hidden`}
+              >
+                <img
+                  className="min-w-full max-h-screen rounded-3xl"
+                  src={gallery[0]?.url}
+                  alt="space"
+                />
+              </div>
+          )}
+            </>
           )}
 
           {/* space details */}
