@@ -192,7 +192,7 @@ const SpaceDetails = () => {
                 } relative`}
               >
                 <img
-                  className="w-full h-full rounded-3xl"
+                  className="min-w-screen max-h-screen rounded-3xl"
                   src={gallery[0]?.url}
                   alt="space"
                 />
