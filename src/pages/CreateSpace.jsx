@@ -1,16 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-import { animateScroll as scroll } from "react-scroll";
-import SpaceInformation from "../components/create-space/SpaceInformation";
-import SpaceMoreInformation from "../components/create-space/SpaceMoreInformation";
-import Button from "../components/ui/Button";
-import { createSpace } from "../http/api";
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
+import SpaceInformation from '../components/create-space/SpaceInformation';
+import SpaceMoreInformation from '../components/create-space/SpaceMoreInformation';
+import Button from '../components/ui/Button';
+import { createSpace } from '../http/api';
 
 const tabs = {
   1: SpaceInformation,
-  2: SpaceMoreInformation,
+  2: SpaceMoreInformation
 };
 
 const CreateSpace = () => {
@@ -23,7 +23,7 @@ const CreateSpace = () => {
   useEffect(() => {
     scroll.scrollToTop({
       duration: 500, // specify the duration of the scroll animation
-      smooth: "easeInOutQuart", // specify the easing function
+      smooth: 'easeInOutQuart' // specify the easing function
     });
   }, [activeTab]);
 
@@ -36,12 +36,12 @@ const CreateSpace = () => {
 
   // create server request
   const { mutate, isPending } = useMutation({
-    mutationKey: ["create-space"],
+    mutationKey: ['create-space'],
     mutationFn: createNewSpace,
     onSuccess: async () => {
-      router("/");
-      toast.success("Space Created Successfull.");
-    },
+      router('/');
+      toast.success('Space Created Successfull.');
+    }
     // onError: async (error) => {
     //   const property = error?.response?.data?.data?.message?.replace("/", "");
     //   setErrors({
@@ -77,16 +77,16 @@ const CreateSpace = () => {
             <div
               className={
                 activeTab === 1
-                  ? "w-3 h-3 rounded-full bg-primary"
-                  : "w-2 h-2 rounded-full bg-[#D9D9D9] cursor-pointer"
+                  ? 'w-3 h-3 rounded-full bg-primary'
+                  : 'w-2 h-2 rounded-full bg-[#D9D9D9] cursor-pointer'
               }
               onClick={() => setActiveTab(1)}
             />
             <div
               className={
                 activeTab === 2
-                  ? "w-3 h-3 rounded-full bg-primary"
-                  : "w-2 h-2 rounded-full bg-[#D9D9D9] cursor-pointer"
+                  ? 'w-3 h-3 rounded-full bg-primary'
+                  : 'w-2 h-2 rounded-full bg-[#D9D9D9] cursor-pointer'
               }
               onClick={() => setActiveTab(2)}
             />

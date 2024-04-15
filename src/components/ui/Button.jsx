@@ -1,23 +1,23 @@
-import { Link } from "react-router-dom";
-import { cn } from "../../lib/utills";
+import { Link } from 'react-router-dom';
+import { cn } from '../../lib/utills';
 
 const Button = ({
-  type = "button",
-  to = "",
-  className = "",
+  type = 'button',
+  to = '',
+  className = '',
   children,
   onClick,
-  size = "lg",
-  variant = "primary",
+  size = 'lg',
+  variant = 'primary',
   loading,
   ...rest
 }) => {
   const styles = `font-medium border ${
-    variant === "primary"
-      ? "text-white bg-primary hover:border-gray hover:bg-transparent hover:text-primary border-transparent"
-      : "bg-transparent text-primary border border-gray hover:bg-primary hover:border-transparent hover:text-white"
+    variant === 'primary'
+      ? 'text-white bg-primary hover:border-gray hover:bg-transparent hover:text-primary border-transparent'
+      : 'bg-transparent text-primary border border-gray hover:bg-primary hover:border-transparent hover:text-white'
   } transition-all rounded-full ${
-    size === "lg" ? "py-4 px-10 text-xl" : "py-3 px-5 text-base"
+    size === 'lg' ? 'py-4 px-10 text-xl' : 'py-3 px-5 text-base'
   }`;
 
   return to ? (

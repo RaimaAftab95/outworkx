@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuthStore } from "../../../store";
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuthStore } from '../../../store';
 
-const Header = () => {
+export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const [openUserOpt, setOpenUserOpt] = useState(false);
   const [openMobileUserOpt, setOpenMobileUserOpt] = useState(false);
@@ -13,17 +13,17 @@ const Header = () => {
   const mobileMenuRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener("click", hideClickOnOutSide);
-    document.addEventListener("click", hideClickOnOutSide2);
+    document.addEventListener('click', hideClickOnOutSide);
+    document.addEventListener('click', hideClickOnOutSide2);
   }, []);
 
-  const hideClickOnOutSide = (e) => {
+  const hideClickOnOutSide = e => {
     if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
       setOpenUserOpt(false);
     }
   };
 
-  const hideClickOnOutSide2 = (e) => {
+  const hideClickOnOutSide2 = e => {
     if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
       setOpenMobileUserOpt(false);
     }
@@ -37,8 +37,8 @@ const Header = () => {
         <nav
           className={`fixed z-50 ${
             activeMenu
-              ? "opacity-100 visible"
-              : "opacity-0 sm:opacity-100 invisible sm:visible"
+              ? 'opacity-100 visible'
+              : 'opacity-0 sm:opacity-100 invisible sm:visible'
           } transition-all duration-300 sm:relative top-0 left-0 right-0 bottom-0 w-full h-full sm:w-auto sm:h-auto bg-white`}
         >
           <div className="flex sm:hidden pt-10 justify-end pr-10">
@@ -98,8 +98,8 @@ const Header = () => {
         <div
           className={`absolute transition-all duration-300 ${
             openUserOpt
-              ? "opacity-0 invisible sm:opacity-100 sm:visible"
-              : "opacity-0 invisible"
+              ? 'opacity-0 invisible sm:opacity-100 sm:visible'
+              : 'opacity-0 invisible'
           } top-[150%] right-0 z-40 bg-white rounded-md shadow-2xl min-w-[250px] border border-gray`}
         >
           <ul className="flex flex-col h-full text-xl sm:text-base gap-5 text-primary px-[14px] py-5 border-b border-gray">
@@ -157,8 +157,8 @@ const Header = () => {
         <div
           className={`absolute transition-all duration-300 ${
             openMobileUserOpt
-              ? "opacity-100 sm:opacity-0 visible sm:invisible"
-              : "opacity-0 invisible"
+              ? 'opacity-100 sm:opacity-0 visible sm:invisible'
+              : 'opacity-0 invisible'
           } top-[150%] left-0 right-0 w-full rounded-[20px] bg-white px-6 z-40 mobile-header`}
         >
           <ul className="py-[18px] flex items-center gap-1 justify-between px-5 text-primary border-b border-gray flex-wrap">
@@ -244,6 +244,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

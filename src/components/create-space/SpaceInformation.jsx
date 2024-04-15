@@ -1,22 +1,22 @@
-import { useState } from "react";
-import Heading from "../shared/Heading";
-import Button from "../ui/Button";
-import Error from "../ui/Error";
-import Input from "../ui/Input";
-import InputBox from "../ui/InputBox";
-import Label from "../ui/Label";
+import { useState } from 'react';
+import Heading from '../shared/Heading';
+import Button from '../ui/Button';
+import Error from '../ui/Error';
+import Input from '../ui/Input';
+import InputBox from '../ui/InputBox';
+import Label from '../ui/Label';
 
 const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
-  const [placeType, setPlaceType] = useState("");
-  const [address, setAddress] = useState("");
+  const [placeType, setPlaceType] = useState('');
+  const [address, setAddress] = useState('');
   const [offers, setOffers] = useState([]);
   const [rules, setRules] = useState([]);
   const [errors, setErrors] = useState({});
 
   // handle select offer
-  const handleSelectOffer = (offer) => {
+  const handleSelectOffer = offer => {
     if (offers?.includes(offer)) {
-      const updatedOffers = offers?.filter((item) => item !== offer);
+      const updatedOffers = offers?.filter(item => item !== offer);
       setOffers(updatedOffers);
     } else {
       setOffers([...offers, offer]);
@@ -24,10 +24,10 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
   };
 
   // select rules
-  const selectRules = (e) => {
+  const selectRules = e => {
     const rule = e.target.value;
     if (rules?.includes(rule)) {
-      const updatedRules = rules?.filter((item) => item !== rule);
+      const updatedRules = rules?.filter(item => item !== rule);
       setRules(updatedRules);
     } else {
       setRules([...rules, rule]);
@@ -35,22 +35,22 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
   };
 
   // submit handler
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     // check validation
     const validationErrors = {};
 
     if (!address) {
-      validationErrors.address = "Address is Required!";
+      validationErrors.address = 'Address is Required!';
     }
 
     if (offers?.length === 0) {
-      validationErrors.offers = "Please Select Offers!";
+      validationErrors.offers = 'Please Select Offers!';
     }
 
     if (rules?.length === 0) {
-      validationErrors.rules = "Please Select Rules!";
+      validationErrors.rules = 'Please Select Rules!';
     }
 
     if (Object.keys(validationErrors).length > 0) {
@@ -62,7 +62,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
       // placeType,
       address,
       amenities: offers,
-      rules,
+      rules
     });
 
     setActiveTab(2);
@@ -75,11 +75,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
         <div className="flex flex-col gap-7">
           <InputBox
             className={`cursor-pointer transition-all ${
-              placeType === "entire-place"
-                ? "border-primary"
-                : "hover:border-primary"
+              placeType === 'entire-place'
+                ? 'border-primary'
+                : 'hover:border-primary'
             }`}
-            onClick={() => setPlaceType("entire-place")}
+            onClick={() => setPlaceType('entire-place')}
           >
             <Label className="cursor-pointer" htmlFor="place">
               An entire place
@@ -90,9 +90,9 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
           </InputBox>
           <InputBox
             className={`cursor-pointer transition-all ${
-              placeType === "room" ? "border-primary" : "hover:border-primary"
+              placeType === 'room' ? 'border-primary' : 'hover:border-primary'
             }`}
-            onClick={() => setPlaceType("room")}
+            onClick={() => setPlaceType('room')}
           >
             <Label className="cursor-pointer" htmlFor="room">
               A room
@@ -104,11 +104,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
           </InputBox>
           <InputBox
             className={`cursor-pointer transition-all ${
-              placeType === "shared-room"
-                ? "border-primary"
-                : "hover:border-primary"
+              placeType === 'shared-room'
+                ? 'border-primary'
+                : 'hover:border-primary'
             }`}
-            onClick={() => setPlaceType("shared-room")}
+            onClick={() => setPlaceType('shared-room')}
           >
             <Label className="cursor-pointer" htmlFor="shared-room">
               A shared room
@@ -134,7 +134,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               // width="600"
               // height="630"
               className="h-[400px] sm:h-[500px] md:h-[630px]"
-              style={{ border: 0, width: "100%" }}
+              style={{ border: 0, width: '100%' }}
               allowfullscreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -147,7 +147,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 </div>
                 <Input
                   value={address}
-                  onChange={(e) => setAddress(e.target.value)}
+                  onChange={e => setAddress(e.target.value)}
                   type="text"
                   placeholder="Enter your address"
                 />
@@ -168,11 +168,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
           <div className="mt-11 grid sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
             <div
               className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-[25px] cursor-pointer transition-all ${
-                offers?.includes("wifi")
-                  ? "border-primary"
-                  : "hover:border-primary"
+                offers?.includes('wifi')
+                  ? 'border-primary'
+                  : 'hover:border-primary'
               }`}
-              onClick={() => handleSelectOffer("wifi")}
+              onClick={() => handleSelectOffer('wifi')}
             >
               <div>
                 <img src="/images/icons/wifi-lg.png" alt="icon" />
@@ -182,11 +182,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
             <div
               className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-[25px] cursor-pointer transition-all ${
-                offers?.includes("tv")
-                  ? "border-primary"
-                  : "hover:border-primary"
+                offers?.includes('tv')
+                  ? 'border-primary'
+                  : 'hover:border-primary'
               }`}
-              onClick={() => handleSelectOffer("tv")}
+              onClick={() => handleSelectOffer('tv')}
             >
               <div>
                 <img src="/images/icons/tv.png" alt="icon" />
@@ -196,11 +196,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
             <div
               className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-[25px] cursor-pointer transition-all ${
-                offers?.includes("kitchen")
-                  ? "border-primary"
-                  : "hover:border-primary"
+                offers?.includes('kitchen')
+                  ? 'border-primary'
+                  : 'hover:border-primary'
               }`}
-              onClick={() => handleSelectOffer("kitchen")}
+              onClick={() => handleSelectOffer('kitchen')}
             >
               <div>
                 <img src="/images/icons/kitchen.png" alt="icon" />
@@ -210,11 +210,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
             <div
               className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-[25px] cursor-pointer transition-all ${
-                offers?.includes("printer")
-                  ? "border-primary"
-                  : "hover:border-primary"
+                offers?.includes('printer')
+                  ? 'border-primary'
+                  : 'hover:border-primary'
               }`}
-              onClick={() => handleSelectOffer("printer")}
+              onClick={() => handleSelectOffer('printer')}
             >
               <div>
                 <img src="/images/icons/printer.png" alt="icon" />
@@ -224,11 +224,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
             <div
               className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-[25px] cursor-pointer transition-all ${
-                offers?.includes("parking")
-                  ? "border-primary"
-                  : "hover:border-primary"
+                offers?.includes('parking')
+                  ? 'border-primary'
+                  : 'hover:border-primary'
               }`}
-              onClick={() => handleSelectOffer("parking")}
+              onClick={() => handleSelectOffer('parking')}
             >
               <div>
                 <img src="/images/icons/parking.png" alt="icon" />
@@ -238,11 +238,11 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
             <div
               className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-[25px] cursor-pointer transition-all ${
-                offers?.includes("air-conditioning")
-                  ? "border-primary"
-                  : "hover:border-primary"
+                offers?.includes('air-conditioning')
+                  ? 'border-primary'
+                  : 'hover:border-primary'
               }`}
-              onClick={() => handleSelectOffer("air-conditioning")}
+              onClick={() => handleSelectOffer('air-conditioning')}
             >
               <div>
                 <img src="/images/icons/air-lg.png" alt="icon" />
@@ -274,7 +274,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 id="no-smoking"
                 value="no-smoking"
                 onChange={selectRules}
-                checked={rules?.includes("no-smoking")}
+                checked={rules?.includes('no-smoking')}
               />
             </div>
             <div className="flex items-center justify-between gap-5 flex-wrap">
@@ -291,7 +291,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 id="no-pets"
                 value="no-pets"
                 onChange={selectRules}
-                checked={rules?.includes("no-pets")}
+                checked={rules?.includes('no-pets')}
               />
             </div>
             <div className="flex items-center justify-between gap-5 flex-wrap">
@@ -305,7 +305,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 type="checkbox"
                 className="w-6 h-6 rounded-[10px] border border-gray"
                 name=""
-                checked={rules?.includes("workspace-clean")}
+                checked={rules?.includes('workspace-clean')}
                 id="workspace-clean"
                 value="workspace-clean"
                 onChange={selectRules}

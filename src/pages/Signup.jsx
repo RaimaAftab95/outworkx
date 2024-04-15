@@ -1,21 +1,21 @@
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store";
-import Heading from "../components/shared/Heading";
-import Button from "../components/ui/Button";
-import Error from "../components/ui/Error";
-import { signUp } from "../http/api";
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store';
+import Heading from '../components/shared/Heading';
+import Button from '../components/ui/Button';
+import Error from '../components/ui/Error';
+import { signUp } from '../http/api';
 
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [gender, setGender] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
   const [errors, setErrors] = useState({});
 
   const router = useNavigate();
@@ -29,7 +29,7 @@ const Signup = () => {
       password,
       phoneNumber,
       dateOfBirth,
-      gender,
+      gender
     });
 
     return data;
@@ -40,62 +40,62 @@ const Signup = () => {
 
   // create server request
   const { mutate, isPending } = useMutation({
-    mutationKey: ["signup"],
+    mutationKey: ['signup'],
     mutationFn: signupUser,
-    onSuccess: async (data) => {
+    onSuccess: async data => {
       // store in local storage
-      localStorage.setItem("auth", JSON.stringify(data?.data));
+      localStorage.setItem('auth', JSON.stringify(data?.data));
 
       // store in zustand
       setAuth(data?.data);
-      router("/");
+      router('/');
 
-      toast.success("Signup successful.");
+      toast.success('Signup successful.');
     },
-    onError: async (error) => {
-      const property = error?.response?.data?.data?.message?.replace("/", "");
+    onError: async error => {
+      const property = error?.response?.data?.data?.message?.replace('/', '');
       setErrors({
-        [property]: `${property} is Required!`,
+        [property]: `${property} is Required!`
       });
-    },
+    }
   });
 
   // submit handler
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     // check validation
     const validationErrors = {};
 
     if (!firstName) {
-      validationErrors.firstName = "First Name is Required!";
+      validationErrors.firstName = 'First Name is Required!';
     }
 
     if (!lastName) {
-      validationErrors.lastName = "Last Name is Required!";
+      validationErrors.lastName = 'Last Name is Required!';
     }
 
     if (!email) {
-      validationErrors.email = "Email is Required!";
+      validationErrors.email = 'Email is Required!';
     }
 
     if (!password) {
-      validationErrors.password = "Password is Required!";
+      validationErrors.password = 'Password is Required!';
     } else if (password?.length < 8) {
       validationErrors.password =
-        "Password Must be Greater or Equal 8 Characters!";
+        'Password Must be Greater or Equal 8 Characters!';
     }
 
     if (!dateOfBirth) {
-      validationErrors.dateOfBirth = "Date Of Birth is Required!";
+      validationErrors.dateOfBirth = 'Date Of Birth is Required!';
     }
 
     if (!phoneNumber) {
-      validationErrors.phoneNumber = "Phone Number is Required!";
+      validationErrors.phoneNumber = 'Phone Number is Required!';
     }
 
     if (!gender) {
-      validationErrors.gender = "Gender is Required!";
+      validationErrors.gender = 'Gender is Required!';
     }
 
     // if (Object.keys(validationErrors).length > 0) {
@@ -123,7 +123,7 @@ const Signup = () => {
                 placeholder="First Name*"
                 className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={e => setFirstName(e.target.value)}
               />
               <Error>{errors?.firstName}</Error>
               <input
@@ -131,7 +131,7 @@ const Signup = () => {
                 placeholder="Last Name*"
                 className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={e => setLastName(e.target.value)}
               />
               <Error>{errors?.lastName}</Error>
               <input
@@ -139,7 +139,7 @@ const Signup = () => {
                 placeholder="E-mail*"
                 className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
               <Error>{errors?.email}</Error>
               <input
@@ -147,7 +147,7 @@ const Signup = () => {
                 placeholder="Phone Number*"
                 className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={e => setPhoneNumber(e.target.value)}
               />
               <Error>{errors?.phoneNumber}</Error>
               <input
@@ -155,7 +155,7 @@ const Signup = () => {
                 placeholder="Create password*"
                 className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
               />
               <Error>{errors?.password}</Error>
               <input
@@ -163,14 +163,14 @@ const Signup = () => {
                 placeholder="Selecte Date of birth*"
                 className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
                 value={dateOfBirth}
-                onChange={(e) => setDateOfBirth(e.target.value)}
+                onChange={e => setDateOfBirth(e.target.value)}
               />
               <Error>{errors?.dateOfBirth}</Error>
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                   <input
                     value="male"
-                    onChange={(e) => setGender(e.target.value)}
+                    onChange={e => setGender(e.target.value)}
                     type="radio"
                     name="gender"
                     id="male"
@@ -182,7 +182,7 @@ const Signup = () => {
                 <div className="flex items-center gap-2">
                   <input
                     value="female"
-                    onChange={(e) => setGender(e.target.value)}
+                    onChange={e => setGender(e.target.value)}
                     type="radio"
                     name="gender"
                     id="female"
@@ -200,7 +200,7 @@ const Signup = () => {
                 Sign up
               </Button>
               <p className="text-xl font-bold leading-[37px] text-primary/70">
-                Already a member?{" "}
+                Already a member?{' '}
                 <Link to="/sign-in" className="underline">
                   Sign in
                 </Link>

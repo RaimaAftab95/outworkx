@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import {
   add,
   eachDayOfInterval,
@@ -6,15 +6,15 @@ import {
   format,
   getDay,
   parse,
-  startOfToday,
-} from "date-fns";
-import { useState } from "react";
-import { IoClose } from "react-icons/io5";
-import { cn } from "../../lib/utills";
-import Button from "../ui/Button";
+  startOfToday
+} from 'date-fns';
+import { useState } from 'react';
+import { IoClose } from 'react-icons/io5';
+import { cn } from '../../lib/utills';
+import Button from '../ui/Button';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 const ReserveCalender = ({
@@ -24,42 +24,42 @@ const ReserveCalender = ({
   setCheckInDate,
   checkOutDate,
   setCheckOutDate,
-  className = "",
+  className = ''
 }) => {
   const today = startOfToday();
-  const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
-  const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+  const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
+  const firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
 
   const [currentNextMonth, setCurrentNextMonth] = useState(
-    format(add(currentMonth, { months: 1 }), "MMM-yyyy")
+    format(add(currentMonth, { months: 1 }), 'MMM-yyyy')
   );
 
   const days = eachDayOfInterval({
     start: firstDayCurrentMonth,
-    end: endOfMonth(firstDayCurrentMonth),
+    end: endOfMonth(firstDayCurrentMonth)
   });
 
   const currentNextMonthDays = eachDayOfInterval({
     start: currentNextMonth,
-    end: endOfMonth(currentNextMonth),
+    end: endOfMonth(currentNextMonth)
   });
 
   function previousMonth() {
     setCurrentMonth(
-      format(add(firstDayCurrentMonth, { months: -2 }), "MMM-yyyy")
+      format(add(firstDayCurrentMonth, { months: -2 }), 'MMM-yyyy')
     );
 
     setCurrentNextMonth(
-      format(add(firstDayCurrentMonth, { months: -1 }), "MMM-yyyy")
+      format(add(firstDayCurrentMonth, { months: -1 }), 'MMM-yyyy')
     );
   }
 
   function nextMonth() {
     setCurrentMonth(
-      format(add(firstDayCurrentMonth, { months: 2 }), "MMM-yyyy")
+      format(add(firstDayCurrentMonth, { months: 2 }), 'MMM-yyyy')
     );
     setCurrentNextMonth(
-      format(add(firstDayCurrentMonth, { months: 3 }), "MMM-yyyy")
+      format(add(firstDayCurrentMonth, { months: 3 }), 'MMM-yyyy')
     );
   }
 
@@ -67,11 +67,11 @@ const ReserveCalender = ({
     <div
       className={cn(
         `transition-all duration-200 ${
-          open ? "visible opacity-100" : "invisible opacity-0"
+          open ? 'visible opacity-100' : 'invisible opacity-0'
         } w-full sm:min-w-[660px] absolute top-[100%] right-0 bg-white shadow-xl border border-gray rounded-2xl`,
         className
       )}
-      onClick={(e) => e.stopPropagation()}
+      onClick={e => e.stopPropagation()}
     >
       <div className="p-5">
         <div className="flex items-center flex-wrap justify-between gap-5">
@@ -93,7 +93,7 @@ const ReserveCalender = ({
               </div>
               <button
                 className="cursor-pointer"
-                onClick={() => setCheckInDate("")}
+                onClick={() => setCheckInDate('')}
               >
                 {checkInDate && <IoClose />}
               </button>
@@ -113,7 +113,7 @@ const ReserveCalender = ({
               </div>
               <button
                 className="cursor-pointer"
-                onClick={() => setCheckOutDate("")}
+                onClick={() => setCheckOutDate('')}
               >
                 {checkOutDate && <IoClose />}
               </button>
@@ -132,7 +132,7 @@ const ReserveCalender = ({
                 <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
               </button>
               <h2 className="flex-auto text-center font-semibold text-gray-900">
-                {format(firstDayCurrentMonth, "MMMM yyyy")}
+                {format(firstDayCurrentMonth, 'MMMM yyyy')}
               </h2>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
@@ -150,7 +150,7 @@ const ReserveCalender = ({
                   key={day.toString()}
                   className={classNames(
                     dayIdx === 0 && colStartClasses[getDay(day)],
-                    "py-1.5"
+                    'py-1.5'
                   )}
                 >
                   <button
@@ -159,25 +159,25 @@ const ReserveCalender = ({
                       day?.toISOString() < today?.toISOString()
                         ? {}
                         : checkInDate && day?.toISOString() > checkInDate
-                        ? setCheckOutDate(day?.toISOString())
-                        : setCheckInDate(day?.toISOString())
+                          ? setCheckOutDate(day?.toISOString())
+                          : setCheckInDate(day?.toISOString())
                     }
                     className={`w-10 h-10 rounded-full transition-all ${
                       checkInDate === day.toISOString() ||
                       checkOutDate === day.toISOString()
-                        ? "border border-primary bg-primary text-white"
-                        : "hover:border border-gray"
+                        ? 'border border-primary bg-primary text-white'
+                        : 'hover:border border-gray'
                     } ${
                       day?.toISOString() > checkInDate &&
                       day?.toISOString() < checkOutDate &&
-                      "bg-gray/50"
+                      'bg-gray/50'
                     } ${
                       day?.toISOString() < today?.toISOString() &&
-                      "text-gray hover:border-transparent cursor-not-allowed"
+                      'text-gray hover:border-transparent cursor-not-allowed'
                     }`}
                   >
-                    <time dateTime={format(day, "yyyy-MM-dd")}>
-                      {format(day, "d")}
+                    <time dateTime={format(day, 'yyyy-MM-dd')}>
+                      {format(day, 'd')}
                     </time>
                   </button>
                 </div>
@@ -187,7 +187,7 @@ const ReserveCalender = ({
           <div>
             <div className="flex items-center">
               <h2 className="flex-auto text-center font-semibold text-gray-900">
-                {format(currentNextMonth, "MMMM yyyy")}
+                {format(currentNextMonth, 'MMMM yyyy')}
               </h2>
               <button
                 onClick={nextMonth}
@@ -212,7 +212,7 @@ const ReserveCalender = ({
                   key={day.toString()}
                   className={classNames(
                     dayIdx === 0 && colStartClasses[getDay(day)],
-                    "py-1.5"
+                    'py-1.5'
                   )}
                 >
                   <button
@@ -221,25 +221,25 @@ const ReserveCalender = ({
                       day?.toISOString() < today?.toISOString()
                         ? {}
                         : checkInDate && day?.toISOString() > checkInDate
-                        ? setCheckOutDate(day?.toISOString())
-                        : setCheckInDate(day?.toISOString())
+                          ? setCheckOutDate(day?.toISOString())
+                          : setCheckInDate(day?.toISOString())
                     }
                     className={`w-10 h-10 rounded-full transition-all ${
                       checkInDate === day.toISOString() ||
                       checkOutDate === day.toISOString()
-                        ? "border border-primary bg-primary text-white"
-                        : "hover:border border-gray"
+                        ? 'border border-primary bg-primary text-white'
+                        : 'hover:border border-gray'
                     }  ${
                       day?.toISOString() > checkInDate &&
                       day?.toISOString() < checkOutDate &&
-                      "bg-gray/50"
+                      'bg-gray/50'
                     } ${
                       day?.toISOString() < today?.toISOString() &&
-                      "text-gray hover:border-transparent cursor-not-allowed"
+                      'text-gray hover:border-transparent cursor-not-allowed'
                     }`}
                   >
-                    <time dateTime={format(day, "yyyy-MM-dd")}>
-                      {format(day, "d")}
+                    <time dateTime={format(day, 'yyyy-MM-dd')}>
+                      {format(day, 'd')}
                     </time>
                   </button>
                 </div>
@@ -263,13 +263,13 @@ const ReserveCalender = ({
 };
 
 let colStartClasses = [
-  "",
-  "col-start-2",
-  "col-start-3",
-  "col-start-4",
-  "col-start-5",
-  "col-start-6",
-  "col-start-7",
+  '',
+  'col-start-2',
+  'col-start-3',
+  'col-start-4',
+  'col-start-5',
+  'col-start-6',
+  'col-start-7'
 ];
 
 export default ReserveCalender;

@@ -1,22 +1,22 @@
-import React from "react";
-import { Chart } from "react-google-charts";
-import Footer from "../components/shared/Footer";
-import Heading from "../components/shared/Heading";
-import TransactionItem from "../components/statistics/TransactionItem";
+import React from 'react';
+import { Chart } from 'react-google-charts';
+import Footer from '../components/shared/Footer';
+import Heading from '../components/shared/Heading';
+import TransactionItem from '../components/statistics/TransactionItem';
 
 const data = [
-  ["", "", ""],
-  ["Jan", 1000, 400],
-  ["Feb", 1170, 460],
-  ["Mar", 660, 1120],
-  ["Apr", 660, 1120],
-  ["May", 660, 1120],
-  ["Jun", 660, 1120],
-  ["Jul", 660, 1120],
-  ["Aug", 1030, 540],
-  ["Sep", 1030, 540],
-  ["Nov", 1030, 540],
-  ["Dec", 1030, 540],
+  ['', '', ''],
+  ['Jan', 1000, 400],
+  ['Feb', 1170, 460],
+  ['Mar', 660, 1120],
+  ['Apr', 660, 1120],
+  ['May', 660, 1120],
+  ['Jun', 660, 1120],
+  ['Jul', 660, 1120],
+  ['Aug', 1030, 540],
+  ['Sep', 1030, 540],
+  ['Nov', 1030, 540],
+  ['Dec', 1030, 540]
 ];
 
 const Statistics = () => {
