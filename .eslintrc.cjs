@@ -4,20 +4,40 @@
  * @type {import('eslint').Linter.Config}
  */
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
+    'plugin:import/errors',
     'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
     'prettier'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh', 'prettier'],
+  plugins: ['react', 'import', 'jsx-a11y', 'prettier'],
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
+  env: {
+    es6: true,
+    browser: true,
+    node: true
+  },
   rules: {
-    'prettier/prettier': 'error'
+    'prettier/prettier': 2,
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 0
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx']
+      }
+    }
   }
 };
