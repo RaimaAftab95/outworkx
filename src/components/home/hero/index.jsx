@@ -4,15 +4,13 @@ import SearchBar from './SearchBar';
 const Hero = () => {
   return (
     <section className="mt-4">
-      <div
-        className="container min-h-[85vh] bg-no-repeat bg-cover rounded-[32px] py-20 flex flex-col justify-center items-center text-center"
-        style={{ backgroundImage: 'url(/images/hero-banner.png)' }}
-      >
-        <h2 className="text-[40px] leading-[50px] sm:text-[60px] sm:leading-[72px] md:text-[70px] md:leading-[82px] lg:text-[82px] lg:leading-[95px] text-white">
+      {/* style={{ backgroundImage: 'url(/images/hero-banner.png)' }} */}
+      <div className="container min-h-[85vh] bg-no-repeat bg-cover rounded-[32px] py-20 flex flex-col justify-center items-center text-center">
+        <h2 className="text-[40px] leading-[50px] sm:text-[60px] sm:leading-[72px] md:text-[70px] md:leading-[82px] lg:text-[82px] lg:leading-[95px] text-black">
           Find Your Next <br />
           Coworking Office
         </h2>
-        <h4 className="text-[30px] leading-[30px] sm:text-[35px] sm:leading-[35px] text-white font-normal mt-6 mb-10">
+        <h4 className="text-[30px] leading-[30px] sm:text-[35px] sm:leading-[35px] text-black font-normal mt-6 mb-10">
           Explore the workspaces
         </h4>
 
