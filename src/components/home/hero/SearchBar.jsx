@@ -4,7 +4,7 @@ const SearchBar = () => {
       <div className="bg-white w-full rounded-full sm:w-40 lg:w-45 flex items-center gap-6 px-10 sm:px-5 md:px-16">
         <h3 className="text-2xl leading-24">Find</h3>
         <input
-          className="py-4 leading-20 w-full bg-transparent outline-none text-xl"
+          className="py-4 leading-20  bg-transparent outline-none text-xl"
           type="text"
           placeholder="Ex: workspace"
         />
