@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 
-const Hero = () => {
+export default function Hero() {
   return (
     <section className="mt-4">
       {/* style={{ backgroundImage: 'url(/images/hero-banner.png)' }} */}
@@ -22,6 +22,6 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+}
 
-export default Hero;
+// export default Hero;
