@@ -1,0 +1,7 @@
+@tailwind utilities;
+
+@layer utilities {
+  .rounded-32 {
+    border-radius: 32px;
+  }
+}
