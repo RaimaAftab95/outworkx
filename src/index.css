@@ -29,6 +29,10 @@ body {
   overflow-x: hidden !important;
 }
 
+.rounded-32 {
+  border-radius: 32px;
+}
+
 h1,
 h2,
 h3,
@@ -37,11 +41,11 @@ h5,
 h6 {
   color: #000;
   font-weight: 600;
-  font-family: "nohemi", sans-serif !important;
+  font-family: 'nohemi', sans-serif !important;
 }
 
 .font-nohemi {
-  font-family: "nohemi", sans-serif !important;
+  font-family: 'nohemi', sans-serif !important;
 }
 
 /* CustomizableBarChart.css */
