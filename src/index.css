@@ -21,16 +21,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .rounded-32 {
+    border-radius: 32px;
+  }
+}
+
 body {
   color: #00000080;
   font-family: 'mluvka', sans-serif;
   font-style: normal;
   min-height: 100vh !important;
   overflow-x: hidden !important;
-}
-
-.rounded-32 {
-  border-radius: 32px;
 }
 
 h1,

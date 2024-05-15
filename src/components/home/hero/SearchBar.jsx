@@ -4,21 +4,21 @@ export default function SearchBar() {
       <div className="bg-white w-full rounded-full sm:w-5/12 lg:w-11/24 flex items-center gap-6 px-10 sm:px-5 md:px-16">
         <h3 className="text-2xl leading-6">Find</h3>
         <input
-          className="py-4 leading-5 w-full bg-transparent outline-none text-xl"
+          className="py-4 leading-6 w-full bg-transparent outline-none text-xl"
           type="text"
           placeholder="Ex: workspace"
         />
       </div>
       <div className="hidden sm:block w-px bg-gray min-h-10" />
-      <div className="bg-white w-full rounded-full sm:w-5/12 lg:w-11/24 flex items-center gap-6 px-10 sm:px-5 md:px-16">
+      <div className="bg-white w-full rounded-full sm:w-5/12 lg:w-11/24 flex items-center gap-6 px-10 sm:px-5 md:px-10">
         <h3 className="text-2xl leading-6">Where</h3>
         <input
-          className="py-4 w-full bg-transparent outline-none leading-5 text-xl"
+          className="py-4 w-full bg-transparent outline-none leading-6 text-xl"
           type="text"
           placeholder="Your City"
         />
       </div>
-      <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center cursor-pointer transition-all hover:opacity-60">
+      <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center cursor-pointer transition-all hover:opacity-60">
         <img src="/images/icons/search.png" alt="search" />
       </div>
     </div>
