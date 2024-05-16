@@ -27,7 +27,7 @@ const Space = ({ space }) => {
           <img
             src={gallery[activeImage].url}
             alt="space"
-            className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 `}
+            className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 object-cover`}
           />
         </Link>
 
