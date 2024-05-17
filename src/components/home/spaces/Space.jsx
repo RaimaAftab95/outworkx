@@ -41,13 +41,13 @@ export default function Space({ space }) {
             <img
               src={gallery[activeImage]?.url}
               alt="space"
-              className="w-full h-full sm:h-[220px] transition-all hover:scale-125 object-cover"
+              className="w-full h-full sm:h-56 transition-all hover:scale-125 object-cover"
             />
           )}
         </Link>
 
         <div
-          className={`absolute top-[10px] right-[10px] w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer transition-all hover:opacity-60 ${!loading ? 'bg-primary' : 'bg-transparent'}`}
+          className={`absolute top-2.5 right-2.5 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all hover:opacity-60 ${!loading ? 'bg-primary' : 'bg-transparent'}`}
         >
           {loading ? (
             <Skeleton circle={true} width={30} height={30} />
@@ -57,7 +57,7 @@ export default function Space({ space }) {
         </div>
 
         {/* Slider navigator */}
-        <div className="absolute left-[10px] right-[10px] top-[50%] transform translate-y-[-50%] flex items-center justify-between gap-5">
+        <div className="absolute left-2.5 right-2.5 top-1/2 transform translate-y-1/2 flex items-center justify-between gap-5">
           <div
             className="cursor-pointer w-6 h-6 rounded-full bg-white transition-all hover:opacity-60 flex items-center justify-center"
             onClick={() => changeImageHandler('left')}
@@ -81,7 +81,7 @@ export default function Space({ space }) {
         </div>
 
         {/* Slider dots */}
-        <div className="absolute bottom-5 w-full flex items-center justify-center gap-[10px]">
+        <div className="absolute bottom-5 w-full flex items-center justify-center gap-2.5">
           {loading ? (
             <Skeleton count={gallery.length} width={8} height={8} />
           ) : (
@@ -89,7 +89,7 @@ export default function Space({ space }) {
               <div
                 key={item?.url}
                 className={`transition-all ${
-                  activeImage === idx ? 'w-[8px] h-[8px]' : 'w-[6px] h-[6px]'
+                  activeImage === idx ? 'w-2 h-2' : 'w-1.5 h-1.5'
                 } rounded-full bg-white cursor-pointer`}
                 onClick={() => setActiveImage(idx)}
               />
@@ -98,7 +98,7 @@ export default function Space({ space }) {
         </div>
       </div>
 
-      <div className="py-[14px] text-lg">
+      <div className="py-3.5 text-lg">
         <div className="flex items-center gap-2 justify-between">
           <h3 className="font-bold">
             <Link to={`/spaces/${id}`}>
