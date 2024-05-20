@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 export default function Hero() {
   return (
     <section>
-      <div className="container min-h-screen rounded-32 py-20 flex flex-col justify-center items-center text-center">
+      <div className="container min-h-screen py-20 flex flex-col justify-center items-center text-center">
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl">
           Find Your Next <br />
           Coworking Office
