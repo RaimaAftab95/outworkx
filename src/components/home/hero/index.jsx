@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchBar from './SearchBar';
 
 export default function Hero() {
@@ -15,8 +14,8 @@ export default function Hero() {
 
         <SearchBar />
         <p className="mt-9 font-medium text-xl">
-          The World's Largest Coworking Space Marketplace | Search & Get Quotes
-          Today
+          The World&apos;s Largest Coworking Space Marketplace | Search & Get
+          Quotes Today
         </p>
       </div>
     </section>
