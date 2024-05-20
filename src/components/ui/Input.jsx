@@ -18,7 +18,7 @@ const Input = ({
       value={value}
       id={id}
       className={cn(
-        'text-[19px] w-full placeholder:text-primary/70 text-primary/70 font-medium leading-[37px] outline-none',
+        'text-xl w-full placeholder:text-primary/70 text-primary/70 font-medium leading-9 outline-none',
         className
       )}
       {...rest}

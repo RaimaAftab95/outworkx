@@ -66,7 +66,7 @@ export default function Header() {
                 alt="icon"
               />
               <div
-                className="flex items-center gap-3 py-[6px] px-3 rounded-full border border-gray transition-all hover:opacity-50 cursor-pointer"
+                className="flex items-center gap-3 py-1.5 px-3 rounded-full border border-gray transition-all hover:opacity-50 cursor-pointer"
                 onClick={() => setOpenUserOpt(!openUserOpt)}
                 ref={userMenuRef}
               >
@@ -84,7 +84,7 @@ export default function Header() {
               alt="icon"
             />
             <div
-              className="flex items-center gap-3 py-[6px] px-3 rounded-full border border-gray transition-all hover:opacity-50 cursor-pointer"
+              className="flex items-center gap-3 py-1.5 px-3 rounded-full border border-gray transition-all hover:opacity-50 cursor-pointer"
               onClick={() => setOpenMobileUserOpt(!openMobileUserOpt)}
               ref={mobileMenuRef}
             >
@@ -100,9 +100,9 @@ export default function Header() {
             openUserOpt
               ? 'opacity-0 invisible sm:opacity-100 sm:visible'
               : 'opacity-0 invisible'
-          } top-[150%] right-0 z-40 bg-white rounded-md shadow-2xl min-w-[250px] border border-gray`}
+          } top-full right-0 z-40 bg-white rounded-md shadow-2xl min-w-64 border border-gray`}
         >
-          <ul className="flex flex-col h-full text-xl sm:text-base gap-5 text-primary px-[14px] py-5 border-b border-gray">
+          <ul className="flex flex-col h-full text-xl sm:text-base gap-5 text-primary px-3.5 py-5 border-b border-gray">
             {user?.id ? (
               <>
                 <li className="transition-all hover:text-primary-light">
@@ -134,7 +134,7 @@ export default function Header() {
               </>
             )}
           </ul>
-          <ul className="flex flex-col h-full text-xl sm:text-base gap-5 text-primary px-[14px] py-5">
+          <ul className="flex flex-col h-full text-xl sm:text-base gap-5 text-primary px-3.5 py-5">
             <li className="transition-all hover:text-primary-light">
               <Link className="w-full block" to="/">
                 Gift cards
@@ -159,9 +159,9 @@ export default function Header() {
             openMobileUserOpt
               ? 'opacity-100 sm:opacity-0 visible sm:invisible'
               : 'opacity-0 invisible'
-          } top-[150%] left-0 right-0 w-full rounded-[20px] bg-white px-6 z-40 mobile-header`}
+          } top-full left-0 right-0 w-full rounded-3xl bg-white px-6 z-40 mobile-header`}
         >
-          <ul className="py-[18px] flex items-center gap-1 justify-between px-5 text-primary border-b border-gray flex-wrap">
+          <ul className="py-5 flex items-center gap-1 justify-between px-5 text-primary border-b border-gray flex-wrap">
             <li className="">
               <Link
                 to="#"
@@ -200,7 +200,7 @@ export default function Header() {
             </li>
           </ul>
 
-          <ul className="flex my-[18px] px-3 items-center justify-center gap-1">
+          <ul className="flex my-5 px-3 items-center justify-center gap-1">
             {user?.id ? (
               <>
                 <li>
@@ -208,7 +208,7 @@ export default function Header() {
                     Account
                   </Link>
                 </li>
-                <div className="w-[2px] h-4 bg-gray" />
+                <div className="w-0.5 h-4 bg-gray" />
                 <li>
                   <Link
                     className="cursor-pointer transition-all hover:text-primary"
@@ -228,7 +228,7 @@ export default function Header() {
                     Login
                   </Link>
                 </li>
-                <div className="w-[2px] h-4 bg-gray" />
+                <div className="w-0.5 h-4 bg-gray" />
                 <li>
                   <Link
                     className="transition-all hover:text-primary"

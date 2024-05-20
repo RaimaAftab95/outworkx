@@ -68,7 +68,7 @@ const ReserveCalender = ({
       className={cn(
         `transition-all duration-200 ${
           open ? 'visible opacity-100' : 'invisible opacity-0'
-        } w-full sm:min-w-[660px] absolute top-[100%] right-0 bg-white shadow-xl border border-gray rounded-2xl`,
+        } w-full sm:min-w-custom absolute top-full right-0 bg-white shadow-xl border border-gray rounded-2xl`,
         className
       )}
       onClick={e => e.stopPropagation()}

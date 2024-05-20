@@ -1,6 +1,6 @@
 const Heading = ({ children }) => {
   return (
-    <h2 className="text-[30px] leading-[35px] sm:text-[35px] sm:leading-[40px] md:text-[40px] md:leading-[45px]">
+    <h2 className="text-3xl leading-9 sm:text-4xl sm:leading-10 md:text-customSize md:leading-10">
       {children}
     </h2>
   );

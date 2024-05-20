@@ -63,7 +63,7 @@ const CreateSpace = () => {
         </div>
       </header>
 
-      <section className="mt-5 text-primary/70 pb-[100px]">
+      <section className="mt-5 text-primary/70 pb-24">
         <div className="container">
           <Tab
             spaceDetails={spaceDetails}
@@ -73,7 +73,7 @@ const CreateSpace = () => {
             createSpace={mutate}
           />
 
-          <div className="mt-14 flex items-center justify-center gap-[10px]">
+          <div className="mt-14 flex items-center justify-center gap-2.5">
             <div
               className={
                 activeTab === 1

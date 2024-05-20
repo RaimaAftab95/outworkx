@@ -126,9 +126,9 @@ const ReserveSpace = () => {
 
         <div className="mt-20 grid lg:grid-cols-2 gap-20 sm:gap-28">
           <div>
-            <h3 className="text-[35px] leading-[42px]">Your trip</h3>
+            <h3 className="text-4xl leading-10">Your trip</h3>
 
-            <div className="text-[22px] leading-[32px] mt-14 flex flex-col gap-12">
+            <div className="text-2xl leading-8 mt-14 flex flex-col gap-12">
               <div
                 className="flex items-center justify-between 
               gap-5 flex-wrap"
@@ -181,36 +181,32 @@ const ReserveSpace = () => {
             </div>
           </div>
 
-          <div className="bg-white px-10 py-12 border border-gray rounded-[25px] h-fit">
+          <div className="bg-white px-10 py-12 border border-gray rounded-3xl h-fit">
             <div className="flex flex-col sm:flex-row justify-between gap-6 pb-4 border-b border-gray">
-              <div className="w-full sm:w-[40%]">
+              <div className="w-full sm:w-2/5">
                 <img
-                  className="w-full rounded-[25px]"
+                  className="w-full rounded-3xl"
                   src={thumbnail}
                   alt="space"
                 />
               </div>
-              <div className="w-full sm:w-[55%] flex flex-col gap-2">
-                <h3 className="text-xl font-bold leading-[32px]">
-                  Reservation
-                </h3>
-                <p className="text-lg leading-[32px]">{name}</p>
+              <div className="w-full sm:w-1/2 flex flex-col gap-2">
+                <h3 className="text-xl font-bold leading-8">Reservation</h3>
+                <p className="text-lg leading-8">{name}</p>
                 <div className="flex items-center flex-wrap gap-2 text-xl text-primary font-bold">
                   <div className="flex items-center gap-2">
                     <img src="/images/icons/star-lg.png" alt="" />
                     <span>{rating}</span>
                   </div>
-                  <div className="w-[5px] h-[5px] rounded-full bg-primary" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                   <span>{totalReviews} Reviews</span>
                 </div>
               </div>
             </div>
 
             <div className="py-8 border-b border-gray">
-              <h3 className="text-[25px] leading-[30px] font-normal">
-                Price details
-              </h3>
-              <div className="mt-6 flex flex-col gap-4 text-xl font-medium leading-[32px]">
+              <h3 className="text-2xl leading-7 font-normal">Price details</h3>
+              <div className="mt-6 flex flex-col gap-4 text-xl font-medium leading-8">
                 <div className="flex items-center justify-between gap-5 flex-wrap">
                   <span className="underline">
                     ${pricePerDesk} X {totalPeople} People
@@ -225,10 +221,10 @@ const ReserveSpace = () => {
             </div>
 
             <div className="flex items-center justify-between gap-5 flex-wrap">
-              <h3 className="text-[25px] mt-6 leading-[30px] font-normal">
+              <h3 className="text-2xl mt-6 leading-7 font-normal">
                 Total (USD)
               </h3>
-              <h3 className="text-[20px] mt-6 leading-[30px] font-bold">
+              <h3 className="text-xl mt-6 leading-7 font-bold">
                 ${pricePerDesk * Number(totalPeople) + 10}.00
               </h3>
             </div>
@@ -243,7 +239,7 @@ const ReserveSpace = () => {
         >
           <ReserveCalender
             setOpen={setOpenCheckInCalender}
-            className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 w-[660px] h-fit"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-custom h-fit"
             open={openCheckInCalender}
             // open={true}
             checkInDate={checkInDate}
@@ -261,7 +257,7 @@ const ReserveSpace = () => {
         >
           <SelectPeople
             openSelectPeople={openSelectPeople}
-            className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 w-[600px] h-fit"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-custom h-fit"
             setOpenSelectPeople={setOpenSelectPeople}
             setTotalPeople={setTotalPeople}
           />

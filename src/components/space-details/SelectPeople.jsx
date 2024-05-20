@@ -30,7 +30,7 @@ const SelectPeople = ({
       className={cn(
         `transition-opacity duration-300 ${
           openSelectPeople ? 'opacity-100 visible' : 'opacity-0 invisible'
-        } w-full absolute top-[110%] left-0 right-0  z-40 bg-white rounded-md border shadow-md py-6 px-4 border-gray flex flex-col gap-5`,
+        } w-full absolute top-full left-0 right-0  z-40 bg-white rounded-md border shadow-md py-6 px-4 border-gray flex flex-col gap-5`,
         className
       )}
       onClick={e => e.stopPropagation()}

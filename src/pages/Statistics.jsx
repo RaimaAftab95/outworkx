@@ -27,14 +27,14 @@ const Statistics = () => {
           <Heading>Available Balance</Heading>
           <div className="flex items-center gap-3">
             <img src="/images/icons/top-up.png" alt="top-up" />
-            <span className="text-[30px] leading-[35px] font-bold text-primary">
+            <span className="text-3xl leading-1/3 font-bold text-primary">
               Top up
             </span>
           </div>
         </div>
 
         <div className="mt-5">
-          <h2 className="text-[60px] sm:text-[80px] md:text-[90px] lg:text-[110px] lg:leading-[130px] font-bold">
+          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl lg:leading-tight font-bold">
             Rs 127,000
           </h2>
 
@@ -42,7 +42,7 @@ const Statistics = () => {
             <Heading>Statistics</Heading>
 
             <div className="mt-12 chart overflow-auto">
-              <div className="min-w-[800px] pb-5">
+              <div className="min-w-96 pb-5">
                 <Chart
                   chartType="Bar"
                   width="100%"
@@ -55,7 +55,7 @@ const Statistics = () => {
             <div className="mt-12">
               <div className="flex items-center gap-5 flex-wrap justify-between">
                 <Heading>Transactions</Heading>
-                <button className="text-primary font-bold text-[25px] leading-[30px]">
+                <button className="text-primary font-bold text-2xl leading-8">
                   View all
                 </button>
               </div>

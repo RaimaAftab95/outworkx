@@ -187,54 +187,52 @@ const SpaceDetails = () => {
           {gallery && (
             <>
               {gallery?.length > 1 ? (
-            <div className="flex flex-col lg:flex-row justify-between gap-5">
-              <div
-                className={`w-full ${
-                  gallery?.length > 1 && 'lg:w-[65%]'
-                } relative`}
-              >
-                <img
-                  className="w-full h-full rounded-3xl"
-                  src={gallery[0]?.url}
-                  alt="space"
-                />
-
-                <div className="absolute bottom-10 right-7">
-                  <Button size="sm">Show All Photos</Button>
-                </div>
-              </div>
-              {gallery?.length > 1 && (
-                <div className="w-full lg:w-[35%] flex flex-col gap-4 h-full">
-                  {gallery?.slice(1, 3)?.map(item => (
+                <div className="flex flex-col lg:flex-row justify-between gap-5">
+                  <div
+                    className={`w-full ${
+                      gallery?.length > 1 && 'lg:w-2/3'
+                    } relative`}
+                  >
                     <img
-                      key={item?.url}
-                      src={item?.url}
                       className="w-full h-full rounded-3xl"
+                      src={gallery[0]?.url}
                       alt="space"
                     />
-                  ))}
+
+                    <div className="absolute bottom-10 right-7">
+                      <Button size="sm">Show All Photos</Button>
+                    </div>
+                  </div>
+                  {gallery?.length > 1 && (
+                    <div className="w-full lg:w-1/3 flex flex-col gap-4 h-full">
+                      {gallery?.slice(1, 3)?.map(item => (
+                        <img
+                          key={item?.url}
+                          src={item?.url}
+                          className="w-full h-full rounded-3xl"
+                          alt="space"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className={`w-full max-h-screen overflow-hidden`}>
+                  <img
+                    className="min-w-full max-h-screen rounded-3xl"
+                    src={gallery[0]?.url}
+                    alt="space"
+                  />
                 </div>
               )}
-            </div>
-          ) : (
-            <div
-                className={`w-full max-h-screen overflow-hidden`}
-              >
-                <img
-                  className="min-w-full max-h-screen rounded-3xl"
-                  src={gallery[0]?.url}
-                  alt="space"
-                />
-              </div>
-          )}
             </>
           )}
 
           {/* space details */}
           <div>
-            <div className="flex flex-col-reverse lg:flex-row justify-between gap-16 mt-[60px]">
+            <div className="flex flex-col-reverse lg:flex-row justify-between gap-16 mt-16">
               {/* space content */}
-              <div className="w-full lg:w-[65%]">
+              <div className="w-full lg:w-2/3">
                 <div>
                   <Heading>{name}</Heading>
 
@@ -243,15 +241,15 @@ const SpaceDetails = () => {
                       <img src="/images/icons/star-lg.png" alt="" />
                       <span>4.86</span>
                     </div>
-                    <div className="w-[5px] h-[5px] rounded-full bg-primary" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                     <span>300 Reviews</span>
                   </div>
                 </div>
 
                 <div className="flex sm:items-center justify-between gap-5 flex-wrap py-7 flex-col sm:flex-row border-b border-gray">
-                  <div className="flex items-center gap-2 text-[25px] text-primary font-semibold flex-1">
+                  <div className="flex items-center gap-2 text-2xl text-primary font-semibold flex-1">
                     <span>1 Guest </span>
-                    <div className="w-[5px] h-[5px] rounded-full bg-primary" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                     <span>1 Table </span>
                   </div>
                   <span className="flex-1 text-primary">
@@ -260,7 +258,7 @@ const SpaceDetails = () => {
                 </div>
 
                 <div className="py-7 border-b border-gray">
-                  <h4 className="text-2xl leading-[47px]">
+                  <h4 className="text-2xl leading-10">
                     Coworking Space Amenities
                   </h4>
                   <div className="mt-5 flex flex-wrap items-center gap-6">
@@ -303,7 +301,7 @@ const SpaceDetails = () => {
                 </div>
 
                 <div className="py-7">
-                  <h4 className="text-2xl leading-[47px]">Workspace Rules</h4>
+                  <h4 className="text-2xl leading-10">Workspace Rules</h4>
                   <div className="mt-5 flex flex-wrap items-center gap-6">
                     {rules?.map(rule => {
                       return rule?.toLowerCase()?.includes('no-smoking') ? (
@@ -335,14 +333,10 @@ const SpaceDetails = () => {
               </div>
 
               {/* space reverse section */}
-              <div className="w-full sm:w-full lg:w-[35%] h-fit border border-gray rounded-2xl shadow py-4 px-6">
+              <div className="w-full sm:w-full lg:w-1/3 h-fit border border-gray rounded-2xl shadow py-4 px-6">
                 <div className="border-b border-gray pb-4">
-                  <h3 className="text-[25px] leading-[50px]">
-                    Coworking Space
-                  </h3>
-                  <span className="text-[15px]">
-                    Access to shared workspace
-                  </span>
+                  <h3 className="text-2xl leading-10">Coworking Space</h3>
+                  <span className="text-base"> Access to shared workspace</span>
                 </div>
 
                 <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap relative">
@@ -450,14 +444,14 @@ const SpaceDetails = () => {
             </div>
 
             <div className="py-7 border-y border-gray">
-              <h4 className="text-xl leading-[47px]">About Place</h4>
-              <p className="text-lg leading-[37px] text-black/70">
+              <h4 className="text-xl leading-10">About Place</h4>
+              <p className="text-lg leading-9 text-black/70">
                 {description?.length > 404
                   ? description?.substr(0, 404)
                   : description}
               </p>
               {description?.length > 404 && (
-                <button className="text-lg font-bold leading-[47px] text-primary cursor-pointer underline">
+                <button className="text-lg font-bold leading-10 text-primary cursor-pointer underline">
                   Show more
                 </button>
               )}
@@ -467,7 +461,7 @@ const SpaceDetails = () => {
             <Reviews />
 
             <div className="py-7">
-              <h4 className="text-lg leading-[47px] mb-6">Map</h4>
+              <h4 className="text-lg leading-10 mb-6">Map</h4>
               <iframe
                 title="map"
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"

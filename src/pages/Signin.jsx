@@ -82,11 +82,11 @@ const Signin = () => {
   };
   return (
     <main className="flex flex-col lg:flex-row justify-between">
-      <div className="py-7 px-5 sm:px-20 w-full min-h-[90vh] lg:w-[50%] xl:w-[30%]">
+      <div className="py-7 px-5 sm:px-20 w-full min-h-full lg:w-1/2 xl:w-1/3">
         <Link to="/">
           <img src="/images/logo.svg" alt="logo" />
         </Link>
-        <div className="min-h-[90vh] py-10 flex items-center">
+        <div className="min-h-full py-10 flex items-center">
           <div className="w-full">
             <Heading>Login</Heading>
 
@@ -113,7 +113,7 @@ const Signin = () => {
               <Button className="w-full" type="submit" loading={isPending}>
                 Sign In
               </Button>
-              <p className="text-xl font-bold leading-[37px] text-primary/70">
+              <p className="text-xl font-bold leading-9 text-primary/70">
                 Don’t have an account?
                 <Link to="/sign-up" className="underline">
                   Signup
@@ -123,7 +123,7 @@ const Signin = () => {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block lg:w-[50%] xl:w-[70%] min-h-screen">
+      <div className="hidden lg:block lg:w-1/2 xl:w-2/3 min-h-screen">
         <img
           src="/images/auth/sign-up-banner.jpg"
           className="w-full h-full"

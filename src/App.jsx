@@ -14,6 +14,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import SpaceDetails from './pages/SpaceDetails';
 import Statistics from './pages/Statistics';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 export default function App() {
   const { pathname } = useLocation();
@@ -59,6 +60,7 @@ export default function App() {
           <Route path="/booking-history" element={<BookingHistory />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/statistics" element={<Statistics />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </div>
     </>

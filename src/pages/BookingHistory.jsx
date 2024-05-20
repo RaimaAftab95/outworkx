@@ -48,17 +48,17 @@ const BookingHistory = () => {
           </div>
 
           <div className="flex items-center gap-10 flex-wrap">
-            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-[300px]">
+            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-72">
               <input
                 type="date"
-                className="w-full outline-none text-xl leading-[47px]"
+                className="w-full outline-none text-xl leading-10"
                 placeholder="Choose"
               />
             </div>
-            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-[300px]">
+            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-72">
               <input
                 type="text"
-                className="w-full outline-none text-xl leading-[47px]"
+                className="w-full outline-none text-xl leading-10"
                 placeholder="Search"
               />
               <img src="/images/icons/search-dark.png" alt="icon" />

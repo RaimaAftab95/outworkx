@@ -10,7 +10,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
-    'prettier'
+    'plugin:prettier/recommended'
   ],
   plugins: ['react', 'import', 'jsx-a11y', 'prettier'],
   parserOptions: {
@@ -26,7 +26,6 @@ module.exports = {
     node: true
   },
   rules: {
-    'prettier/prettier': 2,
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0
   },
