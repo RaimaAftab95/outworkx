@@ -37,11 +37,11 @@ h5,
 h6 {
   color: #000;
   font-weight: 600;
-  font-family: "nohemi", sans-serif !important;
+  font-family: 'nohemi', sans-serif !important;
 }
 
 .font-nohemi {
-  font-family: "nohemi", sans-serif !important;
+  font-family: 'nohemi', sans-serif !important;
 }
 
 /* CustomizableBarChart.css */
