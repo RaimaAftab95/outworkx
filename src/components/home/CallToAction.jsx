@@ -5,15 +5,15 @@ const CallToAction = () => {
   return (
     <section className="pb-20">
       <div className="container">
-        <div className="bg-primary p-5 md:p-10 rounded-3xl flex flex-col-reverse md:flex-row items-center justify-between gap-8">
-          <div className="text-white ml-10">
-            <h2 className="text-white text-4xl sm:text-5xl md:text-6xl md:leading-10">
+        <div className="flex flex-col-reverse items-center justify-between gap-8 rounded-3xl bg-primary p-5 md:flex-row md:p-10">
+          <div className="ml-10 text-white">
+            <h2 className="text-4xl text-white sm:text-5xl md:text-6xl md:leading-10">
               Get the App
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl md:leading-8 mt-4">
+            <p className="mt-4 text-lg sm:text-xl md:text-2xl md:leading-8">
               Download the app and explore the workspaces
             </p>
-            <div className="flex items-center flex-wrap gap-6 mt-9">
+            <div className="mt-9 flex flex-wrap items-center gap-6">
               <Link to="#">
                 <img src="/images/call-to-action/apple.png" alt="apple" />
               </Link>

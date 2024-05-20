@@ -1,5 +1,5 @@
 const Error = ({ children }) => {
-  return children && <p className="text-red-600 font-semibold">{children}</p>;
+  return children && <p className="font-semibold text-red-600">{children}</p>;
 };
 
 export default Error;

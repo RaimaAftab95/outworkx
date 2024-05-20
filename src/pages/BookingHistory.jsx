@@ -39,7 +39,7 @@ const BookingHistory = () => {
   ) : (
     <main className="py-10 text-primary/70">
       <div className="container">
-        <div className="flex items-center gap-5 justify-between flex-wrap">
+        <div className="flex flex-wrap items-center justify-between gap-5">
           <div className="flex items-center gap-7">
             <Link href="/spaces/single-space">
               <img src="/images/icons/right-arrow-lg.png" alt="icon" />
@@ -47,18 +47,18 @@ const BookingHistory = () => {
             <Heading>Booking history</Heading>
           </div>
 
-          <div className="flex items-center gap-10 flex-wrap">
-            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-72">
+          <div className="flex flex-wrap items-center gap-10">
+            <div className="flex w-full items-center justify-between gap-2 rounded-lg border border-primary px-5 sm:w-72">
               <input
                 type="date"
-                className="w-full outline-none text-xl leading-10"
+                className="w-full text-xl leading-10 outline-none"
                 placeholder="Choose"
               />
             </div>
-            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-72">
+            <div className="flex w-full items-center justify-between gap-2 rounded-lg border border-primary px-5 sm:w-72">
               <input
                 type="text"
-                className="w-full outline-none text-xl leading-10"
+                className="w-full text-xl leading-10 outline-none"
                 placeholder="Search"
               />
               <img src="/images/icons/search-dark.png" alt="icon" />
@@ -67,31 +67,31 @@ const BookingHistory = () => {
         </div>
 
         {bookings?.length > 0 && (
-          <div className="mt-10 text-primary/70 overflow-x-auto pb-5">
+          <div className="mt-10 overflow-x-auto pb-5 text-primary/70">
             <table className="min-w-[1050px] lg:w-full">
-              <thead className="bg-[#F2F2F2] !rounded-[15px]">
-                <th className="font-bold text-primary leading-[36px] py-8 pl-[30px] text-left">
+              <thead className="!rounded-[15px] bg-[#F2F2F2]">
+                <th className="py-8 pl-[30px] text-left font-bold leading-[36px] text-primary">
                   Space
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 text-left">
+                <th className="py-8 text-left font-bold leading-[36px] text-primary">
                   Location
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 text-left">
+                <th className="py-8 text-left font-bold leading-[36px] text-primary">
                   Access Hours
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 text-left">
+                <th className="py-8 text-left font-bold leading-[36px] text-primary">
                   Reservation Date
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 text-left">
+                <th className="py-8 text-left font-bold leading-[36px] text-primary">
                   No of People
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 text-left">
+                <th className="py-8 text-left font-bold leading-[36px] text-primary">
                   Price
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 text-left">
+                <th className="py-8 text-left font-bold leading-[36px] text-primary">
                   Table
                 </th>
-                <th className="font-bold text-primary leading-[36px] py-8 pr-5 text-left">
+                <th className="py-8 pr-5 text-left font-bold leading-[36px] text-primary">
                   Guests
                 </th>
               </thead>
@@ -103,7 +103,7 @@ const BookingHistory = () => {
                     <tr key={booking?.id}>
                       <td className="flex items-center gap-[30px] pt-[30px]">
                         <img
-                          className="w-[72px] h-[72px] rounded-[20px]"
+                          className="h-[72px] w-[72px] rounded-[20px]"
                           src="/images/spaces/1.jpg"
                           alt="space"
                         />
@@ -137,7 +137,7 @@ const BookingHistory = () => {
         )}
 
         {bookings?.length === 0 && (
-          <span className="block mt-10 font-semibold text-xl text-center">
+          <span className="mt-10 block text-center text-xl font-semibold">
             No Bookings Found!
           </span>
         )}

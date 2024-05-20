@@ -23,25 +23,25 @@ const Statistics = () => {
   return (
     <main className="pt-10 text-primary/70">
       <div className="container pb-20">
-        <div className="flex items-center gap-5 justify-between flex-wrap">
+        <div className="flex flex-wrap items-center justify-between gap-5">
           <Heading>Available Balance</Heading>
           <div className="flex items-center gap-3">
             <img src="/images/icons/top-up.png" alt="top-up" />
-            <span className="text-3xl leading-1/3 font-bold text-primary">
+            <span className="leading-1/3 text-3xl font-bold text-primary">
               Top up
             </span>
           </div>
         </div>
 
         <div className="mt-5">
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl lg:leading-tight font-bold">
+          <h2 className="text-6xl font-bold sm:text-7xl md:text-8xl lg:text-9xl lg:leading-tight">
             Rs 127,000
           </h2>
 
           <div className="mt-24">
             <Heading>Statistics</Heading>
 
-            <div className="mt-12 chart overflow-auto">
+            <div className="chart mt-12 overflow-auto">
               <div className="min-w-96 pb-5">
                 <Chart
                   chartType="Bar"
@@ -53,9 +53,9 @@ const Statistics = () => {
             </div>
 
             <div className="mt-12">
-              <div className="flex items-center gap-5 flex-wrap justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-5">
                 <Heading>Transactions</Heading>
-                <button className="text-primary font-bold text-2xl leading-8">
+                <button className="text-2xl font-bold leading-8 text-primary">
                   View all
                 </button>
               </div>

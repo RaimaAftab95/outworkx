@@ -32,7 +32,7 @@ const Spaces = () => {
             <img src="/images/loading.gif" alt="" />
           </div>
         ) : (
-          <div className="mt-11 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 text-center">
+          <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {spaces?.slice(0, 8).map(space => (
               <Space key={space?.id} space={space} />
             ))}
@@ -40,7 +40,7 @@ const Spaces = () => {
         )}
 
         {spaces?.length > 8 && (
-          <div className="mt-11 flex flex-col gap-9 justify-center items-center text-center">
+          <div className="mt-11 flex flex-col items-center justify-center gap-9 text-center">
             <h2 className="text-2xl leading-6">
               Continue exploring more trending places
             </h2>

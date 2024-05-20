@@ -33,7 +33,7 @@ const Button = ({
       disabled={loading}
     >
       {loading ? (
-        <div className="text-center w-full flex items-center justify-center">
+        <div className="flex w-full items-center justify-center text-center">
           <img src="/images/loading.gif" className="w-8" alt="loading" />
         </div>
       ) : (

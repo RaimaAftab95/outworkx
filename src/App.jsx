@@ -42,7 +42,7 @@ export default function App() {
 
       <div
         className={`transition-all duration-500 ${
-          isLoading ? 'opacity-0 invisible' : 'opacity-100 visible'
+          isLoading ? 'invisible opacity-0' : 'visible opacity-100'
         }`}
       >
         {pathname !== '/create-space' &&

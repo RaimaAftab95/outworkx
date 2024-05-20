@@ -5,7 +5,7 @@ const InputBox = ({ children, className = '', onClick, ...rest }) => {
   return (
     <div
       className={cn(
-        'flex flex-col py-5 px-10 rounded-3xl border border-gray',
+        'flex flex-col rounded-3xl border border-gray px-10 py-5',
         className
       )}
       onClick={onClick}

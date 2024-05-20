@@ -52,7 +52,7 @@ const CreateSpace = () => {
   return (
     <main>
       <header className="bg-white py-8">
-        <div className="container flex items-center justify-between gap-5 flex-wrap">
+        <div className="container flex flex-wrap items-center justify-between gap-5">
           <Link to="/">
             <img src="/images/logo.svg" alt="logo" />
           </Link>
@@ -63,7 +63,7 @@ const CreateSpace = () => {
         </div>
       </header>
 
-      <section className="mt-5 text-primary/70 pb-24">
+      <section className="mt-5 pb-24 text-primary/70">
         <div className="container">
           <Tab
             spaceDetails={spaceDetails}
@@ -77,16 +77,16 @@ const CreateSpace = () => {
             <div
               className={
                 activeTab === 1
-                  ? 'w-3 h-3 rounded-full bg-primary'
-                  : 'w-2 h-2 rounded-full bg-[#D9D9D9] cursor-pointer'
+                  ? 'h-3 w-3 rounded-full bg-primary'
+                  : 'h-2 w-2 cursor-pointer rounded-full bg-[#D9D9D9]'
               }
               onClick={() => setActiveTab(1)}
             />
             <div
               className={
                 activeTab === 2
-                  ? 'w-3 h-3 rounded-full bg-primary'
-                  : 'w-2 h-2 rounded-full bg-[#D9D9D9] cursor-pointer'
+                  ? 'h-3 w-3 rounded-full bg-primary'
+                  : 'h-2 w-2 cursor-pointer rounded-full bg-[#D9D9D9]'
               }
               onClick={() => setActiveTab(2)}
             />

@@ -68,16 +68,16 @@ const ReserveCalender = ({
       className={cn(
         `transition-all duration-200 ${
           open ? 'visible opacity-100' : 'invisible opacity-0'
-        } w-full sm:min-w-custom absolute top-full right-0 bg-white shadow-xl border border-gray rounded-2xl`,
+        } absolute right-0 top-full w-full rounded-2xl border border-gray bg-white shadow-xl sm:min-w-custom`,
         className
       )}
       onClick={e => e.stopPropagation()}
     >
       <div className="p-5">
-        <div className="flex items-center flex-wrap justify-between gap-5">
+        <div className="flex flex-wrap items-center justify-between gap-5">
           <h2>Select Dates</h2>
-          <div className="text-[#222] text-sm flex items-center border rounded-xl border-black/20 p-2 px-3 gap-4">
-            <div className="flex justify-between gap-6 items-center">
+          <div className="flex items-center gap-4 rounded-xl border border-black/20 p-2 px-3 text-sm text-[#222]">
+            <div className="flex items-center justify-between gap-6">
               {/* {const date = new Date(dateString);} */}
               <div className="flex flex-col gap-1">
                 <span className="text-xs">CHECK IN</span>
@@ -98,7 +98,7 @@ const ReserveCalender = ({
                 {checkInDate && <IoClose />}
               </button>
             </div>
-            <div className="flex justify-between gap-6 items-center">
+            <div className="flex items-center justify-between gap-6">
               <div className="flex flex-col gap-1">
                 <span className="text-xs">CHECK OUT</span>
                 {checkOutDate ? (
@@ -121,21 +121,21 @@ const ReserveCalender = ({
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-8 mt-10">
+        <div className="mt-10 grid gap-8 sm:grid-cols-2">
           <div>
             <div className="flex items-center">
               <button
                 type="button"
                 onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500 -my-1.5 flex flex-none items-center justify-center p-1.5"
               >
-                <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
+                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
               </button>
-              <h2 className="flex-auto text-center font-semibold text-gray-900">
+              <h2 className="text-gray-900 flex-auto text-center font-semibold">
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
               </h2>
             </div>
-            <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
+            <div className="text-gray-500 mt-10 grid grid-cols-7 text-center text-xs leading-6">
               <div>S</div>
               <div>M</div>
               <div>T</div>
@@ -144,7 +144,7 @@ const ReserveCalender = ({
               <div>F</div>
               <div>S</div>
             </div>
-            <div className="grid grid-cols-7 mt-2 text-sm">
+            <div className="mt-2 grid grid-cols-7 text-sm">
               {days.map((day, dayIdx) => (
                 <div
                   key={day.toString()}
@@ -162,18 +162,18 @@ const ReserveCalender = ({
                           ? setCheckOutDate(day?.toISOString())
                           : setCheckInDate(day?.toISOString())
                     }
-                    className={`w-10 h-10 rounded-full transition-all ${
+                    className={`h-10 w-10 rounded-full transition-all ${
                       checkInDate === day.toISOString() ||
                       checkOutDate === day.toISOString()
                         ? 'border border-primary bg-primary text-white'
-                        : 'hover:border border-gray'
+                        : 'border-gray hover:border'
                     } ${
                       day?.toISOString() > checkInDate &&
                       day?.toISOString() < checkOutDate &&
                       'bg-gray/50'
                     } ${
                       day?.toISOString() < today?.toISOString() &&
-                      'text-gray hover:border-transparent cursor-not-allowed'
+                      'cursor-not-allowed text-gray hover:border-transparent'
                     }`}
                   >
                     <time dateTime={format(day, 'yyyy-MM-dd')}>
@@ -186,18 +186,18 @@ const ReserveCalender = ({
           </div>
           <div>
             <div className="flex items-center">
-              <h2 className="flex-auto text-center font-semibold text-gray-900">
+              <h2 className="text-gray-900 flex-auto text-center font-semibold">
                 {format(currentNextMonth, 'MMMM yyyy')}
               </h2>
               <button
                 onClick={nextMonth}
                 type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500 -my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5"
               >
-                <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
+                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
-            <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
+            <div className="text-gray-500 mt-10 grid grid-cols-7 text-center text-xs leading-6">
               <div>S</div>
               <div>M</div>
               <div>T</div>
@@ -206,7 +206,7 @@ const ReserveCalender = ({
               <div>F</div>
               <div>S</div>
             </div>
-            <div className="grid grid-cols-7 mt-2 text-sm">
+            <div className="mt-2 grid grid-cols-7 text-sm">
               {currentNextMonthDays.map((day, dayIdx) => (
                 <div
                   key={day.toString()}
@@ -224,18 +224,18 @@ const ReserveCalender = ({
                           ? setCheckOutDate(day?.toISOString())
                           : setCheckInDate(day?.toISOString())
                     }
-                    className={`w-10 h-10 rounded-full transition-all ${
+                    className={`h-10 w-10 rounded-full transition-all ${
                       checkInDate === day.toISOString() ||
                       checkOutDate === day.toISOString()
                         ? 'border border-primary bg-primary text-white'
-                        : 'hover:border border-gray'
+                        : 'border-gray hover:border'
                     }  ${
                       day?.toISOString() > checkInDate &&
                       day?.toISOString() < checkOutDate &&
                       'bg-gray/50'
                     } ${
                       day?.toISOString() < today?.toISOString() &&
-                      'text-gray hover:border-transparent cursor-not-allowed'
+                      'cursor-not-allowed text-gray hover:border-transparent'
                     }`}
                   >
                     <time dateTime={format(day, 'yyyy-MM-dd')}>

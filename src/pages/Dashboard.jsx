@@ -7,12 +7,12 @@ const Dashboard = () => {
   return (
     <main className="pt-10 text-primary/70">
       <div className="container pb-20">
-        <div className="flex items-center gap-5 justify-between flex-wrap">
+        <div className="flex flex-wrap items-center justify-between gap-5">
           <Heading>Dashboard</Heading>
 
-          <div className="flex items-center gap-10 flex-wrap">
-            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-80">
-              <select className="w-full py-3.5 outline-none text-xl leading-10 bg-transparent">
+          <div className="flex flex-wrap items-center gap-10">
+            <div className="flex w-full items-center justify-between gap-2 rounded-lg border border-primary px-5 sm:w-80">
+              <select className="w-full bg-transparent py-3.5 text-xl leading-10 outline-none">
                 <option value="" className="w-full px-5">
                   Select
                 </option>
@@ -27,10 +27,10 @@ const Dashboard = () => {
                 </option>
               </select>
             </div>
-            <div className="border border-primary rounded-lg px-5 flex items-center justify-between gap-2 w-full sm:w-72">
+            <div className="flex w-full items-center justify-between gap-2 rounded-lg border border-primary px-5 sm:w-72">
               <input
                 type="text"
-                className="w-full outline-none text-xl leading-10"
+                className="w-full text-xl leading-10 outline-none"
                 placeholder="Search"
               />
               <img src="/images/icons/search-dark.png" alt="icon" />
@@ -38,67 +38,67 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-between gap-6 mt-14">
-          <div className="w-full grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-            <div className="bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+        <div className="mt-14 flex flex-col justify-between gap-6 lg:flex-row">
+          <div className="grid w-full gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
               <h4 className="text-xl leading-9 text-primary/70">
                 Complete booking
               </h4>
-              <div className="mt-8 mb-8 flex items-center gap-6">
+              <div className="mb-8 mt-8 flex items-center gap-6">
                 <h2 className="text-5xl leading-6">03</h2>
                 <img src="/images/icons/static.png" alt="static" />
               </div>
             </div>
-            <div className="bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+            <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
               <h4 className="text-xl leading-9 text-primary/70">No show off</h4>
-              <div className="mt-8 mb-8 flex items-center gap-6">
+              <div className="mb-8 mt-8 flex items-center gap-6">
                 <h2 className="text-5xl leading-6">127</h2>
                 <img src="/images/icons/static.png" alt="static" />
               </div>
             </div>
-            <div className="bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+            <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
               <h4 className="text-xl leading-9 text-primary/70">
                 Total Revenue
               </h4>
-              <div className="mt-8 mb-8 flex items-center gap-6">
+              <div className="mb-8 mt-8 flex items-center gap-6">
                 <h2 className="text-5xl leading-6">$127,000</h2>
                 <img src="/images/icons/static.png" alt="static" />
               </div>
             </div>
-            <div className="bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+            <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
               <h4 className="text-xl leading-9 text-primary/70">
                 Active Users
               </h4>
-              <div className="mt-8 mb-8 flex items-center gap-6">
+              <div className="mb-8 mt-8 flex items-center gap-6">
                 <h2 className="text-5xl leading-6">60</h2>
                 <img src="/images/icons/static.png" alt="static" />
               </div>
             </div>
-            <div className="bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+            <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
               <h4 className="text-xl leading-9 text-primary/70">
                 Total Bookings
               </h4>
-              <div className="mt-8 mb-8 flex items-center gap-6">
+              <div className="mb-8 mt-8 flex items-center gap-6">
                 <h2 className="text-5xl leading-6">127</h2>
                 <img src="/images/icons/static.png" alt="static" />
               </div>
             </div>
-            <div className="bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+            <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
               <h4 className="text-xl leading-9 text-primary/70">
                 Pending Bookings
               </h4>
-              <div className="mt-8 mb-8 flex items-center gap-6">
+              <div className="mb-8 mt-8 flex items-center gap-6">
                 <h2 className="text-5xl leading-6">03</h2>
                 <img src="/images/icons/static.png" alt="static" />
               </div>
             </div>
           </div>
-          <div className="w-full sm:w-96 h-fit bg-[#F2F2F2] px-5 py-4 rounded-2xl">
+          <div className="h-fit w-full rounded-2xl bg-[#F2F2F2] px-5 py-4 sm:w-96">
             <h4 className="text-xl leading-9 text-primary/70">
               Bookings Breakdown
             </h4>
 
-            <div className="w-36 h-36 mx-auto mt-4">
+            <div className="mx-auto mt-4 h-36 w-36">
               <PieChart
                 data={[
                   { title: 'confirmed', value: 220, color: '#E6E6E6' },
@@ -113,28 +113,28 @@ const Dashboard = () => {
             </div>
 
             <div className="mt-5 flex flex-col gap-4">
-              <div className="flex items-center justify-between gap-2 flex-wrap text-sm uppercase">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#E6E6E6] rounded-md" />
-                  <span className="font-semibold font-nohemi text-primary/70">
+                  <div className="h-6 w-6 rounded-md bg-[#E6E6E6]" />
+                  <span className="font-nohemi font-semibold text-primary/70">
                     confirmed
                   </span>
                 </div>
                 <span>220 bookings</span>
               </div>
-              <div className="flex items-center justify-between gap-2 flex-wrap text-sm uppercase">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#CBCBCB] rounded-md" />
-                  <span className="font-semibold font-nohemi text-primary/70">
+                  <div className="h-6 w-6 rounded-md bg-[#CBCBCB]" />
+                  <span className="font-nohemi font-semibold text-primary/70">
                     Pending
                   </span>
                 </div>
                 <span>48 bookings</span>
               </div>
-              <div className="flex items-center justify-between gap-2 flex-wrap text-sm uppercase">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#919191] rounded-md" />
-                  <span className="font-semibold font-nohemi text-primary/70">
+                  <div className="h-6 w-6 rounded-md bg-[#919191]" />
+                  <span className="font-nohemi font-semibold text-primary/70">
                     Cancelled
                   </span>
                 </div>
@@ -144,31 +144,31 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="mt-20 text-primary/70 overflow-x-auto pb-5">
+        <div className="mt-20 overflow-x-auto pb-5 text-primary/70">
           <table className="min-w-[1020px] lg:w-full">
-            <thead className="bg-[#F2F2F2] !rounded-2xl">
-              <th className="font-bold text-primary leading-9 py-8 pl-8 text-left">
+            <thead className="!rounded-2xl bg-[#F2F2F2]">
+              <th className="py-8 pl-8 text-left font-bold leading-9 text-primary">
                 Space
               </th>
-              <th className="font-bold text-primary leading-9 py-8 text-left">
+              <th className="py-8 text-left font-bold leading-9 text-primary">
                 Location
               </th>
-              <th className="font-bold text-primary leading-9 py-8 text-left">
+              <th className="py-8 text-left font-bold leading-9 text-primary">
                 Access Hours
               </th>
-              <th className="font-bold text-primary leading-9 py-8 text-left">
+              <th className="py-8 text-left font-bold leading-9 text-primary">
                 Reservation Date
               </th>
-              <th className="font-bold text-primary leading-9 py-8 text-left">
+              <th className="py-8 text-left font-bold leading-9 text-primary">
                 No of People
               </th>
-              <th className="font-bold text-primary leading-9 py-8 text-left">
+              <th className="py-8 text-left font-bold leading-9 text-primary">
                 Price
               </th>
-              <th className="font-bold text-primary leading-9 py-8 text-left">
+              <th className="py-8 text-left font-bold leading-9 text-primary">
                 Table
               </th>
-              <th className="font-bold text-primary leading-9 py-8 pr-5 text-left">
+              <th className="py-8 pr-5 text-left font-bold leading-9 text-primary">
                 Guests
               </th>
             </thead>
@@ -176,7 +176,7 @@ const Dashboard = () => {
               <tr>
                 <td className="flex items-center gap-7 pt-7">
                   <img
-                    className="w-20 h-20 rounded-2xl"
+                    className="h-20 w-20 rounded-2xl"
                     src="/images/spaces/1.jpg"
                     alt="space"
                   />
@@ -196,7 +196,7 @@ const Dashboard = () => {
               <tr>
                 <td className="flex items-center gap-7 pt-7">
                   <img
-                    className="w-20 h-20 rounded-2xl"
+                    className="h-20 w-20 rounded-2xl"
                     src="/images/spaces/1.jpg"
                     alt="space"
                   />
@@ -216,7 +216,7 @@ const Dashboard = () => {
               <tr>
                 <td className="flex items-center gap-7 pt-7">
                   <img
-                    className="w-20 h-20 rounded-2xl"
+                    className="h-20 w-20 rounded-2xl"
                     src="/images/spaces/1.jpg"
                     alt="space"
                   />
@@ -236,7 +236,7 @@ const Dashboard = () => {
               <tr>
                 <td className="flex items-center gap-7 pt-7">
                   <img
-                    className="w-20 h-20 rounded-2xl"
+                    className="h-20 w-20 rounded-2xl"
                     src="/images/spaces/1.jpg"
                     alt="space"
                   />
@@ -256,7 +256,7 @@ const Dashboard = () => {
               <tr>
                 <td className="flex items-center gap-7 pt-7">
                   <img
-                    className="w-20 h-20 rounded-2xl"
+                    className="h-20 w-20 rounded-2xl"
                     src="/images/spaces/1.jpg"
                     alt="space"
                   />
@@ -276,7 +276,7 @@ const Dashboard = () => {
               <tr>
                 <td className="flex items-center gap-7 pt-7">
                   <img
-                    className="w-20 h-20 rounded-2xl"
+                    className="h-20 w-20 rounded-2xl"
                     src="/images/spaces/1.jpg"
                     alt="space"
                   />

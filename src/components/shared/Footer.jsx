@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-[#F2F2F2]">
       <div className="container">
-        <div className="py-16 flex flex-col md:flex-row justify-between gap-10 border-b border-gray">
+        <div className="flex flex-col justify-between gap-10 border-b border-gray py-16 md:flex-row">
           <div className="w-1/3">
             <img src="/images/logo.svg" alt="logo" />
-            <p className="py-5 w-1/2">
+            <p className="w-1/2 py-5">
               Coworkspaces offer a collaborative work environment for
               individuals from various professions to share and work together.
             </p>
-            <div className="flex items-center gap-6 w-3/5">
+            <div className="flex w-3/5 items-center gap-6">
               <Link to="#">
                 <img src="/images/call-to-action/apple.png" alt="apple" />
               </Link>
@@ -24,7 +24,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="w-2/3 grid sm:grid-cols-3 gap-5">
+          <div className="grid w-2/3 gap-5 sm:grid-cols-3">
             <div>
               <h4 className="mb-6">Company</h4>
               <ul className="flex flex-col gap-5">
@@ -68,7 +68,7 @@ const Footer = () => {
                 <li>
                   <Link to="#">Phone: 1 (00) 832 2342</Link>
                 </li>
-                <div className="flex items-center flex-wrap gap-5">
+                <div className="flex flex-wrap items-center gap-5">
                   <Link to="#">
                     <img src="/images/icons/facebook.png" alt="social" />
                   </Link>

@@ -147,23 +147,23 @@ const SpaceMoreInformation = ({
   return (
     <div>
       <Heading>Add some photos of your place</Heading>
-      <p className="text-2xl font-medium leading-9 mt-2">
+      <p className="mt-2 text-2xl font-medium leading-9">
         {`You'll`} need 5 photos to get started. You can add more or make
         changes later.
       </p>
 
       <form onSubmit={submitHandler} className="mt-14">
-        <div className="py-28 bg-[#F2F2F2] flex flex-col justify-center items-center text-center relative">
-          <div className="flex justify-center w-full">
+        <div className="relative flex flex-col items-center justify-center bg-[#F2F2F2] py-28 text-center">
+          <div className="flex w-full justify-center">
             <img src="/images/icons/image.png" alt="icon" />
           </div>
           <h4 className="mt-20 text-3xl leading-10">Drag your photos here</h4>
-          <span className="text-2xl leading-9 font-medium">
+          <span className="text-2xl font-medium leading-9">
             Choose at least 5 photos
           </span>
           <label
             htmlFor="images"
-            className="mt-8 text-2xl leading-9 font-bold cursor-pointer underline"
+            className="mt-8 cursor-pointer text-2xl font-bold leading-9 underline"
           >
             Upload from your device
           </label>
@@ -171,7 +171,7 @@ const SpaceMoreInformation = ({
             type="file"
             multiple
             id="images"
-            className="absolute top-0 left-0 right-0 bottom-0 w-full h-full opacity-0"
+            className="absolute bottom-0 left-0 right-0 top-0 h-full w-full opacity-0"
             onChange={handleFileChange}
           />
 
@@ -185,7 +185,7 @@ const SpaceMoreInformation = ({
         <Error>{errors?.spaceImages}</Error>
 
         {spaceImages?.length > 0 && (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {spaceImages?.map(image => (
               <img key={image} className="rounded-xl" src={image} alt={image} />
             ))}
@@ -194,7 +194,7 @@ const SpaceMoreInformation = ({
 
         <div className="mt-20">
           <Heading>Let’s give title to your place</Heading>
-          <p className="text-2xl font-medium leading-9 mt-2">
+          <p className="mt-2 text-2xl font-medium leading-9">
             Short titles work best.Have fun with it! You can always change it
             later
           </p>
@@ -206,10 +206,10 @@ const SpaceMoreInformation = ({
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="Add your title."
-              className="text-xl w-full placeholder:text-primary/70 text-primary/70 font-medium leading-9 outline-none h-32"
+              className="h-32 w-full text-xl font-medium leading-9 text-primary/70 outline-none placeholder:text-primary/70"
             ></textarea>
           </InputBox>
-          <span className="block mt-8 text-2xl leading-9 font-bold">
+          <span className="mt-8 block text-2xl font-bold leading-9">
             {name?.length}/40
           </span>
           {name?.length > 40 && (
@@ -220,7 +220,7 @@ const SpaceMoreInformation = ({
 
         <div className="mt-14">
           <Heading>Create your description</Heading>
-          <p className="text-2xl font-medium leading-9 mt-2">
+          <p className="mt-2 text-2xl font-medium leading-9">
             Share what makes your place special.
           </p>
 
@@ -231,10 +231,10 @@ const SpaceMoreInformation = ({
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Take it easy and write your description."
-              className="text-xl w-full placeholder:text-primary/70 text-primary/70 font-medium leading-9 outline-none h-56"
+              className="h-56 w-full text-xl font-medium leading-9 text-primary/70 outline-none placeholder:text-primary/70"
             ></textarea>
           </InputBox>
-          <span className="block mt-8 text-2xl leading-9 font-bold">
+          <span className="mt-8 block text-2xl font-bold leading-9">
             {description?.length}/500
           </span>
           {description?.length > 500 && (
@@ -245,7 +245,7 @@ const SpaceMoreInformation = ({
 
         <div className="mt-14">
           <Heading>Set your price</Heading>
-          <p className="text-2xl font-medium leading-9 mt-2">
+          <p className="mt-2 text-2xl font-medium leading-9">
             Your address is only shared with guests after they’ve made a
             reservation.
           </p>
@@ -254,42 +254,42 @@ const SpaceMoreInformation = ({
             <input
               type="text"
               placeholder="Price"
-              className="outline-none bg-transparent border-none placeholder:text-primary text-primary text-center w-full font-bold font-nohemi text-8xl"
+              className="font-nohemi w-full border-none bg-transparent text-center text-8xl font-bold text-primary outline-none placeholder:text-primary"
             />
           </div>
 
-          <div className="mt-12 border border-gray rounded-3xl px-8 py-12">
-            <div className="flex flex-col gap-2 pb-5 border-b border-gray">
-              <div className="flex items-center gap-5 justify-between flex-wrap">
-                <span className="text-2xl leading-9 font-medium">
+          <div className="mt-12 rounded-3xl border border-gray px-8 py-12">
+            <div className="flex flex-col gap-2 border-b border-gray pb-5">
+              <div className="flex flex-wrap items-center justify-between gap-5">
+                <span className="text-2xl font-medium leading-9">
                   Best Price
                 </span>
-                <span className="text-2xl leading-9 font-medium">
+                <span className="text-2xl font-medium leading-9">
                   $35/Per Person
                 </span>
               </div>
-              <div className="flex items-center gap-5 justify-between flex-wrap">
-                <span className="text-2xl leading-9 font-medium">
+              <div className="flex flex-wrap items-center justify-between gap-5">
+                <span className="text-2xl font-medium leading-9">
                   Guest service fee
                 </span>
-                <span className="text-2xl leading-9 font-medium">$5</span>
+                <span className="text-2xl font-medium leading-9">$5</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-5 justify-between flex-wrap mt-6">
-              <span className="text-2xl leading-9 font-extrabold">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
+              <span className="text-2xl font-extrabold leading-9">
                 Guest service fee
               </span>
-              <span className="text-2xl leading-9 font-medium">$40</span>
+              <span className="text-2xl font-medium leading-9">$40</span>
             </div>
           </div>
 
-          <div className="border border-gray rounded-3xl p-7 mt-6">
-            <div className="flex items-center gap-5 justify-between flex-wrap">
-              <span className="text-2xl leading-9 font-extrabold">
+          <div className="mt-6 rounded-3xl border border-gray p-7">
+            <div className="flex flex-wrap items-center justify-between gap-5">
+              <span className="text-2xl font-extrabold leading-9">
                 You earn
               </span>
-              <span className="text-2xl leading-9 font-extrabold">$34</span>
+              <span className="text-2xl font-extrabold leading-9">$34</span>
             </div>
           </div>
         </div>

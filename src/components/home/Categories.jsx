@@ -16,32 +16,32 @@ const Categories = () => {
         <Heading>Explore the categories</Heading>
 
         <div className="mt-11">
-          <ul className="flex items-center gap-3 flex-wrap">
+          <ul className="flex flex-wrap items-center gap-3">
             <li
-              className={`transition-all border cursor-pointer py-3 px-6 rounded-full ${
+              className={`cursor-pointer rounded-full border px-6 py-3 transition-all ${
                 activeCategory === 'Offices'
-                  ? 'bg-primary border-primary text-white'
-                  : 'border-gray text-primary hover:bg-primary hover:border-primary hover:text-white'
+                  ? 'border-primary bg-primary text-white'
+                  : 'border-gray text-primary hover:border-primary hover:bg-primary hover:text-white'
               }`}
               onClick={() => setActiveCategory('Offices')}
             >
               Offices
             </li>
             <li
-              className={`transition-all border cursor-pointer py-3 px-6 rounded-full ${
+              className={`cursor-pointer rounded-full border px-6 py-3 transition-all ${
                 activeCategory === 'Homes'
-                  ? 'bg-primary border-primary text-white'
-                  : 'border-gray text-primary hover:bg-primary hover:border-primary hover:text-white'
+                  ? 'border-primary bg-primary text-white'
+                  : 'border-gray text-primary hover:border-primary hover:bg-primary hover:text-white'
               }`}
               onClick={() => setActiveCategory('Homes')}
             >
               Homes
             </li>
             <li
-              className={`transition-all border cursor-pointer py-3 px-6 rounded-full ${
+              className={`cursor-pointer rounded-full border px-6 py-3 transition-all ${
                 activeCategory === 'Cafe'
-                  ? 'bg-primary border-primary text-white'
-                  : 'border-gray text-primary hover:bg-primary hover:border-primary hover:text-white'
+                  ? 'border-primary bg-primary text-white'
+                  : 'border-gray text-primary hover:border-primary hover:bg-primary hover:text-white'
               }`}
               onClick={() => setActiveCategory('Cafe')}
             >
@@ -76,7 +76,7 @@ const Categories = () => {
             loop={true}
           >
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/1.png"
                   alt="category"
@@ -85,7 +85,7 @@ const Categories = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/2.png"
                   alt="category"
@@ -94,7 +94,7 @@ const Categories = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/3.png"
                   alt="category"
@@ -103,7 +103,7 @@ const Categories = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/4.png"
                   alt="category"
@@ -112,7 +112,7 @@ const Categories = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/2.png"
                   alt="category"
@@ -121,7 +121,7 @@ const Categories = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/1.png"
                   alt="category"
@@ -130,7 +130,7 @@ const Categories = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="overflow-hidden w-full rounded-2xl">
+              <div className="w-full overflow-hidden rounded-2xl">
                 <img
                   src="/images/categories/3.png"
                   alt="category"

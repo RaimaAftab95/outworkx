@@ -81,12 +81,12 @@ const Signin = () => {
     mutate();
   };
   return (
-    <main className="flex flex-col lg:flex-row justify-between">
-      <div className="py-7 px-5 sm:px-20 w-full min-h-full lg:w-1/2 xl:w-1/3">
+    <main className="flex flex-col justify-between lg:flex-row">
+      <div className="min-h-full w-full px-5 py-7 sm:px-20 lg:w-1/2 xl:w-1/3">
         <Link to="/">
           <img src="/images/logo.svg" alt="logo" />
         </Link>
-        <div className="min-h-full py-10 flex items-center">
+        <div className="flex min-h-full items-center py-10">
           <div className="w-full">
             <Heading>Login</Heading>
 
@@ -97,7 +97,7 @@ const Signin = () => {
               <input
                 type="email"
                 placeholder="E-mail*"
-                className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
+                className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               />
@@ -105,7 +105,7 @@ const Signin = () => {
               <input
                 type="password"
                 placeholder="Password*"
-                className="text-primary/70 px-9 py-4 border border-primary rounded-lg outline-none placeholder:text-primary/70 block w-full"
+                className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
@@ -123,10 +123,10 @@ const Signin = () => {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block lg:w-1/2 xl:w-2/3 min-h-screen">
+      <div className="hidden min-h-screen lg:block lg:w-1/2 xl:w-2/3">
         <img
           src="/images/auth/sign-up-banner.jpg"
-          className="w-full h-full"
+          className="h-full w-full"
           alt=""
         />
       </div>

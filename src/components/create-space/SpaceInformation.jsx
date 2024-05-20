@@ -84,7 +84,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             <Label className="cursor-pointer" htmlFor="place">
               An entire place
             </Label>
-            <span className="text-xl w-full placeholder:text-primary/70 text-primary/70 font-medium leading-9">
+            <span className="w-full text-xl font-medium leading-9 text-primary/70 placeholder:text-primary/70">
               Guests have whole place to themselves.
             </span>
           </InputBox>
@@ -97,7 +97,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             <Label className="cursor-pointer" htmlFor="room">
               A room
             </Label>
-            <span className="text-xl w-full placeholder:text-primary/70 text-primary/70 font-medium leading-9">
+            <span className="w-full text-xl font-medium leading-9 text-primary/70 placeholder:text-primary/70">
               Guests have their own room in a home, plus access to shared
               spaces.
             </span>
@@ -113,7 +113,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             <Label className="cursor-pointer" htmlFor="shared-room">
               A shared room
             </Label>
-            <span className="text-xl w-full placeholder:text-primary/70 text-primary/70 font-medium leading-9">
+            <span className="w-full text-xl font-medium leading-9 text-primary/70 placeholder:text-primary/70">
               Guests sleep in a room or common area that may be shared with you
               or others.
             </span>
@@ -122,12 +122,12 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
         <div className="mt-20">
           <Heading>Where’s your place located? </Heading>
-          <p className="text-2xl font-medium leading-9 mt-2">
+          <p className="mt-2 text-2xl font-medium leading-9">
             Your address is only shared with guests after they’ve made a
             reservation.
           </p>
 
-          <div className="mt-16 relative">
+          <div className="relative mt-16">
             <iframe
               title="map"
               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"
@@ -140,8 +140,8 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
 
-            <div className="absolute top-11 left-0 right-0">
-              <div className="w-11/12 sm:w-4/5 mx-auto py-9 px-11 bg-white rounded-full flex items-center gap-5 shadow-lg">
+            <div className="absolute left-0 right-0 top-11">
+              <div className="mx-auto flex w-11/12 items-center gap-5 rounded-full bg-white px-11 py-9 shadow-lg sm:w-4/5">
                 <div>
                   <img src="/images/icons/map.png" alt="map" />
                 </div>
@@ -161,13 +161,13 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
 
         <div className="mt-20">
           <Heading>Tell guests what your place has to offer</Heading>
-          <p className="text-2xl font-medium leading-9 mt-2">
+          <p className="mt-2 text-2xl font-medium leading-9">
             You can add more after publish your listing
           </p>
 
-          <div className="mt-11 grid sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
+          <div className="mt-11 grid gap-8 text-center sm:grid-cols-2 md:grid-cols-3">
             <div
-              className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-3xl cursor-pointer transition-all ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-5 rounded-3xl border border-gray px-5 py-10 transition-all ${
                 offers?.includes('wifi')
                   ? 'border-primary'
                   : 'hover:border-primary'
@@ -181,7 +181,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             </div>
 
             <div
-              className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-3xl cursor-pointer transition-all ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-5 rounded-3xl border border-gray px-5 py-10 transition-all ${
                 offers?.includes('tv')
                   ? 'border-primary'
                   : 'hover:border-primary'
@@ -195,7 +195,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             </div>
 
             <div
-              className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-3xl cursor-pointer transition-all ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-5 rounded-3xl border border-gray px-5 py-10 transition-all ${
                 offers?.includes('kitchen')
                   ? 'border-primary'
                   : 'hover:border-primary'
@@ -209,7 +209,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             </div>
 
             <div
-              className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-3xl cursor-pointer transition-all ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-5 rounded-3xl border border-gray px-5 py-10 transition-all ${
                 offers?.includes('printer')
                   ? 'border-primary'
                   : 'hover:border-primary'
@@ -223,7 +223,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             </div>
 
             <div
-              className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-3xl cursor-pointer transition-all ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-5 rounded-3xl border border-gray px-5 py-10 transition-all ${
                 offers?.includes('parking')
                   ? 'border-primary'
                   : 'hover:border-primary'
@@ -237,7 +237,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
             </div>
 
             <div
-              className={`py-10 px-5 flex flex-col justify-center items-center gap-5 border border-gray rounded-3xl cursor-pointer transition-all ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-5 rounded-3xl border border-gray px-5 py-10 transition-all ${
                 offers?.includes('air-conditioning')
                   ? 'border-primary'
                   : 'hover:border-primary'
@@ -260,7 +260,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
           <Heading>Workspace rules</Heading>
 
           <div className="mt-10 flex flex-col gap-6">
-            <div className="flex items-center justify-between gap-5 flex-wrap">
+            <div className="flex flex-wrap items-center justify-between gap-5">
               <label
                 htmlFor="no-smoking"
                 className="text-2xl font-medium leading-9"
@@ -269,7 +269,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               </label>
               <input
                 type="checkbox"
-                className="w-6 h-6 rounded-xl border border-gray"
+                className="h-6 w-6 rounded-xl border border-gray"
                 name=""
                 id="no-smoking"
                 value="no-smoking"
@@ -277,7 +277,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 checked={rules?.includes('no-smoking')}
               />
             </div>
-            <div className="flex items-center justify-between gap-5 flex-wrap">
+            <div className="flex flex-wrap items-center justify-between gap-5">
               <label
                 htmlFor="no-pets"
                 className="text-2xl font-medium leading-9"
@@ -286,7 +286,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               </label>
               <input
                 type="checkbox"
-                className="w-6 h-6 rounded-xl border border-gray"
+                className="h-6 w-6 rounded-xl border border-gray"
                 name=""
                 id="no-pets"
                 value="no-pets"
@@ -294,7 +294,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 checked={rules?.includes('no-pets')}
               />
             </div>
-            <div className="flex items-center justify-between gap-5 flex-wrap">
+            <div className="flex flex-wrap items-center justify-between gap-5">
               <label
                 htmlFor="workspace-clean"
                 className="text-2xl font-medium leading-9"
@@ -303,7 +303,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
               </label>
               <input
                 type="checkbox"
-                className="w-6 h-6 rounded-xl border border-gray"
+                className="h-6 w-6 rounded-xl border border-gray"
                 name=""
                 checked={rules?.includes('workspace-clean')}
                 id="workspace-clean"

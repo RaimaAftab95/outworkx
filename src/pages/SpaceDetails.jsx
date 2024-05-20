@@ -181,20 +181,20 @@ const SpaceDetails = () => {
   ) : (
     <main>
       {/* details */}
-      <section className="text-black/70 mb-32">
+      <section className="mb-32 text-black/70">
         <div className="container">
           {/* space images */}
           {gallery && (
             <>
               {gallery?.length > 1 ? (
-                <div className="flex flex-col lg:flex-row justify-between gap-5">
+                <div className="flex flex-col justify-between gap-5 lg:flex-row">
                   <div
                     className={`w-full ${
                       gallery?.length > 1 && 'lg:w-2/3'
                     } relative`}
                   >
                     <img
-                      className="w-full h-full rounded-3xl"
+                      className="h-full w-full rounded-3xl"
                       src={gallery[0]?.url}
                       alt="space"
                     />
@@ -204,12 +204,12 @@ const SpaceDetails = () => {
                     </div>
                   </div>
                   {gallery?.length > 1 && (
-                    <div className="w-full lg:w-1/3 flex flex-col gap-4 h-full">
+                    <div className="flex h-full w-full flex-col gap-4 lg:w-1/3">
                       {gallery?.slice(1, 3)?.map(item => (
                         <img
                           key={item?.url}
                           src={item?.url}
-                          className="w-full h-full rounded-3xl"
+                          className="h-full w-full rounded-3xl"
                           alt="space"
                         />
                       ))}
@@ -217,9 +217,9 @@ const SpaceDetails = () => {
                   )}
                 </div>
               ) : (
-                <div className={`w-full max-h-screen overflow-hidden`}>
+                <div className={`max-h-screen w-full overflow-hidden`}>
                   <img
-                    className="min-w-full max-h-screen rounded-3xl"
+                    className="max-h-screen min-w-full rounded-3xl"
                     src={gallery[0]?.url}
                     alt="space"
                   />
@@ -230,26 +230,26 @@ const SpaceDetails = () => {
 
           {/* space details */}
           <div>
-            <div className="flex flex-col-reverse lg:flex-row justify-between gap-16 mt-16">
+            <div className="mt-16 flex flex-col-reverse justify-between gap-16 lg:flex-row">
               {/* space content */}
               <div className="w-full lg:w-2/3">
                 <div>
                   <Heading>{name}</Heading>
 
-                  <div className="flex items-center flex-wrap gap-2 text-xl text-primary font-bold py-7 border-b border-gray">
+                  <div className="flex flex-wrap items-center gap-2 border-b border-gray py-7 text-xl font-bold text-primary">
                     <div className="flex items-center gap-2">
                       <img src="/images/icons/star-lg.png" alt="" />
                       <span>4.86</span>
                     </div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span>300 Reviews</span>
                   </div>
                 </div>
 
-                <div className="flex sm:items-center justify-between gap-5 flex-wrap py-7 flex-col sm:flex-row border-b border-gray">
-                  <div className="flex items-center gap-2 text-2xl text-primary font-semibold flex-1">
+                <div className="flex flex-col flex-wrap justify-between gap-5 border-b border-gray py-7 sm:flex-row sm:items-center">
+                  <div className="flex flex-1 items-center gap-2 text-2xl font-semibold text-primary">
                     <span>1 Guest </span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span>1 Table </span>
                   </div>
                   <span className="flex-1 text-primary">
@@ -257,7 +257,7 @@ const SpaceDetails = () => {
                   </span>
                 </div>
 
-                <div className="py-7 border-b border-gray">
+                <div className="border-b border-gray py-7">
                   <h4 className="text-2xl leading-10">
                     Coworking Space Amenities
                   </h4>
@@ -333,13 +333,13 @@ const SpaceDetails = () => {
               </div>
 
               {/* space reverse section */}
-              <div className="w-full sm:w-full lg:w-1/3 h-fit border border-gray rounded-2xl shadow py-4 px-6">
+              <div className="h-fit w-full rounded-2xl border border-gray px-6 py-4 shadow sm:w-full lg:w-1/3">
                 <div className="border-b border-gray pb-4">
                   <h3 className="text-2xl leading-10">Coworking Space</h3>
                   <span className="text-base"> Access to shared workspace</span>
                 </div>
 
-                <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap relative">
+                <div className="relative flex flex-wrap items-center justify-between gap-2 border-b border-gray py-4 text-lg text-primary">
                   <span
                     className="cursor-pointer"
                     onClick={() => setOpenSelectPeople(!openSelectPeople)}
@@ -368,14 +368,14 @@ const SpaceDetails = () => {
                   </div>
                 )}
 
-                <div className="py-4 border-b border-gray text-primary text-lg flex items-center gap-2 justify-between flex-wrap relative">
+                <div className="relative flex flex-wrap items-center justify-between gap-2 border-b border-gray py-4 text-lg text-primary">
                   <span>Check In</span>
                   <div
                     className="flex items-center gap-3"
                     onClick={() => setOpenCheckInCalender(!openCheckInCalender)}
                     ref={reserveCalenderRef}
                   >
-                    <div className="flex items-center gap-3 cursor-pointer">
+                    <div className="flex cursor-pointer items-center gap-3">
                       {checkInDate ? (
                         <span className="underline">
                           {new Date(checkInDate)?.getDate()}/
@@ -387,7 +387,7 @@ const SpaceDetails = () => {
                       )}
                     </div>{' '}
                     /
-                    <div className="flex items-center gap-3 cursor-pointer">
+                    <div className="flex cursor-pointer items-center gap-3">
                       {checkOutDate ? (
                         <span className="underline">
                           {new Date(checkOutDate)?.getDate()}/
@@ -428,7 +428,7 @@ const SpaceDetails = () => {
                 </div>
 
                 {totalDays !== 0 && totalPeople !== 0 && (
-                  <div className="text-primary text-lg flex items-center gap-2 justify-between flex-wrap mb-3">
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-lg text-primary">
                     <span>
                       ${spaceDetails?.pricePerDesk} x {totalDays} days
                     </span>
@@ -443,7 +443,7 @@ const SpaceDetails = () => {
               </div>
             </div>
 
-            <div className="py-7 border-y border-gray">
+            <div className="border-y border-gray py-7">
               <h4 className="text-xl leading-10">About Place</h4>
               <p className="text-lg leading-9 text-black/70">
                 {description?.length > 404
@@ -451,7 +451,7 @@ const SpaceDetails = () => {
                   : description}
               </p>
               {description?.length > 404 && (
-                <button className="text-lg font-bold leading-10 text-primary cursor-pointer underline">
+                <button className="cursor-pointer text-lg font-bold leading-10 text-primary underline">
                   Show more
                 </button>
               )}
@@ -461,7 +461,7 @@ const SpaceDetails = () => {
             <Reviews />
 
             <div className="py-7">
-              <h4 className="text-lg leading-10 mb-6">Map</h4>
+              <h4 className="mb-6 text-lg leading-10">Map</h4>
               <iframe
                 title="map"
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"

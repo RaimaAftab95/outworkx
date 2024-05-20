@@ -124,17 +124,17 @@ const ReserveSpace = () => {
           <Heading>Reserve space</Heading>
         </div>
 
-        <div className="mt-20 grid lg:grid-cols-2 gap-20 sm:gap-28">
+        <div className="mt-20 grid gap-20 sm:gap-28 lg:grid-cols-2">
           <div>
             <h3 className="text-4xl leading-10">Your trip</h3>
 
-            <div className="text-2xl leading-8 mt-14 flex flex-col gap-12">
+            <div className="mt-14 flex flex-col gap-12 text-2xl leading-8">
               <div
-                className="flex items-center justify-between 
-              gap-5 flex-wrap"
+                className="flex flex-wrap items-center 
+              justify-between gap-5"
               >
                 <div className="flex flex-col gap-1">
-                  <span className="font-bold cursor-pointer">People</span>
+                  <span className="cursor-pointer font-bold">People</span>
                   <span>{totalPeople}</span>
                 </div>
                 <button
@@ -145,8 +145,8 @@ const ReserveSpace = () => {
                 </button>
               </div>
               <div
-                className="flex items-center justify-between 
-              gap-5 flex-wrap"
+                className="flex flex-wrap items-center 
+              justify-between gap-5"
               >
                 <div className="flex flex-col gap-1">
                   <span className="font-bold">Date</span>
@@ -181,8 +181,8 @@ const ReserveSpace = () => {
             </div>
           </div>
 
-          <div className="bg-white px-10 py-12 border border-gray rounded-3xl h-fit">
-            <div className="flex flex-col sm:flex-row justify-between gap-6 pb-4 border-b border-gray">
+          <div className="h-fit rounded-3xl border border-gray bg-white px-10 py-12">
+            <div className="flex flex-col justify-between gap-6 border-b border-gray pb-4 sm:flex-row">
               <div className="w-full sm:w-2/5">
                 <img
                   className="w-full rounded-3xl"
@@ -190,41 +190,41 @@ const ReserveSpace = () => {
                   alt="space"
                 />
               </div>
-              <div className="w-full sm:w-1/2 flex flex-col gap-2">
+              <div className="flex w-full flex-col gap-2 sm:w-1/2">
                 <h3 className="text-xl font-bold leading-8">Reservation</h3>
                 <p className="text-lg leading-8">{name}</p>
-                <div className="flex items-center flex-wrap gap-2 text-xl text-primary font-bold">
+                <div className="flex flex-wrap items-center gap-2 text-xl font-bold text-primary">
                   <div className="flex items-center gap-2">
                     <img src="/images/icons/star-lg.png" alt="" />
                     <span>{rating}</span>
                   </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                   <span>{totalReviews} Reviews</span>
                 </div>
               </div>
             </div>
 
-            <div className="py-8 border-b border-gray">
-              <h3 className="text-2xl leading-7 font-normal">Price details</h3>
+            <div className="border-b border-gray py-8">
+              <h3 className="text-2xl font-normal leading-7">Price details</h3>
               <div className="mt-6 flex flex-col gap-4 text-xl font-medium leading-8">
-                <div className="flex items-center justify-between gap-5 flex-wrap">
+                <div className="flex flex-wrap items-center justify-between gap-5">
                   <span className="underline">
                     ${pricePerDesk} X {totalPeople} People
                   </span>
                   <span>${pricePerDesk * Number(totalPeople)}.00</span>
                 </div>
-                <div className="flex items-center justify-between gap-5 flex-wrap">
+                <div className="flex flex-wrap items-center justify-between gap-5">
                   <span className="underline">Our fee</span>
                   <span>$10.00</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-5 flex-wrap">
-              <h3 className="text-2xl mt-6 leading-7 font-normal">
+            <div className="flex flex-wrap items-center justify-between gap-5">
+              <h3 className="mt-6 text-2xl font-normal leading-7">
                 Total (USD)
               </h3>
-              <h3 className="text-xl mt-6 leading-7 font-bold">
+              <h3 className="mt-6 text-xl font-bold leading-7">
                 ${pricePerDesk * Number(totalPeople) + 10}.00
               </h3>
             </div>
@@ -234,12 +234,12 @@ const ReserveSpace = () => {
 
       {openCheckInCalender && (
         <div
-          className="fixed inset-0 w-full h-full bg-black/40 z-50"
+          className="fixed inset-0 z-50 h-full w-full bg-black/40"
           onClick={() => setOpenCheckInCalender(false)}
         >
           <ReserveCalender
             setOpen={setOpenCheckInCalender}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-custom h-fit"
+            className="fixed left-1/2 top-1/2 z-50 h-fit w-custom -translate-x-1/2 -translate-y-1/2"
             open={openCheckInCalender}
             // open={true}
             checkInDate={checkInDate}
@@ -252,12 +252,12 @@ const ReserveSpace = () => {
 
       {openSelectPeople && (
         <div
-          className="fixed inset-0 w-full h-full bg-black/40 z-50"
+          className="fixed inset-0 z-50 h-full w-full bg-black/40"
           onClick={() => setOpenSelectPeople(false)}
         >
           <SelectPeople
             openSelectPeople={openSelectPeople}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-custom h-fit"
+            className="fixed left-1/2 top-1/2 z-50 h-fit w-custom -translate-x-1/2 -translate-y-1/2"
             setOpenSelectPeople={setOpenSelectPeople}
             setTotalPeople={setTotalPeople}
           />
