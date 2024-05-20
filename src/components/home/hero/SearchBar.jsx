@@ -1,6 +1,6 @@
 export default function SearchBar() {
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center  gap-2 sm:bg-gray rounded-full p-2.5 w-full sm:max-w-24 mx-auto lg:max-w-4xl">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:bg-gray rounded-full p-2.5 w-full sm:max-w-24 mx-auto lg:max-w-4xl">
       <div className="bg-white w-full rounded-full sm:w-5/12 lg:w-3/7 flex items-center gap-6  px-10 sm:px-5 md:px-16">
         <h3 className="text-2xl">Find</h3>
         <input
