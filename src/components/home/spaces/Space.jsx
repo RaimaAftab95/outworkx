@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Space = ({ space }) => {
+export default function Space({ space }) {
   const [activeImage, setActiveImage] = useState(0);
 
   // extract space data
@@ -27,7 +27,7 @@ const Space = ({ space }) => {
           <img
             src={gallery[activeImage].url}
             alt="space"
-            className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 `}
+            className={`w-full h-full sm:h-[220px] transition-all hover:scale-125 object-cover`}
           />
         </Link>
 
@@ -88,6 +88,4 @@ const Space = ({ space }) => {
       </div>
     </div>
   );
-};
-
-export default Space;
+}

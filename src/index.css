@@ -21,6 +21,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .rounded-32 {
+    border-radius: 32px;
+  }
+}
+
 body {
   color: #00000080;
   font-family: 'mluvka', sans-serif;
