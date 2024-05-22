@@ -1,18 +1,18 @@
 export default function SearchBar() {
   return (
-    <div className="mx-auto flex w-full flex-col items-center justify-center gap-2 rounded-full bg-transparent p-2.5 sm:max-w-24 sm:flex-row sm:bg-gray lg:max-w-3xl">
-      <div className="lg:w-11/24 flex w-full items-center gap-6 rounded-full bg-white px-10  sm:w-5/12 sm:px-5 md:px-16">
-        <h3 className="text-2xl leading-6">Find</h3>
+    <div className="mx-auto flex w-full flex-col items-center justify-center gap-6 rounded-full bg-transparent  p-2.5  sm:flex-row sm:bg-gray lg:max-w-3xl">
+      <div className="lg:w-11/24 flex w-full items-center gap-2 rounded-full bg-white px-10 py-4  sm:w-5/12 sm:px-5 md:px-16">
+        <h3 className="text-xl">Find</h3>
         <input
-          className="w-full bg-transparent py-4 text-xl leading-6 outline-none"
+          className="w-full text-xl outline-none"
           type="text"
           placeholder="Ex: workspace"
         />
       </div>
-      <div className="lg:w-11/24 flex w-full items-center gap-6 rounded-full bg-white px-10 sm:w-5/12 sm:px-5 md:px-10">
-        <h3 className="text-2xl leading-6">Where</h3>
+      <div className="lg:w-11/24  flex w-full items-center gap-2 rounded-full bg-white px-10 py-4 sm:w-5/12 sm:px-5 md:px-10">
+        <h3 className="text-xl">Where</h3>
         <input
-          className="w-full bg-transparent py-4 text-xl leading-6 outline-none"
+          className="w-full text-xl outline-none"
           type="text"
           placeholder="Your City"
         />
