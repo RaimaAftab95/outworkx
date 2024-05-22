@@ -187,30 +187,32 @@ const PrivacyPolicy = () => {
   const informationYouProvide = () => {
     return (
       <div>
-        <h2>Information You Provide Us</h2>
+        <h2 className="mt-5">5. Information You Provide Us</h2>
         <p>
           We collect information directly from you when you interact with
           Outworkx through various channels, including our Website and offline
           interactions. Here are the specific details you may provide:
         </p>
-        <h3>5.1. Online Interactions:</h3>
-        <ol>
+        <h3 className="pl-4">5.1. Online Interactions:</h3>
+        <ol className="pl-6">
           <li>
-            <strong>5.1.1. Registration and Account Creation:</strong> When you
-            register for an account on our Website, you may provide information
-            such as name, email address, and possibly additional details
-            depending on the service.
+            <strong className="text-black">
+              5.1.1. Registration and Account Creation:
+            </strong>{' '}
+            When you register for an account on our Website, you may provide
+            information such as name, email address, and possibly additional
+            details depending on the service.
           </li>
           <li>
-            <strong>5.1.2. Subscriptions:</strong> When subscribing to a
-            service, you may provide information related to the subscription,
-            such as your plan type and start date.
+            <strong className="text-black">5.1.2. Subscriptions:</strong> When
+            subscribing to a service, you may provide information related to the
+            subscription, such as your plan type and start date.
           </li>
           <li>
-            <strong>5.1.3. Forms:</strong> Our Website offers various forms to
-            collect information. You may choose to submit information through
-            these forms for purposes including:
-            <ul>
+            <strong className="text-black">5.1.3. Forms:</strong> Our Website
+            offers various forms to collect information. You may choose to
+            submit information through these forms for purposes including:
+            <ul className="list-disc pl-8">
               <li>Signing up for our newsletter</li>
               <li>Contacting us through the "Contact Us" form</li>
               <li>Submitting a support request through the "We Care" form</li>
@@ -219,30 +221,32 @@ const PrivacyPolicy = () => {
             </ul>
           </li>
           <li>
-            <strong>5.1.4. Contests and Promotions:</strong> If you participate
-            in any contests or promotions offered by us, you may provide
-            information necessary for entry.
+            <strong className="text-black">
+              5.1.4. Contests and Promotions:
+            </strong>{' '}
+            If you participate in any contests or promotions offered by us, you
+            may provide information necessary for entry.
           </li>
           <li>
-            <strong>5.1.5. Problem Reporting:</strong> When you report an issue
-            with our Website, you may provide details about the problem to
-            assist us in resolving it.
+            <strong className="text-black">5.1.5. Problem Reporting:</strong>{' '}
+            When you report an issue with our Website, you may provide details
+            about the problem to assist us in resolving it.
           </li>
           <li>
-            <strong>5.1.6. Transactions:</strong> When you make a purchase or
-            fulfill a subscription online, you may provide financial information
-            for payment processing. Outworkx offers both online and offline
-            payment options, with no additional charges for offline payments
-            made in person.
+            <strong className="text-black">5.1.6. Transactions:</strong> When
+            you make a purchase or fulfill a subscription online, you may
+            provide financial information for payment processing. Outworkx
+            offers both online and offline payment options, with no additional
+            charges for offline payments made in person.
           </li>
           <li>
-            <strong>5.1.7. Search Queries:</strong> We may collect information
-            about your search queries on the Website to understand your
-            interests and improve search functionality.
+            <strong className="text-black">5.1.7. Search Queries:</strong> We
+            may collect information about your search queries on the Website to
+            understand your interests and improve search functionality.
           </li>
         </ol>
-        <h3>5.2. Offline Interactions:</h3>
-        <p>
+        <h3 className="mt-3 pl-4">5.2. Offline Interactions:</h3>
+        <p className="pl-4">
           During offline interactions with Outworkx, you may provide some of the
           information mentioned above, such as your name and contact details,
           when making an in-person payment (with no additional charges) or
@@ -256,19 +260,19 @@ const PrivacyPolicy = () => {
   const informationCollectedAutomatically = () => {
     return (
       <div>
-        <h2>Information Collected Automatically</h2>
+        <h2 className="mt-5">6. Information Collected Automatically</h2>
         <p>
           We may automatically collect certain information about your equipment,
           browsing actions, and patterns as you navigate through and interact
           with our Website and services. This information is used to improve our
           services and deliver a better user experience.
         </p>
-        <h3>6.1. Usage Details</h3>
-        <p>
+        <h3 className="pl-4">6.1. Usage Details</h3>
+        <p className="pl-4">
           This includes information about your visits to our Website and online
           interactions with our services, such as:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>Traffic data (e.g., pages visited, time spent on pages)</li>
           <li>Location data (if enabled by your device)</li>
           <li>Logs and other communication data</li>
@@ -280,46 +284,46 @@ const PrivacyPolicy = () => {
             during in-person payment)
           </li>
         </ul>
-        <h3>6.2. Device and Connection Information</h3>
-        <p>
+        <h3 className="mt-3 pl-4">6.2. Device and Connection Information</h3>
+        <p className="pl-4">
           We collect information about your computer and internet connection,
           including:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>IP address</li>
           <li>Operating system</li>
           <li>Browser type</li>
         </ul>
-        <h3>6.3. Cookies</h3>
-        <h4>6.3.1. Browser Cookies</h4>
-        <p>
+        <h3 className="mt-3 pl-4">6.3. Cookies</h3>
+        <h4 className="pl-6">6.3.1. Browser Cookies</h4>
+        <p className="pl-6">
           Cookies are small files placed on your device's hard drive when you
           visit our Website. You can choose to refuse browser cookies by
           activating the appropriate setting on your browser. However, this may
           limit your access to certain features of our Website.
         </p>
-        <h4>6.3.2. Flash Cookies</h4>
-        <p>
+        <h4 className="mt-2 pl-6">6.3.2. Flash Cookies</h4>
+        <p className="pl-6">
           Certain features of our Website may use local stored objects (or Flash
           cookies) to collect and store information about your preferences and
           navigation history. Flash cookies are not managed by the same browser
           settings used for browser cookies. Please refer to your browser or
           device documentation for information on managing Flash cookies.
         </p>
-        <h3>6.4. Web Beacons</h3>
-        <p>
+        <h3 className="mt-3 pl-4">6.4. Web Beacons</h3>
+        <p className="pl-4">
           Our Website and emails may contain small electronic files known as web
           beacons (also referred to as clear gifs, pixel tags, and single-pixel
           gifs). These allow us to:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>Count users who visit certain pages or open emails</li>
           <li>
             Compile website statistics (e.g., popularity of content, system and
             server integrity)
           </li>
         </ul>
-        <p>
+        <p className="mt-2">
           We will use the information collected through these technologies in
           accordance with this Privacy Policy.
         </p>
@@ -331,66 +335,71 @@ const PrivacyPolicy = () => {
   const howWeUseYourInformation = () => {
     return (
       <div>
-        <h2>How We Use Your Information</h2>
+        <h2 className="mt-5">7. How We Use Your Information</h2>
         <p>
           We use the information we collect about you for a variety of purposes
           to improve our services and deliver a better user experience. This
           includes both information you provide directly and information
           collected automatically.
         </p>
-        <h3>7.1. Purposes of Information Use</h3>
-        <h4>7.1.1. Website and Service Improvement</h4>
-        <p>
+        <h3 className="pl-4">7.1. Purposes of Information Use</h3>
+        <h4 className="pl-6">7.1.1. Website and Service Improvement</h4>
+        <p className="pl-6">
           We use statistical data collected automatically to improve our Website
           and services. This allows us to:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>Estimate audience size and usage patterns</li>
           <li>Store information about your preferences for personalization</li>
           <li>Speed up your searches</li>
           <li>Recognize you when you return</li>
         </ul>
-        <h4>7.1.2. Fulfilling Your Requests</h4>
-        <p>
+        <h4 className="mt-2 pl-6">7.1.2. Fulfilling Your Requests</h4>
+        <p className="pl-6">
           We use the information you provide to present our Website and its
           contents to you, and to provide you with information or services you
           request, including:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>Online booking fulfillment</li>
           <li>Subscription management</li>
           <li>Processing offline interactions (e.g., in-person payments)</li>
         </ul>
-        <h4>7.1.3. Communication and Notices</h4>
-        <p>
+        <h4 className="mt-2 pl-6">7.1.3. Communication and Notices</h4>
+        <p className="pl-6">
           We may use your information to communicate with you and send notices,
           including:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>Expiration notices (for subscriptions)</li>
           <li>Billing and renewal notices</li>
           <li>Updates about our Website, projects, or services</li>
         </ul>
-        <h4>7.1.4. Contractual Purposes</h4>
-        <p>
+        <h4 className="mt-2 pl-6">7.1.4. Contractual Purposes</h4>
+        <p className="pl-6">
           We use your information to carry out our obligations and enforce our
           rights arising from any contracts you enter with us, including billing
           and collection.
         </p>
-        <h4>7.1.5. User Participation</h4>
-        <p>
+        <h4 className="mt-2 pl-6">7.1.5. User Participation</h4>
+        <p className="pl-6">
           We may use your information to allow you to participate in interactive
           features on our Website.
         </p>
-        <h4>7.1.6. Additional Purposes with Consent</h4>
-        <p>We may use your information for other purposes with your consent.</p>
-        <h4>7.1.7. Marketing Communications</h4>
-        <p>
+        <h4 className="mt-2 pl-6">7.1.6. Additional Purposes with Consent</h4>
+        <p className="pl-6">
+          We may use your information for other purposes with your consent.
+        </p>
+        <h4 className="mt-2 pl-6">7.1.7. Marketing Communications</h4>
+        <p className="pl-6">
           We may use your information to contact you about our own and
           third-party projects and services that may be of interest to you. You
           can opt out of receiving marketing communications from us by
           contacting us at{' '}
-          <a href="mailto:hello@outworkx.com">hello@outworkx.com</a>.
+          <a className="text-blue-500" href="mailto:hello@outworkx.com">
+            hello@outworkx.com
+          </a>
+          .
         </p>
       </div>
     );
@@ -400,19 +409,21 @@ const PrivacyPolicy = () => {
   const disclosureOfYourInformation = () => {
     return (
       <div>
-        <h2>Disclosure of Your Information</h2>
+        <h2 className="mt-5">8. Disclosure of Your Information</h2>
         <p>
           We may disclose certain information we collect in accordance with this
           Privacy Policy. This includes both personal and non-personal
           information.
         </p>
-        <h3>8.1. Disclosure of Aggregated and De-Identified Information</h3>
-        <p>
+        <h3 className="pl-4">
+          8.1. Disclosure of Aggregated and De-Identified Information
+        </h3>
+        <p className="pl-4">
           We may disclose aggregated information about our users, and
           information that does not identify any individual, without
           restriction. We may disclose this information to:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>Our subsidiaries and affiliates</li>
           <li>
             Contractors, service providers, and other third parties we use to
@@ -429,34 +440,36 @@ const PrivacyPolicy = () => {
             information
           </li>
         </ul>
-        <h3>8.2. Disclosure of Personal Information</h3>
-        <p>
+        <h3 className="mt-3 pl-4">8.2. Disclosure of Personal Information</h3>
+        <p className="pl-4">
           We will only disclose your personal information in the following
           circumstances:
         </p>
-        <h4>8.2.1. Legally Required Disclosures</h4>
-        <p>
+        <h4 className="pl-6">8.2.1. Legally Required Disclosures</h4>
+        <p className="pl-6">
           We may disclose your personal information to comply with any court
           order, law, or legal process, including responding to any government
           or regulatory request.
         </p>
-        <h4>8.2.2. Enforcing Agreements</h4>
-        <p>
+        <h4 className="mt-2 pl-6">8.2.2. Enforcing Agreements</h4>
+        <p className="pl-6">
           We may disclose your personal information to enforce or apply our
           terms of use, terms of sale, and other agreements, including for
           billing and collection purposes.
         </p>
-        <h4>8.2.3. Protecting Our Interests</h4>
-        <p>
+        <h4 className="mt-2 pl-6">8.2.3. Protecting Our Interests</h4>
+        <p className="pl-6">
           We may disclose your personal information if we believe disclosure is
           necessary or appropriate to protect the rights, property, or safety of
           our company, our customers, or others. This includes exchanging
           information with other companies and organizations for the purposes of
           fraud protection and credit risk reduction.
         </p>
-        <h4>8.2.4. With Your Consent</h4>
-        <p>We may disclose your personal information with your consent.</p>
-        <p>
+        <h4 className="mt-2 pl-6">8.2.4. With Your Consent</h4>
+        <p className="pl-6">
+          We may disclose your personal information with your consent.
+        </p>
+        <p className="pl-6">
           We will use commercially reasonable efforts to ensure that any third
           party to whom we disclose your personal information is obligated to
           use your personal information in compliance with this Privacy Policy.
@@ -469,38 +482,48 @@ const PrivacyPolicy = () => {
   const choicesAboutInformation = () => {
     return (
       <div>
-        <h2>Choices About How We Use and Disclose Your Information</h2>
+        <h2 className="mt-5">
+          9. Choices About How We Use and Disclose Your Information
+        </h2>
         <p>
           We are committed to providing you with choices regarding the personal
           information you provide to us. We offer the following controls over
           your information:
         </p>
-        <h3>9.1. Tracking Technologies and Advertising</h3>
-        <p>
+        <h3 className="mt-3 pl-4">
+          9.1. Tracking Technologies and Advertising
+        </h3>
+        <p className="pl-4">
           You can set your browser to refuse all or some browser cookies, or to
           alert you when cookies are being sent. If you disable or refuse
           cookies, please note that some parts of our Website or services may
           then be inaccessible or not function properly.
         </p>
-        <h3>9.2. Disclosure of Your Information for Third-Party Advertising</h3>
-        <p>
+        <h3 className="mt-3 pl-4">
+          9.2. Disclosure of Your Information for Third-Party Advertising
+        </h3>
+        <p className="pl-4">
           If you do not want us to share your personal information with
           unaffiliated or non-agent third parties for promotional purposes, you
           can opt-out by contacting us at{' '}
-          <a href="mailto:hello@outworkx.com">hello@outworkx.com</a>. You can
-          submit your request by email or through any other method we provide
-          for offline communication (e.g., in-person during a payment or service
-          request).
+          <a className="text-blue-500" href="mailto:hello@outworkx.com">
+            hello@outworkx.com
+          </a>
+          . You can submit your request by email or through any other method we
+          provide for offline communication (e.g., in-person during a payment or
+          service request).
         </p>
-        <h3>9.3. Promotional Offers from Outworkx</h3>
-        <p>
+        <h3 className="mt-3 pl-4">9.3. Promotional Offers from Outworkx</h3>
+        <p className="pl-4">
           If you do not wish to have your contact information used by Outworkx
           to promote our own or third-party projects or services, you can
           opt-out by contacting us at{' '}
-          <a href="mailto:hello@outworkx.com">hello@outworkx.com</a>. You can
-          submit your request by email or through any other method we provide
-          for offline communication (e.g., in-person during a payment or service
-          request).
+          <a className="text-blue-500" href="mailto:hello@outworkx.com">
+            hello@outworkx.com
+          </a>
+          . You can submit your request by email or through any other method we
+          provide for offline communication (e.g., in-person during a payment or
+          service request).
         </p>
       </div>
     );
@@ -510,35 +533,39 @@ const PrivacyPolicy = () => {
   const accessingAndCorrectingInformation = () => {
     return (
       <div>
-        <h2>Accessing and Correcting Your Information</h2>
+        <h2 className="mt-5">10. Accessing and Correcting Your Information</h2>
         <p>
           We understand the importance of access and control over your personal
           information. This section outlines your rights related to your data.
         </p>
-        <h3>10.1. Accessing Your Information</h3>
-        <p>
+        <h3 className="pl-4">10.1. Accessing Your Information</h3>
+        <p className="pl-4">
           You have the right to access your personal information that we hold.
           You can request a copy of your information by contacting us at{' '}
-          <a href="mailto:hello@outworkx.com">hello@outworkx.com</a>. We will
-          respond to your request within a reasonable timeframe.
+          <a className="text-blue-500" href="mailto:hello@outworkx.com">
+            hello@outworkx.com
+          </a>
+          . We will respond to your request within a reasonable timeframe.
         </p>
-        <h3>10.2. Correcting Your Information</h3>
-        <p>
+        <h3 className="mt-3 pl-4">10.2. Correcting Your Information</h3>
+        <p className="pl-4">
           You have the right to correct any inaccurate or incomplete personal
           information we hold about you. You can update your information through
           your account settings (if applicable) or by contacting us at{' '}
           <a href="mailto:hello@outworkx.com">hello@outworkx.com</a>. We will
           take reasonable steps to update your information promptly.
         </p>
-        <h3>10.3. Data Erasure</h3>
-        <p>
+        <h3 className="mt-3 pl-4">10.3. Data Erasure</h3>
+        <p className="pl-4">
           You have the right to request that your personal information be
           deleted. You can submit a data erasure request by emailing{' '}
-          <a href="mailto:hello@outworkx.com">hello@outworkx.com</a>. Please
-          note the following important information regarding data erasure
-          requests:
+          <a className="text-blue-500" href="mailto:hello@outworkx.com">
+            hello@outworkx.com
+          </a>
+          . Please note the following important information regarding data
+          erasure requests:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>
             We may retain your personal information as necessary for our
             legitimate business interests, such as fraud prevention, legal
@@ -567,18 +594,18 @@ const PrivacyPolicy = () => {
   const dataSecurity = () => {
     return (
       <div>
-        <h2>Data Security</h2>
+        <h2 className="mt-5">11. Data Security</h2>
         <p>
           We take the security of your information seriously and are committed
           to protecting your personal information from unauthorized access, use,
           disclosure, alteration, or destruction.
         </p>
-        <h3>11.1. Security Measures</h3>
-        <p>
+        <h3 className="pl-4">11.1. Security Measures</h3>
+        <p className="pl-4">
           We have implemented various security measures designed to safeguard
           your information, including:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>
             Secure storage of your information on our servers behind firewalls
           </li>
@@ -587,20 +614,20 @@ const PrivacyPolicy = () => {
             equivalent)
           </li>
         </ul>
-        <h3>11.2. Your Responsibilities</h3>
-        <p>
+        <h3 className="mt-3 pl-4">11.2. Your Responsibilities</h3>
+        <p className="pl-4">
           You also play a role in protecting your information. Here are some
           things you can do:
         </p>
-        <ul>
+        <ul className="list-disc pl-8">
           <li>
             Maintain the confidentiality of any password you use to access our
             services (online or offline)
           </li>
           <li>Avoid sharing your password with anyone</li>
         </ul>
-        <h3>11.3. Limitations of Security</h3>
-        <p>
+        <h3 className="mt-3 pl-4">11.3. Limitations of Security</h3>
+        <p className="pl-4">
           Unfortunately, no data transmission over the internet or electronic
           storage method is guaranteed to be 100% secure. While we strive to use
           commercially reasonable means to protect your information, we cannot
@@ -608,8 +635,8 @@ const PrivacyPolicy = () => {
           our online services or offline interactions. You acknowledge and
           accept this inherent security risk.
         </p>
-        <h3>11.4. Disclaimer of Liability</h3>
-        <p>
+        <h3 className="mt-3 pl-4">11.4. Disclaimer of Liability</h3>
+        <p className="pl-4">
           We are not responsible for any circumvention of any privacy settings
           or security measures we implement on our Website or through our
           offline interactions.
@@ -622,7 +649,7 @@ const PrivacyPolicy = () => {
   const changesToPrivacyPolicy = () => {
     return (
       <div>
-        <h2>Changes to This Privacy Policy</h2>
+        <h2 className="mt-5">12. Changes to This Privacy Policy</h2>
         <p>
           We reserve the right to update this Privacy Policy from time to time.
           We will post any changes we make to this Privacy Policy on our Website
@@ -630,8 +657,8 @@ const PrivacyPolicy = () => {
           address specified in your account) or by means of a notice on our
           Website prior to the change becoming effective.
         </p>
-        <h3>12.1. Your Responsibility</h3>
-        <p>
+        <h3 className="mt-3 pl-4">12.1. Your Responsibility</h3>
+        <p className="mb-10 pl-4">
           It is your responsibility to periodically visit our Website and review
           this Privacy Policy to stay informed of any updates. You are bound by
           any revisions to this Privacy Policy upon our posting on our Website.
