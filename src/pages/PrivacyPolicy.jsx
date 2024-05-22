@@ -7,44 +7,57 @@ const PrivacyPolicy = () => {
   const scopeOfPolicy = () => {
     return (
       <div>
-        <h2>Scope of this Policy</h2>
+        <h2 className="mt-5">1. Scope of this Policy</h2>
         <p>
           This Privacy Policy applies to information we collect through the
           following sources:
         </p>
-        <ol>
+        <ol className="pl-4">
           <li>
-            <strong>Outworkx Website:</strong> Information collected when you
-            visit our website,{' '}
-            <a href="https://www.outworkx.com">www.outworkx.com</a>
+            <strong className="mt-5 text-black">1.1 Outworkx Website:</strong>{' '}
+            Information collected when you visit our website,{' '}
+            <a className="text-blue-500" href="https://www.outworkx.com">
+              www.outworkx.com
+            </a>
           </li>
           <li>
-            <strong>Electronic Communications:</strong> Information collected
-            through email, text, and other electronic messages between you and
-            Outworkx, including those related to online bookings and
-            subscriptions.
+            <strong className="mt-5 text-black">
+              1.2 Electronic Communications:
+            </strong>{' '}
+            Information collected through email, text, and other electronic
+            messages between you and Outworkx, including those related to online
+            bookings and subscriptions.
           </li>
           <li>
-            <strong>Mobile and Desktop Applications:</strong> Information
-            collected through mobile and desktop applications you may download
-            from our Website, which provide dedicated non-browser-based
-            interaction between you and Outworkx.
+            <strong className="mt-5 text-black">
+              1.3 Mobile and Desktop Applications:
+            </strong>{' '}
+            Information collected through mobile and desktop applications you
+            may download from our Website, which provide dedicated
+            non-browser-based interaction between you and Outworkx.
           </li>
           <li>
-            <strong>Online Transactions:</strong> Information collected during
-            online bookings and subscriptions on our Website.
+            <strong className="mt-5 text-black">
+              1.4 Online Transactions:
+            </strong>{' '}
+            Information collected during online bookings and subscriptions on
+            our Website.
           </li>
           <li>
-            <strong>Offline Interactions:</strong> Information collected through
-            offline interactions with Outworkx, including hand payments made in
-            person (no additional charges apply for this offline payment
-            method).
+            <strong className="mt-5 text-black">
+              1.5 Offline Interactions:
+            </strong>{' '}
+            Information collected through offline interactions with Outworkx,
+            including hand payments made in person (no additional charges apply
+            for this offline payment method).
           </li>
           <li>
-            <strong>Third-Party Interactions:</strong> Information collected
-            when you interact with our advertising and applications on
-            third-party websites and services, if those applications or
-            advertising include links to this policy.
+            <strong className="mt-5 text-black">
+              1.6 Third-Party Interactions:
+            </strong>{' '}
+            Information collected when you interact with our advertising and
+            applications on third-party websites and services, if those
+            applications or advertising include links to this policy.
           </li>
         </ol>
       </div>
@@ -55,13 +68,14 @@ const PrivacyPolicy = () => {
   const privacyAgreement = () => {
     return (
       <div>
+        <h2 className="mt-5">2. Your Agreement</h2>
         <p>
-          <strong>Your Agreement.</strong> By accessing or using Outworkx,
-          including our Website, online booking and subscription services, and
-          offline interactions, you agree to this Privacy Policy. This policy
-          may change from time to time. Your continued use of Outworkx after we
-          make changes is deemed to be acceptance of those changes, so please
-          check the policy periodically for updates.
+          By accessing or using Outworkx, including our Website, online booking
+          and subscription services, and offline interactions, you agree to this
+          Privacy Policy. This policy may change from time to time. Your
+          continued use of Outworkx after we make changes is deemed to be
+          acceptance of those changes, so please check the policy periodically
+          for updates.
         </p>
       </div>
     );
@@ -71,11 +85,14 @@ const PrivacyPolicy = () => {
   const additionalTerms = () => {
     return (
       <div>
+        <h2 className="mt-5">3. Additional Terms</h2>
         <p>
-          <strong>Additional Terms.</strong> This Privacy Policy incorporates by
-          reference the following additional terms of use, which also apply to
-          your use of Outworkx:{' '}
-          <a href="[Terms of Use/Service Link]">Terms of Use/Service Link</a>.
+          This Privacy Policy incorporates by reference the following additional
+          terms of use, which also apply to your use of Outworkx:{' '}
+          <a className="text-blue-500" href="[Terms of Use/Service Link]">
+            Terms of Use/Service Link
+          </a>
+          .
         </p>
       </div>
     );
@@ -85,42 +102,54 @@ const PrivacyPolicy = () => {
   const informationCollection = () => {
     return (
       <div>
-        <h2>Information We Collect and How We Collect It</h2>
-        <h3>4.1. Types of Information Collected</h3>
-        <p>
+        <h2 className="mt-5">
+          4. Information We Collect and How We Collect It
+        </h2>
+        <h3 className="pl-4">4.1. Types of Information Collected</h3>
+        <p className="pl-4">
           We collect several types of information from and about users of our
           Website and services, including:
         </p>
-        <ol>
+        <ol className="pl-6">
           <li>
-            <strong>4.1.1. Personal Information:</strong> Information that can
-            be used to identify you as an individual, such as name, postal
-            address, email address, passport number (if applicable for our
-            services), or telephone number.
+            <strong className="text-black">4.1.1. Personal Information:</strong>{' '}
+            Information that can be used to identify you as an individual, such
+            as name, postal address, email address, passport number (if
+            applicable for our services), or telephone number.
           </li>
           <li>
-            <strong>4.1.2. De-identified Information:</strong> Information about
-            you that, by itself, does not identify you as an individual.
+            <strong className="text-black">
+              4.1.2. De-identified Information:
+            </strong>{' '}
+            Information about you that, by itself, does not identify you as an
+            individual.
           </li>
           <li>
-            <strong>4.1.3. Usage Information:</strong> Information about your
-            use of our facilities, services, and your preferences related to
-            them (including online bookings, subscriptions, and offline
-            interactions).
+            <strong className="mt-2 text-black">
+              4.1.3. Usage Information:
+            </strong>{' '}
+            Information about your use of our facilities, services, and your
+            preferences related to them (including online bookings,
+            subscriptions, and offline interactions).
           </li>
           <li>
-            <strong>4.1.4. Connection and Device Information:</strong>{' '}
+            <strong className="text-black">
+              4.1.4. Connection and Device Information:
+            </strong>{' '}
             Information about your internet connection, the equipment you use to
             access our Website or services, and usage details.
           </li>
         </ol>
-        <h3>4.2. Methods of Information Collection</h3>
-        <p>We collect information through the following methods:</p>
-        <ol>
+        <h3 className="mt-3 pl-4">4.2. Methods of Information Collection</h3>
+        <p className="pl-4">
+          We collect information through the following methods:
+        </p>
+        <ol className="pl-6">
           <li>
-            <strong>4.2.1. Direct Collection:</strong> We collect information
-            directly from you when you provide it to us, such as when you:
-            <ul>
+            <strong className="text-black">4.2.1. Direct Collection:</strong> We
+            collect information directly from you when you provide it to us,
+            such as when you:
+            <ul className="list-disc pl-8">
               <li>Register for an account</li>
               <li>Make an online booking</li>
               <li>Subscribe to a service</li>
@@ -130,10 +159,11 @@ const PrivacyPolicy = () => {
             </ul>
           </li>
           <li>
-            <strong>4.2.2. Automatic Collection:</strong> We collect information
-            automatically as you navigate through our Website or interact with
-            our services. Information collected automatically may include:
-            <ul>
+            <strong className="text-black">4.2.2. Automatic Collection:</strong>{' '}
+            We collect information automatically as you navigate through our
+            Website or interact with our services. Information collected
+            automatically may include:
+            <ul className="list-disc pl-8">
               <li>Usage details</li>
               <li>IP addresses</li>
               <li>
@@ -143,10 +173,10 @@ const PrivacyPolicy = () => {
             </ul>
           </li>
           <li>
-            <strong>4.2.3. Third-Party Sources:</strong> We may collect
-            information from third parties, such as our business partners, in
-            accordance with their privacy policies and with your consent (where
-            applicable).
+            <strong className="text-black">4.2.3. Third-Party Sources:</strong>{' '}
+            We may collect information from third parties, such as our business
+            partners, in accordance with their privacy policies and with your
+            consent (where applicable).
           </li>
         </ol>
       </div>
@@ -614,8 +644,8 @@ const PrivacyPolicy = () => {
   return (
     <>
       <Heading>Outworkx Privacy Policy</Heading>
-      <h3 className="mt-3">Effective Date</h3>
-      <p className="text-xl">
+      <h2 className="mt-3">Effective Date</h2>
+      <p className="text-base">
         <strong>Outworkx </strong> ("company," "we," or "us") respects your
         privacy and is committed to protecting it through our compliance with
         this policy. This Privacy Policy describes the types of information we
