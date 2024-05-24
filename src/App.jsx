@@ -15,6 +15,7 @@ import Signup from './pages/Signup';
 import SpaceDetails from './pages/SpaceDetails';
 import Statistics from './pages/Statistics';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndCondition from './pages/TermsAndCondition';
 
 export default function App() {
   const { pathname } = useLocation();
@@ -61,6 +62,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndCondition />} />
         </Routes>
       </div>
     </>
