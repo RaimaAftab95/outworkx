@@ -40,6 +40,9 @@ const Footer = () => {
                 <li>
                   <Link to="#">Contact</Link>
                 </li>
+                <li>
+                  <Link to="#">Privacy Policy</Link>
+                </li>
               </ul>
             </div>
             <div>
