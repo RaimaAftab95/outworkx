@@ -57,45 +57,49 @@ export default function Space({ space }) {
         </div>
 
         {/* Slider navigator */}
-        <div className="absolute left-2.5 right-2.5 top-1/2 flex translate-y-1/2 transform items-center justify-between gap-5 opacity-0 transition-opacity group-hover:opacity-100">
-          <div
-            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-all hover:opacity-60"
-            onClick={() => changeImageHandler('left')}
-          >
-            {loading ? (
-              <Skeleton circle={true} width={30} height={30} />
-            ) : (
-              <img src="/images/icons/left.png" alt="left" />
-            )}
+        {gallery && gallery.length > 1 && (
+          <div className="absolute left-2.5 right-2.5 top-1/2 flex translate-y-1/2 transform items-center justify-between gap-5 opacity-0 transition-opacity group-hover:opacity-100">
+            <div
+              className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-all hover:opacity-60"
+              onClick={() => changeImageHandler('left')}
+            >
+              {loading ? (
+                <Skeleton circle={true} width={30} height={30} />
+              ) : (
+                <img src="/images/icons/left.png" alt="left" />
+              )}
+            </div>
+            <div
+              className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-all hover:opacity-60"
+              onClick={() => changeImageHandler('right')}
+            >
+              {loading ? (
+                <Skeleton circle={true} width={30} height={30} />
+              ) : (
+                <img src="/images/icons/right.png" alt="right" />
+              )}
+            </div>
           </div>
-          <div
-            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-all hover:opacity-60"
-            onClick={() => changeImageHandler('right')}
-          >
-            {loading ? (
-              <Skeleton circle={true} width={30} height={30} />
-            ) : (
-              <img src="/images/icons/right.png" alt="right" />
-            )}
-          </div>
-        </div>
+        )}
 
         {/* Slider dots */}
-        <div className="absolute bottom-5 flex w-full items-center justify-center gap-2.5 opacity-0 group-hover:opacity-100">
-          {loading ? (
-            <Skeleton count={gallery.length} width={8} height={8} />
-          ) : (
-            gallery.map((item, idx) => (
-              <div
-                key={item?.url}
-                className={`transition-all ${
-                  activeImage === idx ? 'h-2 w-2' : 'h-1.5 w-1.5'
-                } cursor-pointer rounded-full bg-white`}
-                onClick={() => setActiveImage(idx)}
-              />
-            ))
-          )}
-        </div>
+        {gallery && gallery.length > 1 && (
+          <div className="absolute bottom-5 flex w-full items-center justify-center gap-2.5 opacity-0 group-hover:opacity-100">
+            {loading ? (
+              <Skeleton count={gallery.length} width={8} height={8} />
+            ) : (
+              gallery.map((item, idx) => (
+                <div
+                  key={item?.url}
+                  className={`transition-all ${
+                    activeImage === idx ? 'h-2 w-2' : 'h-1.5 w-1.5'
+                  } cursor-pointer rounded-full bg-white`}
+                  onClick={() => setActiveImage(idx)}
+                />
+              ))
+            )}
+          </div>
+        )}
       </div>
 
       <div className="text-lg">
