@@ -181,8 +181,9 @@ const SpaceDetails = () => {
   ) : (
     <main>
       {/* details */}
-      <section className="mb-32 text-black/70">
+      <section className=" text-black/70">
         <div className="container">
+          <h3 className="mt-3.5 p-5 text-left text-lg font-bold">{name}</h3>
           {/* space images */}
           {gallery && (
             <>
@@ -478,7 +479,6 @@ const SpaceDetails = () => {
       </section>
 
       {/* <ReserveCalender /> */}
-
       <Footer />
     </main>
   );
