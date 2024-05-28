@@ -41,7 +41,6 @@ export default function Space({ space }) {
             <img
               src={gallery[activeImage]?.url}
               alt="space"
-              // h-auto to automatically maintain the aspect-ratio
               className="h-auto max-h-96 w-full object-cover transition-all hover:scale-125"
             />
           )}
