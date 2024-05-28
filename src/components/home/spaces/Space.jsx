@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import 'react-loading-skeleton/dist/skeleton.css';
-import Skeleton from 'react-loading-skeleton';
+import SpaceSkeleton from './SpaceSkeleton';
 
 export default function Space({ space }) {
   const [activeImage, setActiveImage] = useState(0);
@@ -31,53 +30,37 @@ export default function Space({ space }) {
     }
   };
 
+  if (loading) {
+    return <SpaceSkeleton />;
+  }
+
   return (
     <div>
       <div className="group relative w-full overflow-hidden rounded-2xl">
         <Link to={`/spaces/${id}`}>
-          {loading ? (
-            <Skeleton height={256} />
-          ) : (
-            <img
-              src={gallery[activeImage]?.url}
-              alt="space"
-              className="w-full object-cover transition-all hover:scale-125 sm:h-56 md:h-64 lg:h-72 xl:h-80"
-            />
-          )}
+          <img
+            src={gallery[activeImage]?.url}
+            alt="space"
+            className="w-full object-cover transition-all hover:scale-125 sm:h-56 md:h-64 lg:h-72 xl:h-80"
+          />
         </Link>
 
-        <div
-          className={`absolute right-2.5 top-2.5 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full transition-all hover:opacity-60 ${!loading ? 'bg-primary' : 'bg-transparent'}`}
-        >
-          {loading ? (
-            <Skeleton circle={true} width={30} height={30} />
-          ) : (
-            <img src="/images/icons/favorite.png" alt="favorite" />
-          )}
+        <div className="absolute right-2.5 top-2.5 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-primary transition-all hover:opacity-60">
+          <img src="/images/icons/favorite.png" alt="favorite" />
         </div>
-
-        {/* Slider navigator */}
         {gallery && gallery.length > 1 && (
           <div className="absolute left-2.5 right-2.5 top-1/2 flex translate-y-1/2 transform items-center justify-between gap-5 opacity-0 transition-opacity group-hover:opacity-100">
             <div
               className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-all hover:opacity-60"
               onClick={() => changeImageHandler('left')}
             >
-              {loading ? (
-                <Skeleton circle={true} width={30} height={30} />
-              ) : (
-                <img src="/images/icons/left.png" alt="left" />
-              )}
+              <img src="/images/icons/left.png" alt="left" />
             </div>
             <div
               className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-all hover:opacity-60"
               onClick={() => changeImageHandler('right')}
             >
-              {loading ? (
-                <Skeleton circle={true} width={30} height={30} />
-              ) : (
-                <img src="/images/icons/right.png" alt="right" />
-              )}
+              <img src="/images/icons/right.png" alt="right" />
             </div>
           </div>
         )}
@@ -85,19 +68,15 @@ export default function Space({ space }) {
         {/* Slider dots */}
         {gallery && gallery.length > 1 && (
           <div className="absolute bottom-5 flex w-full items-center justify-center gap-2.5 opacity-0 group-hover:opacity-100">
-            {loading ? (
-              <Skeleton count={gallery.length} width={8} height={8} />
-            ) : (
-              gallery.map((item, idx) => (
-                <div
-                  key={item?.url}
-                  className={`transition-all ${
-                    activeImage === idx ? 'h-2 w-2' : 'h-1.5 w-1.5'
-                  } cursor-pointer rounded-full bg-white`}
-                  onClick={() => setActiveImage(idx)}
-                />
-              ))
-            )}
+            {gallery.map((item, idx) => (
+              <div
+                key={item?.url}
+                className={`transition-all ${
+                  activeImage === idx ? 'h-2 w-2' : 'h-1.5 w-1.5'
+                } cursor-pointer rounded-full bg-white`}
+                onClick={() => setActiveImage(idx)}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -105,36 +84,20 @@ export default function Space({ space }) {
       <div className="text-lg">
         <div className="flex items-center justify-between gap-2">
           <h3 className="mt-3.5 text-left font-bold">
-            <Link to={`/spaces/${id}`}>
-              {loading ? <Skeleton width={150} /> : name}
-            </Link>
+            <Link to={`/spaces/${id}`}>{name}</Link>
           </h3>
           <div className="flex items-center gap-2">
-            {loading ? (
-              <Skeleton circle={true} width={20} height={20} />
-            ) : (
-              <img src="/images/icons/star.png" alt="star" />
-            )}
-            {loading ? (
-              <Skeleton width={30} />
-            ) : (
-              <span className="text-base text-primary">4.93</span>
-            )}
+            <img src="/images/icons/star.png" alt="star" />
+            <span className="text-base text-primary">4.93</span>
           </div>
         </div>
       </div>
       <p className="text-left">
-        {loading ? (
-          <Skeleton count={2} />
-        ) : description?.length > 50 ? (
-          description.substring(0, 50) + '...'
-        ) : (
-          description
-        )}
+        {description?.length > 50
+          ? description.substring(0, 50) + '...'
+          : description}
       </p>
-      <h3 className="text-left font-bold">
-        {loading ? <Skeleton width={50} /> : `$${pricePerDesk}`}
-      </h3>
+      <h3 className="text-left font-bold">${pricePerDesk}</h3>
     </div>
   );
 }
