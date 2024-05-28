@@ -81,14 +81,14 @@ const Signin = () => {
     mutate();
   };
   return (
-    <main className="flex flex-col justify-between lg:flex-row">
-      <div className="min-h-full w-full px-5 py-7 sm:px-20 lg:w-1/2 xl:w-1/3">
+    <main className="flex min-h-screen flex-col justify-between lg:flex-row">
+      <div className="max-h-screen min-h-screen w-full px-5 py-7 sm:px-20 lg:w-1/2 xl:w-1/3">
         <Link to="/">
           <img src="/images/logo.svg" alt="logo" />
         </Link>
-        <div className="flex min-h-full items-center py-10">
+        <div className="flex min-h-full items-center  py-10 pt-20">
           <div className="w-full">
-            <Heading>Login</Heading>
+            <Heading>Login Page</Heading>
 
             <form
               onSubmit={submitHandler}
@@ -126,7 +126,7 @@ const Signin = () => {
       <div className="hidden min-h-screen lg:block lg:w-1/2 xl:w-2/3">
         <img
           src="/images/auth/sign-up-banner.jpg"
-          className="h-full w-full"
+          className="h-auto max-h-screen min-h-screen max-w-full"
           alt=""
         />
       </div>
