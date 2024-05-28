@@ -180,8 +180,7 @@ const SpaceDetails = () => {
     <Loading />
   ) : (
     <main>
-      {/* details */}
-      <section className=" text-black/70">
+      <section className="text-black/70">
         <div className="container">
           <div className="p-5 py-5">
             <Heading>{name}</Heading>
