@@ -38,11 +38,15 @@ export default function Space({ space }) {
     <div>
       <div className="group relative w-full overflow-hidden rounded-2xl">
         <Link to={`/spaces/${id}`}>
-          <img
-            src={gallery[activeImage]?.url}
-            alt="space"
-            className="h-auto max-h-96 w-full object-cover transition-all hover:scale-125"
-          />
+          {loading ? (
+            <Skeleton height={256} />
+          ) : (
+            <img
+              src={gallery[activeImage]?.url}
+              alt="space"
+              className="h-auto max-h-96 w-full object-cover transition-all hover:scale-125"
+            />
+          )}
         </Link>
 
         <div className="absolute right-2.5 top-2.5 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-primary transition-all hover:opacity-60">

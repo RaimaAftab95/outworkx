@@ -180,9 +180,11 @@ const SpaceDetails = () => {
     <Loading />
   ) : (
     <main>
-      {/* details */}
-      <section className="mb-32 text-black/70">
+      <section className="text-black/70">
         <div className="container">
+          <div className="p-5 py-5">
+            <Heading>{name}</Heading>
+          </div>
           {/* space images */}
           {gallery && (
             <>
@@ -465,9 +467,7 @@ const SpaceDetails = () => {
               <iframe
                 title="map"
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"
-                // width="600"
-                // height="720"
-                style={{ border: 0, width: '100%', height: '720px' }}
+                className="lg:h-128 xl:h-160 h-72 w-full border-0 md:h-96"
                 allowfullscreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -478,7 +478,6 @@ const SpaceDetails = () => {
       </section>
 
       {/* <ReserveCalender /> */}
-
       <Footer />
     </main>
   );
