@@ -41,7 +41,7 @@ export default function Space({ space }) {
           <img
             src={gallery[activeImage]?.url}
             alt="space"
-            className="w-full object-cover transition-all hover:scale-125 sm:h-56 md:h-64 lg:h-72 xl:h-80"
+            className="h-auto max-h-96 w-full object-cover transition-all hover:scale-125"
           />
         </Link>
 
@@ -65,7 +65,6 @@ export default function Space({ space }) {
           </div>
         )}
 
-        {/* Slider dots */}
         {gallery && gallery.length > 1 && (
           <div className="absolute bottom-5 flex w-full items-center justify-center gap-2.5 opacity-0 group-hover:opacity-100">
             {gallery.map((item, idx) => (
