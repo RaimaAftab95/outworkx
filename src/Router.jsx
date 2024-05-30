@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLocation
+} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { Route, Routes, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store';
 import Header from './components/shared/Header';
 import MainLoading from './components/shared/MainLoading';
@@ -17,11 +21,36 @@ import Statistics from './pages/Statistics';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndCondition from './pages/TermsAndCondition';
 
-export default function App() {
-  const { pathname } = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
+const router = createBrowserRouter([
+  { path: '/', element: <Home /> },
+  { path: '/spaces/:id', element: <SpaceDetails /> },
+  { path: '/create-space', element: <CreateSpace /> },
+  { path: '/launch', element: <Launch /> },
+  { path: '/reserve-space', element: <ReserveSpace /> },
+  { path: '/sign-up', element: <Signup /> },
+  { path: '/sign-in', element: <Signin /> },
+  { path: '/booking-history', element: <BookingHistory /> },
+  { path: '/dashboard', element: <Dashboard /> },
+  { path: '/statistics', element: <Statistics /> },
+  { path: '/privacy-policy', element: <PrivacyPolicy /> },
+  { path: '/terms-and-conditions', element: <TermsAndCondition /> }
+]);
 
-  // store auth information from local storage
+function ConditionalHeader() {
+  const { pathname } = useLocation();
+
+  if (
+    pathname !== '/create-space' &&
+    pathname !== '/sign-up' &&
+    pathname !== '/sign-in'
+  ) {
+    return <Header />;
+  }
+  return null;
+}
+
+function Router() {
+  const [isLoading, setIsLoading] = useState(false);
   const { setAuth } = useAuthStore();
 
   useEffect(() => {
@@ -37,34 +66,22 @@ export default function App() {
       setIsLoading(false);
     }, 1000);
   }, [setAuth]);
+
   return (
     <>
       {isLoading && <MainLoading />}
-
       <div
         className={`transition-all duration-500 ${
           isLoading ? 'invisible opacity-0' : 'visible opacity-100'
         }`}
       >
-        {pathname !== '/create-space' &&
-          pathname !== '/sign-up' &&
-          pathname !== '/sign-in' && <Header />}
-        <Toaster position="top-center" reverseOrder={false} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/spaces/:id" element={<SpaceDetails />} />
-          <Route path="/create-space" element={<CreateSpace />} />
-          <Route path="/launch" element={<Launch />} />
-          <Route path="/reserve-space" element={<ReserveSpace />} />
-          <Route path="/sign-up" element={<Signup />} />
-          <Route path="/sign-in" element={<Signin />} />
-          <Route path="/booking-history" element={<BookingHistory />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/statistics" element={<Statistics />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-and-conditions" element={<TermsAndCondition />} />
-        </Routes>
+        <RouterProvider router={router}>
+          <ConditionalHeader />
+          <Toaster position="top-center" reverseOrder={false} />
+        </RouterProvider>
       </div>
     </>
   );
 }
+
+export default Router;
