@@ -1,55 +1,65 @@
-import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthStore } from '../../../store';
+import { useRef, useEffect, useState } from 'react';
+
+import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid';
+
+import {
+  MapPinIcon,
+  BuildingOffice2Icon,
+  UserGroupIcon,
+  GlobeAsiaAustraliaIcon
+} from '@heroicons/react/24/outline';
 
 export default function Header() {
-  const [activeMenu, setActiveMenu] = useState(false);
-  const [openUserOpt, setOpenUserOpt] = useState(false);
-  const [openMobileUserOpt, setOpenMobileUserOpt] = useState(false);
-  const { auth, logout } = useAuthStore();
-  const { user } = auth || {};
-
-  const userMenuRef = useRef(null);
-  const mobileMenuRef = useRef(null);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+  const [isMenuActive, setIsMenuActive] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener('click', hideClickOnOutSide);
-    document.addEventListener('click', hideClickOnOutSide2);
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
-  const hideClickOnOutSide = e => {
-    if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-      setOpenUserOpt(false);
+  /**
+   * Handle click outside of the menu
+   * @param {import('react').SyntheticEvent} event
+   * @returns {void}
+   */
+  function handleClickOutside(event) {
+    if (!menuRef.current) {
+      return;
     }
-  };
 
-  const hideClickOnOutSide2 = e => {
-    if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
-      setOpenMobileUserOpt(false);
+    if (menuRef.current.contains(event.target)) {
+      return;
     }
-  };
+
+    setIsMenuActive(false);
+  }
+
+  /**
+   * Close the menu on escape key press
+   * @param {import('react').SyntheticEvent} event
+   * @returns {void}
+   */
+  function closeMenuOnEscape(event) {
+    if (event.key !== 'Escape') {
+      return;
+    }
+
+    setIsMenuActive(false);
+  }
+
   return (
-    <header className="bg-white py-8">
-      <div className="container relative flex flex-wrap items-center justify-between gap-5">
-        <Link to="/">
-          <img src="/images/logo.svg" alt="logo" />
-        </Link>
-        <nav
-          className={`fixed z-50 ${
-            activeMenu
-              ? 'visible opacity-100'
-              : 'invisible opacity-0 sm:visible sm:opacity-100'
-          } bottom-0 left-0 right-0 top-0 h-full w-full bg-white transition-all duration-300 sm:relative sm:h-auto sm:w-auto`}
-        >
-          <div className="flex justify-end pr-10 pt-10 sm:hidden">
-            <img
-              className="h-4 w-4 cursor-pointer"
-              onClick={() => setActiveMenu(false)}
-              src="/images/icons/close.png"
-              alt="icon"
-            />
-          </div>
-          <ul className="flex h-full flex-col items-center justify-center gap-10 text-xl text-primary sm:flex-row sm:text-base">
+    <header className="py-6 text-black">
+      <nav className="container relative flex items-center justify-between px-4">
+        <img src="/images/logo.svg" alt="Brand logo" />
+
+        <div className="flex items-center justify-between gap-3">
+          <ul className="hidden h-full flex-col items-center justify-center gap-9 px-2 text-xl text-primary  sm:flex-row sm:text-base md:flex">
             <li className="transition-all hover:text-primary-light">
               <Link to="/">About Us</Link>
             </li>
@@ -65,45 +75,26 @@ export default function Header() {
                 src="/images/icons/language.svg"
                 alt="icon"
               />
-              <div
-                className="flex cursor-pointer items-center gap-3 rounded-full border border-gray px-3 py-1.5 transition-all hover:opacity-50"
-                onClick={() => setOpenUserOpt(!openUserOpt)}
-                ref={userMenuRef}
-              >
-                <img src="/images/icons/bar.svg" alt="icon" />
-                <img src="/images/icons/profile.svg" alt="icon" />
-              </div>
             </li>
           </ul>
-        </nav>
-        <div className="block sm:hidden">
-          <li className="flex items-center gap-5">
-            <img
-              className="cursor-pointer transition-all hover:opacity-50"
-              src="/images/icons/language.svg"
-              alt="icon"
-            />
-            <div
-              className="flex cursor-pointer items-center gap-3 rounded-full border border-gray px-3 py-1.5 transition-all hover:opacity-50"
-              onClick={() => setOpenMobileUserOpt(!openMobileUserOpt)}
-              ref={mobileMenuRef}
-            >
-              <img src="/images/icons/bar.svg" alt="icon" />
-              <img src="/images/icons/profile.svg" alt="icon" />
-            </div>
-          </li>
+
+          <button
+            className="flex cursor-pointer items-center gap-1 rounded-full border border-gray px-2.5 py-1 transition-all hover:opacity-50"
+            onClick={() => setIsMenuActive(!isMenuActive)}
+            onKeyDown={closeMenuOnEscape}
+            tabIndex={0}
+            ref={menuRef}
+          >
+            <Bars3Icon className="h-6" />
+            <UserCircleIcon className="h-7 text-black" />
+          </button>
         </div>
 
-        {/* user option */}
         <div
-          className={`absolute transition-all duration-300 ${
-            openUserOpt
-              ? 'invisible opacity-0 sm:visible sm:opacity-100'
-              : 'invisible opacity-0'
-          } right-0 top-full z-40 min-w-64 rounded-md border border-gray bg-white shadow-2xl`}
+          className={`absolute right-0 top-full z-40 mt-2 hidden min-w-64 rounded-md border border-gray bg-white shadow-2xl transition-all duration-300 md:block ${isMenuActive ? 'visible opacity-100' : 'invisible opacity-0'}`}
         >
           <ul className="flex h-full flex-col gap-5 border-b border-gray px-3.5 py-5 text-xl text-primary sm:text-base">
-            {user?.id ? (
+            {isUserLoggedIn ? (
               <>
                 <li className="transition-all hover:text-primary-light">
                   <Link className="block w-full" to="/login">
@@ -113,7 +104,7 @@ export default function Header() {
                 <li className="transition-all hover:text-primary-light">
                   <Link
                     className="block w-full cursor-pointer"
-                    onClick={logout}
+                    onClick={() => {}}
                   >
                     Logout
                   </Link>
@@ -122,13 +113,13 @@ export default function Header() {
             ) : (
               <>
                 <li className="transition-all hover:text-primary-light">
-                  <Link className="block w-full" to="/sign-in">
+                  <Link className="block w-full" to="/login">
                     Login
                   </Link>
                 </li>
                 <li className="transition-all hover:text-primary-light">
-                  <Link className="block w-full" to="/sign-up">
-                    Sign up
+                  <Link className="block w-full" to="/register">
+                    Register
                   </Link>
                 </li>
               </>
@@ -142,66 +133,56 @@ export default function Header() {
             </li>
             <li className="transition-all hover:text-primary-light">
               <Link className="block w-full" to="/sign-up">
-                Airbnb your home
-              </Link>
-            </li>
-            <li className="transition-all hover:text-primary-light">
-              <Link className="block w-full" to="/sign-up">
                 Help Center
               </Link>
             </li>
           </ul>
         </div>
 
-        {/* user option for mobile */}
         <div
-          className={`absolute transition-all duration-300 ${
-            openMobileUserOpt
-              ? 'visible opacity-100 sm:invisible sm:opacity-0'
-              : 'invisible opacity-0'
-          } mobile-header left-0 right-0 top-full z-40 w-full rounded-3xl bg-white px-6`}
+          className={`absolute top-full z-40 mt-2 w-11/12 rounded-2xl border border-gray bg-white px-6 shadow-2xl transition-all duration-300 md:hidden ${isMenuActive ? 'visible opacity-100' : 'invisible opacity-0'}`}
         >
-          <ul className="flex flex-wrap items-center justify-between gap-1 border-b border-gray px-5 py-5 text-primary">
-            <li className="">
+          <ul className="flex flex-wrap items-center justify-between gap-1 border-b border-gray px-4 py-5 text-sm">
+            <li>
               <Link
                 to="#"
-                className="flex flex-col items-center justify-center gap-2 opacity-50 transition-all hover:opacity-100"
+                className="flex flex-col items-center justify-center transition-all hover:opacity-50"
               >
-                <img src="/images/icons/explore.png" alt="icon" />
+                <GlobeAsiaAustraliaIcon className="h-7" />
                 <span>Explore</span>
               </Link>
             </li>
-            <li className="">
+            <li>
               <Link
                 to="#"
-                className="flex flex-col items-center justify-center gap-2 opacity-50 transition-all hover:opacity-100"
+                className="flex flex-col items-center justify-center transition-all hover:opacity-100"
               >
-                <img src="/images/icons/about.png" alt="icon" />
+                <UserGroupIcon className="h-7" />
                 <span>About Us</span>
               </Link>
             </li>
-            <li className="">
+            <li>
               <Link
                 to="#"
-                className="flex flex-col items-center justify-center gap-2 opacity-50 transition-all hover:opacity-100"
+                className="flex flex-col items-center justify-center transition-all hover:opacity-100"
               >
-                <img src="/images/icons/list-space.png" alt="icon" />
+                <BuildingOffice2Icon className="h-7" />
                 <span>List Space</span>
               </Link>
             </li>
-            <li className="">
+            <li>
               <Link
                 to="#"
-                className="flex flex-col items-center justify-center gap-2 opacity-50 transition-all hover:opacity-100"
+                className="flex flex-col items-center justify-center transition-all hover:opacity-100"
               >
-                <img src="/images/icons/location.png" alt="icon" />
+                <MapPinIcon className="h-7" />
                 <span>Locations</span>
               </Link>
             </li>
           </ul>
 
-          <ul className="my-5 flex items-center justify-center gap-1 px-3">
-            {user?.id ? (
+          <ul className="my-5 flex items-center justify-center gap-x-3">
+            {isUserLoggedIn ? (
               <>
                 <li>
                   <Link to="#" className="transition-all hover:text-primary">
@@ -212,7 +193,7 @@ export default function Header() {
                 <li>
                   <Link
                     className="cursor-pointer transition-all hover:text-primary"
-                    onClick={logout}
+                    onClick={() => {}}
                   >
                     Logout
                   </Link>
@@ -223,7 +204,7 @@ export default function Header() {
                 <li>
                   <Link
                     className="transition-all hover:text-primary"
-                    to="/sign-in"
+                    to="/login"
                   >
                     Login
                   </Link>
@@ -232,16 +213,16 @@ export default function Header() {
                 <li>
                   <Link
                     className="transition-all hover:text-primary"
-                    to="/sign-up"
+                    to="/register"
                   >
-                    Signup
+                    Register
                   </Link>
                 </li>
               </>
             )}
           </ul>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }
