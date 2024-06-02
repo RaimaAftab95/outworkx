@@ -3,9 +3,18 @@ import Footer from '../components/shared/Footer';
 import Heading from '../components/shared/Heading';
 
 const PrivacyPolicy = () => {
-  // 1 Scope of Policy
-  const scopeOfPolicy = () => {
-    return (
+  return (
+    <>
+      <Heading>Outworkx Privacy Policy</Heading>
+      <h2 className="mt-3">Effective Date</h2>
+      <p className="text-base">
+        <strong>Outworkx </strong> (&quot;company,&quot; &quot;we,&quot; or
+        &quot;us&quot;) respects your privacy and is committed to protecting it
+        through our compliance with this policy. This Privacy Policy describes
+        the types of information we may collect from you or that you may provide
+        when you interact with Outworkx, and our practices for collecting,
+        using, maintaining, protecting, and disclosing that information.
+      </p>
       <div>
         <h2 className="mt-5">1. Scope of this Policy</h2>
         <p>
@@ -61,12 +70,6 @@ const PrivacyPolicy = () => {
           </li>
         </ol>
       </div>
-    );
-  };
-
-  // 2 Privacy Agreement
-  const privacyAgreement = () => {
-    return (
       <div>
         <h2 className="mt-5">2. Your Agreement</h2>
         <p>
@@ -78,12 +81,6 @@ const PrivacyPolicy = () => {
           for updates.
         </p>
       </div>
-    );
-  };
-
-  // 3 Additional Terms
-  const additionalTerms = () => {
-    return (
       <div>
         <h2 className="mt-5">3. Additional Terms</h2>
         <p>
@@ -95,12 +92,6 @@ const PrivacyPolicy = () => {
           .
         </p>
       </div>
-    );
-  };
-
-  // 4 Information Collection
-  const informationCollection = () => {
-    return (
       <div>
         <h2 className="mt-5">
           4. Information We Collect and How We Collect It
@@ -180,12 +171,6 @@ const PrivacyPolicy = () => {
           </li>
         </ol>
       </div>
-    );
-  };
-
-  // 5 Provided Information
-  const informationYouProvide = () => {
-    return (
       <div>
         <h2 className="mt-5">5. Information You Provide Us</h2>
         <p>
@@ -214,8 +199,11 @@ const PrivacyPolicy = () => {
             submit information through these forms for purposes including:
             <ul className="list-disc pl-8">
               <li>Signing up for our newsletter</li>
-              <li>Contacting us through the "Contact Us" form</li>
-              <li>Submitting a support request through the "We Care" form</li>
+              <li>Contacting us through the &quot;Contact Us&quot; form</li>
+              <li>
+                Submitting a support request through the &quot;We Care&quot;
+                form
+              </li>
               <li>Applying for a job through the careers portal (TALEO)</li>
               <li>Requesting further services through dedicated forms</li>
             </ul>
@@ -253,12 +241,6 @@ const PrivacyPolicy = () => {
           requesting a service.
         </p>
       </div>
-    );
-  };
-
-  // 6 Information collected automatically
-  const informationCollectedAutomatically = () => {
-    return (
       <div>
         <h2 className="mt-5">6. Information Collected Automatically</h2>
         <p>
@@ -297,8 +279,8 @@ const PrivacyPolicy = () => {
         <h3 className="mt-3 pl-4">6.3. Cookies</h3>
         <h4 className="pl-6">6.3.1. Browser Cookies</h4>
         <p className="pl-6">
-          Cookies are small files placed on your device's hard drive when you
-          visit our Website. You can choose to refuse browser cookies by
+          Cookies are small files placed on your device&apos;s hard drive when
+          you visit our Website. You can choose to refuse browser cookies by
           activating the appropriate setting on your browser. However, this may
           limit your access to certain features of our Website.
         </p>
@@ -328,12 +310,6 @@ const PrivacyPolicy = () => {
           accordance with this Privacy Policy.
         </p>
       </div>
-    );
-  };
-
-  // 7 How we use your Information
-  const howWeUseYourInformation = () => {
-    return (
       <div>
         <h2 className="mt-5">7. How We Use Your Information</h2>
         <p>
@@ -402,12 +378,6 @@ const PrivacyPolicy = () => {
           .
         </p>
       </div>
-    );
-  };
-
-  // 8 Disclosure of your Information
-  const disclosureOfYourInformation = () => {
-    return (
       <div>
         <h2 className="mt-5">8. Disclosure of Your Information</h2>
         <p>
@@ -475,12 +445,6 @@ const PrivacyPolicy = () => {
           use your personal information in compliance with this Privacy Policy.
         </p>
       </div>
-    );
-  };
-
-  // 9 Choices about Information
-  const choicesAboutInformation = () => {
-    return (
       <div>
         <h2 className="mt-5">
           9. Choices About How We Use and Disclose Your Information
@@ -526,12 +490,6 @@ const PrivacyPolicy = () => {
           service request).
         </p>
       </div>
-    );
-  };
-
-  // 10 Accessing and Correcting Information
-  const accessingAndCorrectingInformation = () => {
-    return (
       <div>
         <h2 className="mt-5">10. Accessing and Correcting Your Information</h2>
         <p>
@@ -587,12 +545,6 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
       </div>
-    );
-  };
-
-  // 11 Data Security
-  const dataSecurity = () => {
-    return (
       <div>
         <h2 className="mt-5">11. Data Security</h2>
         <p>
@@ -642,12 +594,6 @@ const PrivacyPolicy = () => {
           offline interactions.
         </p>
       </div>
-    );
-  };
-
-  // 12 Changes to Privacy Policy
-  const changesToPrivacyPolicy = () => {
-    return (
       <div>
         <h2 className="mt-5">12. Changes to This Privacy Policy</h2>
         <p>
@@ -666,32 +612,6 @@ const PrivacyPolicy = () => {
           you will be deemed to have agreed to such changes.
         </p>
       </div>
-    );
-  };
-  return (
-    <>
-      <Heading>Outworkx Privacy Policy</Heading>
-      <h2 className="mt-3">Effective Date</h2>
-      <p className="text-base">
-        <strong>Outworkx </strong> ("company," "we," or "us") respects your
-        privacy and is committed to protecting it through our compliance with
-        this policy. This Privacy Policy describes the types of information we
-        may collect from you or that you may provide when you interact with
-        Outworkx, and our practices for collecting, using, maintaining,
-        protecting, and disclosing that information.
-      </p>
-      {scopeOfPolicy()}
-      {privacyAgreement()}
-      {additionalTerms()}
-      {informationCollection()}
-      {informationYouProvide()}
-      {informationCollectedAutomatically()}
-      {howWeUseYourInformation()}
-      {disclosureOfYourInformation()}
-      {choicesAboutInformation()}
-      {accessingAndCorrectingInformation()}
-      {dataSecurity()}
-      {changesToPrivacyPolicy()}
       <Footer />
     </>
   );
