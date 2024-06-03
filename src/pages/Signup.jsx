@@ -63,6 +63,7 @@ const Signup = () => {
   // submit handler
   const submitHandler = e => {
     e.preventDefault();
+    console.log('signup', firstName, lastName, email, password);
 
     // check validation
     const validationErrors = {};
