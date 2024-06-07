@@ -1,0 +1,324 @@
+{
+  "info": {
+    "_postman_id": "c57ac9f6-efe0-4d9a-99b8-85aa8aeb64a5",
+    "name": "outworkx",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26803701"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"qaisark@outworkx.com\",\r\n    \"password\": \"outworkx/?123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/auth/login",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"Qaisar\",\r\n    \"lastName\": \"Khan\",\r\n    \"email\": \"qaisark2@outworkx.com\",\r\n    \"password\": \"outworkx/?123\",\r\n    \"dateOfBirth\": \"1997-11-30T00:00:00.000Z\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"gender\": \"male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/auth/register",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "auth", "register"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "space",
+      "item": [
+        {
+          "name": "create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"{{$randomCompanyName}}\",\r\n    \"description\": \"{{$randomLoremParagraph}}\",\r\n    \"address\": \"{{$randomStreetAddress}}\",\r\n    \"addressHint\": \"{{$randomLoremSentence}}\",\r\n    \"city\": \"{{$randomCity}}\",\r\n    \"state\": \"{{$randomLoremWords}}\",\r\n    \"country\": \"{{$randomCountry}}\",\r\n    \"postalCode\": {{$randomInt}},\r\n    \"gallery\": [\r\n        {\r\n            \"type\": \"image\",\r\n            \"url\": \"https://picsum.photos/600\"\r\n        }\r\n    ],\r\n    \"numberOfDesks\": {{$randomInt}},\r\n    \"pricePerDesk\": {{$randomInt}},\r\n    \"maximumNumberOfNomads\" : {{$randomInt}},\r\n    \"amenities\": [\r\n        \"wifi\"\r\n    ],\r\n    \"rules\": [\r\n        \"no-smoking\"\r\n    ],\r\n    \"timings\": [\r\n        {\r\n            \"day\": 1,\r\n            \"start\": 0,\r\n            \"end\": 60\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/space/create",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "space", "create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"spaceId\": \"65ea00e4704960d617264130\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/space/get",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "space", "get"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"spaceId\": \"65ea00e4704960d617264130\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/space/delete",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "space", "delete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/space/list",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "space", "list"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "health",
+      "item": [
+        {
+          "name": "check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/health",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "media",
+      "item": [
+        {
+          "name": "upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "media",
+                  "type": "file",
+                  "src": "/C:/Users/Qaisark/Downloads/image-168456240451S.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/media/upload",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "media", "upload"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "booking",
+      "item": [
+        {
+          "name": "create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"spaceId\": \"65ea0149704960d617264136\",\r\n    \"startDate\": \"2024-03-16T00:00:00.000Z\",\r\n    \"endDate\" : \"2024-03-16T00:00:00.000Z\",\r\n    \"price\": 1000,\r\n    \"numberOfDesks\": 1,\r\n    \"status\": \"pending\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/booking/create",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "booking", "create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bookingId\": \"65efaf843c222b7fc56ca24e\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/booking/get",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "booking", "get"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bookingId\": \"65efaf843c222b7fc56ca24e\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/booking/delete",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "booking", "delete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/booking/list",
+              "host": ["{{HOST}}"],
+              "path": ["v1", "booking", "list"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZTljNzc5ODczYzYwN2NiZTliZGUzZCIsImVtYWlsIjoicWFpc2Fya0BvdXR3b3JreC5jb20iLCJpYXQiOjE3MTczMDkzMDQsImV4cCI6MTcxNzMzMDkwNH0.JtWLjNTRQpPW1Yu6flwimdED7Ta4chhzR5ObbSpZVbw",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "HOST",
+      "value": "https://www.api.outworkx.com",
+      "type": "string"
+    }
+  ]
+}

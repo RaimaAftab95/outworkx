@@ -7,8 +7,11 @@ import Heading from '../components/shared/Heading';
 import Button from '../components/ui/Button';
 import Error from '../components/ui/Error';
 import { signUp } from '../http/api';
+import { useDispatch } from 'react-redux';
+import { register } from '../store/reducers/auth';
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -63,6 +66,18 @@ const Signup = () => {
   // submit handler
   const submitHandler = e => {
     e.preventDefault();
+    console.log('signup', firstName, lastName, email, password);
+    dispatch(
+      register({
+        firstName,
+        lastName,
+        email,
+        password,
+        phoneNumber,
+        dateOfBirth,
+        gender
+      })
+    );
 
     // check validation
     const validationErrors = {};
@@ -97,6 +112,20 @@ const Signup = () => {
     if (!gender) {
       validationErrors.gender = 'Gender is Required!';
     }
+
+    //dispatch(register({ firstName,lastName,email,password,phoneNumber,dateOfBirth,gender}));
+    // trial code
+    //  dispatch(register({ firstName, lastName, email, password, phoneNumber, dateOfBirth, gender }))
+    //  .unwrap()
+    //  .then((user) => {
+    //    // Handle successful registration
+    //    console.log("User registered:", user);
+    //    navigate('/'); // Navigate to home or dashboard after successful registration
+    //  })
+    //  .catch((err) => {
+    //    // Handle registration error
+    //    console.error("Registration error:", err);
+    //  });
 
     // if (Object.keys(validationErrors).length > 0) {
     //   return setErrors(validationErrors);
