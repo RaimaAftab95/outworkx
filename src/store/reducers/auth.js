@@ -5,9 +5,7 @@ const initialState = {
   currentUser: undefined,
   isLoading: false
 };
-
 const HOST = 'https://www.api.outworkx.com';
-
 export const register = createAsyncThunk(
   'auth/register',
   async (userData, thunkAPI) => {
@@ -26,7 +24,6 @@ export const register = createAsyncThunk(
     }
   }
 );
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
