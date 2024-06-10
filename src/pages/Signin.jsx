@@ -1,69 +1,34 @@
-import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store';
+import { useAppDispatch, useAppSelector } from '../lib/hooks';
+import { login } from '../features/auth-slice';
+import { useState } from 'react';
+
 import Heading from '../components/shared/Heading';
 import Button from '../components/ui/Button';
 import Error from '../components/ui/Error';
-import { login } from '../http/api';
 
-const Signin = () => {
+export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
+
+  const dispatch = useAppDispatch();
   const location = useLocation();
+  const router = useNavigate();
+
   const queryParams = new URLSearchParams(location.search);
   const redirect = queryParams.get('redirect');
 
-  const router = useNavigate();
+  /**
+   * Handle form submission
+   * @param {import('react').SyntheticEvent} event
+   * @returns {void}
+   */
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-  // loginUser function
-  const loginUser = async () => {
-    const { data } = await login({
-      email,
-      password
-    });
-
-    return data;
-  };
-
-  // zustand store
-  const { setAuth } = useAuthStore();
-
-  // create server request
-  const { mutate, isPending } = useMutation({
-    mutationKey: ['login'],
-    mutationFn: loginUser,
-    onSuccess: async data => {
-      // store in local storage
-      localStorage.setItem('auth', JSON.stringify(data?.data));
-
-      // store in zustand
-      setAuth(data?.data);
-
-      if (redirect) {
-        router(`/${redirect}`);
-      } else {
-        router('/');
-      }
-
-      toast.success('Login successful.');
-    },
-    onError: async error => {
-      const property = error?.response?.data?.data?.message?.replace('/', '');
-      setErrors({
-        [property]: `${property} is Required!`
-      });
-    }
-  });
-
-  // submit handler
-  const submitHandler = e => {
-    e.preventDefault();
-
-    // check validation
     const validationErrors = {};
 
     if (!email) {
@@ -78,8 +43,18 @@ const Signin = () => {
       return setErrors(validationErrors);
     }
 
-    mutate();
-  };
+    const results = await dispatch(
+      login({
+        email,
+        password
+      })
+    );
+
+    localStorage.setItem('token', results.payload.data.token);
+
+    router(redirect ? redirect : '/');
+  }
+
   return (
     <main className="flex min-h-screen flex-col justify-between lg:flex-row">
       <div className="max-h-screen min-h-screen w-full px-5 py-7 sm:px-20 lg:w-1/2 xl:w-1/3">
@@ -90,31 +65,31 @@ const Signin = () => {
           <div className="w-full">
             <Heading>Login Page</Heading>
 
-            <form
-              onSubmit={submitHandler}
-              className="mt-11 flex flex-col gap-5"
-            >
+            <form onSubmit={handleSubmit} className="mt-11 flex flex-col gap-5">
               <input
                 type="email"
                 placeholder="E-mail*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <Error>{errors?.email}</Error>
+
               <input
                 type="password"
                 placeholder="Password*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Error>{errors?.password}</Error>
-              <Button className="w-full" type="submit" loading={isPending}>
+
+              <Button className="w-full" type="submit" loading={isLoading}>
                 Sign In
               </Button>
+
               <p className="text-xl font-bold leading-9 text-primary/70">
-                Don’t have an account?
+                Don’t have an account? {''}
                 <Link to="/sign-up" className="underline">
                   Signup
                 </Link>
@@ -132,6 +107,4 @@ const Signin = () => {
       </div>
     </main>
   );
-};
-
-export default Signin;
+}

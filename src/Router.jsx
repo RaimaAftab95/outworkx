@@ -11,7 +11,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import SpaceDetails from './pages/SpaceDetails';
 import Statistics from './pages/Statistics';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+import PrivacyPolicy from './pages/ThePrivacyPolicy';
 import TermsAndCondition from './pages/TermsAndCondition';
 
 const router = createBrowserRouter([
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     element: <Signup />
   },
   {
-    path: '/sign-in',
+    path: '/login',
     element: <Signin />
   },
   {
