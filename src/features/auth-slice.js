@@ -36,6 +36,7 @@ export const register = createAsyncThunk(
    * @param {User} payload User object
    */
   async function (payload) {
+    console.log('Register payload:', payload);
     const response = await fetch(
       'https://www.api.outworkx.com/v1/auth/register',
       {
@@ -64,6 +65,7 @@ export const login = createAsyncThunk(
    * @param {string} payload.password User password
    */
   async function (payload) {
+    console.log('Login payload:', payload);
     const response = await fetch('https://www.api.outworkx.com/v1/auth/login', {
       method: 'POST',
       headers: {
@@ -91,6 +93,7 @@ const authSlice = createSlice({
     logout(state) {
       state.isUserLoggedIn = false;
       state.currentUser = null;
+      console.log('User logged out');
     }
   },
   extraReducers: (builder) => {
