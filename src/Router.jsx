@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
 import BookingHistory from './pages/BookingHistory';
 import CreateSpace from './pages/CreateSpace';
 import Dashboard from './pages/Dashboard';
@@ -13,6 +12,7 @@ import SpaceDetails from './pages/SpaceDetails';
 import Statistics from './pages/Statistics';
 import PrivacyPolicy from './pages/ThePrivacyPolicy';
 import TermsAndCondition from './pages/TermsAndCondition';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: '/terms-and-conditions',
     element: <TermsAndCondition />
+  },
+  {
+    path: '*',
+    element: <ErrorPage />
   }
 ]);
 
