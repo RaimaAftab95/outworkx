@@ -42,13 +42,6 @@ const ReserveSpace = () => {
     }
   };
 
-  // when check in date and check out date is set callender modal is closed
-  useEffect(() => {
-    if (checkInDate && checkOutDate) {
-      setOpenCheckInCalender(false);
-    }
-  }, [checkInDate, checkOutDate]);
-
   const router = useNavigate();
 
   useEffect(() => {
