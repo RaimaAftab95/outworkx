@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useRef, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../lib/hooks';
+import { logout } from '../../features/auth-slice';
 
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid';
 
@@ -11,8 +13,10 @@ import {
 } from '@heroicons/react/24/outline';
 
 export default function Header() {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+  const isUserLoggedIn = useAppSelector((state) => state.auth.isUserLoggedIn);
   const [isMenuActive, setIsMenuActive] = useState(false);
+
+  const dispatch = useAppDispatch();
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -51,6 +55,19 @@ export default function Header() {
     }
 
     setIsMenuActive(false);
+  }
+
+  /**
+   * Handle logout
+   * @param {import('react').SyntheticEvent} event
+   * @returns {void}
+   */
+  function handleLogout(event) {
+    event.preventDefault();
+
+    localStorage.removeItem('token');
+
+    dispatch(logout());
   }
 
   return (
@@ -104,7 +121,7 @@ export default function Header() {
                 <li className="transition-all hover:text-primary-light">
                   <Link
                     className="block w-full cursor-pointer"
-                    onClick={() => {}}
+                    onClick={handleLogout}
                   >
                     Logout
                   </Link>
