@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function ErrorPage() {
   return (
     <div className="bg-gray-100 flex min-h-screen items-center justify-center p-4">
