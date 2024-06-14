@@ -1,24 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SpaceSkeleton from './SpaceSkeleton';
 
-export default function Space({ space }) {
+export default function Space({ space, isLoading }) {
   const [activeImage, setActiveImage] = useState(0);
-  const [loading, setLoading] = useState(true); // Initially true to show skeleton
 
   // Extract space data
   const { id, name, description, pricePerDesk, gallery } = space || {};
 
-  // Simulate loading data after 5s
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount
-  }, []);
-
-  const changeImageHandler = navigate => {
+  const changeImageHandler = (navigate) => {
     if (navigate === 'left') {
       activeImage !== 0
         ? setActiveImage(activeImage - 1)
@@ -30,7 +20,11 @@ export default function Space({ space }) {
     }
   };
 
-  if (loading) {
+  // if (!space) {
+  //   return <SpaceSkeleton />;
+  // }
+
+  if (isLoading) {
     return <SpaceSkeleton />;
   }
 
@@ -38,15 +32,11 @@ export default function Space({ space }) {
     <div>
       <div className="group relative w-full overflow-hidden rounded-2xl">
         <Link to={`/spaces/${id}`}>
-          {loading ? (
-            <Skeleton height={256} />
-          ) : (
-            <img
-              src={gallery[activeImage]?.url}
-              alt="space"
-              className="h-auto max-h-96 w-full object-cover transition-all hover:scale-125"
-            />
-          )}
+          <img
+            src={gallery[activeImage]?.url}
+            alt="space"
+            className="h-auto max-h-96 w-full object-cover transition-all hover:scale-125"
+          />
         </Link>
 
         <div className="absolute right-2.5 top-2.5 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-primary transition-all hover:opacity-60">

@@ -1,51 +1,60 @@
-import { useQuery } from '@tanstack/react-query';
-import { spaceList } from '../../../http/api';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSpaces, incrementPageNumber } from '../../../features/SpaceSlice';
 import Heading from '../../shared/Heading';
 import Button from '../../ui/Button';
 import Space from './Space';
+import SpaceSkeleton from './SpaceSkeleton';
 
 const Spaces = () => {
-  // get all spaces
-  // create new space
-  const getAllSpaces = async () => {
-    const { data } = await spaceList({
-      pageNumber: 1,
-      pageSize: 10
-    });
+  const dispatch = useDispatch();
+  const spaces = useSelector((state) => state.spaces.spacesList);
+  const status = useSelector((state) => state.spaces.status);
+  const error = useSelector((state) => state.spaces.error);
+  const pageNumber = useSelector((state) => state.spaces.pageNumber);
 
-    return data;
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchSpaces({ pageSize: 10 }));
+    }
+  }, [status, dispatch]);
+
+  const handleShowMore = () => {
+    dispatch(incrementPageNumber());
+    dispatch(fetchSpaces({ pageSize: 10 }));
   };
 
-  const { data, isPending } = useQuery({
-    queryKey: ['space'],
-    queryFn: getAllSpaces
-  });
+  if (status === 'loading' && spaces.length === 0) {
+    return (
+      <div className="flex items-center justify-center">
+        <img src="/images/loading.gif" alt="Loading" />
+      </div>
+    );
+  }
 
-  const { spaces } = data?.data || {};
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
+  const spacesArray = Array.isArray(spaces) ? spaces : [];
+
   return (
     <section className="py-14">
       <div className="container">
         <Heading>Newest Flexible Office Spaces</Heading>
 
-        {isPending ? (
-          <div className="flex items-center justify-center">
-            <img src="/images/loading.gif" alt="" />
-          </div>
-        ) : (
-          <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {spaces?.slice(0, 8).map(space => (
-              <Space key={space?.id} space={space} />
-            ))}
-          </div>
-        )}
+        <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {spacesArray.slice(0, pageNumber * 5).map((space) => (
+            <Space key={space.id} space={space} />
+          ))}
+        </div>
 
-        {spaces?.length > 8 && (
+        {spacesArray.length > pageNumber * 5 && (
           <div className="mt-11 flex flex-col items-center justify-center gap-9 text-center">
             <h2 className="text-2xl leading-6">
               Continue exploring more trending places
             </h2>
-
-            <Button to="/spaces">Show More</Button>
+            <Button onClick={handleShowMore}>Show More</Button>
           </div>
         )}
       </div>
