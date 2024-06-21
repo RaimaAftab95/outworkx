@@ -1,30 +1,41 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSpaces, incrementPageNumber } from '../../../features/SpaceSlice';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
+import {
+  list,
+  incrementPageNumber,
+  Status
+} from '../../../features/space-slice';
 import Heading from '../../shared/Heading';
 import Button from '../../ui/Button';
 import Space from './Space';
-import SpaceSkeleton from './SpaceSkeleton';
 
-const Spaces = () => {
-  const dispatch = useDispatch();
-  const spaces = useSelector((state) => state.spaces.spacesList);
-  const status = useSelector((state) => state.spaces.status);
-  const error = useSelector((state) => state.spaces.error);
-  const pageNumber = useSelector((state) => state.spaces.pageNumber);
+export default function Spaces() {
+  const dispatch = useAppDispatch();
+
+  const {
+    entities: spaces,
+    status,
+    error,
+    pageNumber,
+    pageSize
+  } = useAppSelector((state) => state.spaces);
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchSpaces({ pageSize: 10 }));
+    if (status === Status.IDLE) {
+      dispatch(list());
     }
   }, [status, dispatch]);
 
+  /**
+   * Handle show more spaces
+   * @returns {void}
+   */
   const handleShowMore = () => {
     dispatch(incrementPageNumber());
-    dispatch(fetchSpaces({ pageSize: 10 }));
+    dispatch(list());
   };
 
-  if (status === 'loading' && spaces.length === 0) {
+  if (status === Status.LOADING && spaces.length === 0) {
     return (
       <div className="flex items-center justify-center">
         <img src="/images/loading.gif" alt="Loading" />
@@ -32,11 +43,9 @@ const Spaces = () => {
     );
   }
 
-  if (status === 'failed') {
+  if (status === Status.FAILED) {
     return <div>Error: {error}</div>;
   }
-
-  const spacesArray = Array.isArray(spaces) ? spaces : [];
 
   return (
     <section className="py-14">
@@ -44,12 +53,12 @@ const Spaces = () => {
         <Heading>Newest Flexible Office Spaces</Heading>
 
         <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {spacesArray.slice(0, pageNumber * 5).map((space) => (
+          {spaces.slice(0, pageNumber * pageSize).map((space) => (
             <Space key={space.id} space={space} />
           ))}
         </div>
 
-        {spacesArray.length > pageNumber * 5 && (
+        {spaces.length > pageNumber * pageSize && (
           <div className="mt-11 flex flex-col items-center justify-center gap-9 text-center">
             <h2 className="text-2xl leading-6">
               Continue exploring more trending places
@@ -60,6 +69,4 @@ const Spaces = () => {
       </div>
     </section>
   );
-};
-
-export default Spaces;
+}
