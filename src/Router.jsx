@@ -1,67 +1,126 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import LoadingAnimation from './components/shared/LoadingAnimation';
+import React, { lazy, Suspense } from 'react';
 
-import BookingHistory from './pages/BookingHistory';
-import CreateSpace from './pages/CreateSpace';
-import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
-import Launch from './pages/Launch';
-import ReserveSpace from './pages/ReserveSpace';
-import Signin from './pages/Signin';
-import Signup from './pages/Signup';
-import SpaceDetails from './pages/SpaceDetails';
-import Statistics from './pages/Statistics';
-import PrivacyPolicy from './pages/ThePrivacyPolicy';
-import TermsAndCondition from './pages/TermsAndCondition';
+const BookingHistory = lazy(() => import('./pages/BookingHistory'));
+const CreateSpace = lazy(() => import('./pages/CreateSpace'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Home = lazy(() => import('./pages/Home'));
+const Launch = lazy(() => import('./pages/Launch'));
+const ReserveSpace = lazy(() => import('./pages/ReserveSpace'));
+const Signin = lazy(() => import('./pages/Signin'));
+const Signup = lazy(() => import('./pages/Signup'));
+const SpaceDetails = lazy(() => import('./pages/SpaceDetails'));
+const Statistics = lazy(() => import('./pages/Statistics'));
+const PrivacyPolicy = lazy(() => import('./pages/ThePrivacyPolicy'));
+const TermsAndCondition = lazy(() => import('./pages/TermsAndCondition'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <Home />
+      </Suspense>
+    )
   },
   {
     path: '/spaces/:id',
-    element: <SpaceDetails />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <SpaceDetails />
+      </Suspense>
+    )
   },
   {
     path: '/create-space',
-    element: <CreateSpace />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <CreateSpace />
+      </Suspense>
+    )
   },
   {
     path: '/launch',
-    element: <Launch />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <Launch />
+      </Suspense>
+    )
   },
   {
     path: '/reserve-space',
-    element: <ReserveSpace />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <ReserveSpace />
+      </Suspense>
+    )
   },
   {
     path: '/sign-up',
-    element: <Signup />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <Signup />
+      </Suspense>
+    )
   },
   {
     path: '/login',
-    element: <Signin />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <Signin />
+      </Suspense>
+    )
   },
   {
     path: '/booking-history',
-    element: <BookingHistory />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <BookingHistory />
+      </Suspense>
+    )
   },
   {
     path: '/dashboard',
-    element: <Dashboard />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <Dashboard />
+      </Suspense>
+    )
   },
   {
     path: '/statistics',
-    element: <Statistics />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <Statistics />
+      </Suspense>
+    )
   },
   {
     path: '/privacy-policy',
-    element: <PrivacyPolicy />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <PrivacyPolicy />
+      </Suspense>
+    )
   },
   {
     path: '/terms-and-conditions',
-    element: <TermsAndCondition />
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <TermsAndCondition />
+      </Suspense>
+    )
+  },
+  {
+    path: '*',
+    element: (
+      <Suspense fallback={<LoadingAnimation />}>
+        <ErrorPage />
+      </Suspense>
+    )
   }
 ]);
 

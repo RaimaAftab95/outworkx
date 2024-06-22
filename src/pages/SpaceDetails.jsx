@@ -75,13 +75,6 @@ const SpaceDetails = () => {
   const { auth } = useAuthStore();
   const { user } = auth || {};
 
-  // when check in date and check out date is set callender modal is closed
-  useEffect(() => {
-    if (checkInDate && checkOutDate) {
-      setOpenCheckInCalender(false);
-    }
-  }, [checkInDate, checkOutDate]);
-
   useEffect(() => {
     scroll.scrollToTop({
       duration: 500, // specify the duration of the scroll animation

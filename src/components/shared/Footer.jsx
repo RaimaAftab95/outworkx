@@ -1,9 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="bg-[#F2F2F2]">
+    <footer>
       <div className="container">
         <div className="flex flex-col justify-between gap-10 border-b border-gray py-16 md:flex-row">
           <div className="w-1/3">
@@ -102,6 +101,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

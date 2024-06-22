@@ -71,7 +71,7 @@ const ReserveCalender = ({
         } absolute right-0 top-full w-full rounded-2xl border border-gray bg-white shadow-xl sm:min-w-custom`,
         className
       )}
-      onClick={e => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="p-5">
         <div className="flex flex-wrap items-center justify-between gap-5">
