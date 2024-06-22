@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+
+import Heading from '../../shared/Heading';
+import Button from '../../ui/Button';
+import Space from './Space';
+
 import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
 import {
   list,
   incrementPageNumber,
   Status
 } from '../../../features/space-slice';
-import Heading from '../../shared/Heading';
-import Button from '../../ui/Button';
-import Space from './Space';
 
 export default function Spaces() {
   const dispatch = useAppDispatch();
@@ -15,36 +18,37 @@ export default function Spaces() {
   const {
     entities: spaces,
     status,
-    error,
     pageNumber,
     pageSize
   } = useAppSelector((state) => state.spaces);
 
   useEffect(() => {
-    if (status === Status.IDLE) {
-      dispatch(list());
+    if (status !== Status.Idle) {
+      return;
     }
-  }, [status, dispatch]);
+
+    dispatch(list());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * Handle show more spaces
    * @returns {void}
    */
-  const handleShowMore = () => {
+  function handleShowMore() {
     dispatch(incrementPageNumber());
     dispatch(list());
-  };
-
-  if (status === Status.LOADING && spaces.length === 0) {
-    return (
-      <div className="flex items-center justify-center">
-        <img src="/images/loading.gif" alt="Loading" />
-      </div>
-    );
   }
 
-  if (status === Status.FAILED) {
-    return <div>Error: {error}</div>;
+  if (status === Status.Failed) {
+    return (
+      <div className="mt-11 flex flex-col items-center justify-center gap-9 text-center">
+        <h2 className="text-2xl leading-6">Failed to load spaces</h2>
+        <Button>
+          <Link to="/">Reload</Link>
+        </Button>
+      </div>
+    );
   }
 
   return (
@@ -54,7 +58,11 @@ export default function Spaces() {
 
         <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {spaces.slice(0, pageNumber * pageSize).map((space) => (
-            <Space key={space.id} space={space} />
+            <Space
+              key={space.id}
+              space={space}
+              isLoading={status === Status.Loading}
+            />
           ))}
         </div>
 

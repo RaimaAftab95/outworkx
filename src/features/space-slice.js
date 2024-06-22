@@ -14,23 +14,22 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 /**
  * @typedef {Object} SpaceState
  * @property { Space[]} entities List of spaces
- * @property {string} status Current status of the space fetching process
+ * @property {ApiStatus} status Current status of the space fetching process
  * @property {?string} error Error message, if any
  * @property {number} pageNumber Current page number
- * * @property {number} pageSize Size of each page (number of items)
+ * @property {number} pageSize Size of each page (number of items)
  */
 
 /**
- * @typedef {('idle'|'loading'|'succeeded'|'failed')} Status
+ * @typedef {('idle'|'loading'|'succeeded'|'failed')} ApiStatus
  * @readonly
- * @enum {Status}
+ * @enum {ApiStatus}
  */
-// Define the Status enum
 export const Status = {
-  IDLE: 'idle',
-  LOADING: 'loading',
-  SUCCEEDED: 'succeeded',
-  FAILED: 'failed'
+  Idle: 'idle',
+  Loading: 'loading',
+  Successful: 'successful',
+  Failed: 'failed'
 };
 
 /**
@@ -38,45 +37,34 @@ export const Status = {
  */
 const initialState = {
   entities: [],
-  status: Status.IDLE,
+  status: Status.Idle,
   error: null,
   pageNumber: 1,
   pageSize: 10
 };
 
-// Async thunk for fetching spaces data
-export const list = createAsyncThunk(
-  'spaces/list',
-  async (_, { getState, rejectWithValue }) => {
-    const { pageNumber, pageSize } = getState().spaces;
-    try {
-      const response = await fetch(
-        'https://www.api.outworkx.com/v1/space/list',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ pageNumber, pageSize })
-        }
-      );
+export const list = createAsyncThunk('spaces/list', async (_, { getState }) => {
+  const { pageNumber, pageSize } = getState().spaces;
 
-      const data = await response.json();
+  const response = await fetch('https://www.api.outworkx.com/v1/space/list', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ pageNumber, pageSize })
+  });
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to fetch spaces');
-      }
+  const data = await response.json();
 
-      return data.data.spaces;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
+  if (!response.ok) {
+    throw new Error(response.data.message);
   }
-);
 
-// Create slice for spaces
+  return data.data.spaces;
+});
+
 const spaceSlice = createSlice({
-  name: 'spaces',
+  name: 'space',
   initialState,
   reducers: {
     incrementPageNumber: (state) => {
@@ -86,14 +74,14 @@ const spaceSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(list.pending, (state) => {
-        state.status = Status.LOADING;
+        state.status = Status.Loading;
       })
       .addCase(list.fulfilled, (state, action) => {
-        state.status = Status.SUCCEEDED;
+        state.status = Status.Successful;
         state.entities = [...state.entities, ...action.payload];
       })
       .addCase(list.rejected, (state, action) => {
-        state.status = Status.FAILED;
+        state.status = Status.Failed;
         state.error = action.payload;
       });
   }
@@ -101,4 +89,5 @@ const spaceSlice = createSlice({
 
 export const { incrementPageNumber } = spaceSlice.actions;
 export const spacesReducer = spaceSlice.reducer;
+
 export default spaceSlice;
