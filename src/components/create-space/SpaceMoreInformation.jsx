@@ -8,13 +8,13 @@ import Button from '../ui/Button';
 import Error from '../ui/Error';
 import InputBox from '../ui/InputBox';
 
-const SpaceMoreInformation = ({
+export default function SpaceMoreInformation({
   setActiveTab,
   setSpaceDetails,
   spaceDetails,
   isPending,
   createSpace
-}) => {
+}) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
@@ -26,7 +26,7 @@ const SpaceMoreInformation = ({
   const { user } = auth || {};
 
   // handle selecte images
-  const handleFileChange = async e => {
+  const handleFileChange = async (e) => {
     const files = e.target.files;
     setImages(files);
   };
@@ -48,12 +48,12 @@ const SpaceMoreInformation = ({
   const { mutate, isPending: isUploading } = useMutation({
     mutationKey: ['upload-images'],
     mutationFn: uploadImagesHandler,
-    onSuccess: async data => {
+    onSuccess: async (data) => {
       console.log('data', data);
       setSpaceImages(data?.data?.media);
       toast.success('Space Images Upload Successfull.');
     },
-    onError: async error => {
+    onError: async (error) => {
       console.log('error', error);
     }
   });
@@ -66,7 +66,7 @@ const SpaceMoreInformation = ({
   }, [images, mutate]);
 
   // submit handler
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     // check validation
@@ -89,7 +89,7 @@ const SpaceMoreInformation = ({
     }
 
     // generate gellary images
-    const galleryImages = spaceImages?.map(image => ({
+    const galleryImages = spaceImages?.map((image) => ({
       type: 'image',
       url: image
     }));
@@ -147,23 +147,23 @@ const SpaceMoreInformation = ({
   return (
     <div>
       <Heading>Add some photos of your place</Heading>
-      <p className="mt-2 text-2xl font-medium leading-9">
+      <p className="mt-2 text-xl font-medium">
         {`You'll`} need 5 photos to get started. You can add more or make
         changes later.
       </p>
 
       <form onSubmit={submitHandler} className="mt-14">
-        <div className="relative flex flex-col items-center justify-center bg-[#F2F2F2] py-28 text-center">
-          <div className="flex w-full justify-center">
+        <div className="relative flex w-full flex-col items-center justify-center bg-[#F2F2F2] p-20 text-center">
+          <div className="flex w-20 justify-center">
             <img src="/images/icons/image.png" alt="icon" />
           </div>
-          <h4 className="mt-20 text-3xl leading-10">Drag your photos here</h4>
-          <span className="text-2xl font-medium leading-9">
+          <h4 className="mt-2 text-xl">Drag your photos here</h4>
+          <span className="mt-1 text-lg font-medium">
             Choose at least 5 photos
           </span>
           <label
             htmlFor="images"
-            className="mt-8 cursor-pointer text-2xl font-bold leading-9 underline"
+            className="mt-1 cursor-pointer text-xl font-bold underline"
           >
             Upload from your device
           </label>
@@ -186,15 +186,15 @@ const SpaceMoreInformation = ({
 
         {spaceImages?.length > 0 && (
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {spaceImages?.map(image => (
+            {spaceImages?.map((image) => (
               <img key={image} className="rounded-xl" src={image} alt={image} />
             ))}
           </div>
         )}
 
-        <div className="mt-20">
+        <div className="mt-8">
           <Heading>Let’s give title to your place</Heading>
-          <p className="mt-2 text-2xl font-medium leading-9">
+          <p className="mt-1 text-xl font-medium">
             Short titles work best.Have fun with it! You can always change it
             later
           </p>
@@ -204,12 +204,12 @@ const SpaceMoreInformation = ({
               name=""
               id=""
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Add your title."
-              className="h-32 w-full text-xl font-medium leading-9 text-primary/70 outline-none placeholder:text-primary/70"
+              className="h-16 w-full text-lg font-medium text-primary/70 outline-none placeholder:text-primary/70"
             ></textarea>
           </InputBox>
-          <span className="mt-8 block text-2xl font-bold leading-9">
+          <span className="mt-8 block text-sm font-bold">
             {name?.length}/40
           </span>
           {name?.length > 40 && (
@@ -218,9 +218,9 @@ const SpaceMoreInformation = ({
           <Error>{errors?.name}</Error>
         </div>
 
-        <div className="mt-14">
+        <div className="mt-10">
           <Heading>Create your description</Heading>
-          <p className="mt-2 text-2xl font-medium leading-9">
+          <p className="mt-1 text-xl font-medium">
             Share what makes your place special.
           </p>
 
@@ -229,12 +229,12 @@ const SpaceMoreInformation = ({
               name=""
               id=""
               value={description}
-              onChange={e => setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="Take it easy and write your description."
-              className="h-56 w-full text-xl font-medium leading-9 text-primary/70 outline-none placeholder:text-primary/70"
+              className="h-32 w-full text-lg font-medium leading-8 text-primary/70 outline-none placeholder:text-primary/70"
             ></textarea>
           </InputBox>
-          <span className="mt-8 block text-2xl font-bold leading-9">
+          <span className="mt-8 block text-sm font-bold leading-8">
             {description?.length}/500
           </span>
           {description?.length > 500 && (
@@ -243,67 +243,57 @@ const SpaceMoreInformation = ({
           <Error>{errors?.description}</Error>
         </div>
 
-        <div className="mt-14">
+        <div className="mt-10">
           <Heading>Set your price</Heading>
-          <p className="mt-2 text-2xl font-medium leading-9">
+          <p className="mt-1 text-xl font-medium">
             Your address is only shared with guests after they’ve made a
             reservation.
           </p>
 
-          <div className="mt-14">
+          <div className="mt-10">
             <input
               type="text"
               placeholder="Price"
-              className="font-nohemi w-full border-none bg-transparent text-center text-8xl font-bold text-primary outline-none placeholder:text-primary"
+              className="font-nohemi w-full border-none bg-transparent text-center text-lg font-bold text-primary outline-none placeholder:text-primary"
             />
           </div>
 
-          <div className="mt-12 rounded-3xl border border-gray px-8 py-12">
+          <div className="mt-8 rounded-3xl border border-gray px-8 py-8">
             <div className="flex flex-col gap-2 border-b border-gray pb-5">
               <div className="flex flex-wrap items-center justify-between gap-5">
-                <span className="text-2xl font-medium leading-9">
-                  Best Price
-                </span>
-                <span className="text-2xl font-medium leading-9">
-                  $35/Per Person
-                </span>
+                <span className="text-lg font-medium">Best Price</span>
+                <span className="text-lg font-medium">$35/Per Person</span>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-5">
-                <span className="text-2xl font-medium leading-9">
-                  Guest service fee
-                </span>
-                <span className="text-2xl font-medium leading-9">$5</span>
+                <span className="text-lg font-medium">Guest service fee</span>
+                <span className="text-lg font-medium">$5</span>
               </div>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
-              <span className="text-2xl font-extrabold leading-9">
-                Guest service fee
-              </span>
-              <span className="text-2xl font-medium leading-9">$40</span>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-5">
+              <span className="text-lg font-medium">Guest service fee</span>
+              <span className="text-lg font-medium">$40</span>
             </div>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-gray p-7">
+          <div className="mt-4 rounded-3xl border border-gray p-7">
             <div className="flex flex-wrap items-center justify-between gap-5">
-              <span className="text-2xl font-extrabold leading-9">
-                You earn
-              </span>
-              <span className="text-2xl font-extrabold leading-9">$34</span>
+              <span className="text-lg font-medium">You earn</span>
+              <span className="text-lg font-medium">$34</span>
             </div>
           </div>
         </div>
 
-        <div className="mt-24 flex justify-end gap-5">
+        <div className="mt-12 flex justify-end gap-5">
           <Button
-            className="px-14"
+            className="px-10"
             variant="secondary"
             onClick={() => setActiveTab(1)}
           >
             Back
           </Button>
           <Button
-            className="px-14"
+            className="px-10"
             disabled={isPending || isUploading}
             type="submit"
             loading={isPending}
@@ -314,6 +304,4 @@ const SpaceMoreInformation = ({
       </form>
     </div>
   );
-};
-
-export default SpaceMoreInformation;
+}
