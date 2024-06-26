@@ -124,7 +124,7 @@ export default function SpaceInformation({
           </InputBox>
         </div>
 
-        <div className="mt-20">
+        <div className="mt-5  origin-center scale-85 transform">
           <Heading>Where’s your place located? </Heading>
           <p className="mt-2 text-xl font-medium ">
             Your address is only shared with guests after they’ve made a
@@ -162,7 +162,7 @@ export default function SpaceInformation({
           </div>
         </div>
 
-        <div className="mt-20">
+        <div className="mt-10 origin-center  scale-85 transform">
           <Heading>Tell guests what your place has to offer</Heading>
           <p className="mt-2 text-xl font-medium">
             You can add more after publish your listing

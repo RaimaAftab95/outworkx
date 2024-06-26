@@ -40,6 +40,12 @@ export default {
       },
       minHeight: {
         custom50percent: '50%'
+      },
+      scale: {
+        85: '0.85',
+        95: '0.95',
+        75: '0.75',
+        70: '0.70'
       }
     },
     container: {

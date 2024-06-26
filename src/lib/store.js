@@ -3,6 +3,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from '../features/auth-slice';
+import { spacesReducer } from '../features/space-slice';
 
 /**
  * @typedef {ReturnType<typeof store.getState>} ApplicationState
@@ -14,7 +15,8 @@ import { authReducer } from '../features/auth-slice';
 
 const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    spaces: spacesReducer
   }
 });
 

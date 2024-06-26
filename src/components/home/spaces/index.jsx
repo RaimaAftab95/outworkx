@@ -1,56 +1,80 @@
-import { useQuery } from '@tanstack/react-query';
-import { spaceList } from '../../../http/api';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import Heading from '../../shared/Heading';
 import Button from '../../ui/Button';
 import Space from './Space';
 
-const Spaces = () => {
-  // get all spaces
-  // create new space
-  const getAllSpaces = async () => {
-    const { data } = await spaceList({
-      pageNumber: 1,
-      pageSize: 10
-    });
+import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
+import {
+  list,
+  incrementPageNumber,
+  Status
+} from '../../../features/space-slice';
 
-    return data;
-  };
+export default function Spaces() {
+  const dispatch = useAppDispatch();
 
-  const { data, isPending } = useQuery({
-    queryKey: ['space'],
-    queryFn: getAllSpaces
-  });
+  const {
+    entities: spaces,
+    status,
+    pageNumber,
+    pageSize
+  } = useAppSelector((state) => state.spaces);
 
-  const { spaces } = data?.data || {};
+  useEffect(() => {
+    if (status !== Status.Idle) {
+      return;
+    }
+
+    dispatch(list());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /**
+   * Handle show more spaces
+   * @returns {void}
+   */
+  function handleShowMore() {
+    dispatch(incrementPageNumber());
+    dispatch(list());
+  }
+
+  if (status === Status.Failed) {
+    return (
+      <div className="mt-11 flex flex-col items-center justify-center gap-9 text-center">
+        <h2 className="text-2xl leading-6">Failed to load spaces</h2>
+        <Button>
+          <Link to="/">Reload</Link>
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <section className="py-14">
       <div className="container">
         <Heading>Newest Flexible Office Spaces</Heading>
 
-        {isPending ? (
-          <div className="flex items-center justify-center">
-            <img src="/images/loading.gif" alt="" />
-          </div>
-        ) : (
-          <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {spaces?.slice(0, 8).map(space => (
-              <Space key={space?.id} space={space} />
-            ))}
-          </div>
-        )}
+        <div className="mt-11 grid gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {spaces.slice(0, pageNumber * pageSize).map((space) => (
+            <Space
+              key={space.id}
+              space={space}
+              isLoading={status === Status.Loading}
+            />
+          ))}
+        </div>
 
-        {spaces?.length > 8 && (
+        {spaces.length > pageNumber * pageSize && (
           <div className="mt-11 flex flex-col items-center justify-center gap-9 text-center">
             <h2 className="text-2xl leading-6">
               Continue exploring more trending places
             </h2>
-
-            <Button to="/spaces">Show More</Button>
+            <Button onClick={handleShowMore}>Show More</Button>
           </div>
         )}
       </div>
     </section>
   );
-};
-
-export default Spaces;
+}
