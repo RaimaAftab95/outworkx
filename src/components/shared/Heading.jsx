@@ -1,9 +1,7 @@
-const Heading = ({ children }) => {
+export default function Heading({ children }) {
   return (
-    <h2 className="text-3xl leading-9 sm:text-4xl sm:leading-10 md:text-customSize md:leading-10">
+    <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
       {children}
     </h2>
   );
-};
-
-export default Heading;
+}
