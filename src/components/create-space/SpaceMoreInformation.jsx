@@ -26,7 +26,7 @@ const SpaceMoreInformation = ({
   const { user } = auth || {};
 
   // handle selecte images
-  const handleFileChange = async e => {
+  const handleFileChange = async (e) => {
     const files = e.target.files;
     setImages(files);
   };
@@ -48,12 +48,12 @@ const SpaceMoreInformation = ({
   const { mutate, isPending: isUploading } = useMutation({
     mutationKey: ['upload-images'],
     mutationFn: uploadImagesHandler,
-    onSuccess: async data => {
+    onSuccess: async (data) => {
       console.log('data', data);
       setSpaceImages(data?.data?.media);
       toast.success('Space Images Upload Successfull.');
     },
-    onError: async error => {
+    onError: async (error) => {
       console.log('error', error);
     }
   });
@@ -66,7 +66,7 @@ const SpaceMoreInformation = ({
   }, [images, mutate]);
 
   // submit handler
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     // check validation
@@ -89,7 +89,7 @@ const SpaceMoreInformation = ({
     }
 
     // generate gellary images
-    const galleryImages = spaceImages?.map(image => ({
+    const galleryImages = spaceImages?.map((image) => ({
       type: 'image',
       url: image
     }));
@@ -145,15 +145,19 @@ const SpaceMoreInformation = ({
     createSpace();
   };
   return (
-    <div>
-      <Heading>Add some photos of your place</Heading>
-      <p className="mt-2 text-2xl font-medium leading-9">
-        {`You'll`} need 5 photos to get started. You can add more or make
-        changes later.
-      </p>
-
-      <form onSubmit={submitHandler} className="mt-14">
-        <div className="relative flex flex-col items-center justify-center bg-[#F2F2F2] py-28 text-center">
+    <div className="-mt-10">
+      <div className="origin-center scale-90 transform ">
+        <Heading>Add some photos of your place</Heading>
+        <p className="mt-2 text-xl font-medium leading-9">
+          {`You'll`} need 5 photos to get started. You can add more or make
+          changes later.
+        </p>
+      </div>
+      <form
+        onSubmit={submitHandler}
+        className="-mt-56 origin-center scale-75 transform"
+      >
+        <div className="relative -mt-36 flex flex-col items-center justify-center bg-[#F2F2F2] py-28 text-center">
           <div className="flex w-full justify-center">
             <img src="/images/icons/image.png" alt="icon" />
           </div>
@@ -186,13 +190,13 @@ const SpaceMoreInformation = ({
 
         {spaceImages?.length > 0 && (
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {spaceImages?.map(image => (
+            {spaceImages?.map((image) => (
               <img key={image} className="rounded-xl" src={image} alt={image} />
             ))}
           </div>
         )}
 
-        <div className="mt-20">
+        <div className="mt-20 ">
           <Heading>Let’s give title to your place</Heading>
           <p className="mt-2 text-2xl font-medium leading-9">
             Short titles work best.Have fun with it! You can always change it
@@ -204,7 +208,7 @@ const SpaceMoreInformation = ({
               name=""
               id=""
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Add your title."
               className="h-32 w-full text-xl font-medium leading-9 text-primary/70 outline-none placeholder:text-primary/70"
             ></textarea>
@@ -229,7 +233,7 @@ const SpaceMoreInformation = ({
               name=""
               id=""
               value={description}
-              onChange={e => setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="Take it easy and write your description."
               className="h-56 w-full text-xl font-medium leading-9 text-primary/70 outline-none placeholder:text-primary/70"
             ></textarea>

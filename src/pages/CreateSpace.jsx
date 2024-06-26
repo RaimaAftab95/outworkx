@@ -63,8 +63,8 @@ const CreateSpace = () => {
         </div>
       </header>
 
-      <section className="mt-5 pb-24 text-primary/70">
-        <div className="container">
+      <section className=" pb-24 text-primary/70">
+        <div className="container origin-center  scale-95 transform">
           <Tab
             spaceDetails={spaceDetails}
             setSpaceDetails={setSpaceDetails}

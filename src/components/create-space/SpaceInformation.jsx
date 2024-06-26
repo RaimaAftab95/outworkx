@@ -14,9 +14,9 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
   const [errors, setErrors] = useState({});
 
   // handle select offer
-  const handleSelectOffer = offer => {
+  const handleSelectOffer = (offer) => {
     if (offers?.includes(offer)) {
-      const updatedOffers = offers?.filter(item => item !== offer);
+      const updatedOffers = offers?.filter((item) => item !== offer);
       setOffers(updatedOffers);
     } else {
       setOffers([...offers, offer]);
@@ -24,10 +24,10 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
   };
 
   // select rules
-  const selectRules = e => {
+  const selectRules = (e) => {
     const rule = e.target.value;
     if (rules?.includes(rule)) {
-      const updatedRules = rules?.filter(item => item !== rule);
+      const updatedRules = rules?.filter((item) => item !== rule);
       setRules(updatedRules);
     } else {
       setRules([...rules, rule]);
@@ -35,7 +35,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
   };
 
   // submit handler
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     // check validation
@@ -120,7 +120,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
           </InputBox>
         </div>
 
-        <div className="mt-20">
+        <div className="mt-5  origin-center scale-85 transform">
           <Heading>Where’s your place located? </Heading>
           <p className="mt-2 text-2xl font-medium leading-9">
             Your address is only shared with guests after they’ve made a
@@ -147,7 +147,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
                 </div>
                 <Input
                   value={address}
-                  onChange={e => setAddress(e.target.value)}
+                  onChange={(e) => setAddress(e.target.value)}
                   type="text"
                   placeholder="Enter your address"
                 />
@@ -159,7 +159,7 @@ const SpaceInformation = ({ setActiveTab, spaceDetails, setSpaceDetails }) => {
           </div>
         </div>
 
-        <div className="mt-20">
+        <div className="mt-10 origin-center  scale-85 transform">
           <Heading>Tell guests what your place has to offer</Heading>
           <p className="mt-2 text-2xl font-medium leading-9">
             You can add more after publish your listing
