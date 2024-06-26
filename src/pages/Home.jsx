@@ -3,7 +3,7 @@ import Spaces from '../components/home/spaces';
 import Footer from '../components/shared/Footer';
 import Header from '../components/shared/Header';
 
-const Home = () => {
+export default function Home() {
   return (
     <main>
       <Header />
@@ -12,6 +12,4 @@ const Home = () => {
       <Footer />
     </main>
   );
-};
-
-export default Home;
+}

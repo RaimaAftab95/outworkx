@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../../lib/hooks';
 import { logout } from '../../features/auth-slice';
 
@@ -73,18 +74,20 @@ export default function Header() {
   return (
     <header className="py-6 text-black">
       <nav className="container relative flex items-center justify-between px-4">
-        <img src="/images/logo.svg" alt="Brand logo" />
+        <Link to="/">
+          <img src="/images/logo.svg" alt="Brand logo" />
+        </Link>
 
         <div className="flex items-center justify-between gap-3">
-          <ul className="hidden h-full flex-col items-center justify-center gap-9 px-2 text-xl text-primary  sm:flex-row sm:text-base md:flex">
+          <ul className="hidden h-full flex-col items-center justify-center gap-9 px-2 text-xl text-primary sm:flex-row sm:text-base md:flex">
             <li className="transition-all hover:text-primary-light">
               <Link to="/">About Us</Link>
             </li>
             <li className="transition-all hover:text-primary-light">
-              <Link to="/">List Space</Link>
-            </li>
-            <li className="transition-all hover:text-primary-light">
               <Link to="/">Locations</Link>
+            </li>
+            <li className="rounded-full bg-black px-5 py-2 text-white transition-all hover:opacity-60">
+              <Link to="/space/create">List Space</Link>
             </li>
             <li className="flex items-center gap-5">
               <img

@@ -7,7 +7,6 @@ const BookingHistory = lazy(() => import('./pages/BookingHistory'));
 const CreateSpace = lazy(() => import('./pages/CreateSpace'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Home = lazy(() => import('./pages/Home'));
-const Launch = lazy(() => import('./pages/Launch'));
 const ReserveSpace = lazy(() => import('./pages/ReserveSpace'));
 const Signin = lazy(() => import('./pages/Signin'));
 const Signup = lazy(() => import('./pages/Signup'));
@@ -27,7 +26,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: '/spaces/:id',
+    path: '/space/:id',
     element: (
       <Suspense fallback={<LoadingAnimation />}>
         <SpaceDetails />
@@ -35,18 +34,10 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: '/create-space',
+    path: '/space/create',
     element: (
       <Suspense fallback={<LoadingAnimation />}>
         <CreateSpace />
-      </Suspense>
-    )
-  },
-  {
-    path: '/launch',
-    element: (
-      <Suspense fallback={<LoadingAnimation />}>
-        <Launch />
       </Suspense>
     )
   },
