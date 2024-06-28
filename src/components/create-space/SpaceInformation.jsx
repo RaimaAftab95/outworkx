@@ -135,8 +135,7 @@ export default function SpaceInformation({
             <iframe
               title="map"
               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"
-              className="h-64 sm:h-smCustom md:h-mdCustom"
-              style={{ border: 0, width: '100%' }}
+              className="h-64 w-full border-0 sm:h-smCustom md:h-mdCustom"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -181,7 +180,7 @@ export default function SpaceInformation({
                 <img
                   src="/images/icons/wifi-lg.png"
                   alt="icon"
-                  style={{ width: '50px', height: '50px' }}
+                  className="h-12 w-12"
                 />
               </div>
               <h3 className="text-xl">Wifi</h3>
@@ -199,7 +198,7 @@ export default function SpaceInformation({
                 <img
                   src="/images/icons/tv.png"
                   alt="icon"
-                  style={{ width: '50px', height: '50px' }}
+                  className="h-12 w-12"
                 />
               </div>
               <h3 className="text-xl">TV</h3>
@@ -217,7 +216,7 @@ export default function SpaceInformation({
                 <img
                   src="/images/icons/kitchen.png"
                   alt="icon"
-                  style={{ width: '50px', height: '50px' }}
+                  className="h-12 w-12"
                 />
               </div>
               <h3 className="text-xl">Kitchen</h3>
@@ -235,7 +234,7 @@ export default function SpaceInformation({
                 <img
                   src="/images/icons/printer.png"
                   alt="icon"
-                  style={{ width: '50px', height: '50px' }}
+                  className="h-12 w-12"
                 />
               </div>
               <h3 className="text-xl">Printer</h3>
@@ -253,7 +252,7 @@ export default function SpaceInformation({
                 <img
                   src="/images/icons/parking.png"
                   alt="icon"
-                  style={{ width: '50px', height: '50px' }}
+                  className="h-12 w-12"
                 />
               </div>
               <h3 className="text-xl">Parking</h3>
@@ -271,7 +270,7 @@ export default function SpaceInformation({
                 <img
                   src="/images/icons/air-lg.png"
                   alt="icon"
-                  style={{ width: '50px', height: '50px' }}
+                  className="h-12 w-12"
                 />
               </div>
               <h3 className="text-xl">Air Conditioning</h3>

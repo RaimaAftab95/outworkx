@@ -55,6 +55,7 @@ export default function SpaceMoreInformation({
     },
     onError: async (error) => {
       console.log('error', error);
+      toast.error('Image upload failed. Please try again.');
     }
   });
 
@@ -145,7 +146,7 @@ export default function SpaceMoreInformation({
     createSpace();
   };
   return (
-    <div className="flex w-20 justify-center">
+    <div className="flex w-full justify-center">
       <div className="-mt-10">
         <div className="origin-center scale-90 transform">
           <Heading>Add some photos of your place</Heading>
@@ -271,24 +272,24 @@ export default function SpaceMoreInformation({
               <div className="flex flex-col gap-2 border-b border-gray pb-5">
                 <div className="flex flex-wrap items-center justify-between gap-5">
                   <span className="text-lg font-medium">Best Price</span>
-                  <span className="text-lg font-medium">$35/Per Person</span>
+                  <span className="text-lg font-medium">Rs35/Per Person</span>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-5">
                   <span className="text-lg font-medium">Guest service fee</span>
-                  <span className="text-lg font-medium">$5</span>
+                  <span className="text-lg font-medium">Rs5</span>
                 </div>
               </div>
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-5">
                 <span className="text-lg font-medium">Guest service fee</span>
-                <span className="text-lg font-medium">$40</span>
+                <span className="text-lg font-medium">Rs40</span>
               </div>
             </div>
 
             <div className="mt-4 rounded-3xl border border-gray p-7">
               <div className="flex flex-wrap items-center justify-between gap-5">
                 <span className="text-lg font-medium">You earn</span>
-                <span className="text-lg font-medium">$34</span>
+                <span className="text-lg font-medium">Rs34</span>
               </div>
             </div>
           </div>

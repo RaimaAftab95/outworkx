@@ -42,7 +42,7 @@ const Signup = () => {
   const { mutate, isPending } = useMutation({
     mutationKey: ['signup'],
     mutationFn: signupUser,
-    onSuccess: async data => {
+    onSuccess: async (data) => {
       // store in local storage
       localStorage.setItem('auth', JSON.stringify(data?.data));
 
@@ -52,7 +52,7 @@ const Signup = () => {
 
       toast.success('Signup successful.');
     },
-    onError: async error => {
+    onError: async (error) => {
       const property = error?.response?.data?.data?.message?.replace('/', '');
       setErrors({
         [property]: `${property} is Required!`
@@ -61,7 +61,7 @@ const Signup = () => {
   });
 
   // submit handler
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     // check validation
@@ -120,7 +120,7 @@ const Signup = () => {
                 placeholder="First Name*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={firstName}
-                onChange={e => setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
               />
               <Error>{errors?.firstName}</Error>
               <input
@@ -128,7 +128,7 @@ const Signup = () => {
                 placeholder="Last Name*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={lastName}
-                onChange={e => setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
               />
               <Error>{errors?.lastName}</Error>
               <input
@@ -136,7 +136,7 @@ const Signup = () => {
                 placeholder="E-mail*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <Error>{errors?.email}</Error>
               <input
@@ -144,7 +144,7 @@ const Signup = () => {
                 placeholder="Phone Number*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={phoneNumber}
-                onChange={e => setPhoneNumber(e.target.value)}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
               <Error>{errors?.phoneNumber}</Error>
               <input
@@ -152,7 +152,7 @@ const Signup = () => {
                 placeholder="Create password*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Error>{errors?.password}</Error>
               <input
@@ -160,14 +160,14 @@ const Signup = () => {
                 placeholder="Select Date of birth*"
                 className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
                 value={dateOfBirth}
-                onChange={e => setDateOfBirth(e.target.value)}
+                onChange={(e) => setDateOfBirth(e.target.value)}
               />
               <Error>{errors?.dateOfBirth}</Error>
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                   <input
                     value="male"
-                    onChange={e => setGender(e.target.value)}
+                    onChange={(e) => setGender(e.target.value)}
                     type="radio"
                     name="gender"
                     id="male"
@@ -179,7 +179,7 @@ const Signup = () => {
                 <div className="flex items-center gap-2">
                   <input
                     value="female"
-                    onChange={e => setGender(e.target.value)}
+                    onChange={(e) => setGender(e.target.value)}
                     type="radio"
                     name="gender"
                     id="female"
@@ -198,7 +198,7 @@ const Signup = () => {
               </Button>
               <p className="text-xl font-bold leading-9 text-primary/70">
                 Already a member?{' '}
-                <Link to="/sign-in" className="underline">
+                <Link to="/login" className="underline">
                   Sign in
                 </Link>
               </p>
