@@ -4,6 +4,8 @@ import axios from '../client/http.client';
 import Space from '../components/Space';
 import Hero from './../components/Hero';
 
+const { VITE_BACKEND_API } = import.meta.env;
+
 export default function Home() {
   const [pagination, setPagination] = useState({});
   const [spaces, setSpaces] = useState([]);
@@ -13,7 +15,7 @@ export default function Home() {
     const { pageNumber = 1, pageSize = 10 } = pagination;
 
     try {
-      const { data } = await axios.post('http://localhost:1100/v1/space/list', {
+      const { data } = await axios.post(`${VITE_BACKEND_API}/v1/space/list`, {
         pageNumber: pageNumber,
         pageSize: pageSize
       });

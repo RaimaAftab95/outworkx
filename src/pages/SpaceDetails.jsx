@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import axios from '../client/http.client';
 
+const { VITE_BACKEND_API } = import.meta.env;
+
 export default function SpaceDetails() {
   const [space, setSpace] = useState(null);
   const params = useParams();
@@ -10,7 +12,7 @@ export default function SpaceDetails() {
   useEffect(
     function () {
       axios
-        .post('http://localhost:1100/v1/space/get', {
+        .post(`${VITE_BACKEND_API}/v1/space/get`, {
           spaceId: params.id
         })
         .then(function (response) {

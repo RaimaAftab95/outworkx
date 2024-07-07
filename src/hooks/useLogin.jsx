@@ -1,6 +1,8 @@
 import { useAuthContext } from './useAuthContext';
 import { useState } from 'react';
 
+const { VITE_BACKEND_API } = import.meta.env;
+
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -17,7 +19,7 @@ export function useLogin() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('http://localhost:1100/v1/auth/login', {
+    const response = await fetch(`${VITE_BACKEND_API}/v1/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })

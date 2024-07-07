@@ -1,6 +1,8 @@
 import { useAuthContext } from './useAuthContext';
 import { useState } from 'react';
 
+const { VITE_BACKEND_API } = import.meta.env;
+
 export function useRegister() {
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -22,7 +24,7 @@ export function useRegister() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('http://localhost:1100/v1/auth/register', {
+    const response = await fetch(`${VITE_BACKEND_API}/v1/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

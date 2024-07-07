@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "prepare": "npx husky install",
-    "build": "vite build",
-    "dev": "vite"
+    "build": "vite build --mode production",
+    "dev": "vite --mode development"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.4",
