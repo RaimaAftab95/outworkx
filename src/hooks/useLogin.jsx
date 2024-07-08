@@ -1,7 +1,7 @@
 import { useAuthContext } from './useAuthContext';
 import { useState } from 'react';
 
-const { VITE_BACKEND_API } = import.meta.env;
+// const { VITE_BACKEND_API } = import.meta.env;
 
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(null);
@@ -19,27 +19,43 @@ export function useLogin() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`${VITE_BACKEND_API}/v1/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
+    try {
+      //const response = await fetch(`${VITE_BACKEND_API}/v1/auth/login`, {
+      const response = await fetch(
+        'https://www.api.outworkx.com//v1/auth/login',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        }
+      );
 
-    const { data } = await response.json();
+      const { data } = await response.json();
 
-    if (!response.ok) {
-      setIsLoading(false);
-      setError(data.message);
+      if (!response.ok) {
+        setIsLoading(false);
+        setError(data.message);
+        // added code
+        console.error('Login error:', data.message);
+        setIsLoading(false);
+        // throw new Error(data.message);
 
-      throw new Error(); // To reject the promise
-    }
+        throw new Error(data.message); // To reject the promise
+      }
 
-    if (response.ok) {
-      localStorage.setItem('user', JSON.stringify(data.user));
-      localStorage.setItem('token', JSON.stringify(data.token));
+      if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', JSON.stringify(data.token));
 
-      dispatch({ type: 'LOGIN', payload: data });
+        dispatch({ type: 'LOGIN', payload: data });
 
+        setIsLoading(false);
+      }
+    } catch (error) {
+      //aded try block
+      // added code
+      setError(error.message || 'An unexpected error occurred.');
+      console.error('Unexpected error during login:', error);
       setIsLoading(false);
     }
   }

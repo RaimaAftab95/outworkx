@@ -1,7 +1,7 @@
 import { useAuthContext } from './useAuthContext';
 import { useState } from 'react';
 
-const { VITE_BACKEND_API } = import.meta.env;
+// const { VITE_BACKEND_API } = import.meta.env;
 
 export function useRegister() {
   const [isLoading, setIsLoading] = useState(null);
@@ -24,19 +24,23 @@ export function useRegister() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`${VITE_BACKEND_API}/v1/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstName: payload.firstName,
-        lastName: payload.lastName,
-        email: payload.email,
-        password: payload.password,
-        dateOfBirth: payload.dateOfBirth,
-        phoneNumber: payload.phoneNumber,
-        gender: payload.gender
-      })
-    });
+    // const response = await fetch(`${VITE_BACKEND_API}/v1/auth/register`, {
+    const response = await fetch(
+      'https://www.api.outworkx.com/v1/auth/register',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          email: payload.email,
+          password: payload.password,
+          dateOfBirth: payload.dateOfBirth,
+          phoneNumber: payload.phoneNumber,
+          gender: payload.gender
+        })
+      }
+    );
 
     const { data } = await response.json();
 
@@ -50,6 +54,7 @@ export function useRegister() {
     if (response.ok) {
       localStorage.setItem('user', JSON.stringify(data.user));
       localStorage.setItem('token', JSON.stringify(data.token));
+      console.log('register user data', data.user);
 
       dispatch({ type: 'LOGIN', payload: data });
 

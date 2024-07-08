@@ -30,13 +30,19 @@ export default function Signin() {
   async function handleFormSubmit(e) {
     e.preventDefault();
 
-    await toast.promise(login({ email, password }), {
-      loading: 'Loading...',
-      success: 'Login successful!',
-      error: 'Login failed. Please try again!'
-    });
+    try {
+      await toast.promise(login({ email, password }), {
+        loading: 'Loading...',
+        success: 'Login successful!',
+        error: 'Login failed. Please try again!'
+      });
 
-    navigate(redirect || '/dashboard');
+      navigate(redirect || '/dashboard');
+
+      // added code
+    } catch (error) {
+      console.error('Error during form submission:', error);
+    }
   }
 
   return (
