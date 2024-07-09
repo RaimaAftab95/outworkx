@@ -7,6 +7,11 @@ export default function Gallery() {
   const { dispatch } = useCreateSpaceContext();
   const navigate = useNavigate();
 
+  /**
+   * Handle form submission for the gallery
+   * @param {import('react').SyntheticEvent} e Event
+   * @returns {void}
+   */
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -20,6 +25,11 @@ export default function Gallery() {
     navigate('/space/create/highlights');
   }
 
+  /**
+   * Handle image upload
+   * @param {import('react').SyntheticEvent} e Event
+   * @returns {void}
+   */
   function handleImageUpload(e) {
     const files = Array.from(e.target.files);
     setImages((prevImages) => [...prevImages, ...files]);

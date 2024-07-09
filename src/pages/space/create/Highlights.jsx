@@ -7,6 +7,11 @@ export default function Highlights() {
   const { dispatch, space } = useCreateSpaceContext();
   // const navigate = useNavigate();
 
+  /**
+   * Handle form submission for highlights
+   * @param {import('react').SyntheticEvent} e Event
+   * @returns {void}
+   */
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -20,6 +25,10 @@ export default function Highlights() {
     // navigate('/space/create/summary');
   }
 
+  /**
+   * Effect to check if all data is present to create space
+   * @returns {void}
+   */
   useEffect(() => {
     if (
       space.name &&
