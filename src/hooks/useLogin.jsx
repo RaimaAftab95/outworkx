@@ -22,7 +22,7 @@ export function useLogin() {
     try {
       //const response = await fetch(`${VITE_BACKEND_API}/v1/auth/login`, {
       const response = await fetch(
-        'https://www.api.outworkx.com//v1/auth/login',
+        'https:/www.api.outworkx.com/v1/auth/login',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -48,6 +48,7 @@ export function useLogin() {
         localStorage.setItem('token', JSON.stringify(data.token));
 
         dispatch({ type: 'LOGIN', payload: data });
+        console.log('payload data:', { payload: data });
 
         setIsLoading(false);
       }

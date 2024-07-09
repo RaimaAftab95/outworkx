@@ -33,7 +33,8 @@ export default function Location() {
       }
     });
 
-    navigate('/space/create/location');
+    // navigate('/space/create/location');
+    navigate('/space/create/gallery');
   }
 
   return (
@@ -82,7 +83,7 @@ export default function Location() {
         />
         <button
           type="submit"
-          className="bg-primary rounded-lg py-4 text-lg font-bold text-white"
+          className="bg-primary rounded-lg py-4 text-lg font-bold"
         >
           Next
         </button>

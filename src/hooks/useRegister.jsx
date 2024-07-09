@@ -26,7 +26,7 @@ export function useRegister() {
 
     // const response = await fetch(`${VITE_BACKEND_API}/v1/auth/register`, {
     const response = await fetch(
-      'https://www.api.outworkx.com/v1/auth/register',
+      'https:/www.api.outworkx.com/v1/auth/register',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -47,6 +47,7 @@ export function useRegister() {
     if (!response.ok) {
       setIsLoading(false);
       setError(data.message);
+      console.log(' response is no ok register user data', data.user);
 
       throw new Error(); // To reject the promise
     }
