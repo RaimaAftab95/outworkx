@@ -2,6 +2,25 @@ import { createContext, useReducer } from 'react';
 
 export const CreateSpaceContext = createContext();
 
+/**
+ * @typedef {Object} Space
+ * @property {string} name
+ * @property {string} description
+ * @property {string} numberOfDesks
+ * @property {string} pricePerDesk
+ * @property {string} maximumNumberOfNomads
+ * @property {string} address
+ * @property {string} city
+ * @property {string} state
+ * @property {string} zipCode
+ * @property {string} country
+ * @property {Array} gallery
+ * @property {Array} amenities
+ * @property {Array} rules
+ * @property {Array} availability
+ */
+
+/** @type {Space} */
 const initialState = {
   space: {
     name: '',
@@ -15,20 +34,15 @@ const initialState = {
     zipCode: '',
     country: '',
     gallery: [], // Array to hold uploaded images
-    highlights: [] // Array to hold highlights data
+    amenities: [],
+    rules: [],
+    availability: [] // Array to hold availability data
   }
 };
 
 export function createSpaceReducer(state, action) {
   switch (action.type) {
     case 'SET_GENERAL':
-      return {
-        ...state,
-        space: {
-          ...state.space,
-          ...action.payload.space
-        }
-      };
     case 'SET_LOCATION':
       return {
         ...state,
@@ -45,14 +59,28 @@ export function createSpaceReducer(state, action) {
           gallery: action.payload.gallery
         }
       };
-    case 'SET_HIGHLIGHTS':
+    case 'SET_AMENITIES_AND_RULES':
       return {
         ...state,
         space: {
           ...state.space,
-          highlights: action.payload.highlights
+          amenities: action.payload.amenities,
+          rules: action.payload.rules
         }
       };
+    case 'SET_AVAILABILITY':
+      return {
+        ...state,
+        space: {
+          ...state.space,
+          availability: action.payload.availability
+        }
+      };
+    case 'CREATE_SPACE':
+      // Assuming space creation logic here
+      console.log('Space creation request sent with data:', state.space);
+      alert('Space created successfully!');
+      return state;
     default:
       return state;
   }
@@ -62,18 +90,8 @@ export function CreateSpaceContextProvider({ children }) {
   const [state, dispatch] = useReducer(createSpaceReducer, initialState);
 
   console.log('CreateSpaceContextProvider -> state', state);
-  const handleSpaceCreation = () => {
-    // Assuming space creation is successful
-    dispatch({ type: 'SET_SPACE_CREATED', payload: true });
-
-    // Show alert for demonstration
-    alert('Space created successfully!');
-  };
-
   return (
-    <CreateSpaceContext.Provider
-      value={{ ...state, dispatch, handleSpaceCreation }}
-    >
+    <CreateSpaceContext.Provider value={{ ...state, dispatch }}>
       {children}
     </CreateSpaceContext.Provider>
   );

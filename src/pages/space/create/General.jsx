@@ -82,6 +82,11 @@ export default function General() {
       <button type="submit" className="bg-primary rounded-lg px-9 py-4">
         Next
       </button>
+      {/* <div className="mt-12 flex justify-end">
+          <Button type="submit" className="px-10">
+            Next
+          </Button>
+        </div> */}
     </form>
   );
 }
