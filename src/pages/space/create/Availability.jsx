@@ -12,30 +12,41 @@ const daysOfWeek = [
   'Sunday'
 ];
 
+const timeOptions = Array.from({ length: 24 }, (_, i) => {
+  const hour = i.toString().padStart(2, '0');
+  return [`${hour}:00 AM`, `${hour}:30 AM`, `${hour}:00 PM`, `${hour}:30 PM`];
+}).flat();
+
 export default function Availability() {
   const [availability, setAvailability] = useState([]);
   const { dispatch } = useCreateSpaceContext();
   const navigate = useNavigate();
 
-  const addAvailabilitySlot = () => {
-    setAvailability([...availability, { day: '', start: 0, end: 60 }]);
+  const toggleAvailability = (day) => {
+    const existingSlot = availability.find((slot) => slot.day === day);
+    if (existingSlot) {
+      removeAvailabilitySlot(day);
+    } else {
+      addAvailabilitySlot(day);
+    }
   };
 
-  const removeAvailabilitySlot = (index) => {
-    const updatedAvailability = [...availability];
-    updatedAvailability.splice(index, 1);
+  const addAvailabilitySlot = (day) => {
+    setAvailability([
+      ...availability,
+      { day, start: '09:00 AM', end: '05:00 PM' }
+    ]);
+  };
+
+  const removeAvailabilitySlot = (day) => {
+    const updatedAvailability = availability.filter((slot) => slot.day !== day);
     setAvailability(updatedAvailability);
   };
 
-  const handleDayChange = (index, day) => {
-    const updatedAvailability = [...availability];
-    updatedAvailability[index].day = day;
-    setAvailability(updatedAvailability);
-  };
-
-  const handleTimeChange = (index, field, value) => {
-    const updatedAvailability = [...availability];
-    updatedAvailability[index][field] = value;
+  const handleTimeChange = (day, field, value) => {
+    const updatedAvailability = availability.map((slot) =>
+      slot.day === day ? { ...slot, [field]: value } : slot
+    );
     setAvailability(updatedAvailability);
   };
 
@@ -52,77 +63,72 @@ export default function Availability() {
     navigate('/space/create/highlights');
   };
 
+  const renderTimeSelect = (day, field, value) => (
+    <select
+      value={value}
+      onChange={(e) => handleTimeChange(day, field, e.target.value)}
+      className="mt-1 block w-full rounded-lg border-gray p-2"
+    >
+      {timeOptions.map((time) => (
+        <option key={time} value={time}>
+          {time}
+        </option>
+      ))}
+    </select>
+  );
+
   return (
-    <div>
-      <h2 className="text-primary text-2xl font-bold">Availability</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-        {availability.map((slot, index) => (
-          <div key={index} className="mt-4">
-            <label className="block text-lg font-medium">Day:</label>
-            <select
-              value={slot.day}
-              onChange={(e) => handleDayChange(index, e.target.value)}
-              className="border-gray mt-1 block w-full rounded-lg p-2"
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <h2 className="mb-5 mt-5 text-2xl font-bold text-primary">
+          Availability
+        </h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {daysOfWeek.map((day) => (
+            <div key={day} className="flex items-center gap-4">
+              <label className="block w-24 text-lg font-medium">{day}</label>
+              <div
+                className={`focus-within:bg-primary-500 relative inline-block h-4 w-12 rounded-full bg-black transition-all duration-200 ${availability.some((slot) => slot.day === day) ? 'bg-green-500' : ''}`}
+                onClick={() => toggleAvailability(day)}
+              >
+                <div
+                  className={`absolute h-4 w-4 transform rounded-full bg-white shadow-md transition-transform duration-200 ${availability.some((slot) => slot.day === day) ? 'translate-x-6' : ''}`}
+                />
+              </div>
+              {availability
+                .filter((slot) => slot.day === day)
+                .map((slot) => (
+                  <div key={day} className="flex items-center gap-2">
+                    {renderTimeSelect(day, 'start', slot.start)}
+                    <span>to</span>
+                    {renderTimeSelect(day, 'end', slot.end)}
+                    <button
+                      type="button"
+                      onClick={() => removeAvailabilitySlot(day)}
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                ))}
+            </div>
+          ))}
+          <div className="flex justify-between">
+            <button
+              type="submit"
+              className="rounded-lg bg-black px-4 py-2 text-white"
             >
-              <option value="">Select a day</option>
-              {daysOfWeek.map((day) => (
-                <option key={day} value={day}>
-                  {day}
-                </option>
-              ))}
-            </select>
-            <div className="mt-2">
-              <label className="block text-lg font-medium">
-                From (minutes since midnight):
-              </label>
-              <input
-                type="number"
-                value={slot.start}
-                onChange={(e) =>
-                  handleTimeChange(index, 'start', parseInt(e.target.value))
-                }
-                className="border-gray mt-1 block w-full rounded-lg p-2"
-              />
-            </div>
-            <div className="mt-2">
-              <label className="block text-lg font-medium">
-                To (minutes since midnight):
-              </label>
-              <input
-                type="number"
-                value={slot.end}
-                onChange={(e) =>
-                  handleTimeChange(index, 'end', parseInt(e.target.value))
-                }
-                className="border-gray mt-1 block w-full rounded-lg p-2"
-              />
-            </div>
+              Done
+            </button>
             <button
               type="button"
-              onClick={() => removeAvailabilitySlot(index)}
-              className="mt-2 rounded-lg bg-red-500 px-4 py-2 text-white"
+              className="rounded-lg bg-black px-4 py-2 text-white"
+              onClick={() => navigate('/space/create/highlights')}
             >
-              Remove
+              Skip
             </button>
           </div>
-        ))}
-        <button
-          type="button"
-          onClick={addAvailabilitySlot}
-          className="bg-primary mt-4 rounded-lg py-4 text-lg font-bold"
-        >
-          Add Availability Slot
-        </button>
-        {/* <button type="submit" className="mt-4 bg-primary rounded-lg py-4 text-lg font-bold">
-          Finish
-        </button> */}
-        <button
-          type="submit"
-          className="bg-primary rounded-lg py-4 text-lg font-bold"
-        >
-          Next
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

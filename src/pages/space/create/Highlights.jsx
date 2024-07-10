@@ -59,9 +59,8 @@ export default function Highlights() {
       country,
       gallery,
       amenities = [],
-      rules = []
-      // availability.length > 0 // Check for availability as well
-      // highlights: { amenities, rules },
+      rules = [],
+      availability = [] // Check for availability as well
     } = space;
 
     if (
@@ -77,7 +76,8 @@ export default function Highlights() {
       country &&
       gallery.length > 0 &&
       amenities.length > 0 &&
-      rules.length > 0
+      rules.length > 0 &&
+      availability.length > 0
     ) {
       console.log('Space created:', space);
       alert('Space created successfully!');
@@ -88,9 +88,9 @@ export default function Highlights() {
 
   return (
     <div>
-      <h2 className="text-primary text-2xl font-bold">Highlights</h2>
+      <h2 className="text-2xl font-bold text-primary">Highlights</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-        <div className="scale-85 mt-10 origin-center transform">
+        <div className="mt-10 origin-center scale-85 transform">
           <h3 className="text-xl font-bold">
             Tell guests what your place has to offer
           </h3>
@@ -110,7 +110,7 @@ export default function Highlights() {
                 key={amenity}
                 className={`cursor-pointer rounded-lg border p-4 ${
                   amenities.includes(amenity.toLowerCase())
-                    ? 'border-primary bg-gray-200'
+                    ? 'bg-gray-200 border-primary'
                     : 'border-gray bg-white'
                 }`}
                 onClick={() => handleSelectAmenity(amenity.toLowerCase())}
@@ -133,7 +133,7 @@ export default function Highlights() {
                 <label className="text-lg font-medium">{rule}</label>
                 <input
                   type="checkbox"
-                  className="border-gray h-4 w-4 rounded"
+                  className="h-4 w-4 rounded border-gray"
                   checked={rules.includes(rule.toLowerCase())}
                   onChange={() => handleSelectRule(rule.toLowerCase())}
                 />
@@ -144,7 +144,7 @@ export default function Highlights() {
 
         <button
           type="submit"
-          className="bg-primary rounded-lg py-4 text-lg font-bold"
+          // className="bg-primary rounded-lg py-4 text-lg font-bold"
         >
           Finish
         </button>

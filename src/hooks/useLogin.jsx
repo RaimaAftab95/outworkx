@@ -20,9 +20,6 @@ export function useLogin() {
     setError(null);
 
     const response = await fetch(`${VITE_BACKEND_API}/v1/auth/login`, {
-      // const response = await fetch(
-      //   'https:/www.api.outworkx.com/v1/auth/login',
-      //   {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })

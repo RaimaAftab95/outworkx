@@ -37,17 +37,17 @@ export default function Gallery() {
 
   return (
     <div>
-      <h2 className="text-primary text-2xl font-bold">Gallery</h2>
+      <h2 className="text-2xl font-bold text-primary">Gallery</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         <input
           type="file"
           multiple
-          className="border-primary text-primary/70 block w-full rounded-lg border px-9 py-4 outline-none"
+          className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none"
           onChange={handleImageUpload}
         />
         <button
           type="submit"
-          className="bg-primary rounded-lg py-4 text-lg font-bold"
+          // className="bg-primary rounded-lg py-4 text-lg font-bold"
         >
           Next
         </button>

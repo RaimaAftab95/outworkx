@@ -39,12 +39,12 @@ export default function Location() {
 
   return (
     <div>
-      <h2 className="text-primary text-2xl font-bold">Location</h2>
+      <h2 className="text-2xl font-bold text-primary">Location</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         <input
           type="text"
           placeholder="Address*"
-          className="border-primary text-primary/70 placeholder:text-primary/70 block w-full rounded-lg border px-9 py-4 outline-none"
+          className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
           value={address}
           required
           onChange={(e) => setAddress(e.target.value)}
@@ -52,7 +52,7 @@ export default function Location() {
         <input
           type="text"
           placeholder="City*"
-          className="border-primary text-primary/70 placeholder:text-primary/70 block w-full rounded-lg border px-9 py-4 outline-none"
+          className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
           value={city}
           required
           onChange={(e) => setCity(e.target.value)}
@@ -60,7 +60,7 @@ export default function Location() {
         <input
           type="text"
           placeholder="State*"
-          className="border-primary text-primary/70 placeholder:text-primary/70 block w-full rounded-lg border px-9 py-4 outline-none"
+          className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
           value={state}
           required
           onChange={(e) => setState(e.target.value)}
@@ -68,7 +68,7 @@ export default function Location() {
         <input
           type="text"
           placeholder="Zip code*"
-          className="border-primary text-primary/70 placeholder:text-primary/70 block w-full rounded-lg border px-9 py-4 outline-none"
+          className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
           value={zipCode}
           required
           onChange={(e) => setZipCode(e.target.value)}
@@ -76,14 +76,14 @@ export default function Location() {
         <input
           type="text"
           placeholder="Country*"
-          className="border-primary text-primary/70 placeholder:text-primary/70 block w-full rounded-lg border px-9 py-4 outline-none"
+          className="block w-full rounded-lg border border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70"
           value={country}
           required
           onChange={(e) => setCountry(e.target.value)}
         />
         <button
           type="submit"
-          className="bg-primary rounded-lg py-4 text-lg font-bold"
+          // className="bg-primary rounded-lg py-4 text-lg font-bold"
         >
           Next
         </button>
