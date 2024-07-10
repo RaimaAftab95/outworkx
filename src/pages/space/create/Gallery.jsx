@@ -22,7 +22,7 @@ export default function Gallery() {
       }
     });
 
-    navigate('/space/create/highlights');
+    navigate('/space/create/availability');
   }
 
   /**

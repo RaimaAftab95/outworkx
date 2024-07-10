@@ -45,7 +45,6 @@ export function createSpaceReducer(state, action) {
     case 'SET_GENERAL':
     case 'SET_LOCATION':
       return {
-        ...state,
         space: {
           ...state.space,
           ...action.payload.space
@@ -53,7 +52,6 @@ export function createSpaceReducer(state, action) {
       };
     case 'SET_GALLERY':
       return {
-        ...state,
         space: {
           ...state.space,
           gallery: action.payload.gallery
@@ -61,7 +59,6 @@ export function createSpaceReducer(state, action) {
       };
     case 'SET_AMENITIES_AND_RULES':
       return {
-        ...state,
         space: {
           ...state.space,
           amenities: action.payload.amenities,
@@ -70,7 +67,6 @@ export function createSpaceReducer(state, action) {
       };
     case 'SET_AVAILABILITY':
       return {
-        ...state,
         space: {
           ...state.space,
           availability: action.payload.availability
@@ -91,7 +87,7 @@ export function CreateSpaceContextProvider({ children }) {
 
   console.log('CreateSpaceContextProvider -> state', state);
   return (
-    <CreateSpaceContext.Provider value={{ ...state, dispatch }}>
+    <CreateSpaceContext.Provider value={{ space: state.space, dispatch }}>
       {children}
     </CreateSpaceContext.Provider>
   );

@@ -81,6 +81,8 @@ export default function Highlights() {
     ) {
       console.log('Space created:', space);
       alert('Space created successfully!');
+    } else {
+      alert('Please fill in all required fields before creating the space.');
     }
   }, [space]);
 
@@ -108,8 +110,8 @@ export default function Highlights() {
                 key={amenity}
                 className={`cursor-pointer rounded-lg border p-4 ${
                   amenities.includes(amenity.toLowerCase())
-                    ? 'border-primary'
-                    : 'border-gray'
+                    ? 'border-primary bg-gray-200'
+                    : 'border-gray bg-white'
                 }`}
                 onClick={() => handleSelectAmenity(amenity.toLowerCase())}
               >
@@ -146,7 +148,9 @@ export default function Highlights() {
         >
           Finish
         </button>
-        <button onClick={handleCreateSpace}>Create Space</button>
+        <button type="submit" onClick={handleCreateSpace}>
+          Create Space
+        </button>
       </form>
     </div>
   );

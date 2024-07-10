@@ -22,7 +22,6 @@ export default function Register() {
    */
   async function handleFormSubmit(e) {
     e.preventDefault();
-    // console.log(formData);
 
     await toast.promise(
       register({
