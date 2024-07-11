@@ -60,7 +60,7 @@ export default function Highlights() {
       gallery,
       amenities = [],
       rules = [],
-      availability = [] // Check for availability as well
+      availability = []
     } = space;
 
     if (
@@ -87,17 +87,17 @@ export default function Highlights() {
   }, [space]);
 
   return (
-    <div>
+    <div className="p-10">
       <h2 className="text-2xl font-bold text-primary">Highlights</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-        <div className="mt-10 origin-center scale-85 transform">
+        <div className="mt-10">
           <h3 className="text-xl font-bold">
-            Tell guests what your place has to offer
+            What amenities does your space offer?
           </h3>
           <p className="mt-2 text-lg">
-            You can add more after publishing your listing
+            You can add more after publishing your listing.
           </p>
-          <div className="mt-11 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               'Wifi',
               'Kitchen',
@@ -106,51 +106,58 @@ export default function Highlights() {
               'Pets Allowed',
               'Fitness'
             ].map((amenity) => (
-              <div
-                key={amenity}
-                className={`cursor-pointer rounded-lg border p-4 ${
-                  amenities.includes(amenity.toLowerCase())
-                    ? 'bg-gray-200 border-primary'
-                    : 'border-gray bg-white'
-                }`}
-                onClick={() => handleSelectAmenity(amenity.toLowerCase())}
-              >
-                <h4 className="text-center">{amenity}</h4>
+              <div key={amenity} className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="h-6 w-6 appearance-none rounded border-2 border-green-500 checked:border-transparent checked:bg-green-500 focus:outline-none"
+                  checked={amenities.includes(amenity.toLowerCase())}
+                  onChange={() => handleSelectAmenity(amenity.toLowerCase())}
+                />
+                <label className="ml-2 text-lg">{amenity}</label>
               </div>
             ))}
           </div>
         </div>
 
         <div className="mt-10">
-          <h3 className="text-xl font-bold">Workspace rules</h3>
-          <div className="mt-4 space-y-4">
+          <h3 className="text-xl font-bold">Rules</h3>
+          <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               'No smoking',
               'No waste of electricity',
               'Keep workspace clean'
             ].map((rule) => (
-              <div key={rule} className="flex items-center justify-between">
-                <label className="text-lg font-medium">{rule}</label>
+              <div key={rule} className="flex items-center gap-3">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray"
+                  className="h-6 w-6 appearance-none rounded border-2 border-green-500 checked:border-transparent checked:bg-green-500 focus:outline-none"
                   checked={rules.includes(rule.toLowerCase())}
                   onChange={() => handleSelectRule(rule.toLowerCase())}
                 />
+                <label className="text-lg font-medium">{rule}</label>
               </div>
             ))}
           </div>
         </div>
 
-        <button
-          type="submit"
-          // className="bg-primary rounded-lg py-4 text-lg font-bold"
-        >
-          Finish
-        </button>
-        <button type="submit" onClick={handleCreateSpace}>
-          Create Space
-        </button>
+        <div className="mt-12 flex justify-end gap-3">
+          <button
+            type="button"
+            className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+            onClick={() => navigate('/space/create/highlights')}
+          >
+            Skip
+          </button>
+          <button
+            type="submit"
+            onClick={handleCreateSpace}
+            className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+          >
+            Done
+          </button>
+        </div>
       </form>
     </div>
   );

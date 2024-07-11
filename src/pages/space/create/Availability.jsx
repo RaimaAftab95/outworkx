@@ -12,6 +12,25 @@ const daysOfWeek = [
   'Sunday'
 ];
 
+// Day to number mapping
+const dayToNumber = {
+  Sunday: 0,
+  Monday: 1,
+  Tuesday: 2,
+  Wednesday: 3,
+  Thursday: 4,
+  Friday: 5,
+  Saturday: 6
+};
+
+// Convert time string to minutes past midnight
+const timeStringToMinutes = (time) => {
+  const [hour, minute, period] = time.match(/(\d+):(\d+) (AM|PM)/).slice(1);
+  let hoursInMinutes = (parseInt(hour) % 12) * 60;
+  if (period === 'PM') hoursInMinutes += 12 * 60;
+  return hoursInMinutes + parseInt(minute);
+};
+
 const timeOptions = Array.from({ length: 24 }, (_, i) => {
   const hour = i.toString().padStart(2, '0');
   return [`${hour}:00 AM`, `${hour}:30 AM`, `${hour}:00 PM`, `${hour}:30 PM`];
@@ -53,10 +72,16 @@ export default function Availability() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const formattedAvailability = availability.map((slot) => ({
+      day: dayToNumber[slot.day],
+      start: timeStringToMinutes(slot.start),
+      end: timeStringToMinutes(slot.end)
+    }));
+
     dispatch({
       type: 'SET_AVAILABILITY',
       payload: {
-        availability
+        availability: formattedAvailability
       }
     });
 
@@ -112,19 +137,21 @@ export default function Availability() {
                 ))}
             </div>
           ))}
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="rounded-lg bg-black px-4 py-2 text-white"
-            >
-              Done
-            </button>
+          <div className="flex justify-between gap-2">
             <button
               type="button"
-              className="rounded-lg bg-black px-4 py-2 text-white"
+              className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
               onClick={() => navigate('/space/create/highlights')}
             >
               Skip
+            </button>
+            <button
+              type="submit"
+              className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+            >
+              Done
             </button>
           </div>
         </form>

@@ -8,6 +8,7 @@ export default function General() {
   const [numberOfDesks, setNumberOfDesks] = useState('');
   const [pricePerDesk, setPricePerDesk] = useState('');
   const [maximumNumberOfNomads, setMaximumNumberOfNomads] = useState('');
+  const [spaceOwner, setSpaceOwner] = useState('');
 
   const { dispatch } = useCreateSpaceContext();
   const navigate = useNavigate();
@@ -28,7 +29,8 @@ export default function General() {
           description,
           numberOfDesks,
           pricePerDesk,
-          maximumNumberOfNomads
+          maximumNumberOfNomads,
+          spaceOwner
         }
       }
     });
@@ -37,10 +39,18 @@ export default function General() {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-primary">General</h2>
+    <div className="p-2">
+      <div className="mb-6 flex w-full items-center justify-between">
+        <h2 className="text-2xl font-bold text-primary">General</h2>
+        <button
+          className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+        >
+          Save & Exit
+        </button>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8 px-8 py-4">
-        <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-tight">
+        <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
           Place Name*
         </h2>
         <input
@@ -51,8 +61,8 @@ export default function General() {
           required
           onChange={(e) => setName(e.target.value)}
         />
-        <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-tight">
-          Discription*
+        <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
+          Description*
         </h2>
         <input
           type="text"
@@ -63,9 +73,9 @@ export default function General() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-          <div>
-            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-tight">
+        <div className="flex flex-col gap-8 sm:flex-row">
+          <div className="flex-1">
+            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
               Number of Desks*
             </h2>
             <input
@@ -78,9 +88,9 @@ export default function General() {
             />
           </div>
 
-          <div>
-            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-tight">
-              Price Per desk*
+          <div className="flex-1">
+            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
+              Price Per Desk*
             </h2>
             <input
               type="text"
@@ -93,41 +103,44 @@ export default function General() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-          <div>
-            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-tight">
-              Maximum number of nomads*
+        <div className="flex flex-col gap-8 sm:flex-row">
+          <div className="flex-1">
+            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
+              Maximum Number of Nomads*
             </h2>
             <input
               type="text"
-              placeholder="Write number of desks"
+              placeholder="Write maximum number of nomads"
               className="block w-full border-b border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70 focus:border-b-2"
-              value={numberOfDesks}
+              value={maximumNumberOfNomads}
               required
-              onChange={(e) => setNumberOfDesks(e.target.value)}
+              onChange={(e) => setMaximumNumberOfNomads(e.target.value)}
             />
           </div>
 
-          <div>
-            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-tight">
-              Space owner*
+          <div className="flex-1">
+            <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
+              Space Owner*
             </h2>
             <input
               type="text"
-              placeholder="Write Space owner name"
+              placeholder="Write space owner name"
               className="block w-full border-b border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70 focus:border-b-2"
-              value={pricePerDesk}
+              value={spaceOwner}
               required
-              onChange={(e) => setPricePerDesk(e.target.value)}
+              onChange={(e) => setSpaceOwner(e.target.value)}
             />
           </div>
         </div>
-        <button type="submit">Next</button>
-        {/* <div className="mt-12 flex justify-end">
-          <button type="submit" className="bg-primary rounded-lg px-9 py-4">
+        <div className="mt-12 flex justify-end">
+          <button
+            type="submit"
+            className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+          >
             Next
           </button>
-        </div> */}
+        </div>
       </form>
     </div>
   );

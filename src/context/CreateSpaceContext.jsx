@@ -28,6 +28,7 @@ const initialState = {
     numberOfDesks: '',
     pricePerDesk: '',
     maximumNumberOfNomads: '',
+    spaceOwner: '',
     address: '',
     city: '',
     state: '',

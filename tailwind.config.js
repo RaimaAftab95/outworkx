@@ -6,7 +6,8 @@ export default {
       colors: {
         primary: '#000',
         'primary-light': '#00000080',
-        gray: '#DDDDDD'
+        gray: '#DDDDDD',
+        customGray: '#F9F9F9'
       },
       width: {
         custom: '660px',
