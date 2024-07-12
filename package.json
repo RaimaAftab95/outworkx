@@ -9,10 +9,9 @@
     "dev": "vite --mode development"
   },
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^2.1.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tanstack/react-query": "^5.51.1",
     "axios": "^1.7.2",
     "axios-cache-interceptor": "^1.5.3",
     "jwt-decode": "^4.0.0",

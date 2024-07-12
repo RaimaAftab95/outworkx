@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useCreateSpaceContext } from '../../../hooks/useCreateSpaceContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 export default function Highlights() {
   const [amenities, setAmenities] = useState([]);
   const [rules, setRules] = useState([]);
-  const { dispatch, space } = useCreateSpaceContext();
+  const { dispatch, space, createSpace } = useCreateSpaceContext();
   const navigate = useNavigate();
-
-  const handleCreateSpace = () => {
-    dispatch({ type: 'CREATE_SPACE' });
-  };
 
   const handleSelectAmenity = (amenity) => {
     setAmenities((prevAmenities) =>
@@ -38,11 +35,19 @@ export default function Highlights() {
         rules
       }
     });
+    handleCreateSpace();
+  };
 
-    console.log('Selected amenities:', amenities);
-    console.log('Selected rules:', rules);
-
-    // navigate('/space/create/summary');
+  const handleCreateSpace = async () => {
+    try {
+      await createSpace();
+      // If successful, nevigate to home
+      navigate('/');
+    } catch (error) {
+      // If unsuccessful, show error message
+      console.error('Create space error:', error);
+      toast.error('Failed to create space');
+    }
   };
 
   useEffect(() => {
@@ -53,6 +58,7 @@ export default function Highlights() {
       pricePerDesk,
       maximumNumberOfNomads,
       address,
+      addresshint,
       city,
       state,
       zipCode,
@@ -70,6 +76,7 @@ export default function Highlights() {
       pricePerDesk &&
       maximumNumberOfNomads &&
       address &&
+      addresshint &&
       city &&
       state &&
       zipCode &&
@@ -79,10 +86,12 @@ export default function Highlights() {
       rules.length > 0 &&
       availability.length > 0
     ) {
-      console.log('Space created:', space);
-      alert('Space created successfully!');
+      // Data is complete, proceed with space creation
+      handleCreateSpace();
     } else {
-      alert('Please fill in all required fields before creating the space.');
+      toast.error(
+        'Please fill in all required fields before creating the space.'
+      );
     }
   }, [space]);
 
@@ -145,17 +154,16 @@ export default function Highlights() {
             type="button"
             className="rounded-full border border-transparent bg-primary px-6 py-2 
         font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
-            onClick={() => navigate('/space/create/highlights')}
+            onClick={() => navigate('/space/create/availability')}
           >
-            Skip
+            Previous
           </button>
           <button
             type="submit"
-            onClick={handleCreateSpace}
             className="rounded-full border border-transparent bg-primary px-6 py-2 
         font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
           >
-            Done
+            Publish
           </button>
         </div>
       </form>

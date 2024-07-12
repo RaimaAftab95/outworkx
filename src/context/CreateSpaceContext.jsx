@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react';
+import { toast } from 'react-hot-toast';
 
 export const CreateSpaceContext = createContext();
 
@@ -9,6 +10,7 @@ export const CreateSpaceContext = createContext();
  * @property {string} numberOfDesks
  * @property {string} pricePerDesk
  * @property {string} maximumNumberOfNomads
+ * @property {string} spaceOwner
  * @property {string} address
  * @property {string} city
  * @property {string} state
@@ -30,14 +32,15 @@ const initialState = {
     maximumNumberOfNomads: '',
     spaceOwner: '',
     address: '',
+    addresshint: '',
     city: '',
     state: '',
     zipCode: '',
     country: '',
-    gallery: [], // Array to hold uploaded images
+    gallery: [],
     amenities: [],
     rules: [],
-    availability: [] // Array to hold availability data
+    availability: []
   }
 };
 
@@ -73,11 +76,32 @@ export function createSpaceReducer(state, action) {
           availability: action.payload.availability
         }
       };
-    case 'CREATE_SPACE':
-      // Assuming space creation logic here
-      console.log('Space creation request sent with data:', state.space);
-      alert('Space created successfully!');
-      return state;
+    case 'CREATE_SPACE_REQUEST':
+      console.log('Sending space creation request with data:', state.space);
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case 'CREATE_SPACE_SUCCESS':
+      // Handle successful space creation
+      toast.success('Space created successfully!');
+      console.log('Space created:', action.payload.space);
+      return {
+        ...state,
+        space: action.payload.space,
+        isLoading: false,
+        error: null
+      };
+    case 'CREATE_SPACE_FAILURE':
+      // Handle space creation failure
+      toast.error(action.payload.error || 'Failed to create space');
+      console.error('Create space error:', action.payload.error);
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error
+      };
     default:
       return state;
   }
@@ -86,7 +110,6 @@ export function createSpaceReducer(state, action) {
 export function CreateSpaceContextProvider({ children }) {
   const [state, dispatch] = useReducer(createSpaceReducer, initialState);
 
-  console.log('CreateSpaceContextProvider -> state', state);
   return (
     <CreateSpaceContext.Provider value={{ space: state.space, dispatch }}>
       {children}

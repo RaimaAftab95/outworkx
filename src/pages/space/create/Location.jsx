@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 export default function Location() {
   const [address, setAddress] = useState('');
+  const [addresshint, setAddresshint] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zipCode, setZipCode] = useState('');
@@ -25,6 +26,7 @@ export default function Location() {
       payload: {
         space: {
           address,
+          addresshint,
           city,
           state,
           zipCode,
@@ -57,6 +59,17 @@ export default function Location() {
           value={address}
           required
           onChange={(e) => setAddress(e.target.value)}
+        />
+        <h2 className="text-xl leading-7 sm:text-2xl sm:leading-8 md:text-3xl md:leading-custom72px">
+          Address Hint*
+        </h2>
+        <input
+          type="text"
+          placeholder="Give some hint about the address of the place"
+          className="block w-full border-b border-primary px-9 py-4 text-primary/70 outline-none placeholder:text-primary/70 focus:border-b-2"
+          value={addresshint}
+          required
+          onChange={(e) => setAddresshint(e.target.value)}
         />
         <div className="flex flex-col gap-8 sm:flex-row">
           <div className="flex-1">
@@ -125,7 +138,15 @@ export default function Location() {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
-        <div className="mt-12 flex justify-end">
+        <div className="mt-12 flex justify-end gap-4">
+          <button
+            type="button"
+            onClick={() => navigate('/space/create')}
+            className="rounded-full border border-transparent bg-primary px-6 py-2 
+        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+          >
+            Previous
+          </button>
           <button
             type="submit"
             className="rounded-full border border-transparent bg-primary px-6 py-2 

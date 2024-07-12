@@ -1,16 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useCreateSpaceContext } from '../../../hooks/useCreateSpaceContext';
 import { useNavigate } from 'react-router-dom';
-
-const daysOfWeek = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday'
-];
 
 // Day to number mapping
 const dayToNumber = {
@@ -109,7 +99,7 @@ export default function Availability() {
           Availability
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {daysOfWeek.map((day) => (
+          {Object.keys(dayToNumber).map((day) => (
             <div key={day} className="flex items-center gap-4">
               <label className="block w-24 text-lg font-medium">{day}</label>
               <div
@@ -142,16 +132,16 @@ export default function Availability() {
               type="button"
               className="rounded-full border border-transparent bg-primary px-6 py-2 
         font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
-              onClick={() => navigate('/space/create/highlights')}
+              onClick={() => navigate('/space/create/gallery')}
             >
-              Skip
+              Previous
             </button>
             <button
               type="submit"
               className="rounded-full border border-transparent bg-primary px-6 py-2 
         font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
             >
-              Done
+              Next
             </button>
           </div>
         </form>
