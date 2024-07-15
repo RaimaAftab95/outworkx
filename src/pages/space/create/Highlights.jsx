@@ -1,31 +1,34 @@
-import { useState, useEffect } from 'react';
 import { useCreateSpaceContext } from '../../../hooks/useCreateSpaceContext';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { useState } from 'react';
+import { useCreateSpace } from '../../../hooks/useCreateSpace';
+import toast from 'react-hot-toast';
 
 export default function Highlights() {
   const [amenities, setAmenities] = useState([]);
   const [rules, setRules] = useState([]);
-  const { dispatch, space, createSpace } = useCreateSpaceContext();
+  const { createSpace, isLoading } = useCreateSpace();
+
+  const { space, dispatch } = useCreateSpaceContext();
   const navigate = useNavigate();
 
-  const handleSelectAmenity = (amenity) => {
+  function handleSelectAmenity(amenity) {
     setAmenities((prevAmenities) =>
       prevAmenities.includes(amenity)
         ? prevAmenities.filter((item) => item !== amenity)
         : [...prevAmenities, amenity]
     );
-  };
+  }
 
-  const handleSelectRule = (rule) => {
+  function handleSelectRule(rule) {
     setRules((prevRules) =>
       prevRules.includes(rule)
         ? prevRules.filter((item) => item !== rule)
         : [...prevRules, rule]
     );
-  };
+  }
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     dispatch({
@@ -35,69 +38,19 @@ export default function Highlights() {
         rules
       }
     });
-    handleCreateSpace();
-  };
 
-  const handleCreateSpace = async () => {
-    try {
-      await createSpace();
-      // If successful, nevigate to home
-      navigate('/');
-    } catch (error) {
-      // If unsuccessful, show error message
-      console.error('Create space error:', error);
-      toast.error('Failed to create space');
-    }
-  };
+    await toast.promise(createSpace(space), {
+      loading: 'Creating space...',
+      success: 'Space created successfully!',
+      error: 'Failed to create space. Please try again'
+    });
 
-  useEffect(() => {
-    const {
-      name,
-      description,
-      numberOfDesks,
-      pricePerDesk,
-      maximumNumberOfNomads,
-      address,
-      addresshint,
-      city,
-      state,
-      zipCode,
-      country,
-      gallery,
-      amenities = [],
-      rules = [],
-      availability = []
-    } = space;
-
-    if (
-      name &&
-      description &&
-      numberOfDesks &&
-      pricePerDesk &&
-      maximumNumberOfNomads &&
-      address &&
-      addresshint &&
-      city &&
-      state &&
-      zipCode &&
-      country &&
-      gallery.length > 0 &&
-      amenities.length > 0 &&
-      rules.length > 0 &&
-      availability.length > 0
-    ) {
-      // Data is complete, proceed with space creation
-      handleCreateSpace();
-    } else {
-      toast.error(
-        'Please fill in all required fields before creating the space.'
-      );
-    }
-  }, [space]);
+    navigate('/dashboard');
+  }
 
   return (
     <div className="p-10">
-      <h2 className="text-2xl font-bold text-primary">Highlights</h2>
+      <h2 className="text-primary text-2xl font-bold">Highlights</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         <div className="mt-10">
           <h3 className="text-xl font-bold">
@@ -107,14 +60,7 @@ export default function Highlights() {
             You can add more after publishing your listing.
           </p>
           <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              'Wifi',
-              'Kitchen',
-              'Breakout Area',
-              'Coffee',
-              'Pets Allowed',
-              'Fitness'
-            ].map((amenity) => (
+            {['Wifi', 'AirCon'].map((amenity) => (
               <div key={amenity} className="flex items-center">
                 <input
                   type="checkbox"
@@ -131,11 +77,7 @@ export default function Highlights() {
         <div className="mt-10">
           <h3 className="text-xl font-bold">Rules</h3>
           <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              'No smoking',
-              'No waste of electricity',
-              'Keep workspace clean'
-            ].map((rule) => (
+            {['no-smoking', 'no-pets'].map((rule) => (
               <div key={rule} className="flex items-center gap-3">
                 <input
                   type="checkbox"
@@ -152,16 +94,15 @@ export default function Highlights() {
         <div className="mt-12 flex justify-end gap-3">
           <button
             type="button"
-            className="rounded-full border border-transparent bg-primary px-6 py-2 
-        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+            className="bg-primary rounded-full border border-transparent px-6 py-2 font-medium transition-all"
             onClick={() => navigate('/space/create/availability')}
           >
             Previous
           </button>
           <button
             type="submit"
-            className="rounded-full border border-transparent bg-primary px-6 py-2 
-        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+            className="bg-primary rounded-full border px-6 py-2 font-medium transition-all"
+            disabled={isLoading}
           >
             Publish
           </button>

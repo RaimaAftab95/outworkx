@@ -1,100 +1,89 @@
-import React, { useState, useRef } from 'react';
-import toast from 'react-hot-toast';
 import { useCreateSpaceContext } from '../../../hooks/useCreateSpaceContext';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 const { VITE_BACKEND_API } = import.meta.env;
 
 export default function Gallery() {
-  const [images, setImages] = useState([]);
   const [spaceImages, setSpaceImages] = useState([]);
-  const [showError, setShowError] = useState(false);
-  const { dispatch, auth } = useCreateSpaceContext();
+
+  const { dispatch } = useCreateSpaceContext();
+  const { token } = useAuthContext();
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
+  /**
+   * Upload images to the server
+   * @param {import('react').SyntheticEvent} e Event
+   * @returns {void}
+   */
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    setImages(files);
-  };
 
-  const uploadImagesHandler = async () => {
-    if (images.length === 0) {
+    if (files.length === 0) {
       toast.error('Please select at least one image to upload.');
       return;
     }
 
     const formData = new FormData();
-    images.forEach((file) => {
+    files.forEach((file) => {
       formData.append('media', file);
     });
 
-    try {
-      const response = await fetch(`${VITE_BACKEND_API}/v1/media/upload`, {
-        method: 'POST',
-        body: formData,
+    toast.promise(
+      axios.post(`${VITE_BACKEND_API}/v1/media/upload`, formData, {
         headers: {
-          Authorization: `Bearer ${auth?.token || ''}` // Include Bearer token
+          Authorization: `Bearer ${token || ''}`
         }
-      });
+      }),
+      {
+        loading: 'Uploading images...',
+        success: (response) => {
+          const uploadedImages = response?.data?.data?.media.map((url) => ({
+            url,
+            type: 'image'
+          }));
 
-      if (!response.ok) {
-        throw new Error('Failed to upload images');
+          setSpaceImages(uploadedImages);
+
+          return 'Images uploaded successfully.';
+        },
+        error: 'Failed to upload'
       }
-
-      const data = await response.json();
-      const uploadedImages = data?.data?.media.map((url) => ({
-        url,
-        type: 'image'
-      }));
-
-      setSpaceImages(uploadedImages);
-      toast.success('Images uploaded successfully.');
-    } catch (error) {
-      console.error('Upload error', error);
-      toast.error('Failed to upload images.');
-    }
+    );
   };
 
-  const handleSubmit = (e) => {
+  /**
+   * Handle form submission
+   * @param {import('react').SyntheticEvent} e Event
+   * @returns {void}
+   */
+  function handleSubmit(e) {
     e.preventDefault();
-
-    if (spaceImages.length < 3) {
-      setShowError(true);
-      return;
-    }
-
-    setShowError(false);
-
-    // Format spaceImages to match the expected structure
-    const formattedImages = spaceImages.map((image) => ({
-      type: 'image',
-      url: image.url
-    }));
 
     dispatch({
       type: 'SET_GALLERY',
       payload: {
-        gallery: formattedImages
+        gallery: spaceImages
       }
     });
 
     navigate('/space/create/availability');
-  };
+  }
 
   return (
-    <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center p-2">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-2">
       <div className="mb-6 flex w-full items-center justify-between">
-        <h2 className="text-2xl font-bold text-primary">Gallery</h2>
-        <button
-          className="rounded-full border border-transparent bg-primary px-6 py-2 
-          font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
-        >
+        <h2 className="text-primary text-2xl font-bold">Gallery</h2>
+        <button className="bg-primary rounded-full border border-transparent px-6 py-2 font-medium transition-all">
           Save & Exit
         </button>
       </div>
       <form onSubmit={handleSubmit} className="flex w-full flex-col gap-8">
-        <div className="relative flex h-96 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed bg-customGray p-4">
+        <div className="bg-customGray relative flex h-96 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed p-4">
           <input
             ref={fileInputRef}
             type="file"
@@ -121,11 +110,7 @@ export default function Gallery() {
             <p className="mt-1 text-sm font-medium">Choose at least 3 photos</p>
           </div>
         </div>
-        {showError && spaceImages.length < 3 && (
-          <p className="mt-2 text-sm text-red-500">
-            Please upload at least 3 images of the space.
-          </p>
-        )}
+
         {spaceImages.length > 0 && (
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {spaceImages.map((image, index) => (
@@ -138,19 +123,16 @@ export default function Gallery() {
             ))}
           </div>
         )}
+
         <div className="mt-4 flex justify-end">
           <button
             type="button"
-            className="rounded-md bg-blue-500 px-4 py-2 text-white"
+            className="rounded-md border px-4 py-2"
             onClick={() => navigate('/space/create/location')}
           >
             Previous
           </button>
-          <button
-            type="submit"
-            className="rounded-md bg-blue-500 px-4 py-2 text-white"
-            onClick={uploadImagesHandler}
-          >
+          <button type="submit" className="rounded-md border px-4 py-2">
             Next
           </button>
         </div>

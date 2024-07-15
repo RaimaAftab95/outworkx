@@ -59,7 +59,12 @@ export default function Availability() {
     setAvailability(updatedAvailability);
   };
 
-  const handleSubmit = (e) => {
+  /**
+   * Handle submit event
+   * @param {import('react').SyntheticEvent} e Event
+   * @returns {void}
+   */
+  function handleSubmit(e) {
     e.preventDefault();
 
     const formattedAvailability = availability.map((slot) => ({
@@ -76,13 +81,13 @@ export default function Availability() {
     });
 
     navigate('/space/create/highlights');
-  };
+  }
 
   const renderTimeSelect = (day, field, value) => (
     <select
       value={value}
       onChange={(e) => handleTimeChange(day, field, e.target.value)}
-      className="mt-1 block w-full rounded-lg border-gray p-2"
+      className="border-gray mt-1 block w-full rounded-lg p-2"
     >
       {timeOptions.map((time) => (
         <option key={time} value={time}>
@@ -95,7 +100,7 @@ export default function Availability() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <h2 className="mb-5 mt-5 text-2xl font-bold text-primary">
+        <h2 className="text-primary mb-5 mt-5 text-2xl font-bold">
           Availability
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -117,12 +122,6 @@ export default function Availability() {
                     {renderTimeSelect(day, 'start', slot.start)}
                     <span>to</span>
                     {renderTimeSelect(day, 'end', slot.end)}
-                    <button
-                      type="button"
-                      onClick={() => removeAvailabilitySlot(day)}
-                    >
-                      🗑️
-                    </button>
                   </div>
                 ))}
             </div>
@@ -130,16 +129,14 @@ export default function Availability() {
           <div className="flex justify-between gap-2">
             <button
               type="button"
-              className="rounded-full border border-transparent bg-primary px-6 py-2 
-        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+              className="bg-primary rounded-full border border-transparent px-6 py-2 font-medium transition-all"
               onClick={() => navigate('/space/create/gallery')}
             >
               Previous
             </button>
             <button
               type="submit"
-              className="rounded-full border border-transparent bg-primary px-6 py-2 
-        font-medium text-white transition-all hover:border-gray hover:bg-transparent hover:text-primary"
+              className="bg-primary rounded-full border border-transparent px-6 py-2 font-medium transition-all"
             >
               Next
             </button>
