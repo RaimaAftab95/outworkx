@@ -43,7 +43,6 @@ export function useRegister() {
     if (!response.ok) {
       setIsLoading(false);
       setError(data.message);
-      console.log(' response is no ok register user data', data.user);
 
       throw new Error(); // To reject the promise
     }
@@ -51,7 +50,6 @@ export function useRegister() {
     if (response.ok) {
       localStorage.setItem('user', JSON.stringify(data.user));
       localStorage.setItem('token', JSON.stringify(data.token));
-      console.log('register user data', data.user);
 
       dispatch({ type: 'LOGIN', payload: data });
 

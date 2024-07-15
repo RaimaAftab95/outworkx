@@ -38,7 +38,6 @@ export function useLogin() {
       localStorage.setItem('token', JSON.stringify(data.token));
 
       dispatch({ type: 'LOGIN', payload: data });
-      console.log('payload data:', { payload: data });
 
       setIsLoading(false);
     }

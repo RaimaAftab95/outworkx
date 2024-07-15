@@ -86,8 +86,6 @@ export function createSpaceReducer(state, action) {
 export function CreateSpaceContextProvider({ children }) {
   const [state, dispatch] = useReducer(createSpaceReducer, initialState);
 
-  console.log('Context state', state);
-
   return (
     <CreateSpaceContext.Provider value={{ space: state, dispatch }}>
       {children}
