@@ -11,14 +11,11 @@ export default function SpaceDetails() {
 
   useEffect(() => {
     const fetchSpaceDetails = async () => {
-      console.log(`Fetching space details for ID: ${id}`);
-
       try {
         const response = await axios.post(`${VITE_BACKEND_API}/v1/space/get`, {
           spaceId: id
         });
 
-        console.log('Response data:', response.data);
         setSpace(response.data.data.space);
       } catch (error) {
         console.error('Error fetching space details:', error);

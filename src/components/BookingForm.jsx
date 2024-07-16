@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
-import { useCreateBookingContext } from '../hooks/useCreateBookingContext';
+import { useCreateBooking } from '../hooks/useCreateBooking';
 import { useAuthContext } from '../hooks/useAuthContext';
 import toast from 'react-hot-toast';
 
 export default function BookingForm({ spaceId }) {
-  const { createBooking } = useCreateBookingContext();
+  const { createBooking } = useCreateBooking();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [price, setPrice] = useState(0);
   const [numberOfDesks, setNumberOfDesks] = useState(1);
 
-  const { user, token } = useAuthContext();
-  // Log user and token to debug
-  console.log('User:', user);
-  console.log('Token:', token);
+  const { token } = useAuthContext();
 
   // Remove surrounding quotes from the token
   const cleanToken = token.replace(/^"(.*)"$/, '$1');
 
-  const handleBooking = async (e) => {
+  /**
+   * Handles booking submission.
+   * @param {import('react').SyntheticEvent} e - The synthetic event object.
+   * @returns {Promise<void>}
+   */
+  async function handleBooking(e) {
     e.preventDefault();
 
     const bookingDetails = {
@@ -30,18 +32,13 @@ export default function BookingForm({ spaceId }) {
       status: 'pending'
     };
 
-    console.log('Request Booking Details:', bookingDetails);
-
     try {
-      // Use the cleaned token
       await createBooking(bookingDetails, cleanToken);
-
-      //   await createBooking(bookingDetails, user.token);
       toast.success('Booking created successfully');
     } catch (error) {
       toast.error('Failed to create booking');
     }
-  };
+  }
 
   return (
     <form

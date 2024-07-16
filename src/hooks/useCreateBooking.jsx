@@ -1,18 +1,16 @@
-import { useContext } from 'react';
-import { CreateBookingContext } from '../context/CreateBookingContext';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-export function useCreateBookingContext() {
-  const { state, dispatch } = useContext(CreateBookingContext);
+export function useCreateBooking() {
+  const [booking, setBooking] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const createBooking = async (bookingData, token) => {
-    dispatch({ type: 'BOOKING_REQUEST' });
+    setIsLoading(true);
+    setError(null);
 
     try {
-      //booking request data and token to the console
-      console.log('Sending Booking Request:', bookingData);
-      console.log('Authorization Token:', token);
-
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_API}/v1/booking/create`,
         {
@@ -31,22 +29,25 @@ export function useCreateBookingContext() {
         throw new Error(data.message || 'Failed to create booking');
       }
 
-      dispatch({ type: 'BOOKING_SUCCESS', payload: { booking: data } });
+      setBooking(data);
       toast.success('Booking created successfully');
     } catch (error) {
-      dispatch({ type: 'BOOKING_FAILURE', payload: { error } });
+      setError(error.message);
       toast.error('Failed to create booking');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const clearBooking = () => {
-    dispatch({ type: 'CLEAR_BOOKING' });
+    setBooking(null);
+    setError(null);
   };
 
   return {
-    booking: state.booking,
-    isLoading: state.isLoading,
-    error: state.error,
+    booking,
+    isLoading,
+    error,
     createBooking,
     clearBooking
   };

@@ -1,7 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
-// import axios from '../client/http.client';
 import axios from 'axios';
-
 import Space from '../components/Space';
 import Hero from './../components/Hero';
 
