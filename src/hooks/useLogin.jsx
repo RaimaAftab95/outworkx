@@ -30,7 +30,6 @@ export function useLogin() {
     if (!response.ok) {
       setIsLoading(false);
       setError(data.message);
-
       throw new Error(); // To reject the promise
     }
 

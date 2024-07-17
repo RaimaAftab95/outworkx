@@ -15,6 +15,9 @@ export default function CreateSpaceLayout() {
           <Link to="/space/create/gallery">Gallery</Link>
         </li>
         <li>
+          <Link to="/space/create/availability">Availability</Link>
+        </li>
+        <li>
           <Link to="/space/create/highlights">Highlights</Link>
         </li>
       </ul>
