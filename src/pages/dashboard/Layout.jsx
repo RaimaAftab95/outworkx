@@ -4,7 +4,7 @@ export default function DashboardLayout() {
   return (
     <>
       <div className="bg-red-100 py-5">
-        <div className="container mx-auto">
+        <div className="container">
           <ul className="flex items-center justify-center gap-5 text-lg font-bold">
             <li>
               <Link to="/dashboard">Dashboard</Link>
@@ -27,7 +27,7 @@ export default function DashboardLayout() {
         </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container">
         <Outlet />
       </div>
     </>

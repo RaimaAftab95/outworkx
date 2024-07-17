@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-import axios from '../client/http.client';
+import axios from 'axios';
 
 const { VITE_BACKEND_API } = import.meta.env;
 

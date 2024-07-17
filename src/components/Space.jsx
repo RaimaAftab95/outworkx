@@ -3,6 +3,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+import { H6, Small, Muted } from '../components/primitives/typography';
+
 import { StarIcon } from '@heroicons/react/24/solid';
 
 import {
@@ -49,6 +51,7 @@ export default function Space({ space }) {
         <div className="absolute right-2.5 top-2.5 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-black transition-all hover:opacity-60">
           <HeartIcon className="h-7 text-white" />
         </div>
+
         {gallery && gallery.length > 1 && (
           <div
             className="top-14/30 absolute left-2.5 right-2.5 flex transform items-center justify-between gap-5 opacity-0 transition-opacity group-hover:opacity-100"
@@ -91,20 +94,20 @@ export default function Space({ space }) {
         )}
       </div>
 
-      <div className="text-lg">
-        <div className="flex justify-between gap-2 pt-3.5">
-          <h3 className="text-left font-bold">
-            <Link to={`/space/${id}`}>{name}</Link>
-          </h3>
-          <div className="flex items-start gap-2">
-            <StarIcon className="h-5" />
-            <span className="text-primary text-base">4.93</span>
-          </div>
+      <div className="flex items-start justify-between gap-2 pt-3.5">
+        <H6 className="text-left">
+          <Link to={`/space/${id}`}>{name}</Link>
+        </H6>
+        <div className="flex items-center gap-2">
+          <StarIcon className="h-5" />
+          <Small>4.93</Small>
         </div>
       </div>
 
-      <p className="pb-2 text-left">{description.substring(0, 50) + '...'}</p>
-      <h3 className="text-left font-bold">Rs. {pricePerDesk}</h3>
+      <Muted className="py-1 !text-left">
+        {description.substring(0, 60) + '...'}
+      </Muted>
+      <H6 className="text-left">Rs. {pricePerDesk}</H6>
     </div>
   );
 }

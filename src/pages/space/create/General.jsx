@@ -35,7 +35,7 @@ export default function General() {
   }
 
   return (
-    <div className="container p-2">
+    <div className="container">
       <div className="mb-6 flex w-full items-center justify-between">
         <h2 className="text-primary text-2xl font-bold">General</h2>
         <button className="rounded-full border px-6 py-2 font-medium transition-all">
