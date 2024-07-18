@@ -7,17 +7,13 @@ export default function BookingForm({ spaceId }) {
   const { createBooking } = useCreateBooking();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [numberOfDesks, setNumberOfDesks] = useState(1);
-
   const { token } = useAuthContext();
-
-  // Remove surrounding quotes from the token
-  const cleanToken = token.replace(/^"(.*)"$/, '$1');
 
   /**
    * Handles booking submission.
-   * @param {import('react').SyntheticEvent} e - The synthetic event object.
+   * @param {React.SyntheticEvent} e - The synthetic event object.
    * @returns {Promise<void>}
    */
   async function handleBooking(e) {
@@ -27,17 +23,16 @@ export default function BookingForm({ spaceId }) {
       spaceId,
       startDate: new Date(startDate).toISOString(),
       endDate: new Date(endDate).toISOString(),
-      price,
-      numberOfDesks,
+      price: parseInt(price, 10),
+      numberOfDesks: parseInt(numberOfDesks, 10),
       status: 'pending'
     };
 
-    try {
-      await createBooking(bookingDetails, cleanToken);
-      toast.success('Booking created successfully');
-    } catch (error) {
-      toast.error('Failed to create booking');
-    }
+    toast.promise(createBooking(bookingDetails, token), {
+      loading: 'Creating booking...',
+      success: 'Booking created successfully',
+      error: 'Failed to create booking'
+    });
   }
 
   return (
@@ -80,9 +75,9 @@ export default function BookingForm({ spaceId }) {
         </label>
         <input
           id="price"
-          type="number"
+          type="text"
           value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
+          onChange={(e) => setPrice(e.target.value)}
           className="block w-full rounded border border-gray-300 p-2"
           required
         />
@@ -96,9 +91,9 @@ export default function BookingForm({ spaceId }) {
         </label>
         <input
           id="numberOfDesks"
-          type="number"
+          type="text"
           value={numberOfDesks}
-          onChange={(e) => setNumberOfDesks(Number(e.target.value))}
+          onChange={(e) => setNumberOfDesks(e.target.value)}
           className="block w-full rounded border border-gray-300 p-2"
           required
         />

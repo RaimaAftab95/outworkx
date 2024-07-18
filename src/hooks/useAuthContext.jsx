@@ -9,5 +9,6 @@ export function useAuthContext() {
       'useAuthContext must be used within an AuthContextProvider'
     );
   }
+
   return context;
 }
