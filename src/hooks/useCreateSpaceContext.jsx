@@ -6,7 +6,7 @@ export function useCreateSpaceContext() {
 
   if (!context) {
     throw new Error(
-      'useCreateSpaceContext must be used within an CreateSpaceContextProvider'
+      'useCreateSpaceContext must be used within a CreateSpaceContextProvider'
     );
   }
 
