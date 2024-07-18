@@ -69,20 +69,14 @@ export default function Header() {
   }
 
   return (
-    <header className="py-6">
-      <nav className="container relative mx-auto flex items-center justify-between px-4">
+    <header className="py-6 font-inter">
+      <nav className="container relative flex items-center justify-between">
         <Link to="/">
           <img src="/images/logo.svg" alt="Brand logo" />
         </Link>
 
         <div className="flex items-center justify-between gap-3">
           <ul className="text-primary hidden h-full flex-col items-center justify-center gap-9 px-2 text-xl sm:flex-row sm:text-base md:flex">
-            <li className="hover:text-primary-light transition-all">
-              <Link to="/about">About Us</Link>
-            </li>
-            <li className="hover:text-primary-light transition-all">
-              <Link to="/locations">Locations</Link>
-            </li>
             <li className="rounded-full bg-black px-4 py-1.5 text-white transition-all hover:opacity-60">
               <Link to="/space/create">List Space</Link>
             </li>
@@ -101,7 +95,7 @@ export default function Header() {
         </div>
 
         <div
-          className={`border-gray absolute right-0 top-full z-40 mt-2 hidden min-w-64 rounded-md border bg-white shadow-2xl transition-all duration-300 md:block ${isMenuActive ? 'visible opacity-100' : 'invisible opacity-0'}`}
+          className={`border-gray absolute right-8 top-full z-40 mt-2 hidden min-w-64 rounded-md border bg-white shadow-2xl transition-all duration-300 md:block ${isMenuActive ? 'visible opacity-100' : 'invisible opacity-0'}`}
         >
           <ul className="border-gray text-primary flex h-full flex-col gap-5 border-b px-3.5 py-5 text-xl sm:text-base">
             {user !== null ? (
@@ -150,7 +144,7 @@ export default function Header() {
         </div>
 
         <div
-          className={`border-gray absolute top-full z-40 mt-2 w-11/12 rounded-2xl border bg-white px-6 shadow-2xl transition-all duration-300 md:hidden ${isMenuActive ? 'visible opacity-100' : 'invisible opacity-0'}`}
+          className={`border-gray absolute right-4 top-full z-40 mt-2 w-11/12 rounded-2xl border bg-white px-6 shadow-2xl transition-all duration-300 md:hidden ${isMenuActive ? 'visible opacity-100' : 'invisible opacity-0'}`}
         >
           <ul className="border-gray flex flex-wrap items-center justify-between gap-1 border-b px-4 py-5 text-sm">
             <li>

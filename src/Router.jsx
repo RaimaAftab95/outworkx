@@ -23,6 +23,7 @@ import General from './pages/space/create/General';
 import Location from './pages/space/create/Location';
 import Gallery from './pages/space/create/Gallery';
 import Highlights from './pages/space/create/Highlights';
+import Availability from './pages/space/create/Availability';
 
 export default function Router() {
   return (
@@ -39,6 +40,10 @@ export default function Router() {
                 <Route path="/space/create" element={<General />} />
                 <Route path="/space/create/location" element={<Location />} />
                 <Route path="/space/create/gallery" element={<Gallery />} />
+                <Route
+                  path="/space/create/availability"
+                  element={<Availability />}
+                />
                 <Route
                   path="/space/create/highlights"
                   element={<Highlights />}
