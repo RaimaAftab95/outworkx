@@ -33,7 +33,7 @@ export default function Gallery() {
     });
 
     try {
-      toast.promise(
+      await toast.promise(
         fetch(`${VITE_BACKEND_API}/v1/media/upload`, {
           method: 'POST',
           headers: {
@@ -54,15 +54,10 @@ export default function Gallery() {
           setSpaceImages(uploadedImages);
 
           return 'Images uploaded successfully.';
-        }),
-        {
-          loading: 'Uploading images...',
-          success: 'Images uploaded successfully.',
-          error: 'Failed to upload'
-        }
+        })
       );
     } catch (error) {
-      console.error('Error uploading images:', error);
+      toast.error('Failed to upload images.');
     }
   };
 
