@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import Router from './Router';
 import React from 'react';
-
 import { AuthContextProvider } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
 
