@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BookingForm from '../components/BookingForm';
-import axios from 'axios';
 
 const { VITE_BACKEND_API } = import.meta.env;
 
@@ -12,10 +11,20 @@ export default function SpaceDetails() {
   useEffect(() => {
     const fetchSpaceDetails = async () => {
       try {
-        const response = await axios.post(`${VITE_BACKEND_API}/v1/space/get`, {
-          spaceId: id
+        const response = await fetch(`${VITE_BACKEND_API}/v1/space/get`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ spaceId: id })
         });
-        setSpace(response.data.data.space);
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const data = await response.json();
+        setSpace(data.data.space);
       } catch (error) {
         console.error('Error fetching space details:', error);
       }

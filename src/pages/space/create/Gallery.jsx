@@ -2,7 +2,6 @@ import { useCreateSpaceContext } from '../../../hooks/useCreateSpaceContext';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 const { VITE_BACKEND_API } = import.meta.env;
@@ -20,7 +19,7 @@ export default function Gallery() {
    * @param {import('react').SyntheticEvent} e Event
    * @returns {void}
    */
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const files = Array.from(e.target.files);
 
     if (files.length === 0) {
@@ -33,16 +32,21 @@ export default function Gallery() {
       formData.append('media', file);
     });
 
-    toast.promise(
-      axios.post(`${VITE_BACKEND_API}/v1/media/upload`, formData, {
-        headers: {
-          Authorization: `Bearer ${token || ''}`
-        }
-      }),
-      {
-        loading: 'Uploading images...',
-        success: (response) => {
-          const uploadedImages = response?.data?.data?.media.map((url) => ({
+    try {
+      toast.promise(
+        fetch(`${VITE_BACKEND_API}/v1/media/upload`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token || ''}`
+          },
+          body: formData
+        }).then(async (response) => {
+          if (!response.ok) {
+            throw new Error('Failed to upload');
+          }
+
+          const data = await response.json();
+          const uploadedImages = data?.data?.media.map((url) => ({
             url,
             type: 'image'
           }));
@@ -50,10 +54,16 @@ export default function Gallery() {
           setSpaceImages(uploadedImages);
 
           return 'Images uploaded successfully.';
-        },
-        error: 'Failed to upload'
-      }
-    );
+        }),
+        {
+          loading: 'Uploading images...',
+          success: 'Images uploaded successfully.',
+          error: 'Failed to upload'
+        }
+      );
+    } catch (error) {
+      console.error('Error uploading images:', error);
+    }
   };
 
   /**
