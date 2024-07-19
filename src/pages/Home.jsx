@@ -1,8 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import axios from 'axios';
-
 import { H3, Lead } from '../components/primitives/typography';
-
 import Space from '../components/Space';
 import Hero from './../components/Hero';
 
@@ -17,16 +14,28 @@ export default function Home() {
     const { pageNumber = 1, pageSize = 12 } = pagination;
 
     try {
-      const { data } = await axios.post(`${VITE_BACKEND_API}/v1/space/list`, {
-        pageNumber: pageNumber,
-        pageSize: pageSize
+      const response = await fetch(`${VITE_BACKEND_API}/v1/space/list`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          pageNumber: pageNumber,
+          pageSize: pageSize
+        })
       });
 
+      if (!response.ok) {
+        throw new Error('Failed to fetch');
+      }
+
+      const data = await response.json();
       return {
         spaces: data.data.spaces,
         metadata: data.data.metadata
       };
     } catch (error) {
+      console.error('Error fetching spaces:', error);
       return {
         spaces: [],
         metadata: {}
@@ -44,9 +53,7 @@ export default function Home() {
 
       setPagination(metadata);
 
-      for (const space of spaces) {
-        setSpaces((prevSpaces) => [...prevSpaces, space]);
-      }
+      setSpaces((prevSpaces) => [...prevSpaces, ...spaces]);
     },
     [getSpaces, pagination]
   );

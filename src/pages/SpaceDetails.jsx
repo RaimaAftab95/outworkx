@@ -20,7 +20,7 @@ export default function SpaceDetails() {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error('Network response was not ok');
         }
 
         const data = await response.json();

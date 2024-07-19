@@ -32,33 +32,34 @@ export default function Gallery() {
       formData.append('media', file);
     });
 
-    try {
-      await toast.promise(
-        fetch(`${VITE_BACKEND_API}/v1/media/upload`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token || ''}`
-          },
-          body: formData
-        }).then(async (response) => {
-          if (!response.ok) {
-            throw new Error('Failed to upload');
-          }
+    toast.promise(
+      fetch(`${VITE_BACKEND_API}/v1/media/upload`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token || ''}`
+        },
+        body: formData
+      }).then(async (response) => {
+        if (!response.ok) {
+          throw new Error('Failed to upload');
+        }
 
-          const data = await response.json();
-          const uploadedImages = data?.data?.media.map((url) => ({
-            url,
-            type: 'image'
-          }));
+        const data = await response.json();
+        const uploadedImages = data?.data?.media.map((url) => ({
+          url,
+          type: 'image'
+        }));
 
-          setSpaceImages(uploadedImages);
+        setSpaceImages(uploadedImages);
 
-          return 'Images uploaded successfully.';
-        })
-      );
-    } catch (error) {
-      toast.error('Failed to upload images.');
-    }
+        return 'Images uploaded successfully.';
+      }),
+      {
+        loading: 'Uploading images...',
+        success: 'Images uploaded successfully.',
+        error: 'Failed to upload images.'
+      }
+    );
   };
 
   /**
@@ -68,6 +69,15 @@ export default function Gallery() {
    */
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (spaceImages.length === 0) {
+      toast.error('Please upload at least one image.');
+      return;
+    }
+    if (spaceImages.length < 3) {
+      toast.error('Please upload at least 3 images.');
+      return;
+    }
 
     dispatch({
       type: 'SET_GALLERY',
