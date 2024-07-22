@@ -19,6 +19,13 @@ export default {
       },
       backgroundColor: {
         secondary: '#F2F2F2'
+      },
+      fontSize: {
+        '60vw': '60vw',
+        '50vw': '50vw',
+        '30vw': '30vw',
+        '15vw': '15vw',
+        '20vw': '20vw'
       }
     }
   },

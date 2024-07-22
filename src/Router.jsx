@@ -24,6 +24,7 @@ import Location from './pages/space/create/Location';
 import Gallery from './pages/space/create/Gallery';
 import Highlights from './pages/space/create/Highlights';
 import Availability from './pages/space/create/Availability';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function Router() {
   return (
@@ -62,6 +63,7 @@ export default function Router() {
 
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
