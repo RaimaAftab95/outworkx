@@ -6,15 +6,36 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { XMarkIcon, ArrowsPointingOutIcon } from '@heroicons/react/24/outline';
-import { H1, P } from '../components/primitives/typography';
+import {
+  XMarkIcon,
+  ArrowsPointingOutIcon,
+  PhoneIcon,
+  GlobeAltIcon
+} from '@heroicons/react/24/outline';
+import { H1, H2, P } from '../components/primitives/typography';
 
 const { VITE_BACKEND_API } = import.meta.env;
+
+// Define amenities with images
+const amenitiesData = [
+  { name: 'Wifi', image: '../images/wifi.png' },
+  { name: 'Coffee', image: '../images/coffee.png' },
+  { name: 'Fitness', image: '../images/fitness.png' },
+  { name: 'Kitchen', image: '../images/kitchen.png' }
+];
+
+const extraAmenitiesData = [
+  { name: 'Tea', image: '../images/tea.png' },
+  { name: 'AirCondition', image: '../images/aircond.png' },
+  { name: 'Pets Allowed', image: '../images/pets-allowed.png' }
+];
 
 export default function SpaceDetails() {
   const { id } = useParams();
   const [space, setSpace] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchSpaceDetails = async () => {
@@ -47,12 +68,25 @@ export default function SpaceDetails() {
     setSelectedImageIndex(null);
   };
 
+  const toggleDescription = () => {
+    setShowFullDescription((prev) => !prev);
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  console.log('Space amenities:', space?.amenities);
   return (
     <div className="relative">
       {space ? (
         <>
-          <div className="container mx-auto p-4">
-            {/* Main Swiper displaying 3 images per slide*/}
+          <section className="container mx-auto p-4">
+            {/* Main Swiper displaying 3 images per slide */}
             <Swiper
               slidesPerView={3}
               spaceBetween={10}
@@ -75,7 +109,7 @@ export default function SpaceDetails() {
                 >
                   <div className="flex items-center justify-center">
                     <img
-                      className={`h-60 w-20 object-cover ${index === 1 ? 'h-60 w-full' : 'opacity-75'}`}
+                      className={`h-60 w-full object-cover ${index === 1 ? 'h-60' : 'opacity-75'}`}
                       style={{
                         width: 'calc(100% - 2px)',
                         height: 'calc(100% - 2px)'
@@ -88,7 +122,7 @@ export default function SpaceDetails() {
               ))}
             </Swiper>
 
-            {/*second Swiper for single image view per slide */}
+            {/* Second Swiper for single image view per slide */}
             {selectedImageIndex !== null && (
               <div
                 className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-70"
@@ -137,19 +171,215 @@ export default function SpaceDetails() {
             )}
 
             {/* Space details */}
-            <div className="flex">
-              <div>
+            <section className="flex flex-col gap-4 md:flex-row">
+              <div className="flex-1">
                 <H1 className="my-4 text-3xl font-bold">{space.name}</H1>
-                <P className="text-lg">{space.description}</P>
+                <div className="mb-4 flex items-center space-x-4">
+                  <div className="text-black-500 flex items-center">
+                    <span className="ml-1 text-lg">5.0</span>
+                    <span className="text-2xl"> &#9733;</span>
+                  </div>
+                  <span className="text-sm text-gray-500">(1 Review)</span>
+                  <span className="relative rounded px-2 py-1 text-sm text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
+                    210$/Month
+                  </span>
+                  <span className="relative rounded px-2 py-1 text-sm text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
+                    Coworking, Office Space
+                  </span>
+                </div>
+
+                {/* Amenities Section */}
+                <section className="mt-4 w-full">
+                  <hr className="my-4" />
+                  <div className="flex flex-wrap gap-6">
+                    {amenitiesData.map((amenity) => (
+                      <div
+                        key={amenity.name}
+                        className={`flex flex-col items-center ${space.amenities.includes(amenity.name.toLowerCase()) ? 'text-green-600' : 'text-gray-500'}`}
+                      >
+                        <img
+                          className="mb-2 h-12 w-12"
+                          src={amenity.image}
+                          alt={amenity.name}
+                        />
+                        <span className="text-lg">{amenity.name}</span>
+                      </div>
+                    ))}
+                    <div
+                      className="flex cursor-pointer flex-col items-center text-green-500"
+                      onClick={openModal}
+                    >
+                      <span className="text-lg">(+2)</span>
+                    </div>
+                  </div>
+                  <hr className="my-4" />
+                </section>
+
+                <P className="text-lg">
+                  {showFullDescription
+                    ? space.description
+                    : `${space.description.slice(0, 100)}...`}
+                </P>
+                <button className="mt-2 font-bold" onClick={toggleDescription}>
+                  {showFullDescription ? 'Show Less' : 'Show More'}
+                </button>
+
+                {/* Contact Section */}
+                <section className="mt-4 w-full">
+                  <hr className="my-4" />
+                  <H2 className="mb-4 text-xl font-semibold">Contact</H2>
+                  <div className="mb-2 flex items-center">
+                    <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
+                    <span className="text-lg text-gray-700">18664580333</span>
+                  </div>
+                  <div className="flex items-center">
+                    <GlobeAltIcon className="mr-2 h-6 w-6 text-gray-500" />
+                    <span className="text-lg text-gray-700">
+                      vangoghmuseum.nl
+                    </span>
+                  </div>
+                  <hr className="my-4" />
+                </section>
+
+                {/* Moreinfo  Section */}
+                <section className="mt-4 w-full">
+                  <H2 className="mb-4 text-xl font-semibold">
+                    More Information
+                  </H2>
+                  <P>Coworking desks84 (From $27 per person per day)</P>
+                  <P>Private office20 (From $410 per person per month)</P>
+                  <P>Meeting rooms4 (From $49 per hour)</P>
+                  <P>Virtual Offices6 (From $ 112 per month)</P>
+                  <hr className="my-4" />
+                </section>
+
+                <section name="map">
+                  <h3>Map</h3>
+                  <div className="py-7">
+                    <iframe
+                      title="map"
+                      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14771.99037376455!2d91.82208290000001!3d22.2401701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbn!2sbd!4v1707335722787!5m2!1sbn!2sbd"
+                      className="h-96 w-full max-w-5xl border-0"
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                  <hr className="my-4" />
+                </section>
+
+                <section name="agent">
+                  <H1>Agent</H1>
+                  <div className="rounded-lg bg-gray-100 p-6 shadow-lg">
+                    <div className="flex flex-col gap-6">
+                      <div className="flex gap-6">
+                        <div className="flex w-1/2 flex-col items-center">
+                          <div className="h-24 w-24 rounded-full bg-gray-400"></div>{' '}
+                          {/* Small Gray Circle */}
+                        </div>
+
+                        <div className="flex-1">
+                          <h2 className="mb-2 text-2xl font-bold">Kelin</h2>
+                          <p className="mb-2 text-gray-700">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit.
+                          </p>
+                          <p className="mb-4 text-gray-700">
+                            Sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua.
+                          </p>
+
+                          <div className="mb-4 flex items-center">
+                            <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
+                            <span className="text-lg text-gray-700">
+                              +123 456 7890
+                            </span>
+                          </div>
+                          <div className="flex items-center">
+                            <GlobeAltIcon className="mr-2 h-6 w-6 text-gray-500" />
+                            <span className="text-lg text-gray-700">
+                              kelin@example.com
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="rounded-lg border border-gray-200 bg-white p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex space-x-4">
+                            <a
+                              href="https://facebook.com"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <img
+                                src="../images/facebook.png"
+                                alt="Facebook"
+                                className="h-6 w-6"
+                              />
+                            </a>
+                            <a
+                              href="https://instagram.com"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <img
+                                src="../images/instagram.png"
+                                alt="Instagram"
+                                className="h-6 w-6"
+                              />
+                            </a>
+                          </div>
+                          <button className="rounded-lg bg-black px-4 py-2 text-white">
+                            Send Message
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
-              <div>
+
+              {/* Booking Form */}
+              <section>
                 <BookingForm spaceId={id} />
+              </section>
+            </section>
+          </section>
+          <section name="modal">
+            {/* Modal */}
+            {showModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75">
+                <div className="relative rounded-lg bg-white p-6 shadow-lg">
+                  <button
+                    onClick={closeModal}
+                    className="absolute right-5 top-4 text-gray-700"
+                  >
+                    <XMarkIcon className="h-6 w-6 text-gray-700" />
+                  </button>
+                  <H2 className="mb-4 text-xl font-semibold">Highlight</H2>
+                  <div className="flex flex-wrap gap-6">
+                    {extraAmenitiesData.map((amenity) => (
+                      <div
+                        key={amenity.name}
+                        className={`flex flex-col items-center text-gray-500`}
+                      >
+                        <img
+                          className="mb-2 h-12 w-12"
+                          src={amenity.image}
+                          alt={amenity.name}
+                        />
+                        <span className="text-lg">{amenity.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            )}
+          </section>
         </>
       ) : (
-        <P>Loading...</P>
+        <div>Loading...</div>
       )}
     </div>
   );

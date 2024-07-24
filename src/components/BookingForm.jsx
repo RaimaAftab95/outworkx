@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCreateBooking } from '../hooks/useCreateBooking';
 import { useAuthContext } from '../hooks/useAuthContext';
 import toast from 'react-hot-toast';
+import { H6, Small } from '../components/primitives/typography';
 
 export default function BookingForm({ spaceId }) {
   const { createBooking } = useCreateBooking();
@@ -38,72 +39,84 @@ export default function BookingForm({ spaceId }) {
   return (
     <form
       onSubmit={handleBooking}
-      className="mx-auto mt-5 max-w-md rounded border border-gray-300 bg-gray-100 p-6 shadow-md"
+      className="mx-auto mt-5 max-w-md rounded-3xl border border-gray-300 bg-white p-6 shadow-md"
     >
-      <div className="mb-4">
-        <label
-          htmlFor="startDate"
-          className="mb-2 block font-bold text-gray-700"
-        >
-          Start Date:
-        </label>
+      <H6 className="">Coworking Space</H6>
+      <Small className="">Access to shared workspace</Small>
+      <hr className="my-4" />
+      <div className="mb-4 flex justify-between text-sm">
+        <span>1-20 People</span>
+        <span>$19/person/day</span>
+      </div>
+      <hr className="my-4"></hr>
+      <div className="mb-4 flex items-center justify-between">
+        <Small htmlFor="startDate" className="block font-bold text-gray-700">
+          Check In:
+        </Small>
         <input
           id="startDate"
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="block w-full rounded border border-gray-300 p-2"
+          className="ml-2 block w-1/2 border-b border-gray-300 p-2 text-sm focus:border-black focus:outline-none"
           required
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="endDate" className="mb-2 block font-bold text-gray-700">
-          End Date:
-        </label>
+      <div className="mb-4 flex items-center justify-between">
+        <Small htmlFor="endDate" className="block font-bold text-gray-700">
+          Check Out:
+        </Small>
         <input
           id="endDate"
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="block w-full rounded border border-gray-300 p-2"
+          className="ml-2 block w-1/2 border-b border-gray-300 p-2 text-sm focus:border-black focus:outline-none"
           required
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="price" className="mb-2 block font-bold text-gray-700">
+      <div className="mb-4 flex items-center justify-between">
+        <Small htmlFor="price" className="block font-bold text-gray-700">
           Price:
-        </label>
+        </Small>
         <input
           id="price"
           type="text"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          className="block w-full rounded border border-gray-300 p-2"
+          className="ml-2 block w-1/2 border-b border-gray-300 p-2 text-sm focus:border-black focus:outline-none"
           required
         />
       </div>
-      <div className="mb-4">
-        <label
+      <div className="mb-4 flex items-center justify-between">
+        <Small
           htmlFor="numberOfDesks"
-          className="mb-2 block font-bold text-gray-700"
+          className="block font-bold text-gray-700"
         >
           Number of Desks:
-        </label>
+        </Small>
         <input
           id="numberOfDesks"
           type="text"
           value={numberOfDesks}
           onChange={(e) => setNumberOfDesks(e.target.value)}
-          className="block w-full rounded border border-gray-300 p-2"
+          className="ml-2 block w-1/2 border-b border-gray-300 p-2 text-sm focus:border-black focus:outline-none"
           required
         />
       </div>
-      <button
-        type="submit"
-        className="rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700"
-      >
-        Book
-      </button>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="rounded-full bg-black px-4 py-1.5 text-sm text-white transition-all hover:opacity-60"
+        >
+          Reserve Space
+        </button>
+      </div>
+      <hr className="my-4" />
+      <div className="mb-4 flex justify-between text-sm">
+        <span>$19&times;5 days</span>
+        <span className="font-bold">150$</span>
+      </div>
     </form>
   );
 }
