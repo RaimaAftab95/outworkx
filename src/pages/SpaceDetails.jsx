@@ -137,9 +137,15 @@ export default function SpaceDetails() {
             )}
 
             {/* Space details */}
-            <H1 className="my-4 text-3xl font-bold">{space.name}</H1>
-            <P className="text-lg">{space.description}</P>
-            <BookingForm spaceId={id} />
+            <div className="flex">
+              <div>
+                <H1 className="my-4 text-3xl font-bold">{space.name}</H1>
+                <P className="text-lg">{space.description}</P>
+              </div>
+              <div>
+                <BookingForm spaceId={id} />
+              </div>
+            </div>
           </div>
         </>
       ) : (
