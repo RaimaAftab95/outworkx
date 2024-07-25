@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import React, { useRef } from 'react';
+// import React, { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import BookingForm from '../components/BookingForm';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,7 +14,7 @@ import {
   GlobeAltIcon,
   EnvelopeIcon
 } from '@heroicons/react/24/outline';
-import { H3, Lead, P } from '../components/primitives/typography';
+import { H3, Lead, P, Small } from '../components/primitives/typography';
 
 const { VITE_BACKEND_API } = import.meta.env;
 
@@ -276,26 +276,32 @@ export default function SpaceDetails() {
                     <div className="flex flex-col">
                       <div className="mt-2 flex gap-6">
                         <div className="mt-2 flex w-1/4 flex-col items-center">
-                          <div className="h-24 w-24 rounded-full bg-gray-400"></div>
+                          <div className="h-24 w-24 overflow-hidden rounded-full">
+                            <img
+                              src="../images/kevin.png"
+                              alt="Profile"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
                         </div>
 
                         <div className="mb-4 mt-2 flex-1">
                           <h2 className="mb-2 text-2xl font-bold">Kelin</h2>
-                          <p className="mb-2 text-gray-700">
+                          <Small className="mb-2 text-gray-700">
                             Hello!, My name is Kelvin, also known as @Uxper.I am
                             a Chef, a Traveler, and a Digital Enterpreneure.
-                          </p>
-                          <div className="mb-4 flex items-center">
+                          </Small>
+                          <div className="mb-4 mt-2 flex items-center">
                             <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
-                            <span className="text-lg text-gray-700">
+                            <Small className="text-lg text-gray-700">
                               (415) 550-81149
-                            </span>
+                            </Small>
                           </div>
                           <div className="flex items-center">
                             <EnvelopeIcon className="mr-2 h-6 w-6 text-gray-500" />
-                            <span className="text-lg text-gray-700">
+                            <Small className="text-lg text-gray-700">
                               hello@uxper.co
-                            </span>
+                            </Small>
                           </div>
                         </div>
                       </div>
@@ -401,7 +407,13 @@ export default function SpaceDetails() {
                     <div className="flex flex-col">
                       <div className="flex items-start gap-4">
                         <div className="flex-shrink-0">
-                          <div className="h-24 w-24 rounded-full bg-gray-400"></div>
+                          <div className="h-24 w-24 overflow-hidden rounded-full">
+                            <img
+                              src="../images/kevin.png"
+                              alt="Profile"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
                         </div>
 
                         <div className="flex-1">
@@ -416,13 +428,13 @@ export default function SpaceDetails() {
                       </div>
 
                       <div className="mt-4 rounded-lg bg-white px-4 py-4">
-                        <p className="text-sm">
-                          Love the workspace. Its atmosphere is amazing. Feels
-                          like an agency workspace. Dogs are also welcome.
-                          Modern workspace for entrepreneurs and small
-                          businesses. The front desk staff is very helpful. Lots
-                          of events to socialize.
-                        </p>
+                        <Small className="text-sm">
+                          Love the workspace! The atmosphere is amazing. Feels
+                          like an agency space. Dogs are also welcome. Modern
+                          workspace for entrepreneurs and small businesses. The
+                          front desk staff is really helpful. Lots of events to
+                          socialize.
+                        </Small>
                       </div>
                     </div>
                   </div>
