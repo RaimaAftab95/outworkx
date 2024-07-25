@@ -12,7 +12,7 @@ import {
   PhoneIcon,
   GlobeAltIcon
 } from '@heroicons/react/24/outline';
-import { H1, H2, P } from '../components/primitives/typography';
+import { H3, Lead, P } from '../components/primitives/typography';
 
 const { VITE_BACKEND_API } = import.meta.env;
 
@@ -173,7 +173,7 @@ export default function SpaceDetails() {
             {/* Space details */}
             <section className="flex flex-col gap-4 md:flex-row">
               <div className="flex-1">
-                <H1 className="my-4 text-3xl font-bold">{space.name}</H1>
+                <H3 className="my-4 text-3xl font-bold">{space.name}</H3>
                 <div className="mb-4 flex items-center space-x-4">
                   <div className="text-black-500 flex items-center">
                     <span className="ml-1 text-lg">5.0</span>
@@ -227,7 +227,7 @@ export default function SpaceDetails() {
                 {/* Contact Section */}
                 <section className="mt-4 w-full">
                   <hr className="my-4" />
-                  <H2 className="mb-4 text-xl font-semibold">Contact</H2>
+                  <Lead className="mb-4 text-xl font-semibold">Contact</Lead>
                   <div className="mb-2 flex items-center">
                     <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
                     <span className="text-lg text-gray-700">18664580333</span>
@@ -243,9 +243,9 @@ export default function SpaceDetails() {
 
                 {/* Moreinfo  Section */}
                 <section className="mt-4 w-full">
-                  <H2 className="mb-4 text-xl font-semibold">
+                  <Lead className="mb-4 text-xl font-semibold">
                     More Information
-                  </H2>
+                  </Lead>
                   <P>Coworking desks84 (From $27 per person per day)</P>
                   <P>Private office20 (From $410 per person per month)</P>
                   <P>Meeting rooms4 (From $49 per hour)</P>
@@ -254,7 +254,7 @@ export default function SpaceDetails() {
                 </section>
 
                 <section name="map">
-                  <h3>Map</h3>
+                  <Lead>Map</Lead>
                   <div className="py-7">
                     <iframe
                       title="map"
@@ -269,7 +269,7 @@ export default function SpaceDetails() {
                 </section>
 
                 <section name="agent">
-                  <H1>Agent</H1>
+                  <Lead>Agent</Lead>
                   <div className="rounded-lg bg-gray-100 p-6 shadow-lg">
                     <div className="flex flex-col gap-6">
                       <div className="flex gap-6">
@@ -357,7 +357,7 @@ export default function SpaceDetails() {
                   >
                     <XMarkIcon className="h-6 w-6 text-gray-700" />
                   </button>
-                  <H2 className="mb-4 text-xl font-semibold">Highlight</H2>
+                  <Lead className="mb-4 text-xl font-semibold">Highlight</Lead>
                   <div className="flex flex-wrap gap-6">
                     {extraAmenitiesData.map((amenity) => (
                       <div
