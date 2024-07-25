@@ -10,7 +10,8 @@ import {
   XMarkIcon,
   ArrowsPointingOutIcon,
   PhoneIcon,
-  GlobeAltIcon
+  GlobeAltIcon,
+  EnvelopeIcon
 } from '@heroicons/react/24/outline';
 import { H3, Lead, P } from '../components/primitives/typography';
 
@@ -267,44 +268,39 @@ export default function SpaceDetails() {
                   </div>
                   <hr className="my-4" />
                 </section>
-
-                <section name="agent">
-                  <Lead>Agent</Lead>
-                  <div className="rounded-lg bg-gray-100 p-6 shadow-lg">
-                    <div className="flex flex-col gap-6">
-                      <div className="flex gap-6">
-                        <div className="flex w-1/2 flex-col items-center">
-                          <div className="h-24 w-24 rounded-full bg-gray-400"></div>{' '}
+                {/* Agent  Section */}
+                <section>
+                  <Lead className="mb-5">Agent</Lead>
+                  <div className="rounded-lg border border-gray-200 bg-white shadow-lg">
+                    <div className="flex flex-col">
+                      <div className="mt-2 flex gap-6">
+                        <div className="mt-2 flex w-1/4 flex-col items-center">
+                          <div className="h-24 w-24 rounded-full bg-gray-400"></div>
                           {/* Small Gray Circle */}
                         </div>
 
-                        <div className="flex-1">
+                        <div className="mb-4 mt-2 flex-1">
                           <h2 className="mb-2 text-2xl font-bold">Kelin</h2>
                           <p className="mb-2 text-gray-700">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit.
+                            Hello!, My name is Kelvin, also known as @Uxper.I am
+                            a Chef, a Traveler, and a Digital Enterpreneure.
                           </p>
-                          <p className="mb-4 text-gray-700">
-                            Sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.
-                          </p>
-
                           <div className="mb-4 flex items-center">
                             <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
                             <span className="text-lg text-gray-700">
-                              +123 456 7890
+                              (415) 550-81149
                             </span>
                           </div>
                           <div className="flex items-center">
-                            <GlobeAltIcon className="mr-2 h-6 w-6 text-gray-500" />
+                            <EnvelopeIcon className="mr-2 h-6 w-6 text-gray-500" />
                             <span className="text-lg text-gray-700">
-                              kelin@example.com
+                              hello@uxper.co
                             </span>
                           </div>
                         </div>
                       </div>
-
-                      <div className="rounded-lg border border-gray-200 bg-white p-4">
+                      <hr className="border-gray-200" />
+                      <div className="rounded-lg  bg-white px-4 py-4">
                         <div className="flex items-center justify-between">
                           <div className="flex space-x-4">
                             <a
@@ -330,13 +326,72 @@ export default function SpaceDetails() {
                               />
                             </a>
                           </div>
-                          <button className="rounded-lg bg-black px-4 py-2 text-white">
+                          <button className="rounded-full bg-black px-4 py-1.5 text-sm text-white transition-all hover:opacity-60">
                             Send Message
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <hr className="my-10" />
+                </section>
+                {/* Review  Section */}
+                <section>
+                  <Lead className="mb-5">
+                    Review
+                    <span className="text-2xl"> &#9733;</span>
+                    <span className="text-sm">5.0 Based on 1 Review</span>
+                  </Lead>
+                  <div className="rounded-lg border border-gray-200 bg-white shadow-lg">
+                    <div className="p-6">
+                      <div className="mb-4 flex">
+                        <div className="flex w-1/2 items-center pr-2">
+                          <div className="flex-1">
+                            <h3 className="mb-1 text-lg font-bold">Service</h3>
+                            <div className="h-2 w-full rounded-full bg-green-500"></div>
+                          </div>
+                          <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
+                            5.00
+                          </button>
+                        </div>
+                        <div className="flex w-1/2 items-center pl-2">
+                          <div className="flex-1">
+                            <h3 className="mb-1 text-lg font-bold">
+                              Value for Money
+                            </h3>
+                            <div className="h-2 w-full rounded-full bg-green-500"></div>
+                          </div>
+                          <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
+                            5.00
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="mb-4 flex">
+                        <div className="flex w-1/2 items-center pr-2">
+                          <div className="flex-1">
+                            <h3 className="mb-1 text-lg font-bold">Location</h3>
+                            <div className="h-2 w-full rounded-full bg-green-500"></div>
+                          </div>
+                          <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
+                            5.00
+                          </button>
+                        </div>
+                        <div className="flex w-1/2 items-center pl-2">
+                          <div className="flex-1">
+                            <h3 className="mb-1 text-lg font-bold">
+                              Cleanliness
+                            </h3>
+                            <div className="h-2 w-full rounded-full bg-green-500"></div>
+                          </div>
+                          <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
+                            5.00
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr className="my-10" />
                 </section>
               </div>
 
@@ -349,7 +404,7 @@ export default function SpaceDetails() {
           <section name="modal">
             {/* Modal */}
             {showModal && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75">
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600 bg-opacity-75">
                 <div className="relative rounded-lg bg-white p-6 shadow-lg">
                   <button
                     onClick={closeModal}
