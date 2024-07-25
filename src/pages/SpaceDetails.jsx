@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import React, { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import BookingForm from '../components/BookingForm';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -276,7 +277,6 @@ export default function SpaceDetails() {
                       <div className="mt-2 flex gap-6">
                         <div className="mt-2 flex w-1/4 flex-col items-center">
                           <div className="h-24 w-24 rounded-full bg-gray-400"></div>
-                          {/* Small Gray Circle */}
                         </div>
 
                         <div className="mb-4 mt-2 flex-1">
@@ -335,6 +335,7 @@ export default function SpaceDetails() {
                   </div>
                   <hr className="my-10" />
                 </section>
+
                 {/* Review  Section */}
                 <section>
                   <Lead className="mb-5">
@@ -393,6 +394,40 @@ export default function SpaceDetails() {
                   </div>
                   <hr className="my-10" />
                 </section>
+
+                {/* Review in detail  Section */}
+                <section>
+                  <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
+                    <div className="flex flex-col">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          <div className="h-24 w-24 rounded-full bg-gray-400"></div>
+                        </div>
+
+                        <div className="flex-1">
+                          <h2 className="mt-5 flex items-center gap-2 text-xl font-bold">
+                            Kelin
+                            <span className="text-xl">
+                              &#9733;&#9733;&#9733;&#9733;&#9733;
+                            </span>
+                          </h2>
+                          <p className="text-sm text-gray-700">2 Years Ago</p>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 rounded-lg bg-white px-4 py-4">
+                        <p className="text-sm">
+                          Love the workspace. Its atmosphere is amazing. Feels
+                          like an agency workspace. Dogs are also welcome.
+                          Modern workspace for entrepreneurs and small
+                          businesses. The front desk staff is very helpful. Lots
+                          of events to socialize.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr className="my-10" />
+                </section>
               </div>
 
               {/* Booking Form */}
@@ -431,6 +466,30 @@ export default function SpaceDetails() {
                 </div>
               </div>
             )}
+          </section>
+
+          <P>similar space section goes here</P>
+          <section>
+            <Lead className="mb-5">Similar Places</Lead>
+            <p>swiper goes here</p>
+            <Swiper
+              pagination={{
+                type: 'fraction'
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+            >
+              <SwiperSlide>Slide 1</SwiperSlide>
+              <SwiperSlide>Slide 2</SwiperSlide>
+              <SwiperSlide>Slide 3</SwiperSlide>
+              <SwiperSlide>Slide 4</SwiperSlide>
+              <SwiperSlide>Slide 5</SwiperSlide>
+              <SwiperSlide>Slide 6</SwiperSlide>
+              <SwiperSlide>Slide 7</SwiperSlide>
+              <SwiperSlide>Slide 8</SwiperSlide>
+              <SwiperSlide>Slide 9</SwiperSlide>
+            </Swiper>
           </section>
         </>
       ) : (
