@@ -142,3 +142,31 @@
     top: 3.3333%;
   }
 }
+
+/* Custom Swiper Styles */
+.swiper-pagination-bullet {
+  background-color: #18b40a !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(15, 15, 15) !important;
+}
+
+/* Style for Swiper navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50%;
+  background-color: #1d1f1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}

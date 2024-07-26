@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-// import React, { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import BookingForm from '../components/BookingForm';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,12 +14,11 @@ import {
   EnvelopeIcon
 } from '@heroicons/react/24/outline';
 import {
-  H2,
   H3,
+  H5,
   H6,
   Large,
   Lead,
-  P,
   Small,
   Muted
 } from '../components/primitives/typography';
@@ -106,10 +104,18 @@ export default function SpaceDetails() {
                 delay: 2500,
                 disableOnInteraction: false
               }}
-              pagination={{
-                clickable: true
+              // pagination={{
+              //   clickable: true
+              // }}
+              // navigation={true}
+              navigation={{
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
               }}
-              navigation={true}
+              pagination={{
+                clickable: true,
+                el: '.swiper-pagination'
+              }}
               modules={[Autoplay, Pagination, Navigation]}
               className="mySwiper"
             >
@@ -118,19 +124,18 @@ export default function SpaceDetails() {
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
                 >
-                  <div className="flex items-center justify-center">
+                  <div className="flex h-full w-full items-center justify-center">
                     <img
-                      className={`h-60 w-full object-cover ${index === 1 ? 'h-60' : 'opacity-75'}`}
-                      style={{
-                        width: 'calc(100% - 2px)',
-                        height: 'calc(100% - 2px)'
-                      }}
+                      className={`h-30 w-full object-cover ${index === 1 ? 'h-30' : 'opacity-75'}`}
                       src={item.url}
                       alt={`space-${index}`}
                     />
                   </div>
                 </SwiperSlide>
               ))}
+              <div className="swiper-pagination"></div>
+              <div className="swiper-button-next"></div>
+              <div className="swiper-button-prev"></div>
             </Swiper>
 
             {/* Second Swiper for single image view per slide */}
@@ -145,20 +150,29 @@ export default function SpaceDetails() {
                     spaceBetween={10}
                     centeredSlides={true}
                     initialSlide={selectedImageIndex}
-                    navigation={true}
-                    pagination={{ clickable: true }}
+                    // navigation={true}
+                    // pagination={{ clickable: true }}
+                    navigation={{
+                      nextEl: '.swiper-button-next',
+                      prevEl: '.swiper-button-prev'
+                    }}
+                    pagination={{
+                      clickable: true,
+                      el: '.swiper-pagination'
+                    }}
                     modules={[Pagination, Navigation]}
                     className="h-full w-full"
                   >
                     {space.gallery.map((item, index) => (
                       <SwiperSlide key={index}>
-                        <img
-                          className="h-full w-full object-cover"
-                          src={item.url}
-                          alt={`selected-space-${index}`}
-                        />
+                        <div className="flex h-full items-center justify-center">
+                          <img src={item.url} alt={`selected-space-${index}`} />
+                        </div>
                       </SwiperSlide>
                     ))}
+                    <div className="swiper-pagination"></div>
+                    <div className="swiper-button-next"></div>
+                    <div className="swiper-button-prev"></div>
                   </Swiper>
                   <button
                     className="absolute right-4 top-4 z-50 rounded-full bg-gray-800 bg-opacity-75 p-2 text-white"
@@ -181,28 +195,39 @@ export default function SpaceDetails() {
               </div>
             )}
 
-            {/* Space details */}
+            {/*main container Space details */}
             <section className="flex flex-col gap-4 md:flex-row">
               <div className="flex-1">
-                <H3 className="my-4 text-3xl font-bold">{space.name}</H3>
-                <div className="mb-4 flex items-center space-x-4">
-                  <div className="text-black-500 flex items-center">
-                    <Muted className="ml-1 text-blue-500">5.0</Muted>
-                    <Muted className="text-blue-500"> &#9733;</Muted>
+                {/* Space details */}
+                <section className="flex flex-col gap-4 md:flex-row">
+                  <div className="flex-1">
+                    <H3 className="my-4 text-3xl font-bold">{space.name}</H3>
+
+                    <div className="mb-4 flex flex-col md:flex-row md:items-center md:space-x-4">
+                      <div className="mb-2 flex items-center space-x-4 md:mb-0">
+                        <Muted className="text-black-500 flex items-center">
+                          <span className="text-green-500">5.0</span>
+                          <span className="ml-1 text-green-500"> &#9733;</span>
+                        </Muted>
+                        <Muted className="text-gray-500">(1 Review)</Muted>
+                      </div>
+
+                      <div className="flex items-center space-x-4">
+                        <Muted className="relative rounded px-2 py-1 text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
+                          210$/Month
+                        </Muted>
+                        <Muted className="relative rounded px-2 py-1 text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
+                          Coworking, Office Space
+                        </Muted>
+                      </div>
+                    </div>
                   </div>
-                  <Muted className="text-gray-500">(1 Review)</Muted>
-                  <Muted className="relative rounded px-2 py-1 text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
-                    210$/Month
-                  </Muted>
-                  <Muted className="relative rounded px-2 py-1 text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
-                    Coworking, Office Space
-                  </Muted>
-                </div>
+                </section>
 
                 {/* Amenities Section */}
                 <section className="mt-4 w-full">
                   <hr className="my-4" />
-                  <div className="flex flex-wrap gap-6">
+                  <div className="flex flex-wrap gap-20">
                     {amenitiesData.map((amenity) => (
                       <div
                         key={amenity.name}
@@ -238,13 +263,13 @@ export default function SpaceDetails() {
                 {/* Contact Section */}
                 <section className="mt-4 w-full">
                   <hr className="my-4" />
-                  <H6 className="mb-4">Contact</H6>
+                  <H5 className="mb-4">Contact</H5>
                   <div className="mb-2 flex items-center">
-                    <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
+                    <PhoneIcon className="mr-2 h-6 w-6 text-green-500" />
                     <Small className="text-gray-700">18664580333</Small>
                   </div>
                   <div className="flex items-center">
-                    <GlobeAltIcon className="mr-2 h-6 w-6 text-gray-500" />
+                    <GlobeAltIcon className="mr-2 h-6 w-6 text-green-500" />
                     <Small className="text-gray-700">vangoghmuseum.nl</Small>
                   </div>
                   <hr className="my-4" />
@@ -252,39 +277,35 @@ export default function SpaceDetails() {
 
                 {/* Moreinfo  Section */}
                 <section className="mt-4 w-full">
-                  <H6 className="mb-4">More Information</H6>
-                  {/* <Small>Coworking desks84 (From $27 per person per day)</Small>
-                  <Small>Private office20 (From $410 per person per month)</Small>
-                  <Small>Meeting rooms4 (From $49 per hour)</Small>
-                  <Small>Virtual Offices6 (From $ 112 per month)</Small> */}
-                  <Small className="flex">
-                    Coworking desks84{' '}
+                  <H5 className="mb-4">More Information</H5>
+                  <Large className="flex">
+                    Coworking desks
                     <Muted className="ml-5 pb-2">
-                      (From $27 per person per day)
+                      84 (From $27 per person per day)
                     </Muted>
-                  </Small>
+                  </Large>
                   <br></br>
-                  <Small className="flex">
-                    Private office20{' '}
+                  <Large className="flex">
+                    Private office
                     <Muted className="ml-5">
-                      (From $410 per person per month)
+                      20 (From $410 per person per month)
                     </Muted>
-                  </Small>
+                  </Large>
                   <br></br>
-                  <Small className="flex">
-                    Meeting rooms4{' '}
-                    <Muted className="ml-5">(From $49 per hour)</Muted>
-                  </Small>
+                  <Large className="flex">
+                    Meeting rooms
+                    <Muted className="ml-5">4 (From $49 per hour)</Muted>
+                  </Large>
                   <br></br>
-                  <Small className="flex">
-                    Virtual Offices6{' '}
-                    <Muted className="ml-5">(From $112 per month)</Muted>
-                  </Small>
+                  <Large className="flex">
+                    Virtual Offices
+                    <Muted className="ml-5">6 (From $112 per month)</Muted>
+                  </Large>
                   <hr className="my-4" />
                 </section>
 
                 <section name="map">
-                  <H6 className="mb-4">Map</H6>
+                  <H5 className="mb-4">Map</H5>
                   <div className="py-7">
                     <iframe
                       title="map"
@@ -299,7 +320,7 @@ export default function SpaceDetails() {
                 </section>
                 {/* Agent  Section */}
                 <section>
-                  <H6 className="mb-4">Agent</H6>
+                  <H5 className="mb-4">Agent</H5>
                   <div className="rounded-lg border border-gray-200 bg-white shadow-lg">
                     <div className="flex flex-col">
                       <div className="mt-2 flex gap-6">
@@ -372,11 +393,21 @@ export default function SpaceDetails() {
 
                 {/* Review  Section */}
                 <section>
-                  <Lead className="mb-5">
-                    Review
-                    <span className="text-2xl"> &#9733;</span>
-                    <span className="text-sm">5.0 Based on 1 Review</span>
-                  </Lead>
+                  <div className="flex">
+                    <div>
+                      <Lead className="mb-5">Review</Lead>
+                    </div>
+                    <div>
+                      <Muted className="ml-1 mt-1">
+                        <span className=" text-green-500"> 5.0 &#9733;</span>
+                        <span className=" text-gray-500">
+                          {' '}
+                          Based on 1 Review
+                        </span>
+                      </Muted>
+                    </div>
+                  </div>
+
                   <div className="rounded-lg border border-gray-200 bg-white shadow-lg">
                     <div className="p-6">
                       <div className="mb-4 flex">
