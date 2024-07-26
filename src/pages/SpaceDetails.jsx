@@ -14,7 +14,16 @@ import {
   GlobeAltIcon,
   EnvelopeIcon
 } from '@heroicons/react/24/outline';
-import { H3, Lead, P, Small } from '../components/primitives/typography';
+import {
+  H2,
+  H3,
+  H6,
+  Large,
+  Lead,
+  P,
+  Small,
+  Muted
+} from '../components/primitives/typography';
 
 const { VITE_BACKEND_API } = import.meta.env;
 
@@ -178,16 +187,16 @@ export default function SpaceDetails() {
                 <H3 className="my-4 text-3xl font-bold">{space.name}</H3>
                 <div className="mb-4 flex items-center space-x-4">
                   <div className="text-black-500 flex items-center">
-                    <span className="ml-1 text-lg">5.0</span>
-                    <span className="text-2xl"> &#9733;</span>
+                    <Muted className="ml-1 text-blue-500">5.0</Muted>
+                    <Muted className="text-blue-500"> &#9733;</Muted>
                   </div>
-                  <span className="text-sm text-gray-500">(1 Review)</span>
-                  <span className="relative rounded px-2 py-1 text-sm text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
+                  <Muted className="text-gray-500">(1 Review)</Muted>
+                  <Muted className="relative rounded px-2 py-1 text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
                     210$/Month
-                  </span>
-                  <span className="relative rounded px-2 py-1 text-sm text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
+                  </Muted>
+                  <Muted className="relative rounded px-2 py-1 text-gray-700 before:absolute before:left-[-8px] before:top-1/2 before:h-2 before:w-2 before:-translate-y-1/2 before:rounded-full before:bg-gray-400">
                     Coworking, Office Space
-                  </span>
+                  </Muted>
                 </div>
 
                 {/* Amenities Section */}
@@ -204,7 +213,7 @@ export default function SpaceDetails() {
                           src={amenity.image}
                           alt={amenity.name}
                         />
-                        <span className="text-lg">{amenity.name}</span>
+                        <Small className="text-lg">{amenity.name}</Small>
                       </div>
                     ))}
                     <div
@@ -217,11 +226,11 @@ export default function SpaceDetails() {
                   <hr className="my-4" />
                 </section>
 
-                <P className="text-lg">
+                <Small>
                   {showFullDescription
                     ? space.description
                     : `${space.description.slice(0, 100)}...`}
-                </P>
+                </Small>
                 <button className="mt-2 font-bold" onClick={toggleDescription}>
                   {showFullDescription ? 'Show Less' : 'Show More'}
                 </button>
@@ -229,34 +238,53 @@ export default function SpaceDetails() {
                 {/* Contact Section */}
                 <section className="mt-4 w-full">
                   <hr className="my-4" />
-                  <Lead className="mb-4 text-xl font-semibold">Contact</Lead>
+                  <H6 className="mb-4">Contact</H6>
                   <div className="mb-2 flex items-center">
                     <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
-                    <span className="text-lg text-gray-700">18664580333</span>
+                    <Small className="text-gray-700">18664580333</Small>
                   </div>
                   <div className="flex items-center">
                     <GlobeAltIcon className="mr-2 h-6 w-6 text-gray-500" />
-                    <span className="text-lg text-gray-700">
-                      vangoghmuseum.nl
-                    </span>
+                    <Small className="text-gray-700">vangoghmuseum.nl</Small>
                   </div>
                   <hr className="my-4" />
                 </section>
 
                 {/* Moreinfo  Section */}
                 <section className="mt-4 w-full">
-                  <Lead className="mb-4 text-xl font-semibold">
-                    More Information
-                  </Lead>
-                  <P>Coworking desks84 (From $27 per person per day)</P>
-                  <P>Private office20 (From $410 per person per month)</P>
-                  <P>Meeting rooms4 (From $49 per hour)</P>
-                  <P>Virtual Offices6 (From $ 112 per month)</P>
+                  <H6 className="mb-4">More Information</H6>
+                  {/* <Small>Coworking desks84 (From $27 per person per day)</Small>
+                  <Small>Private office20 (From $410 per person per month)</Small>
+                  <Small>Meeting rooms4 (From $49 per hour)</Small>
+                  <Small>Virtual Offices6 (From $ 112 per month)</Small> */}
+                  <Small className="flex">
+                    Coworking desks84{' '}
+                    <Muted className="ml-5 pb-2">
+                      (From $27 per person per day)
+                    </Muted>
+                  </Small>
+                  <br></br>
+                  <Small className="flex">
+                    Private office20{' '}
+                    <Muted className="ml-5">
+                      (From $410 per person per month)
+                    </Muted>
+                  </Small>
+                  <br></br>
+                  <Small className="flex">
+                    Meeting rooms4{' '}
+                    <Muted className="ml-5">(From $49 per hour)</Muted>
+                  </Small>
+                  <br></br>
+                  <Small className="flex">
+                    Virtual Offices6{' '}
+                    <Muted className="ml-5">(From $112 per month)</Muted>
+                  </Small>
                   <hr className="my-4" />
                 </section>
 
                 <section name="map">
-                  <Lead>Map</Lead>
+                  <H6 className="mb-4">Map</H6>
                   <div className="py-7">
                     <iframe
                       title="map"
@@ -271,7 +299,7 @@ export default function SpaceDetails() {
                 </section>
                 {/* Agent  Section */}
                 <section>
-                  <Lead className="mb-5">Agent</Lead>
+                  <H6 className="mb-4">Agent</H6>
                   <div className="rounded-lg border border-gray-200 bg-white shadow-lg">
                     <div className="flex flex-col">
                       <div className="mt-2 flex gap-6">
@@ -286,20 +314,20 @@ export default function SpaceDetails() {
                         </div>
 
                         <div className="mb-4 mt-2 flex-1">
-                          <h2 className="mb-2 text-2xl font-bold">Kelin</h2>
+                          <Lead className="mb-2">Kelvin</Lead>
                           <Small className="mb-2 text-gray-700">
                             Hello!, My name is Kelvin, also known as @Uxper.I am
                             a Chef, a Traveler, and a Digital Enterpreneure.
                           </Small>
                           <div className="mb-4 mt-2 flex items-center">
                             <PhoneIcon className="mr-2 h-6 w-6 text-gray-500" />
-                            <Small className="text-lg text-gray-700">
+                            <Small className="text-gray-700">
                               (415) 550-81149
                             </Small>
                           </div>
                           <div className="flex items-center">
                             <EnvelopeIcon className="mr-2 h-6 w-6 text-gray-500" />
-                            <Small className="text-lg text-gray-700">
+                            <Small className="text-gray-700">
                               hello@uxper.co
                             </Small>
                           </div>
@@ -354,7 +382,9 @@ export default function SpaceDetails() {
                       <div className="mb-4 flex">
                         <div className="flex w-1/2 items-center pr-2">
                           <div className="flex-1">
-                            <h3 className="mb-1 text-lg font-bold">Service</h3>
+                            <Large className="mb-1 text-lg font-bold">
+                              Service
+                            </Large>
                             <div className="h-2 w-full rounded-full bg-green-500"></div>
                           </div>
                           <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
@@ -363,9 +393,9 @@ export default function SpaceDetails() {
                         </div>
                         <div className="flex w-1/2 items-center pl-2">
                           <div className="flex-1">
-                            <h3 className="mb-1 text-lg font-bold">
+                            <Large className="mb-1 text-lg font-bold">
                               Value for Money
-                            </h3>
+                            </Large>
                             <div className="h-2 w-full rounded-full bg-green-500"></div>
                           </div>
                           <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
@@ -377,7 +407,9 @@ export default function SpaceDetails() {
                       <div className="mb-4 flex">
                         <div className="flex w-1/2 items-center pr-2">
                           <div className="flex-1">
-                            <h3 className="mb-1 text-lg font-bold">Location</h3>
+                            <Large className="mb-1 text-lg font-bold">
+                              Location
+                            </Large>
                             <div className="h-2 w-full rounded-full bg-green-500"></div>
                           </div>
                           <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
@@ -386,9 +418,9 @@ export default function SpaceDetails() {
                         </div>
                         <div className="flex w-1/2 items-center pl-2">
                           <div className="flex-1">
-                            <h3 className="mb-1 text-lg font-bold">
+                            <Large className="mb-1 text-lg font-bold">
                               Cleanliness
-                            </h3>
+                            </Large>
                             <div className="h-2 w-full rounded-full bg-green-500"></div>
                           </div>
                           <button className="ml-2 mt-5 rounded-3xl bg-gray-200 px-2 py-1 text-gray-800">
@@ -417,12 +449,12 @@ export default function SpaceDetails() {
                         </div>
 
                         <div className="flex-1">
-                          <h2 className="mt-5 flex items-center gap-2 text-xl font-bold">
-                            Kelin
+                          <Lead className="mt-5 flex items-center gap-2">
+                            Kelvin
                             <span className="text-xl">
                               &#9733;&#9733;&#9733;&#9733;&#9733;
                             </span>
-                          </h2>
+                          </Lead>
                           <p className="text-sm text-gray-700">2 Years Ago</p>
                         </div>
                       </div>
@@ -478,30 +510,6 @@ export default function SpaceDetails() {
                 </div>
               </div>
             )}
-          </section>
-
-          <P>similar space section goes here</P>
-          <section>
-            <Lead className="mb-5">Similar Places</Lead>
-            <p>swiper goes here</p>
-            <Swiper
-              pagination={{
-                type: 'fraction'
-              }}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              <SwiperSlide>Slide 1</SwiperSlide>
-              <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
-              <SwiperSlide>Slide 5</SwiperSlide>
-              <SwiperSlide>Slide 6</SwiperSlide>
-              <SwiperSlide>Slide 7</SwiperSlide>
-              <SwiperSlide>Slide 8</SwiperSlide>
-              <SwiperSlide>Slide 9</SwiperSlide>
-            </Swiper>
           </section>
         </>
       ) : (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCreateBooking } from '../hooks/useCreateBooking';
 import { useAuthContext } from '../hooks/useAuthContext';
 import toast from 'react-hot-toast';
-import { H6, Small } from '../components/primitives/typography';
+import { H6, Muted, Small } from '../components/primitives/typography';
 
 export default function BookingForm({ spaceId }) {
   const { createBooking } = useCreateBooking();
@@ -50,9 +50,9 @@ export default function BookingForm({ spaceId }) {
       </div>
       <hr className="my-4"></hr>
       <div className="mb-4 flex items-center justify-between">
-        <Small htmlFor="startDate" className="block font-bold text-gray-700">
+        <Muted htmlFor="startDate" className="block font-bold text-gray-700">
           Check In:
-        </Small>
+        </Muted>
         <input
           id="startDate"
           type="date"
@@ -63,9 +63,9 @@ export default function BookingForm({ spaceId }) {
         />
       </div>
       <div className="mb-4 flex items-center justify-between">
-        <Small htmlFor="endDate" className="block font-bold text-gray-700">
+        <Muted htmlFor="endDate" className="block font-bold text-gray-700">
           Check Out:
-        </Small>
+        </Muted>
         <input
           id="endDate"
           type="date"
@@ -76,9 +76,9 @@ export default function BookingForm({ spaceId }) {
         />
       </div>
       <div className="mb-4 flex items-center justify-between">
-        <Small htmlFor="price" className="block font-bold text-gray-700">
+        <Muted htmlFor="price" className="block font-bold text-gray-700">
           Price:
-        </Small>
+        </Muted>
         <input
           id="price"
           type="text"
@@ -89,12 +89,12 @@ export default function BookingForm({ spaceId }) {
         />
       </div>
       <div className="mb-4 flex items-center justify-between">
-        <Small
+        <Muted
           htmlFor="numberOfDesks"
           className="block font-bold text-gray-700"
         >
           Number of Desks:
-        </Small>
+        </Muted>
         <input
           id="numberOfDesks"
           type="text"
