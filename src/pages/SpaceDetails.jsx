@@ -16,7 +16,6 @@ import {
 import {
   H3,
   H5,
-  H6,
   Large,
   Lead,
   Small,
@@ -104,10 +103,6 @@ export default function SpaceDetails() {
                 delay: 2500,
                 disableOnInteraction: false
               }}
-              // pagination={{
-              //   clickable: true
-              // }}
-              // navigation={true}
               navigation={{
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev'
@@ -150,8 +145,6 @@ export default function SpaceDetails() {
                     spaceBetween={10}
                     centeredSlides={true}
                     initialSlide={selectedImageIndex}
-                    // navigation={true}
-                    // pagination={{ clickable: true }}
                     navigation={{
                       nextEl: '.swiper-button-next',
                       prevEl: '.swiper-button-prev'
@@ -196,7 +189,7 @@ export default function SpaceDetails() {
             )}
 
             {/*main container Space details */}
-            <section className="flex flex-col gap-4 md:flex-row">
+            <section className="flex flex-col gap-4 p-6 md:flex-row">
               <div className="flex-1">
                 {/* Space details */}
                 <section className="flex flex-col gap-4 md:flex-row">
@@ -227,7 +220,7 @@ export default function SpaceDetails() {
                 {/* Amenities Section */}
                 <section className="mt-4 w-full">
                   <hr className="my-4" />
-                  <div className="flex flex-wrap gap-20">
+                  <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-20">
                     {amenitiesData.map((amenity) => (
                       <div
                         key={amenity.name}
@@ -241,11 +234,13 @@ export default function SpaceDetails() {
                         <Small className="text-lg">{amenity.name}</Small>
                       </div>
                     ))}
-                    <div
-                      className="flex cursor-pointer flex-col items-center text-green-500"
-                      onClick={openModal}
-                    >
-                      <span className="text-lg">(+2)</span>
+                    <div className="col-span-2 flex justify-center">
+                      <div
+                        className="flex cursor-pointer flex-col items-center text-green-500"
+                        onClick={openModal}
+                      >
+                        <span className="text-lg">(+2)</span>
+                      </div>
                     </div>
                   </div>
                   <hr className="my-4" />
@@ -275,32 +270,27 @@ export default function SpaceDetails() {
                   <hr className="my-4" />
                 </section>
 
-                {/* Moreinfo  Section */}
+                {/* Moreinfo Section */}
                 <section className="mt-4 w-full">
                   <H5 className="mb-4">More Information</H5>
-                  <Large className="flex">
-                    Coworking desks
-                    <Muted className="ml-5 pb-2">
-                      84 (From $27 per person per day)
-                    </Muted>
-                  </Large>
-                  <br></br>
-                  <Large className="flex">
-                    Private office
-                    <Muted className="ml-5">
-                      20 (From $410 per person per month)
-                    </Muted>
-                  </Large>
-                  <br></br>
-                  <Large className="flex">
-                    Meeting rooms
-                    <Muted className="ml-5">4 (From $49 per hour)</Muted>
-                  </Large>
-                  <br></br>
-                  <Large className="flex">
-                    Virtual Offices
-                    <Muted className="ml-5">6 (From $112 per month)</Muted>
-                  </Large>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <Large>Coworking desks</Large>
+                      <Muted>84 (From $27 per person per day)</Muted>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Large>Private office</Large>
+                      <Muted>20 (From $410 per person per month)</Muted>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Large>Meeting rooms</Large>
+                      <Muted>4 (From $49 per hour)</Muted>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Large>Virtual Offices</Large>
+                      <Muted>6 (From $112 per month)</Muted>
+                    </div>
+                  </div>
                   <hr className="my-4" />
                 </section>
 
@@ -318,6 +308,7 @@ export default function SpaceDetails() {
                   </div>
                   <hr className="my-4" />
                 </section>
+
                 {/* Agent  Section */}
                 <section>
                   <H5 className="mb-4">Agent</H5>
@@ -325,7 +316,7 @@ export default function SpaceDetails() {
                     <div className="flex flex-col">
                       <div className="mt-2 flex gap-6">
                         <div className="mt-2 flex w-1/4 flex-col items-center">
-                          <div className="h-24 w-24 overflow-hidden rounded-full">
+                          <div className="ml-5 h-20 w-20 overflow-hidden rounded-full sm:h-24 sm:w-24">
                             <img
                               src="../images/kevin.png"
                               alt="Profile"
@@ -391,9 +382,9 @@ export default function SpaceDetails() {
                   <hr className="my-10" />
                 </section>
 
-                {/* Review  Section */}
+                {/* Review Section */}
                 <section>
-                  <div className="flex">
+                  <div className="flex flex-wrap">
                     <div>
                       <Lead className="mb-5">Review</Lead>
                     </div>
@@ -401,7 +392,6 @@ export default function SpaceDetails() {
                       <Muted className="ml-1 mt-1">
                         <span className=" text-green-500"> 5.0 &#9733;</span>
                         <span className=" text-gray-500">
-                          {' '}
                           Based on 1 Review
                         </span>
                       </Muted>
@@ -410,8 +400,8 @@ export default function SpaceDetails() {
 
                   <div className="rounded-lg border border-gray-200 bg-white shadow-lg">
                     <div className="p-6">
-                      <div className="mb-4 flex">
-                        <div className="flex w-1/2 items-center pr-2">
+                      <div className="mb-4 flex flex-col sm:flex-row">
+                        <div className="mb-4 flex w-full items-center pr-2 sm:mb-0 sm:w-1/2">
                           <div className="flex-1">
                             <Large className="mb-1 text-lg font-bold">
                               Service
@@ -422,7 +412,7 @@ export default function SpaceDetails() {
                             5.00
                           </button>
                         </div>
-                        <div className="flex w-1/2 items-center pl-2">
+                        <div className="flex w-full items-center pl-2 sm:w-1/2">
                           <div className="flex-1">
                             <Large className="mb-1 text-lg font-bold">
                               Value for Money
@@ -435,8 +425,8 @@ export default function SpaceDetails() {
                         </div>
                       </div>
 
-                      <div className="mb-4 flex">
-                        <div className="flex w-1/2 items-center pr-2">
+                      <div className="mb-4 flex flex-col sm:flex-row">
+                        <div className="mb-4 flex w-full items-center pr-2 sm:mb-0 sm:w-1/2">
                           <div className="flex-1">
                             <Large className="mb-1 text-lg font-bold">
                               Location
@@ -447,7 +437,7 @@ export default function SpaceDetails() {
                             5.00
                           </button>
                         </div>
-                        <div className="flex w-1/2 items-center pl-2">
+                        <div className="flex w-full items-center pl-2 sm:w-1/2">
                           <div className="flex-1">
                             <Large className="mb-1 text-lg font-bold">
                               Cleanliness
