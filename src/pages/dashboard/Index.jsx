@@ -1,65 +1,64 @@
 import { PieChart } from 'react-minimal-pie-chart';
+import {
+  H1,
+  H4,
+  H2,
+  Small,
+  Muted
+} from '../../components/primitives/typography';
 
 export default function Dashboard() {
   return (
     <>
-      <h1>Insights</h1>
+      <H2 className="mt-10">Insights</H2>
 
-      <div className="mt-14 flex flex-col justify-between gap-6 lg:flex-row">
+      <div className="mb-8 mt-8 flex flex-col justify-between gap-6 lg:flex-row">
         <div className="grid w-full gap-6 sm:grid-cols-2 xl:grid-cols-3">
           <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
-            <h4 className="text-primary/70 text-xl leading-9">
-              Complete booking
-            </h4>
+            <H4>Complete booking</H4>
             <div className="mb-8 mt-8 flex items-center gap-6">
-              <h2 className="text-5xl leading-6">03</h2>
-              <img src="/images/icons/static.png" alt="static" />
+              <H1>03</H1>
+              <img src="/images/icon/vector-up.svg" alt="static" />
             </div>
           </div>
           <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
-            <h4 className="text-primary/70 text-xl leading-9">No show off</h4>
+            <H4>No show off</H4>
             <div className="mb-8 mt-8 flex items-center gap-6">
-              <h2 className="text-5xl leading-6">127</h2>
-              <img src="/images/icons/static.png" alt="static" />
+              <H1>127</H1>
+              <img src="/images/icon/vector-up.svg" alt="static" />
             </div>
           </div>
           <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
-            <h4 className="text-primary/70 text-xl leading-9">Total Revenue</h4>
+            <H4>Total Revenue</H4>
             <div className="mb-8 mt-8 flex items-center gap-6">
-              <h2 className="text-5xl leading-6">$127,000</h2>
-              <img src="/images/icons/static.png" alt="static" />
+              <H1>$127,000</H1>
+              <img src="/images/icon/vector-up.svg" alt="static" />
             </div>
           </div>
           <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
-            <h4 className="text-primary/70 text-xl leading-9">Active Users</h4>
+            <H4>Active Users</H4>
             <div className="mb-8 mt-8 flex items-center gap-6">
-              <h2 className="text-5xl leading-6">60</h2>
-              <img src="/images/icons/static.png" alt="static" />
+              <H1>60</H1>
+              <img src="/images/icon/vector-down.svg" alt="static" />
             </div>
           </div>
           <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
-            <h4 className="text-primary/70 text-xl leading-9">
-              Total Bookings
-            </h4>
+            <H4>Total Bookings</H4>
             <div className="mb-8 mt-8 flex items-center gap-6">
-              <h2 className="text-5xl leading-6">127</h2>
-              <img src="/images/icons/static.png" alt="static" />
+              <H1>127</H1>
+              <img src="/images/icon/vector-up.svg" alt="static" />
             </div>
           </div>
           <div className="rounded-2xl bg-[#F2F2F2] px-5 py-4">
-            <h4 className="text-primary/70 text-xl leading-9">
-              Pending Bookings
-            </h4>
+            <H4>Pending Bookings</H4>
             <div className="mb-8 mt-8 flex items-center gap-6">
-              <h2 className="text-5xl leading-6">03</h2>
-              <img src="/images/icons/static.png" alt="static" />
+              <H1>03</H1>
+              <img src="/images/icon/vector-up.svg" alt="static" />
             </div>
           </div>
         </div>
         <div className="h-fit w-full rounded-2xl bg-[#F2F2F2] px-5 py-4 sm:w-96">
-          <h4 className="text-primary/70 text-xl leading-9">
-            Bookings Breakdown
-          </h4>
+          <H4>Bookings Breakdown</H4>
 
           <div className="mx-auto mt-4 h-36 w-36">
             <PieChart
@@ -79,29 +78,23 @@ export default function Dashboard() {
             <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
               <div className="flex items-center gap-3">
                 <div className="h-6 w-6 rounded-md bg-[#E6E6E6]" />
-                <span className="font-nohemi text-primary/70 font-semibold">
-                  confirmed
-                </span>
+                <Small>confirmed</Small>
               </div>
-              <span>220 bookings</span>
-            </div>
-            <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
-              <div className="flex items-center gap-3">
-                <div className="h-6 w-6 rounded-md bg-[#CBCBCB]" />
-                <span className="font-nohemi text-primary/70 font-semibold">
-                  Pending
-                </span>
-              </div>
-              <span>48 bookings</span>
+              <Muted>220 bookings</Muted>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
               <div className="flex items-center gap-3">
                 <div className="h-6 w-6 rounded-md bg-[#919191]" />
-                <span className="font-nohemi text-primary/70 font-semibold">
-                  Cancelled
-                </span>
+                <Small>Pending</Small>
               </div>
-              <span>32 bookings</span>
+              <Muted>48 bookings</Muted>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2 text-sm uppercase">
+              <div className="flex items-center gap-3">
+                <div className="h-6 w-6 rounded-md bg-[#919191]" />
+                <Small>Cancelled</Small>
+              </div>
+              <Muted>32 bookings</Muted>
             </div>
           </div>
         </div>
