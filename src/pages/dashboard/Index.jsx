@@ -4,7 +4,8 @@ import {
   H4,
   H2,
   Small,
-  Muted
+  Muted,
+  Large
 } from '../../components/primitives/typography';
 
 export default function Dashboard() {
@@ -60,7 +61,7 @@ export default function Dashboard() {
         <div className="h-fit w-full rounded-2xl bg-[#F2F2F2] px-5 py-4 sm:w-96">
           <H4>Bookings Breakdown</H4>
 
-          <div className="mx-auto mt-4 h-36 w-36">
+          <div className="h-42 w-42 relative mx-auto mt-4">
             <PieChart
               data={[
                 { title: 'confirmed', value: 220, color: '#E6E6E6' },
@@ -72,6 +73,11 @@ export default function Dashboard() {
               animate
               background="#ddd"
             />
+            {/* Center text */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <Large>TOTAL</Large>
+              <H1>300</H1>
+            </div>
           </div>
 
           <div className="mt-5 flex flex-col gap-4">
